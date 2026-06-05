@@ -294,8 +294,10 @@ export function ResultsClient() {
           description="Phase 2.4 renders an in-app card preview and local copy text only. Public links, image export, and backend persistence remain blocked."
         />
         <div className="share-preview-layout">
-          <article className="local-share-card" aria-label="Local share card preview">
-            <div className="share-card-orb" aria-hidden="true" />
+          <article className="local-share-card upgraded-share-card" aria-label={shareCard.ariaLabel}>
+            <div className="share-card-threshold" aria-hidden="true" />
+            <div className="share-card-orb primary-orb" aria-hidden="true" />
+            <div className="share-card-orb secondary-orb" aria-hidden="true" />
             <div className="share-card-topline">
               <span>{shareCard.eyebrow}</span>
               <span>{shareCard.confidence}</span>
@@ -305,20 +307,28 @@ export function ResultsClient() {
               <h3>{shareCard.title}</h3>
               <blockquote>{shareCard.pattern}</blockquote>
             </div>
+            <div className="share-card-signature" aria-label="Share-card signature">
+              <span>Corridor signature</span>
+              <strong>{shareCard.signature}</strong>
+            </div>
             <div className="share-card-traits" aria-label="Dominant share-card traits">
               {shareCard.traits.map((trait) => (
                 <span key={trait.code}>{trait.label}</span>
               ))}
             </div>
-            <div className="share-card-meta">
-              <div>
-                <strong>Main tension</strong>
-                <span>{shareCard.mainTension}</span>
-              </div>
-              <div>
-                <strong>Deep motive</strong>
-                <span>{shareCard.deepMotive}</span>
-              </div>
+            <div className="share-card-metrics" aria-label="Share-card metrics">
+              {shareCard.metrics.map((metric) => (
+                <div key={metric.label}>
+                  <strong>{metric.label}</strong>
+                  <span>{metric.value}</span>
+                  <small>{metric.detail}</small>
+                </div>
+              ))}
+            </div>
+            <div className="share-card-visual-cues" aria-label="Share-card local evidence cues">
+              {shareCard.visualCues.map((cue) => (
+                <span key={cue.label}><strong>{cue.label}</strong>{cue.value}</span>
+              ))}
             </div>
             <p className="share-card-footer">{shareCard.footer}</p>
           </article>

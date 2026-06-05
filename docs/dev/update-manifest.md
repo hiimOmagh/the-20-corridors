@@ -236,3 +236,28 @@ npm run build
 ```
 
 Scope: visual identity tokens, corridor atmosphere, landing visual-system preview, typography/surface/focus refinements, reduced-motion-safe styling, and design-token tests only. No backend, database, AI/LLM, auth, payments, analytics, public result links, image/PDF export, or scoring methodology changes.
+
+## Phase 3.1 — Share Card Visual Upgrade
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-3-1-share-card-visual-upgrade-status.md
+src/app/globals.css
+src/features/results/ResultsClient.tsx
+src/features/results/resultShareCard.ts
+tests/ui/resultShareCard.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: upgraded local share-card visual hierarchy, corridor signature, share-card metrics, evidence cues, improved Discord/chat copy text, styling, and helper tests only. No image export, backend, database, AI/LLM, auth, payments, analytics, public result links, or scoring methodology changes.
