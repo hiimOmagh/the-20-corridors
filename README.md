@@ -25,7 +25,7 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 1.2 — Deterministic Report Composer**
+**Phase 1.3 — Report Quality Guard + Edge-Case Fixture Pack**
 
 This phase introduces the first code foundation:
 
@@ -40,6 +40,10 @@ This phase introduces the first code foundation:
 - deterministic composed report sections
 - evidence-linked report cards
 - golden-profile tests
+- synthetic edge-case fixture pack
+- repeated-letter regression profiles
+- motive/behavior split guard
+- report quality guard for evidence, authority wording, fallback text, and generic flattery
 
 ## Development rule
 
@@ -48,7 +52,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Quality Guard
 ```
 
 ## Commands
