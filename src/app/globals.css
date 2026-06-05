@@ -1304,3 +1304,232 @@ h3 {
     text-align: center;
   }
 }
+
+.landing-shell {
+  display: grid;
+  gap: 28px;
+}
+
+.landing-hero-grid {
+  min-height: calc(100vh - 88px);
+}
+
+.landing-hero-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-hero-panel::after {
+  content: "";
+  position: absolute;
+  inset: auto -18% -26% 42%;
+  height: 260px;
+  border-radius: 999px;
+  background: rgba(125, 211, 252, 0.11);
+  filter: blur(54px);
+  pointer-events: none;
+}
+
+.landing-hero-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.landing-actions {
+  margin-top: 34px;
+}
+
+.landing-disclaimer {
+  margin-top: 24px;
+  border: 1px solid rgba(252, 165, 165, 0.28);
+  border-radius: 20px;
+  padding: 16px;
+  background: rgba(127, 29, 29, 0.16);
+  display: grid;
+  gap: 6px;
+  max-width: 720px;
+}
+
+.landing-disclaimer strong {
+  color: var(--danger);
+}
+
+.landing-disclaimer span {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.landing-corridor-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-corridor-lines {
+  min-height: 460px;
+}
+
+.landing-rule-list span {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(15, 23, 42, 0.42);
+}
+
+.landing-section {
+  padding: clamp(22px, 4vw, 38px);
+}
+
+.landing-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.landing-trust-card,
+.landing-method-card {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(15, 23, 42, 0.46);
+}
+
+.landing-trust-card {
+  min-height: 220px;
+  padding: 20px;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.landing-trust-card span {
+  width: max-content;
+  border: 1px solid rgba(125, 211, 252, 0.34);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--accent);
+  background: rgba(14, 116, 144, 0.16);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.landing-trust-card p,
+.landing-method-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.landing-method-section {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.landing-method-list {
+  display: grid;
+  gap: 14px;
+}
+
+.landing-method-card {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.landing-method-card strong {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(125, 211, 252, 0.36);
+  border-radius: 16px;
+  color: var(--accent);
+  background: rgba(14, 116, 144, 0.16);
+  font-size: 0.82rem;
+}
+
+.landing-scope-panel {
+  padding: clamp(22px, 4vw, 38px);
+}
+
+.landing-scope-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.landing-scope-pill {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.42);
+  display: grid;
+  gap: 7px;
+}
+
+.landing-scope-pill span {
+  color: var(--soft);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.landing-scope-pill strong {
+  color: var(--text);
+}
+
+.landing-scope-pill.included {
+  border-color: rgba(134, 239, 172, 0.26);
+  background: rgba(20, 83, 45, 0.14);
+}
+
+.landing-scope-pill.included span {
+  color: var(--success);
+}
+
+.landing-scope-pill.excluded {
+  border-color: rgba(252, 165, 165, 0.24);
+  background: rgba(127, 29, 29, 0.12);
+}
+
+.landing-scope-pill.excluded span {
+  color: var(--danger);
+}
+
+@media (max-width: 1040px) {
+  .landing-trust-grid,
+  .landing-scope-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .landing-hero-grid,
+  .landing-trust-grid,
+  .landing-scope-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-corridor-lines {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 640px) {
+  .landing-section,
+  .landing-scope-panel {
+    padding: 20px 0;
+  }
+
+  .landing-method-card {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-method-card strong {
+    width: max-content;
+    padding: 0 14px;
+  }
+}

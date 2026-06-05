@@ -124,3 +124,28 @@ npm run build
 ```
 
 Scope: quiz visual hierarchy, mobile option polish, completion review panel, next-unanswered navigation, Enter-to-generate keyboard completion, review-dot presentation helpers, and UI tests only. No backend, AI, auth, payments, database, public result links, image export, or telemetry.
+
+## Phase 2.6 — Landing + Methodology Trust UX
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-2-6-landing-methodology-trust-ux-status.md
+src/app/globals.css
+src/app/page.tsx
+src/features/landing/landingPresentation.ts
+tests/ui/landingPresentation.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: landing-page visual hierarchy, methodology/trust preview, non-clinical disclaimer visibility, included/blocked scope cards, CTA flow refinement, and landing presentation tests only. No backend, AI, auth, payments, database, public result links, image export, or telemetry.

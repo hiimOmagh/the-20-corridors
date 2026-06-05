@@ -25,16 +25,15 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 2.5 — Quiz Visual Polish + Mobile Completion UX**
+**Phase 2.6 — Landing + Methodology Trust UX**
 
-This phase polishes the quiz-taking experience for mobile completion and review while preserving the engine boundary:
+This phase upgrades the landing page into a trust-building product entry point while preserving the current engine and UI boundaries:
 
-- mobile-first quiz hierarchy with a compact progress summary
-- clearer A/B/C/D option cards with tap/keyboard hints
-- completion review panel before deterministic result generation
-- Enter-to-generate behavior only after all 20 corridors are answered
-- next-unanswered navigation after each answer, including review-mode wraparound
-- refined answer review dots and disabled action states
+- stronger hero hierarchy and clearer CTA flow into the quiz
+- visible non-clinical disclaimer before the user starts
+- methodology preview explaining answer-specific scoring, axes, contradictions, and falsifiers
+- included/blocked scope boundary cards for current product trust
+- landing presentation helper tests
 - backend/database/AI/auth/payment/public-link/image-export scope remains blocked
 
 ## Development rule
@@ -141,7 +140,7 @@ The public API strips internal numeric scoring diagnostics from the UI-facing re
 /results
 ```
 
-Phase 2.5 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, or image export yet. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, and an in-app local share-card preview. The quiz page now includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation.
+Phase 2.6 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, or image export yet. The landing page now includes a stronger trust/methodology preview and an explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, and an in-app local share-card preview. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation.
 
 ## Evidence snapshots
 
