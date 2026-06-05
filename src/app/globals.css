@@ -2092,3 +2092,254 @@ body::after {
     border-radius: 16px;
   }
 }
+
+/* Phase 3.2 — result page visual consistency pass */
+.result-report-shell {
+  gap: clamp(18px, 3vw, 34px);
+}
+
+.result-hero-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.result-hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, rgba(251, 191, 36, 0.09), transparent 34%, rgba(125, 211, 252, 0.08) 72%, transparent),
+    radial-gradient(circle at 8% 8%, rgba(125, 211, 252, 0.16), transparent 18rem);
+  opacity: 0.86;
+}
+
+.result-hero-main,
+.result-hero-aside {
+  position: relative;
+  z-index: 1;
+}
+
+.visual-jump-nav {
+  position: sticky;
+  top: 12px;
+  z-index: 8;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px;
+  backdrop-filter: blur(20px);
+}
+
+.report-jump-link {
+  display: grid;
+  gap: 4px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 15px;
+  padding: 10px 9px;
+  text-align: center;
+  color: var(--muted);
+  background: rgba(2, 6, 23, 0.22);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.report-jump-link span {
+  color: var(--soft);
+  font-size: 0.62rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+}
+
+.report-jump-link strong {
+  color: var(--text);
+  font-size: 0.76rem;
+  line-height: 1;
+}
+
+.report-jump-link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(251, 191, 36, 0.3);
+  background: rgba(15, 23, 42, 0.54);
+}
+
+.result-section-index {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px;
+}
+
+.section-index-card {
+  min-height: 142px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 20px;
+  padding: 14px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(125, 211, 252, 0.08), transparent 8rem),
+    rgba(15, 23, 42, 0.34);
+}
+
+.section-index-card span {
+  color: var(--color-threshold);
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+}
+
+.section-index-card strong {
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.section-index-card small {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.visual-tone {
+  position: relative;
+  overflow: hidden;
+}
+
+.visual-tone::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  opacity: 0.72;
+  background: var(--visual-tone-color, rgba(125, 211, 252, 0.5));
+  pointer-events: none;
+}
+
+.visual-tone-signal {
+  --visual-tone-color: linear-gradient(180deg, transparent, rgba(125, 211, 252, 0.78), transparent);
+  border-color: rgba(125, 211, 252, 0.26);
+}
+
+.visual-tone-evidence {
+  --visual-tone-color: linear-gradient(180deg, transparent, rgba(56, 189, 248, 0.62), transparent);
+  border-color: rgba(56, 189, 248, 0.2);
+}
+
+.visual-tone-tension {
+  --visual-tone-color: linear-gradient(180deg, transparent, rgba(251, 191, 36, 0.82), transparent);
+  border-color: rgba(251, 191, 36, 0.24);
+}
+
+.visual-tone-practical {
+  --visual-tone-color: linear-gradient(180deg, transparent, rgba(134, 239, 172, 0.62), transparent);
+  border-color: rgba(134, 239, 172, 0.2);
+}
+
+.visual-tone-trust {
+  --visual-tone-color: linear-gradient(180deg, transparent, rgba(167, 139, 250, 0.68), transparent);
+  border-color: rgba(167, 139, 250, 0.22);
+}
+
+.visual-tone-local {
+  --visual-tone-color: linear-gradient(180deg, transparent, rgba(148, 163, 184, 0.56), transparent);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.primary-tension-card {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(251, 191, 36, 0.16), transparent 13rem),
+    rgba(15, 23, 42, 0.46);
+}
+
+.axis-report-card,
+.contradiction-report-card,
+.compact-report-section,
+.evidence-card,
+.trait-card,
+.report-metric-card {
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.axis-report-card .card-title-row,
+.contradiction-report-card .card-title-row {
+  align-items: start;
+  gap: 14px;
+}
+
+.axis-report-card .band-pill,
+.contradiction-report-card .band-pill {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.evidence-card {
+  min-height: 132px;
+}
+
+.evidence-card strong {
+  color: var(--color-threshold);
+}
+
+.evidence-card span {
+  color: var(--soft);
+  font-weight: 900;
+}
+
+.compact-report-section {
+  min-height: 100%;
+}
+
+.compact-report-section .bullet-card-list {
+  margin-top: 18px;
+}
+
+@media (max-width: 1040px) {
+  .visual-jump-nav {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    position: relative;
+    top: auto;
+  }
+
+  .result-section-index {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .visual-jump-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .report-jump-link {
+    text-align: left;
+  }
+
+  .result-section-index {
+    grid-template-columns: 1fr;
+  }
+
+  .section-index-card {
+    min-height: 0;
+  }
+
+  .axis-report-card .card-title-row,
+  .contradiction-report-card .card-title-row {
+    align-items: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .report-jump-link,
+  .axis-report-card,
+  .contradiction-report-card,
+  .compact-report-section,
+  .evidence-card,
+  .trait-card,
+  .report-metric-card {
+    transition: none;
+  }
+
+  .report-jump-link:hover {
+    transform: none;
+  }
+}
+

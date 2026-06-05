@@ -34,6 +34,12 @@ import {
   type LocalFeedbackState
 } from '@/features/results/resultFeedback';
 import { buildLocalShareCardPreview } from '@/features/results/resultShareCard';
+import {
+  buildResultSectionIndex,
+  getAxisVisualTone,
+  getContradictionVisualTone,
+  getPracticalVisualTone
+} from '@/features/results/resultVisualConsistency';
 
 export function ResultsClient() {
   const [result, setResult] = useState<CorridorsPublicResultDto | null>(null);
@@ -127,6 +133,7 @@ export function ResultsClient() {
     deepMotive: result.deepMotive.label,
     ...(mainContradiction ? { contradictionTitle: mainContradiction.title } : {})
   });
+  const sectionIndex = buildResultSectionIndex(REPORT_SECTION_ANCHORS);
 
   return (
     <main className="page-shell result-report-shell">
@@ -150,11 +157,24 @@ export function ResultsClient() {
         </div>
       </section>
 
-      <nav className="panel report-jump-nav" aria-label="Result report sections">
-        {REPORT_SECTION_ANCHORS.map((anchor) => (
-          <a href={`#${anchor.id}`} key={anchor.id} title={anchor.description}>{anchor.shortLabel}</a>
+      <nav className="panel report-jump-nav visual-jump-nav" aria-label="Result report sections">
+        {sectionIndex.map((anchor) => (
+          <a className={`report-jump-link visual-tone-${anchor.tone}`} href={`#${anchor.id}`} key={anchor.id} title={anchor.description}>
+            <span>{anchor.stepLabel}</span>
+            <strong>{anchor.shortLabel}</strong>
+          </a>
         ))}
       </nav>
+
+      <section className="panel result-section-index" aria-label="Report rhythm overview">
+        {sectionIndex.slice(0, 6).map((section) => (
+          <a className={`section-index-card visual-tone-${section.tone}`} href={`#${section.id}`} key={section.id}>
+            <span>{section.stepLabel}</span>
+            <strong>{section.label}</strong>
+            <small>{section.description}</small>
+          </a>
+        ))}
+      </section>
 
       <section className="report-grid report-grid-four" aria-label="Headline metrics">
         {viewModel.headlineMetrics.map((metric) => (
@@ -186,8 +206,8 @@ export function ResultsClient() {
           description="Every axis card is rendered from the deterministic report contract: band, dominant key, interpretation, and supporting evidence."
         />
         <div className="report-grid report-grid-two">
-          {viewModel.axisCards.map((axisCard) => (
-            <article className="axis-report-card" key={axisCard.id}>
+          {viewModel.axisCards.map((axisCard, index) => (
+            <article className={`axis-report-card ${getAxisVisualTone(index).className}`} key={axisCard.id}>
               <div className="card-title-row">
                 <h3>{axisCard.label}</h3>
                 <span className="band-pill">{axisCard.band}</span>
@@ -208,8 +228,8 @@ export function ResultsClient() {
         />
         {viewModel.contradictionCards.length > 0 ? (
           <div className="report-grid report-grid-two">
-            {viewModel.contradictionCards.map((contradiction) => (
-              <article className="contradiction-report-card" key={contradiction.id}>
+            {viewModel.contradictionCards.map((contradiction, index) => (
+              <article className={`contradiction-report-card ${getContradictionVisualTone(index).className}`} key={contradiction.id}>
                 <div className="card-title-row">
                   <h3>{contradiction.title}</h3>
                   <span className="band-pill danger-pill">Tension</span>
@@ -237,9 +257,9 @@ export function ResultsClient() {
       </section>
 
       <section className="report-grid report-grid-three" id="practical-map" aria-label="Practical interpretation sections">
-        <BulletPanel eyebrow="What works" title="Strengths" items={viewModel.strengths} />
-        <BulletPanel eyebrow="Failure surface" title="Failure modes" items={viewModel.failureModes} />
-        <BulletPanel eyebrow="Operational next move" title="Growth directions" items={viewModel.growthDirections} />
+        <BulletPanel eyebrow="What works" title="Strengths" items={viewModel.strengths} toneClass={getPracticalVisualTone('strengths').className} />
+        <BulletPanel eyebrow="Failure surface" title="Failure modes" items={viewModel.failureModes} toneClass={getPracticalVisualTone('failureModes').className} />
+        <BulletPanel eyebrow="Operational next move" title="Growth directions" items={viewModel.growthDirections} toneClass={getPracticalVisualTone('growthDirections').className} />
       </section>
 
       <section className="panel report-section" id="evidence-digest" aria-labelledby="evidence-heading">
@@ -420,9 +440,14 @@ function EvidencePills({ evidence }: Readonly<{ evidence: readonly EvidenceDispl
   );
 }
 
-function BulletPanel({ eyebrow, title, items }: Readonly<{ eyebrow: string; title: string; items: readonly BulletDisplayItem[] }>) {
+function BulletPanel({
+  eyebrow,
+  title,
+  items,
+  toneClass
+}: Readonly<{ eyebrow: string; title: string; items: readonly BulletDisplayItem[]; toneClass: string }>) {
   return (
-    <section className="panel report-section compact-report-section">
+    <section className={`panel report-section compact-report-section ${toneClass}`}>
       <p className="kicker">{eyebrow}</p>
       <h2>{title}</h2>
       <div className="bullet-card-list">

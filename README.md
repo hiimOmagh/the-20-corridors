@@ -25,15 +25,15 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 3.0 — Visual Identity System**
+**Phase 3.2 — Result Page Visual Consistency Pass**
 
-This phase begins the visual identity layer after Phase 2 closure:
+This phase applies the Phase 3 identity system across the result report instead of adding new product scope:
 
-- corridor atmosphere is strengthened through explicit color, surface, glow, and focus tokens
-- the landing page includes a visual identity preview section with trust-oriented design principles
-- cards, panels, buttons, and corridor surfaces receive more consistent hierarchy and depth
-- reduced-motion-safe design rules remain active
-- scoring, routing, persistence, backend, AI, auth, payment, analytics, public links, and export scope remain unchanged
+- the result page now has a stronger report rhythm with a visual section index
+- the jump navigation uses numbered, tone-coded anchors for mobile and desktop scanning
+- axis, contradiction, practical, evidence, and trust sections share consistent tone treatments
+- the first contradiction receives primary-tension emphasis without changing engine logic
+- share-card, feedback, local-session storage, routing, scoring, backend, AI, auth, payment, analytics, public links, and export scope remain unchanged
 
 ## Development rule
 
@@ -151,7 +151,7 @@ The public API strips internal numeric scoring diagnostics from the UI-facing re
 /results
 ```
 
-Phase 3.1 still stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, analytics, or image export yet. The landing page includes a visual identity preview in addition to the trust/methodology preview and explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, an upgraded in-app local share-card preview, and a local-only feedback UX stub. The upgraded local share card now exposes a corridor signature, card metrics, visual evidence cues, and Discord/chat-readable copy text while remaining purely local. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation. The local UI remains covered by a smoke contract and Phase 2 closure gate.
+Phase 3.2 still stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, analytics, or image export yet. The landing page includes a visual identity preview in addition to the trust/methodology preview and explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, an upgraded in-app local share-card preview, and a local-only feedback UX stub. The upgraded local share card exposes a corridor signature, card metrics, visual evidence cues, and Discord/chat-readable copy text while remaining purely local. The result report now applies consistent section tones, numbered jump anchors, and a visual section index across axis, contradiction, practical, evidence, trust, feedback, and share sections. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation. The local UI remains covered by a smoke contract and Phase 2 closure gate.
 
 ## Evidence snapshots
 

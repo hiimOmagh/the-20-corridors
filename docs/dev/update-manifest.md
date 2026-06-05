@@ -261,3 +261,31 @@ npm run build
 ```
 
 Scope: upgraded local share-card visual hierarchy, corridor signature, share-card metrics, evidence cues, improved Discord/chat copy text, styling, and helper tests only. No image export, backend, database, AI/LLM, auth, payments, analytics, public result links, or scoring methodology changes.
+
+Scope: upgraded local share-card hierarchy, corridor signature, card metrics, evidence cue chips, Discord/chat-readable copy text, and helper tests only. No image export, public result links, backend, database, AI/LLM, auth, payments, analytics, or telemetry.
+
+## Phase 3.2 — Result Page Visual Consistency Pass
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-3-2-result-page-visual-consistency-status.md
+src/app/globals.css
+src/features/results/ResultsClient.tsx
+src/features/results/resultVisualConsistency.ts
+tests/ui/resultVisualConsistency.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: result report visual hierarchy, numbered section index, tone-coded jump navigation, axis/contradiction/practical card consistency, reduced-motion-safe CSS, and presentation helper tests only. No scoring changes, image export, public result links, backend, database, AI/LLM, auth, payments, analytics, or telemetry.
+
