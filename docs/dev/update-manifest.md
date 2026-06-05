@@ -338,3 +338,27 @@ npm run build
 ```
 
 Scope: landing visual consistency pass, section-index navigation, continuity markers, trust-signal strip, mobile CTA rhythm, and landing visual helper tests only. No route behavior change, backend, AI, auth, payments, database, telemetry, image export, or methodology change.
+## Phase 3.5 — Motion + Reduced-Motion Interaction Polish
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-3-5-motion-reduced-motion-interaction-polish-status.md
+src/app/globals.css
+src/features/visual/motionPolish.ts
+tests/ui/motionPolish.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: interaction polish across existing UI states, reduced-motion-safe behavior, mobile hover suppression, and presentation helper tests only. No route changes, backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, image/PDF export, or scoring methodology changes.
+

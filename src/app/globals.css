@@ -2856,3 +2856,220 @@ body::after {
     transform: none;
   }
 }
+
+/* Phase 3.5 — motion and reduced-motion interaction polish */
+:root {
+  --motion-lift-small: translateY(-1px);
+  --motion-lift-medium: translateY(-2px);
+  --motion-press: translateY(0) scale(0.992);
+  --motion-focus-ring: 0 0 0 3px rgba(251, 191, 36, 0.16);
+  --motion-signal-glow: 0 18px 54px rgba(56, 189, 248, 0.18);
+  --motion-threshold-glow: 0 18px 58px rgba(251, 191, 36, 0.12);
+}
+
+.button,
+.option-button,
+.review-dot,
+.report-jump-link,
+.section-index-card,
+.landing-index-link,
+.feedback-rating,
+.feedback-focus-chip,
+.local-share-card,
+.trait-card,
+.axis-report-card,
+.contradiction-report-card,
+.bullet-card,
+.evidence-card,
+.report-metric-card,
+.landing-trust-card,
+.landing-method-card,
+.landing-scope-pill {
+  will-change: transform;
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: var(--motion-lift-small);
+  box-shadow: var(--motion-signal-glow), var(--motion-focus-ring);
+}
+
+.button:active,
+.option-button:active,
+.review-dot:active,
+.feedback-rating:active,
+.feedback-focus-chip:active {
+  transform: var(--motion-press);
+}
+
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:focus-visible,
+.quiz-actions .button:disabled,
+.quiz-actions .button:disabled:hover,
+.quiz-actions .button:disabled:focus-visible {
+  transform: none;
+  box-shadow: none;
+}
+
+.option-button:hover,
+.option-button:focus-visible {
+  transform: var(--motion-lift-medium);
+  box-shadow: var(--motion-signal-glow);
+}
+
+.option-button.selected,
+.quiz-option-grid .option-identity-selected {
+  box-shadow:
+    0 0 0 1px rgba(251, 191, 36, 0.16),
+    var(--motion-threshold-glow);
+}
+
+.review-dot:hover,
+.review-dot:focus-visible,
+.report-jump-link:hover,
+.report-jump-link:focus-visible,
+.section-index-card:hover,
+.section-index-card:focus-visible,
+.landing-index-link:hover,
+.landing-index-link:focus-visible {
+  outline: none;
+  transform: var(--motion-lift-small);
+}
+
+.section-index-card:focus-visible,
+.report-jump-link:focus-visible,
+.landing-index-link:focus-visible {
+  box-shadow: var(--motion-focus-ring);
+}
+
+.trait-card:hover,
+.axis-report-card:hover,
+.contradiction-report-card:hover,
+.bullet-card:hover,
+.evidence-card:hover,
+.report-metric-card:hover,
+.landing-trust-card:hover,
+.landing-method-card:hover,
+.landing-scope-pill:hover {
+  transform: var(--motion-lift-small);
+}
+
+.local-share-card:hover {
+  transform: var(--motion-lift-small);
+  box-shadow:
+    0 36px 110px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(251, 191, 36, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.feedback-rating:hover,
+.feedback-rating:focus-visible,
+.feedback-focus-chip:hover,
+.feedback-focus-chip:focus-visible {
+  outline: none;
+  box-shadow: var(--motion-focus-ring);
+}
+
+.progress-bar,
+.share-card-threshold,
+.quiz-card-polished::before,
+.landing-hero-panel::after,
+.result-hero-card::before,
+.feedback-section::before,
+.polished-state-card::before {
+  transition: opacity var(--motion-medium), filter var(--motion-medium), transform var(--motion-medium);
+}
+
+.polished-state-card:hover::before,
+.feedback-section:hover::before {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .button:hover,
+  .option-button:hover,
+  .review-dot:hover,
+  .report-jump-link:hover,
+  .section-index-card:hover,
+  .landing-index-link:hover,
+  .trait-card:hover,
+  .axis-report-card:hover,
+  .contradiction-report-card:hover,
+  .bullet-card:hover,
+  .evidence-card:hover,
+  .report-metric-card:hover,
+  .landing-trust-card:hover,
+  .landing-method-card:hover,
+  .landing-scope-pill:hover,
+  .local-share-card:hover,
+  .feedback-rating:hover,
+  .feedback-focus-chip:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-lift-small: none;
+    --motion-lift-medium: none;
+    --motion-press: none;
+  }
+
+  .button,
+  .option-button,
+  .review-dot,
+  .report-jump-link,
+  .section-index-card,
+  .landing-index-link,
+  .feedback-rating,
+  .feedback-focus-chip,
+  .local-share-card,
+  .trait-card,
+  .axis-report-card,
+  .contradiction-report-card,
+  .bullet-card,
+  .evidence-card,
+  .report-metric-card,
+  .landing-trust-card,
+  .landing-method-card,
+  .landing-scope-pill {
+    will-change: auto;
+  }
+
+  .button:hover,
+  .button:focus-visible,
+  .option-button:hover,
+  .option-button:focus-visible,
+  .review-dot:hover,
+  .review-dot:focus-visible,
+  .report-jump-link:hover,
+  .report-jump-link:focus-visible,
+  .section-index-card:hover,
+  .section-index-card:focus-visible,
+  .landing-index-link:hover,
+  .landing-index-link:focus-visible,
+  .feedback-rating:hover,
+  .feedback-rating:focus-visible,
+  .feedback-focus-chip:hover,
+  .feedback-focus-chip:focus-visible,
+  .local-share-card:hover,
+  .trait-card:hover,
+  .axis-report-card:hover,
+  .contradiction-report-card:hover,
+  .bullet-card:hover,
+  .evidence-card:hover,
+  .report-metric-card:hover,
+  .landing-trust-card:hover,
+  .landing-method-card:hover,
+  .landing-scope-pill:hover {
+    transform: none;
+  }
+
+  .corridor-lines::before,
+  .corridor-lines::after,
+  .share-card-threshold,
+  body::after {
+    animation: none !important;
+  }
+}
