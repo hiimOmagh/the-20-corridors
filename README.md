@@ -422,3 +422,56 @@ The gate is included in:
 ```bash
 npm run validate
 ```
+
+## Phase 4.4 — Phase 4 Closure Gate + Export Smoke Contract
+
+Phase 4.4 closes the local export phase with a formal export smoke contract and Phase 4 closure gate.
+
+Run:
+
+```bash
+npm run smoke:export
+npm run closure:phase4
+```
+
+The gates verify:
+
+- `readiness:export` and `qa:export-visual` still pass.
+- The export action surface remains local to the browser.
+- The PNG export uses the visible share-card summary only.
+- Runtime signals for SVG/canvas/download behavior remain present.
+- Raw answers and full result serialization are not exposed through export.
+- No backend, database, AI, auth, payment, analytics, telemetry, persistence, or public-link scope is introduced.
+
+The full validation chain now includes:
+
+```bash
+npm run smoke:export
+npm run closure:phase4
+```
+
+## Phase 5.0 — Public Result Link Privacy Contract
+
+Phase 5.0 defines the privacy contract for future public result links without implementing public-link infrastructure.
+
+Run:
+
+```bash
+npm run privacy:public-link
+```
+
+The gate verifies:
+
+- Phase 4 closure remains valid.
+- A minimized `PublicResultDto` contract exists.
+- Raw answers are never persisted for public links.
+- Anonymous result IDs are unguessable and not derived from answers.
+- Delete-token and default-expiry expectations are defined.
+- Future public-link smoke expectations are defined before implementation.
+- No backend, database, auth, payment, AI, analytics, telemetry, persistence, or public-link route has been introduced.
+
+The full validation chain now includes:
+
+```bash
+npm run privacy:public-link
+```

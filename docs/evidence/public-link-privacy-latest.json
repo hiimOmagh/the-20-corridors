@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "phase-5.0-public-link-privacy-v1",
+  "privacyId": "phase-5-public-result-link-privacy-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-5-public-link-contract-only",
+    "phase4ClosureSchemaVersion": "phase-4.4-closure-gate-v1",
+    "implementationMode": "contract-only-no-backend"
+  },
+  "gates": {
+    "phase4ClosurePassed": true,
+    "privacyScriptExists": true,
+    "validateScriptRunsPublicLinkPrivacy": true,
+    "privacyContractDocExists": true,
+    "phase50StatusDocExists": true,
+    "phase5TransitionDocExists": true,
+    "publicResultDtoMinimizationDefined": true,
+    "anonymousResultIdPolicyDefined": true,
+    "rawAnswerExclusionDefined": true,
+    "deleteAndExpiryExpectationsDefined": true,
+    "publicLinkSmokeGateExpectationsDefined": true,
+    "noBackendImplementationYet": true,
+    "noDatabaseAuthPaymentAiImplementationYet": true,
+    "noRawAnswerPublicLinkImplementation": true,
+    "noFullResultSerializationPublicLinkImplementation": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "publicLinkPrivacyContract": "docs/release/phase-5-public-result-link-privacy-contract.md",
+    "phase50Status": "docs/ui/phase-5-0-public-result-link-privacy-contract-status.md",
+    "phase5Transition": "docs/ui/phase-5-transition-plan.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link",
+    "publicLinkPrivacy": "tsx scripts/public-link-privacy.ts"
+  },
+  "privacyContract": {
+    "allowedPublicResultFields": [
+      "resultId",
+      "schemaVersion",
+      "createdAt",
+      "expiresAt",
+      "archetype",
+      "confidenceBand",
+      "dominantTags",
+      "deepMotive",
+      "axisSummaries",
+      "contradictionSummaries",
+      "shareCard",
+      "reportOverview",
+      "deleteTokenHash"
+    ],
+    "forbiddenPublicResultFields": [
+      "answers",
+      "rawAnswers",
+      "questionAnswers",
+      "selectedAnswer",
+      "questionId",
+      "tagScores",
+      "axisScoresRaw",
+      "privateReportSeed",
+      "sessionStorageEnvelope",
+      "ipAddress",
+      "email",
+      "name",
+      "userId",
+      "deviceFingerprint"
+    ],
+    "persistencePolicy": [
+      "anonymous-id-only",
+      "raw-answers-never-persisted",
+      "public-dto-minimized",
+      "delete-token-required",
+      "default-expiry-required",
+      "no-account-required",
+      "no-analytics-required"
+    ],
+    "publicLinkSmokeGateExpectations": [
+      "public-link-route-loads-by-anonymous-id",
+      "public-link-renders-minimized-dto-only",
+      "raw-answer-strings-absent-from-public-payload",
+      "expired-result-renders-expired-state",
+      "deleted-result-renders-deleted-state",
+      "delete-token-flow-does-not-reveal-answers",
+      "no-auth-required-for-viewing-public-link"
+    ]
+  },
+  "implementationScan": {
+    "blockedImplementationPaths": [],
+    "blockedImplementationSignals": [],
+    "rawAnswerPublicLinkSignals": [],
+    "fullResultSerializationPublicLinkSignals": []
+  },
+  "coverage": {
+    "phase4ClosureIssueCount": 0,
+    "allowedFieldCount": 13,
+    "forbiddenFieldCount": 14,
+    "persistencePolicyCount": 7,
+    "publicLinkSmokeExpectationCount": 7,
+    "blockedImplementationPathCount": 0,
+    "blockedSignalCount": 0
+  },
+  "issues": []
+}

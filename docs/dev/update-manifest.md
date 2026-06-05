@@ -512,3 +512,62 @@ npm run build
 ```
 
 Scope: export visual QA and download contract for the local share-card PNG surface. Verifies SVG dimensions, required labels, boundary text, unsafe text escaping, stable filename, local-only signals, and blocked-scope absence. No backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, PDF export, full-result JSON export, or answer-level data export.
+
+## Phase 4.4 — Phase 4 Closure Gate + Export Smoke Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/export-smoke-contract-latest.json
+docs/evidence/phase4-closure-latest.json
+docs/release/phase-4-closure-review.md
+docs/ui/phase-4-4-phase-4-closure-gate-export-smoke-contract-status.md
+docs/ui/phase-5-transition-plan.md
+scripts/export-smoke-contract.ts
+scripts/phase4-closure-gate.ts
+src/core/release/exportSmokeContract.ts
+src/core/release/phase4ClosureGate.ts
+tests/core/exportSmokeContract.test.ts
+tests/core/phase4ClosureGate.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: formal Phase 4 closure, export smoke contract, local-only PNG export boundary verification, evidence snapshots, and Phase 5 transition planning. No backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, PDF export, full-result JSON export, or answer-level export surface.
+
+## Phase 5.0 — Public Result Link Privacy Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-link-privacy-latest.json
+docs/release/phase-5-public-result-link-privacy-contract.md
+docs/ui/phase-5-0-public-result-link-privacy-contract-status.md
+scripts/public-link-privacy.ts
+src/core/release/publicLinkPrivacy.ts
+tests/core/publicLinkPrivacy.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: contract-only privacy gate for future public result links. Defines public DTO minimization, anonymous result ID policy, raw-answer exclusion, delete/expiry expectations, and future public-link smoke gates. No backend, database, AI/LLM, auth, payments, analytics, telemetry, persistence, public routes, or public-link implementation.
