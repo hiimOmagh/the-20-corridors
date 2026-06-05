@@ -1,11 +1,12 @@
 import type { LocalShareCardPreview } from '@/features/results/resultShareCard';
 
-export const LOCAL_SHARE_IMAGE_EXPORT_SCHEMA_VERSION = 'phase-4.1-local-share-card-image-export-v1' as const;
+export const LOCAL_SHARE_IMAGE_EXPORT_SCHEMA_VERSION = 'phase-4.2-local-share-card-image-export-v1' as const;
 export const LOCAL_SHARE_IMAGE_EXPORT_BOUNDARY_NOTE = 'Local PNG export only. No upload, account, public URL, or answer-level data.' as const;
 export const LOCAL_SHARE_IMAGE_EXPORT_WIDTH = 1200 as const;
 export const LOCAL_SHARE_IMAGE_EXPORT_HEIGHT = 1600 as const;
 
 export type LocalShareImageExportStatus = 'idle' | 'exporting' | 'exported' | 'unsupported' | 'failed';
+export type LocalShareImageExportCapabilityReason = 'supported' | 'server_context' | 'missing_document' | 'missing_canvas' | 'missing_canvas_context' | 'missing_blob' | 'missing_object_url' | 'missing_anchor_download';
 
 export interface LocalShareImageExportPayload {
   readonly schemaVersion: typeof LOCAL_SHARE_IMAGE_EXPORT_SCHEMA_VERSION;
@@ -27,6 +28,42 @@ export interface LocalShareImageExportResult {
   readonly status: Exclude<LocalShareImageExportStatus, 'idle' | 'exporting'>;
   readonly fileName: string;
   readonly message: string;
+}
+
+export interface LocalShareImageExportCapabilityReport {
+  readonly isSupported: boolean;
+  readonly reason: LocalShareImageExportCapabilityReason;
+  readonly label: string;
+  readonly detail: string;
+}
+
+export interface LocalShareImageExportStatusDetail {
+  readonly eyebrow: string;
+  readonly title: string;
+  readonly description: string;
+  readonly actionHint: string;
+  readonly tone: 'neutral' | 'working' | 'success' | 'warning' | 'danger';
+}
+
+export interface LocalShareImageExportUxDetails {
+  readonly fileName: string;
+  readonly dimensions: string;
+  readonly exportSurface: 'share-card-summary-only';
+  readonly buttonLabel: string;
+  readonly canAttemptExport: boolean;
+  readonly capability: LocalShareImageExportCapabilityReport;
+  readonly status: LocalShareImageExportStatusDetail;
+  readonly boundaryItems: readonly string[];
+}
+
+export interface LocalShareImageExportCapabilityInput {
+  readonly hasWindow: boolean;
+  readonly hasDocument: boolean;
+  readonly hasCanvas: boolean;
+  readonly hasCanvasContext: boolean;
+  readonly hasBlob: boolean;
+  readonly hasObjectUrl: boolean;
+  readonly hasAnchorDownload: boolean;
 }
 
 export function buildLocalShareImageExportPayload(card: LocalShareCardPreview): LocalShareImageExportPayload {
@@ -94,28 +131,100 @@ export function buildLocalShareCardExportSvg(card: LocalShareCardPreview): strin
 }
 
 export function getLocalShareImageExportStatusCopy(status: LocalShareImageExportStatus): string {
+  return getLocalShareImageExportStatusDetail(status).description;
+}
+
+export function getLocalShareImageExportStatusDetail(status: LocalShareImageExportStatus): LocalShareImageExportStatusDetail {
   switch (status) {
     case 'idle':
-      return 'Local PNG export is ready. The image is generated in this browser from the share-card summary only.';
+      return {
+        eyebrow: 'Local export ready',
+        title: 'PNG export is available in this browser.',
+        description: 'Local PNG export is ready. The image is generated in this browser from the share-card summary only.',
+        actionHint: 'Use Export PNG locally, or copy the text if you only need a Discord/chat version.',
+        tone: 'neutral'
+      };
     case 'exporting':
-      return 'Generating local PNG from the share-card surface...';
+      return {
+        eyebrow: 'Export in progress',
+        title: 'Generating local PNG.',
+        description: 'Generating local PNG from the share-card surface...',
+        actionHint: 'Keep this tab open until the browser download starts.',
+        tone: 'working'
+      };
     case 'exported':
-      return 'Local PNG export completed.';
+      return {
+        eyebrow: 'Export complete',
+        title: 'Local PNG export completed.',
+        description: 'Local PNG export completed.',
+        actionHint: 'The file was generated locally. No result was uploaded or saved remotely.',
+        tone: 'success'
+      };
     case 'unsupported':
-      return 'PNG export is not supported in this browser context. Copy the share text instead.';
+      return {
+        eyebrow: 'Export unsupported',
+        title: 'This browser cannot generate the PNG locally.',
+        description: 'PNG export is not supported in this browser context. Copy the share text instead.',
+        actionHint: 'Try another modern browser, or use Copy card text for a safe fallback.',
+        tone: 'warning'
+      };
     case 'failed':
-      return 'PNG export failed. Copy the share text or retry in another browser.';
+      return {
+        eyebrow: 'Export failed',
+        title: 'The PNG could not be generated.',
+        description: 'PNG export failed. Copy the share text or retry in another browser.',
+        actionHint: 'Retry once. If it fails again, use Copy card text or another browser.',
+        tone: 'danger'
+      };
   }
+}
+
+export function buildLocalShareImageExportUxDetails(
+  card: LocalShareCardPreview,
+  status: LocalShareImageExportStatus,
+  capability: LocalShareImageExportCapabilityReport = getLocalShareImageExportCapability()
+): LocalShareImageExportUxDetails {
+  const fileName = buildLocalShareImageFileName(card);
+  return {
+    fileName,
+    dimensions: `${LOCAL_SHARE_IMAGE_EXPORT_WIDTH} × ${LOCAL_SHARE_IMAGE_EXPORT_HEIGHT} PNG`,
+    exportSurface: 'share-card-summary-only',
+    buttonLabel: status === 'exporting' ? 'Generating PNG...' : 'Export PNG locally',
+    canAttemptExport: capability.isSupported && status !== 'exporting',
+    capability,
+    status: getLocalShareImageExportStatusDetail(status),
+    boundaryItems: [
+      'Exports the visible share-card summary only.',
+      'Does not include individual answer selections or question-by-question data.',
+      'Does not serialize the full result JSON.',
+      'Does not upload, persist, or create a public link.'
+    ]
+  };
+}
+
+export function getLocalShareImageExportCapability(input?: Partial<LocalShareImageExportCapabilityInput>): LocalShareImageExportCapabilityReport {
+  const resolved = resolveCapabilityInput(input);
+
+  if (!resolved.hasWindow) return capability(false, 'server_context', 'Server context', 'PNG export needs a browser window.');
+  if (!resolved.hasDocument) return capability(false, 'missing_document', 'DOM unavailable', 'PNG export needs document APIs.');
+  if (!resolved.hasCanvas) return capability(false, 'missing_canvas', 'Canvas unavailable', 'PNG export needs canvas support.');
+  if (!resolved.hasCanvasContext) return capability(false, 'missing_canvas_context', 'Canvas context unavailable', 'PNG export needs a 2D canvas context.');
+  if (!resolved.hasBlob) return capability(false, 'missing_blob', 'Blob unavailable', 'PNG export needs Blob support.');
+  if (!resolved.hasObjectUrl) return capability(false, 'missing_object_url', 'Object URL unavailable', 'PNG export needs local object URLs.');
+  if (!resolved.hasAnchorDownload) return capability(false, 'missing_anchor_download', 'Download unavailable', 'PNG export needs anchor download support.');
+
+  return capability(true, 'supported', 'Supported locally', 'This browser has the APIs needed for local PNG export.');
 }
 
 export async function exportLocalShareCardPng(card: LocalShareCardPreview): Promise<LocalShareImageExportResult> {
   const fileName = buildLocalShareImageFileName(card);
 
-  if (typeof window === 'undefined' || typeof document === 'undefined') {
+  const browserCapability = getLocalShareImageExportCapability();
+  if (!browserCapability.isSupported || typeof window === 'undefined' || typeof document === 'undefined') {
     return {
       status: 'unsupported',
       fileName,
-      message: getLocalShareImageExportStatusCopy('unsupported')
+      message: `${getLocalShareImageExportStatusCopy('unsupported')} ${browserCapability.detail}`
     };
   }
 
@@ -182,6 +291,54 @@ export async function exportLocalShareCardPng(card: LocalShareCardPreview): Prom
   } finally {
     window.URL.revokeObjectURL(svgUrl);
   }
+}
+
+
+function resolveCapabilityInput(input?: Partial<LocalShareImageExportCapabilityInput>): LocalShareImageExportCapabilityInput {
+  if (input) {
+    return {
+      hasWindow: input.hasWindow ?? false,
+      hasDocument: input.hasDocument ?? false,
+      hasCanvas: input.hasCanvas ?? false,
+      hasCanvasContext: input.hasCanvasContext ?? false,
+      hasBlob: input.hasBlob ?? false,
+      hasObjectUrl: input.hasObjectUrl ?? false,
+      hasAnchorDownload: input.hasAnchorDownload ?? false
+    };
+  }
+
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return {
+      hasWindow: false,
+      hasDocument: false,
+      hasCanvas: false,
+      hasCanvasContext: false,
+      hasBlob: typeof Blob !== 'undefined',
+      hasObjectUrl: false,
+      hasAnchorDownload: false
+    };
+  }
+
+  const canvas = document.createElement('canvas');
+  const anchor = document.createElement('a');
+  return {
+    hasWindow: true,
+    hasDocument: true,
+    hasCanvas: typeof canvas.toBlob === 'function',
+    hasCanvasContext: Boolean(canvas.getContext('2d')),
+    hasBlob: typeof Blob !== 'undefined',
+    hasObjectUrl: Boolean(window.URL?.createObjectURL),
+    hasAnchorDownload: 'download' in anchor
+  };
+}
+
+function capability(
+  isSupported: boolean,
+  reason: LocalShareImageExportCapabilityReason,
+  label: string,
+  detail: string
+): LocalShareImageExportCapabilityReport {
+  return { isSupported, reason, label, detail };
 }
 
 function wrapSvgText(value: string, maxLineLength: number, maxLines: number): readonly string[] {

@@ -35,8 +35,8 @@ import {
 } from '@/features/results/resultFeedback';
 import { buildLocalShareCardPreview } from '@/features/results/resultShareCard';
 import {
+  buildLocalShareImageExportUxDetails,
   exportLocalShareCardPng,
-  getLocalShareImageExportStatusCopy,
   type LocalShareImageExportStatus
 } from '@/features/results/resultShareImageExport';
 import {
@@ -138,6 +138,7 @@ export function ResultsClient() {
 
   const viewModel = buildResultReportViewModel(result);
   const shareCard = buildLocalShareCardPreview(result);
+  const exportUx = buildLocalShareImageExportUxDetails(shareCard, shareImageExportState);
   const mainContradiction = viewModel.contradictionCards[0];
   const mobileSummary = buildMobileResultSummary({
     archetypeTitle: result.archetype.title,
@@ -323,7 +324,7 @@ export function ResultsClient() {
         <SectionHeader
           eyebrow="Local share preview"
           title="Share card"
-          description="Phase 4.1 exports a local PNG from the share-card surface only. Public links, backend persistence, raw answers, and full-result serialization remain blocked."
+          description="Phase 4.2 hardens the local PNG export path with visible filename, capability, failure, and fallback details. Public links, backend persistence, raw answers, and full-result serialization remain blocked."
         />
         <div className="share-preview-layout">
           <article className="local-share-card upgraded-share-card" aria-label={shareCard.ariaLabel}>
@@ -375,8 +376,35 @@ export function ResultsClient() {
             <p className="share-export-boundary"><strong>Export boundary:</strong> PNG export is generated locally from this share-card summary only. It does not export the answer list, full result JSON, or a public URL.</p>
           </div>
         </div>
-        <div className="actions">
-          <button className="button" disabled={shareImageExportState === 'exporting'} onClick={() => void exportShareCardImage(shareCard)} type="button">Export PNG locally</button>
+        <div className={`export-ux-panel export-tone-${exportUx.status.tone}`} aria-live="polite">
+          <div className="export-status-copy">
+            <p className="kicker">{exportUx.status.eyebrow}</p>
+            <h3>{exportUx.status.title}</h3>
+            <p>{exportUx.status.description}</p>
+            <span>{exportUx.status.actionHint}</span>
+          </div>
+          <div className="export-detail-grid" aria-label="Local PNG export details">
+            <div>
+              <strong>Filename</strong>
+              <span>{exportUx.fileName}</span>
+            </div>
+            <div>
+              <strong>Size</strong>
+              <span>{exportUx.dimensions}</span>
+            </div>
+            <div>
+              <strong>Capability</strong>
+              <span>{exportUx.capability.label}</span>
+            </div>
+          </div>
+          <ul className="export-boundary-list" aria-label="Local export privacy boundary">
+            {exportUx.boundaryItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="actions export-actions">
+          <button className="button" disabled={!exportUx.canAttemptExport} onClick={() => void exportShareCardImage(shareCard)} type="button">{exportUx.buttonLabel}</button>
           <button className="button secondary" onClick={() => void copyShareText(shareCard.copyText, 'card-copied')} type="button">Copy card text</button>
           <button className="button secondary" onClick={() => void copyShareText(viewModel.shareSummary, 'summary-copied')} type="button">Copy compact summary</button>
           <Link className="button secondary" href="/quiz">Retake</Link>
@@ -384,15 +412,13 @@ export function ResultsClient() {
           <Link className="button secondary" href="/">Home</Link>
         </div>
         <p className="small live-status" aria-live="polite">
-          {shareImageExportState !== 'idle'
-            ? getLocalShareImageExportStatusCopy(shareImageExportState)
-            : shareCopyState === 'card-copied'
-              ? 'Share-card text copied to clipboard.'
-              : shareCopyState === 'summary-copied'
-                ? 'Compact summary copied to clipboard.'
-                : shareCopyState === 'failed'
-                  ? 'Clipboard copy failed. Select the text manually.'
-                  : 'Local-only export surface. No backend, public result URL, external share target, or full-result export is used in this phase.'}
+          {shareCopyState === 'card-copied'
+            ? 'Share-card text copied to clipboard.'
+            : shareCopyState === 'summary-copied'
+              ? 'Compact summary copied to clipboard.'
+              : shareCopyState === 'failed'
+                ? 'Clipboard copy failed. Select the text manually.'
+                : 'Local-only export surface. No backend, public result URL, external share target, or full-result export is used in this phase.'}
         </p>
       </section>
     </main>

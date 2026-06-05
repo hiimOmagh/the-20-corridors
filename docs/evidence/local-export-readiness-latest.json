@@ -1,12 +1,12 @@
 {
-  "schemaVersion": "phase-4.1-local-export-readiness-v1",
+  "schemaVersion": "phase-4.2-local-export-readiness-v1",
   "readinessId": "phase-4-local-result-export-readiness",
   "metadata": {
     "checkedAt": "static",
     "repoRootName": "repository",
     "phaseScope": "phase-4-local-export-readiness",
     "phase3ClosureSchemaVersion": "phase-3.6-closure-gate-v1",
-    "exportMode": "local-share-card-image-export-prototype"
+    "exportMode": "local-share-card-image-export-hardened"
   },
   "gates": {
     "phase3ClosurePassed": true,
@@ -14,6 +14,7 @@
     "validateScriptRunsExportReadiness": true,
     "exportReadinessContractDocExists": true,
     "phase4StatusDocExists": true,
+    "phase42StatusDocExists": true,
     "localOnlyExportSurfacesDefined": true,
     "noRawAnswerLeakageInExportSurface": true,
     "noFullResultSerializationExport": true,
@@ -26,7 +27,7 @@
   },
   "docs": {
     "exportReadinessContract": "docs/release/phase-4-local-result-export-readiness-contract.md",
-    "phase4Status": "docs/ui/phase-4-0-local-result-export-readiness-contract-status.md",
+    "phase4Status": "docs/ui/phase-4-2-export-ux-hardening-failure-state-polish-status.md",
     "phase4Transition": "docs/ui/phase-4-transition-plan.md"
   },
   "scripts": {
@@ -37,7 +38,8 @@
     "allowedLocalExportSurfaces": [
       "local-share-card-preview",
       "copy-ready-share-card-text",
-      "local-image-export-from-share-card-only"
+      "local-image-export-from-share-card-only",
+      "hardened-export-status-and-failure-copy"
     ],
     "checkedFiles": [
       "src/features/results/resultShareCard.ts",
@@ -56,8 +58,10 @@
       "src/features/results/resultShareImageExport.ts:URL.createObjectURL",
       "src/features/results/resultShareImageExport.ts:anchor.download",
       "src/features/results/resultShareImageExport.ts:buildLocalShareCardExportSvg",
+      "src/features/results/resultShareImageExport.ts:buildLocalShareImageExportUxDetails",
       "src/features/results/resultShareImageExport.ts:canvas.toBlob",
       "src/features/results/resultShareImageExport.ts:exportLocalShareCardPng",
+      "src/features/results/resultShareImageExport.ts:getLocalShareImageExportCapability",
       "src/features/results/resultShareImageExport.ts:new Blob("
     ],
     "disallowedImageExportSignals": [],
@@ -68,7 +72,7 @@
     "phase3ClosureIssueCount": 0,
     "rawLeakageIssueCount": 0,
     "implementationIssueCount": 0,
-    "approvedImageExportSignalCount": 7,
+    "approvedImageExportSignalCount": 9,
     "blockedScopeIssueCount": 0
   },
   "issues": []

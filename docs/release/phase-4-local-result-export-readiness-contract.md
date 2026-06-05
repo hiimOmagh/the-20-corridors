@@ -75,3 +75,19 @@ The implementation must consume `LocalShareCardPreview`, not `CorridorsPublicRes
 ## Validation rule
 
 `npm run readiness:export` must pass before export changes are committed.
+
+## Phase 4.2 hardening addendum
+
+The local share-card image export may show filename, dimensions, browser capability, status, and fallback guidance before or after export.
+
+The export surface remains limited to the compressed share-card summary. It must not include raw answers, answer-by-answer records, full serialized result data, public URLs, backend upload, analytics event, auth state, database write, or payment flow.
+
+Allowed hardening additions:
+
+- visible filename and dimensions;
+- visible browser capability summary;
+- local unsupported/failure copy;
+- retry/copy-text fallback guidance;
+- local-only privacy boundary bullets.
+
+Blocked additions remain unchanged: backend export, public result links, full-result export, raw-answer export, PDF export, AI generation, telemetry, database, authentication, and payments.

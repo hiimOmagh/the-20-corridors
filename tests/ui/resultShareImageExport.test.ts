@@ -8,9 +8,22 @@ import {
   LOCAL_SHARE_IMAGE_EXPORT_WIDTH,
   buildLocalShareCardExportSvg,
   buildLocalShareImageExportPayload,
+  buildLocalShareImageExportUxDetails,
   buildLocalShareImageFileName,
-  getLocalShareImageExportStatusCopy
+  getLocalShareImageExportCapability,
+  getLocalShareImageExportStatusCopy,
+  getLocalShareImageExportStatusDetail
 } from '@/features/results/resultShareImageExport';
+
+const supportedCapabilityInput = {
+  hasWindow: true,
+  hasDocument: true,
+  hasCanvas: true,
+  hasCanvasContext: true,
+  hasBlob: true,
+  hasObjectUrl: true,
+  hasAnchorDownload: true
+} as const;
 
 describe('local share-card image export helpers', () => {
   it('builds a safe versioned export payload from the local share-card preview', () => {
@@ -19,6 +32,7 @@ describe('local share-card image export helpers', () => {
     const payload = buildLocalShareImageExportPayload(card);
 
     expect(payload.schemaVersion).toBe(LOCAL_SHARE_IMAGE_EXPORT_SCHEMA_VERSION);
+    expect(payload.schemaVersion).toBe('phase-4.2-local-share-card-image-export-v1');
     expect(payload.fileName).toMatch(/^the-20-corridors-[a-z0-9-]+\.png$/);
     expect(payload.width).toBe(LOCAL_SHARE_IMAGE_EXPORT_WIDTH);
     expect(payload.height).toBe(LOCAL_SHARE_IMAGE_EXPORT_HEIGHT);
@@ -57,11 +71,43 @@ describe('local share-card image export helpers', () => {
     expect(svg).not.toContain('<script>');
   });
 
-  it('returns explicit local export status copy', () => {
+  it('returns explicit local export status copy and structured status detail', () => {
     expect(getLocalShareImageExportStatusCopy('idle')).toContain('Local PNG export is ready');
     expect(getLocalShareImageExportStatusCopy('exporting')).toContain('Generating local PNG');
     expect(getLocalShareImageExportStatusCopy('exported')).toContain('completed');
     expect(getLocalShareImageExportStatusCopy('unsupported')).toContain('not supported');
     expect(getLocalShareImageExportStatusCopy('failed')).toContain('failed');
+    expect(getLocalShareImageExportStatusDetail('failed')).toMatchObject({
+      eyebrow: 'Export failed',
+      tone: 'danger'
+    });
+  });
+
+  it('detects browser capability boundaries without touching runtime globals', () => {
+    expect(getLocalShareImageExportCapability(supportedCapabilityInput)).toMatchObject({
+      isSupported: true,
+      reason: 'supported',
+      label: 'Supported locally'
+    });
+    expect(getLocalShareImageExportCapability({ ...supportedCapabilityInput, hasCanvasContext: false })).toMatchObject({
+      isSupported: false,
+      reason: 'missing_canvas_context'
+    });
+    expect(getLocalShareImageExportCapability({ ...supportedCapabilityInput, hasAnchorDownload: false })).toMatchObject({
+      isSupported: false,
+      reason: 'missing_anchor_download'
+    });
+  });
+
+  it('builds visible export UX details with filename, capability, and privacy boundaries', () => {
+    const card = buildLocalShareCardPreview(runCorridorsEngine('1D 2B 3B 4A 5D 6B 7B 8D 9C 10B 11A 12D 13C 14A 15A 16D 17A 18B 19D 20D'));
+    const details = buildLocalShareImageExportUxDetails(card, 'idle', getLocalShareImageExportCapability(supportedCapabilityInput));
+
+    expect(details.fileName).toBe('the-20-corridors-the-observer-strategist.png');
+    expect(details.dimensions).toBe('1200 × 1600 PNG');
+    expect(details.canAttemptExport).toBe(true);
+    expect(details.exportSurface).toBe('share-card-summary-only');
+    expect(details.boundaryItems).toContain('Does not include individual answer selections or question-by-question data.');
+    expect(details.boundaryItems).toContain('Does not upload, persist, or create a public link.');
   });
 });

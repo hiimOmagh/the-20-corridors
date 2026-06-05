@@ -455,3 +455,32 @@ npm run build
 ```
 
 Scope: local PNG export prototype from the share-card preview model only. No backend, database, AI/LLM, auth, payment, analytics, telemetry, public links, PDF export, full-result serialization export, or answer-level data export.
+
+## Phase 4.2 — Export UX Hardening + Failure-State Polish
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/evidence/local-export-readiness-latest.json
+docs/release/phase-4-local-result-export-readiness-contract.md
+docs/ui/phase-4-2-export-ux-hardening-failure-state-polish-status.md
+src/app/globals.css
+src/core/release/localExportReadiness.ts
+src/features/results/ResultsClient.tsx
+src/features/results/resultShareImageExport.ts
+tests/core/localExportReadiness.test.ts
+tests/ui/resultShareImageExport.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: local PNG export UX hardening, visible filename/dimension/capability details, unsupported/failure copy polish, and privacy-boundary presentation. No backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, PDF export, full-result serialization export, or answer-level export surface.

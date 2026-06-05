@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { runPhase3ClosureGate } from './phase3ClosureGate';
 
-export const LOCAL_EXPORT_READINESS_SCHEMA_VERSION = 'phase-4.1-local-export-readiness-v1' as const;
+export const LOCAL_EXPORT_READINESS_SCHEMA_VERSION = 'phase-4.2-local-export-readiness-v1' as const;
 export const LOCAL_EXPORT_READINESS_ID = 'phase-4-local-result-export-readiness' as const;
 
 export interface LocalExportReadinessOptions {
@@ -17,7 +17,7 @@ export interface LocalExportReadinessReport {
     readonly repoRootName: string;
     readonly phaseScope: 'phase-4-local-export-readiness';
     readonly phase3ClosureSchemaVersion: string;
-    readonly exportMode: 'local-share-card-image-export-prototype';
+    readonly exportMode: 'local-share-card-image-export-hardened';
   };
   readonly gates: {
     readonly phase3ClosurePassed: boolean;
@@ -25,6 +25,7 @@ export interface LocalExportReadinessReport {
     readonly validateScriptRunsExportReadiness: boolean;
     readonly exportReadinessContractDocExists: boolean;
     readonly phase4StatusDocExists: boolean;
+    readonly phase42StatusDocExists: boolean;
     readonly localOnlyExportSurfacesDefined: boolean;
     readonly noRawAnswerLeakageInExportSurface: boolean;
     readonly noFullResultSerializationExport: boolean;
@@ -74,6 +75,7 @@ interface PackageJsonSubset {
 
 const EXPORT_READINESS_CONTRACT_DOC = 'docs/release/phase-4-local-result-export-readiness-contract.md';
 const PHASE_4_STATUS_DOC = 'docs/ui/phase-4-0-local-result-export-readiness-contract-status.md';
+const PHASE_4_2_STATUS_DOC = 'docs/ui/phase-4-2-export-ux-hardening-failure-state-polish-status.md';
 const PHASE_4_TRANSITION_DOC = 'docs/ui/phase-4-transition-plan.md';
 
 const SHARE_CARD_FILE = 'src/features/results/resultShareCard.ts';
@@ -83,7 +85,8 @@ const SHARE_IMAGE_EXPORT_FILE = 'src/features/results/resultShareImageExport.ts'
 const ALLOWED_LOCAL_EXPORT_SURFACES = [
   'local-share-card-preview',
   'copy-ready-share-card-text',
-  'local-image-export-from-share-card-only'
+  'local-image-export-from-share-card-only',
+  'hardened-export-status-and-failure-copy'
 ] as const;
 
 const CHECKED_EXPORT_FILES = [
@@ -120,6 +123,8 @@ const SERIALIZATION_EXPORT_SIGNALS = [
 const APPROVED_IMAGE_EXPORT_IMPLEMENTATION_SIGNALS = [
   'buildLocalShareCardExportSvg',
   'exportLocalShareCardPng',
+  'buildLocalShareImageExportUxDetails',
+  'getLocalShareImageExportCapability',
   'LocalShareCardPreview',
   'canvas.toBlob',
   'URL.createObjectURL',
@@ -160,11 +165,12 @@ export function runLocalExportReadiness(options: LocalExportReadinessOptions = {
 
   const exportReadinessContractDocExists = existsSync(path.join(repoRoot, EXPORT_READINESS_CONTRACT_DOC));
   const phase4StatusDocExists = existsSync(path.join(repoRoot, PHASE_4_STATUS_DOC));
+  const phase42StatusDocExists = existsSync(path.join(repoRoot, PHASE_4_2_STATUS_DOC));
   const readinessScriptExists = packageJson.scripts?.['readiness:export'] === 'tsx scripts/local-export-readiness.ts';
   const validateScriptRunsExportReadiness = Boolean(packageJson.scripts?.validate?.includes('npm run readiness:export'));
   const existingCheckedFiles = CHECKED_EXPORT_FILES.filter((relativeFile) => existsSync(path.join(repoRoot, relativeFile)));
   const localOnlyExportSurfacesDefined =
-    ALLOWED_LOCAL_EXPORT_SURFACES.length === 3 &&
+    ALLOWED_LOCAL_EXPORT_SURFACES.length === 4 &&
     existingCheckedFiles.includes(SHARE_CARD_FILE) &&
     existingCheckedFiles.includes(SHARE_IMAGE_EXPORT_FILE);
   const rawAnswerLeakageSignals = findSignals(repoRoot, RAW_ANSWER_CHECK_FILES, SHARE_CARD_RAW_ANSWER_LEAKAGE_SIGNALS);
@@ -186,7 +192,9 @@ export function runLocalExportReadiness(options: LocalExportReadinessOptions = {
     resultClientSource.includes('exportLocalShareCardPng') &&
     shareCardSource.includes('buildLocalShareCardPreview') &&
     shareCardSource.includes('SHARE_CARD_COPY_BOUNDARY_NOTE') &&
-    shareImageExportSource.includes('LocalShareCardPreview');
+    shareImageExportSource.includes('LocalShareCardPreview') &&
+    shareImageExportSource.includes('buildLocalShareImageExportUxDetails') &&
+    shareImageExportSource.includes('getLocalShareImageExportCapability');
 
   const gates = {
     phase3ClosurePassed: phase3Closure.gates.overallPassed,
@@ -194,6 +202,7 @@ export function runLocalExportReadiness(options: LocalExportReadinessOptions = {
     validateScriptRunsExportReadiness,
     exportReadinessContractDocExists,
     phase4StatusDocExists,
+    phase42StatusDocExists,
     localOnlyExportSurfacesDefined,
     noRawAnswerLeakageInExportSurface: rawAnswerLeakageSignals.length === 0,
     noFullResultSerializationExport: serializationExportSignals.length === 0,
@@ -218,12 +227,12 @@ export function runLocalExportReadiness(options: LocalExportReadinessOptions = {
       repoRootName: 'repository',
       phaseScope: 'phase-4-local-export-readiness',
       phase3ClosureSchemaVersion: phase3Closure.schemaVersion,
-      exportMode: 'local-share-card-image-export-prototype'
+      exportMode: 'local-share-card-image-export-hardened'
     },
     gates: completeGates,
     docs: {
       exportReadinessContract: EXPORT_READINESS_CONTRACT_DOC,
-      phase4Status: PHASE_4_STATUS_DOC,
+      phase4Status: PHASE_4_2_STATUS_DOC,
       phase4Transition: PHASE_4_TRANSITION_DOC
     },
     scripts: buildScriptSummary(packageJson),
