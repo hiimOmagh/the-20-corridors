@@ -25,7 +25,7 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 1.1 — Deterministic Scoring Engine**
+**Phase 1.2 — Deterministic Report Composer**
 
 This phase introduces the first code foundation:
 
@@ -37,6 +37,8 @@ This phase introduces the first code foundation:
 - contradiction detection
 - confidence banding
 - report seed contract
+- deterministic composed report sections
+- evidence-linked report cards
 - golden-profile tests
 
 ## Development rule
@@ -46,7 +48,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report
 ```
 
 ## Commands

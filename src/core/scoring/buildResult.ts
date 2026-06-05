@@ -10,6 +10,7 @@ import type { ArchetypeResolution } from './resolveArchetype';
 import { resolveArchetype } from './resolveArchetype';
 import type { Tag, TagScoreMap } from '../methodology/tags';
 import { buildReportSeed, type ReportSeed } from '../report/reportContract';
+import { composeReport, type ComposedReport } from '../report/composeReport';
 
 export interface ScoringResult {
   readonly answers: AnswerMap;
@@ -22,6 +23,7 @@ export interface ScoringResult {
   readonly deepMotive: string;
   readonly confidenceBand: ConfidenceBand;
   readonly reportSeed: ReportSeed;
+  readonly report: ComposedReport;
 }
 
 export function buildResult(input: AnswerInput): ScoringResult {
@@ -39,6 +41,17 @@ export function buildResult(input: AnswerInput): ScoringResult {
     contradictions,
     confidenceBand
   });
+  const report = composeReport({
+    answers,
+    tagScores,
+    dominantTags,
+    tagEvidence: evidence,
+    axisScores,
+    archetype,
+    contradictions,
+    confidenceBand,
+    reportSeed
+  });
 
   return {
     answers,
@@ -50,7 +63,8 @@ export function buildResult(input: AnswerInput): ScoringResult {
     contradictions,
     deepMotive: axisScores.deepMotive.dominant,
     confidenceBand,
-    reportSeed
+    reportSeed,
+    report
   };
 }
 

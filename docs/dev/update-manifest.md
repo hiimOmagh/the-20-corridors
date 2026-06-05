@@ -2,53 +2,38 @@
 
 ## Package
 
-`the-20-corridors_phase1_1_scoring_engine.zip`
+`the-20-corridors_phase1_2_report_composer.zip`
 
 ## Phase
 
-Phase 1.1 — Deterministic Scoring Engine
+Phase 1.2 — Deterministic Report Composer
 
 ## Purpose
 
-Introduce the first executable scoring core for The 20 Corridors.
+Expand the Phase 1.1 scoring engine with a deterministic report composer.
 
-This package adds a TypeScript-only deterministic engine. It does not add UI, routing, styling, backend persistence, AI generation, payments, account handling, or share-card rendering.
+This package keeps the project UI-free and backend-free. It converts the existing structured scoring result into evidence-linked report sections that can later be rendered by a web UI without changing the core analysis engine.
 
 ## Files included
 
+Only new or modified files are included in this update package:
+
 ```text
-.gitignore
 README.md
-package.json
-package-lock.json
-tsconfig.json
-tsconfig.test.json
-vitest.config.ts
 docs/dev/update-manifest.md
-src/core/methodology/tags.ts
-src/core/methodology/weights.ts
-src/core/methodology/questions.ts
-src/core/methodology/axes.ts
-src/core/methodology/archetypes.ts
-src/core/methodology/contradictions.ts
-src/core/methodology/goldenProfiles.ts
-src/core/scoring/scoreAnswers.ts
-src/core/scoring/calculateTagScores.ts
-src/core/scoring/calculateAxisScores.ts
-src/core/scoring/resolveArchetype.ts
-src/core/scoring/detectContradictions.ts
-src/core/scoring/calculateConfidence.ts
+src/core/report/reportCopy.ts
+src/core/report/composeReport.ts
 src/core/scoring/buildResult.ts
-src/core/report/reportContract.ts
-tests/core/scoring.test.ts
-tests/core/goldenProfiles.test.ts
-tests/core/contradictions.test.ts
+tests/core/reportComposer.test.ts
 tests/core/resultContract.test.ts
 ```
 
 ## Files intentionally not included
 
 ```text
+unchanged methodology files
+unchanged scoring files
+unchanged package files
 node_modules/
 Next.js app files
 React UI components
@@ -58,25 +43,42 @@ AI report generation
 PDF/share-card generation
 ```
 
-Reason: Phase 1.1 must validate the scoring engine before any presentation layer is built.
+Reason: the project rule is changed-files-only update packaging.
+
+## What changed
+
+```text
+Added deterministic composed report schema.
+Added overview report section.
+Added six axis report cards.
+Added contradiction report cards with evidence references.
+Added strengths, failure modes, and growth directions.
+Added disproven-if/falsifier list.
+Added evidence digest with Q-answer references.
+Integrated composed report into buildResult().
+Added report composer regression tests.
+Expanded result contract tests.
+Updated README current phase and pipeline description.
+```
 
 ## Apply instructions
 
 From repository root:
 
 ```bash
-unzip the-20-corridors_phase1_1_scoring_engine.zip
-npm install
+unzip -o the-20-corridors_phase1_2_report_composer.zip
 npm run typecheck
 npm test
+npm audit --omit=dev
+npm audit
 git status --short
 ```
 
 Then commit:
 
 ```bash
-git add .
-git commit -m "feat: add deterministic scoring engine"
+git add README.md docs/dev/update-manifest.md src/core/report src/core/scoring/buildResult.ts tests/core
+git commit -m "feat: add deterministic report composer"
 ```
 
 ## Validation performed before packaging
@@ -92,7 +94,7 @@ Observed validation result:
 
 ```text
 typecheck: passed
-tests: 4 files passed, 32 tests passed
+tests: 5 files passed, 44 tests passed
 production dependency audit: 0 vulnerabilities
 full dependency audit: 0 vulnerabilities
 ```
@@ -100,28 +102,29 @@ full dependency audit: 0 vulnerabilities
 ## Acceptance gate status
 
 ```text
-All 20 questions exist: passed
-All 80 answer options have tags: passed
-All question weights exist: passed
-Tag scoring is deterministic: passed
-Axis scoring works: passed
-Archetype resolution works: passed
-Contradiction detection works: passed
-Golden profiles run: passed
-No result has empty archetype: passed
-No result has empty dominantTags: passed
-No result has empty axisScores: passed
-No clinical/diagnostic wording exists in reportSeed: passed
+Report composition is deterministic: passed
+Report has overview section: passed
+Report has six axis cards: passed
+Report has evidence-linked dominant traits: passed
+Report has evidence-linked contradiction cards: passed
+Report has strengths: passed
+Report has failure modes: passed
+Report has growth directions: passed
+Report has disproven-if conditions: passed
+Report evidence digest has 20 answer references: passed
+No clinical/diagnostic wording exists in composed report: passed
+Existing golden profile resolution remains unchanged: passed
 ```
 
 ## Next recommended milestone
 
-Phase 1.2 — Report Composer Seed Expansion
+Phase 1.3 — Report Quality Guard + Edge-Case Fixture Pack
 
 Scope:
 
-- convert reportSeed into structured report sections
-- add strength/failure-mode generators
-- add evidence-linked section builders
-- keep output deterministic
-- no UI yet
+- add mixed/flat answer profiles
+- add low-confidence fixture tests
+- add archetype tie-breaker regression tests
+- add report anti-genericness checks
+- add wording quality guard for empty/vague sections
+- still no UI

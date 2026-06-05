@@ -32,6 +32,9 @@ describe('result contract', () => {
       'failure_modes',
       'disproven_if'
     ]);
+    expect(result.report.schemaVersion).toBe('phase-1.2-report-v1');
+    expect(result.report.axisCards).toHaveLength(AXIS_IDS.length);
+    expect(result.report.evidenceDigest).toHaveLength(20);
 
     for (const axisId of AXIS_IDS) {
       expect(result.axisScores[axisId]).toBeDefined();
