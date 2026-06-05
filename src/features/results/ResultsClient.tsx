@@ -15,6 +15,11 @@ import {
   type EvidenceDisplayItem,
   type ResultReportViewModel
 } from '@/features/results/resultReportViewModel';
+import {
+  REPORT_SECTION_ANCHORS,
+  buildMobileResultSummary,
+  getResultStateCopy
+} from '@/features/results/resultReportPresentation';
 
 export function ResultsClient() {
   const [result, setResult] = useState<CorridorsPublicResultDto | null>(null);
@@ -53,55 +58,58 @@ export function ResultsClient() {
   }
 
   if (!loaded) {
+    const loadingCopy = getResultStateCopy('loading');
+
     return (
       <main className="page-shell result-shell">
-        <section className="panel result-card result-state-card">Loading result…</section>
+        <StateCard copy={loadingCopy} />
       </main>
     );
   }
 
   if (storageState.status === 'invalid') {
+    const invalidCopy = getResultStateCopy('invalid', storageState.message);
+
     return (
       <main className="page-shell result-shell">
-        <section className="panel result-card result-state-card">
-          <p className="kicker">Stored result invalid</p>
-          <h2>The local corridor map could not be read.</h2>
-          <p className="lede">
-            The saved browser session is missing fields or uses an unsupported schema. Clear it and take the corridors again.
-          </p>
-          <p className="small error-text">{storageState.message}</p>
-          <div className="actions">
-            <button className="button secondary" onClick={clearStoredResult} type="button">Clear local result</button>
-            <Link className="button" href="/quiz">Retake</Link>
-          </div>
-        </section>
+        <StateCard copy={invalidCopy} onClear={clearStoredResult} />
       </main>
     );
   }
 
   if (!result) {
+    const emptyCopy = getResultStateCopy('empty');
+
     return (
       <main className="page-shell result-shell">
-        <section className="panel result-card result-state-card">
-          <p className="kicker">No local result</p>
-          <h2>No corridor map found.</h2>
-          <p className="lede">Complete the 20 questions first. Phase 2.2 still stores a versioned result only in this browser session.</p>
-          <Link className="button" href="/quiz">Start the corridors</Link>
-        </section>
+        <StateCard copy={emptyCopy} />
       </main>
     );
   }
 
   const viewModel = buildResultReportViewModel(result);
   const mainContradiction = viewModel.contradictionCards[0];
+  const mobileSummary = buildMobileResultSummary({
+    archetypeTitle: result.archetype.title,
+    confidence: result.report.overview.confidenceBand,
+    deepMotive: result.deepMotive.label,
+    ...(mainContradiction ? { contradictionTitle: mainContradiction.title } : {})
+  });
 
   return (
     <main className="page-shell result-report-shell">
+      <a className="skip-link" href="#dominant-traits">Skip to report sections</a>
+
       <section className="panel result-hero-card" aria-labelledby="result-title">
-        <div>
+        <div className="result-hero-main">
           <p className="kicker">Deterministic corridor report</p>
           <h2 id="result-title">{result.archetype.title}</h2>
           <p className="lede">{result.report.overview.patternSummary}</p>
+          <div className="mobile-summary-strip" aria-label="Condensed result summary">
+            {mobileSummary.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
         </div>
         <div className="result-hero-aside" aria-label="Result summary">
           <p className="small">Main contradiction</p>
@@ -110,13 +118,19 @@ export function ResultsClient() {
         </div>
       </section>
 
+      <nav className="panel report-jump-nav" aria-label="Result report sections">
+        {REPORT_SECTION_ANCHORS.map((anchor) => (
+          <a href={`#${anchor.id}`} key={anchor.id} title={anchor.description}>{anchor.shortLabel}</a>
+        ))}
+      </nav>
+
       <section className="report-grid report-grid-four" aria-label="Headline metrics">
         {viewModel.headlineMetrics.map((metric) => (
           <Metric key={metric.label} label={metric.label} value={metric.value} detail={metric.detail} />
         ))}
       </section>
 
-      <section className="panel report-section" aria-labelledby="dominant-traits-heading">
+      <section className="panel report-section" id="dominant-traits" aria-labelledby="dominant-traits-heading">
         <SectionHeader
           eyebrow="Dominant evidence"
           title="Top traits"
@@ -133,7 +147,7 @@ export function ResultsClient() {
         </div>
       </section>
 
-      <section className="panel report-section" aria-labelledby="axis-heading">
+      <section className="panel report-section" id="axis-map" aria-labelledby="axis-heading">
         <SectionHeader
           eyebrow="Six-axis map"
           title="Full axis analysis"
@@ -154,7 +168,7 @@ export function ResultsClient() {
         </div>
       </section>
 
-      <section className="panel report-section" aria-labelledby="contradictions-heading">
+      <section className="panel report-section" id="contradiction-map" aria-labelledby="contradictions-heading">
         <SectionHeader
           eyebrow="Tension layer"
           title="Contradiction map"
@@ -190,13 +204,13 @@ export function ResultsClient() {
         )}
       </section>
 
-      <section className="report-grid report-grid-three" aria-label="Practical interpretation sections">
+      <section className="report-grid report-grid-three" id="practical-map" aria-label="Practical interpretation sections">
         <BulletPanel eyebrow="What works" title="Strengths" items={viewModel.strengths} />
         <BulletPanel eyebrow="Failure surface" title="Failure modes" items={viewModel.failureModes} />
         <BulletPanel eyebrow="Operational next move" title="Growth directions" items={viewModel.growthDirections} />
       </section>
 
-      <section className="panel report-section" aria-labelledby="evidence-heading">
+      <section className="panel report-section" id="evidence-digest" aria-labelledby="evidence-heading">
         <SectionHeader
           eyebrow="Traceability"
           title="Evidence digest"
@@ -213,7 +227,7 @@ export function ResultsClient() {
         </div>
       </section>
 
-      <section className="panel report-section" aria-labelledby="falsifier-heading">
+      <section className="panel report-section" id="trust-guard" aria-labelledby="falsifier-heading">
         <SectionHeader
           eyebrow="Trust guard"
           title="Disproven-if checks"
@@ -226,11 +240,11 @@ export function ResultsClient() {
         </ul>
       </section>
 
-      <section className="panel report-section share-section" aria-labelledby="share-heading">
+      <section className="panel report-section share-section" id="share-summary" aria-labelledby="share-heading">
         <SectionHeader
           eyebrow="Local share draft"
           title="Share summary"
-          description="Phase 2.2 provides copy-ready text only. Public links, images, and backend persistence remain blocked for later phases."
+          description="Phase 2.3 provides copy-ready text only. Public links, images, and backend persistence remain blocked for later phases."
         />
         <pre className="share-preview">{viewModel.shareSummary}</pre>
         <div className="actions">
@@ -248,6 +262,33 @@ export function ResultsClient() {
         </p>
       </section>
     </main>
+  );
+}
+
+
+function StateCard({
+  copy,
+  onClear
+}: Readonly<{
+  copy: ReturnType<typeof getResultStateCopy>;
+  onClear?: () => void;
+}>) {
+  return (
+    <section className="panel result-card result-state-card polished-state-card">
+      <p className="kicker">{copy.eyebrow}</p>
+      <h2>{copy.title}</h2>
+      <p className="lede">{copy.description}</p>
+      {copy.detail ? <p className="small error-text">{copy.detail}</p> : null}
+      {copy.primaryActionLabel === 'Loading' ? null : (
+        <div className="actions">
+          <Link className="button" href="/quiz">{copy.primaryActionLabel}</Link>
+          {copy.secondaryActionLabel && onClear ? (
+            <button className="button secondary" onClick={onClear} type="button">{copy.secondaryActionLabel}</button>
+          ) : null}
+          <Link className="button secondary" href="/">Home</Link>
+        </div>
+      )}
+    </section>
   );
 }
 

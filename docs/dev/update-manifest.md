@@ -47,3 +47,28 @@ public result links
 PDF/image export
 friend comparison
 ```
+
+## Phase 2.3 — Visual Polish + Mobile Result UX
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-2-3-visual-polish-mobile-result-ux-status.md
+src/app/globals.css
+src/features/results/ResultsClient.tsx
+src/features/results/resultReportPresentation.ts
+tests/ui/resultReportPresentation.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: mobile result UX polish, report jump navigation, state-card copy helpers, reduced-motion CSS, and presentation tests only. No backend, AI, auth, payments, database, or telemetry.

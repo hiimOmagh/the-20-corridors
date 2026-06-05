@@ -143,7 +143,7 @@ The public API strips internal numeric scoring diagnostics from the UI-facing re
 /results
 ```
 
-Phase 2.2 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, or payment integration yet.
+Phase 2.3 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, or payment integration yet. The result page now includes full report navigation, mobile summary chips, polished local-result states, and reduced-motion safety rules.
 
 ## Evidence snapshots
 
