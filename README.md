@@ -25,20 +25,18 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 2.1 — Quiz UX Hardening + Keyboard/Progress Contract**
+**Phase 2.2 — Full Result Report UI**
 
-This phase hardens the quiz interaction layer while preserving the engine boundary:
+This phase renders the full deterministic result report while preserving the engine boundary:
 
-- A/B/C/D keyboard shortcuts
-- ArrowLeft review shortcut
-- Backspace undo shortcut
-- explicit instruction strip inside the quiz route
-- answer review dots for all 20 corridors
-- selected-answer state on reviewed questions
-- versioned sessionStorage result serialization
-- legacy result compatibility for Phase 2.0 local sessions
-- invalid local-result error state and clear action
-- pure UI behavior helper tests
+- full archetype and pattern overview
+- headline metrics for confidence, deep motive, primary axis, and runner-up archetype
+- dominant trait cards with evidence references
+- all six axis cards from the public report contract
+- contradiction map with tension, behavioral implication, disproven-if, and evidence references
+- strengths, failure modes, growth directions, and evidence digest sections
+- local copy-ready share summary
+- improved empty/invalid result states
 - backend/database/AI/auth/payment scope remains blocked
 
 ## Development rule
@@ -145,7 +143,7 @@ The public API strips internal numeric scoring diagnostics from the UI-facing re
 /results
 ```
 
-Phase 2.1 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence yet.
+Phase 2.2 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, or payment integration yet.
 
 ## Evidence snapshots
 

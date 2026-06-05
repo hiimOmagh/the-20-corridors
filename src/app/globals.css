@@ -379,3 +379,282 @@ h3 {
   color: var(--danger);
   overflow-wrap: anywhere;
 }
+
+.result-report-shell {
+  display: grid;
+  gap: 22px;
+  align-items: start;
+  padding-top: 32px;
+}
+
+.result-state-card {
+  width: min(760px, 100%);
+  margin: 0 auto;
+}
+
+.result-hero-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  gap: 24px;
+  align-items: stretch;
+  padding: clamp(26px, 5vw, 56px);
+}
+
+.result-hero-aside {
+  border: 1px solid var(--line-strong);
+  border-radius: 24px;
+  padding: 22px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(125, 211, 252, 0.18), transparent 16rem),
+    rgba(8, 47, 73, 0.28);
+  display: grid;
+  align-content: center;
+  gap: 10px;
+}
+
+.result-hero-aside strong {
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+
+.result-hero-aside span {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.report-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.report-grid-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.report-grid-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.report-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.report-section {
+  padding: clamp(22px, 4vw, 38px);
+}
+
+.compact-report-section {
+  align-self: start;
+}
+
+.section-heading {
+  max-width: 780px;
+  margin-bottom: 24px;
+}
+
+.section-heading h2,
+.compact-report-section h2 {
+  font-size: clamp(1.75rem, 3.8vw, 3.15rem);
+}
+
+.report-metric-card {
+  min-height: 156px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.report-metric-card p {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.report-metric-card span {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.trait-card,
+.axis-report-card,
+.contradiction-report-card,
+.bullet-card,
+.evidence-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.46);
+}
+
+.trait-card,
+.axis-report-card,
+.contradiction-report-card {
+  padding: 20px;
+}
+
+.trait-card h3,
+.axis-report-card h3,
+.contradiction-report-card h3,
+.bullet-card h3 {
+  letter-spacing: -0.015em;
+}
+
+.trait-code {
+  width: max-content;
+  border: 1px solid rgba(125, 211, 252, 0.38);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--accent);
+  background: rgba(14, 116, 144, 0.16);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.card-title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.band-pill,
+.evidence-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(125, 211, 252, 0.36);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--accent);
+  background: rgba(14, 116, 144, 0.16);
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.danger-pill {
+  color: var(--danger);
+  border-color: rgba(252, 165, 165, 0.36);
+  background: rgba(127, 29, 29, 0.22);
+}
+
+.muted-pill {
+  color: var(--soft);
+  border-color: var(--line);
+  background: rgba(15, 23, 42, 0.3);
+}
+
+.strong-muted {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.evidence-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.callout-block {
+  border-left: 2px solid rgba(125, 211, 252, 0.42);
+  padding-left: 14px;
+  margin-top: 16px;
+  display: grid;
+  gap: 5px;
+}
+
+.callout-block strong {
+  color: var(--text);
+}
+
+.callout-block span {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.bullet-card-list {
+  display: grid;
+  gap: 12px;
+}
+
+.bullet-card {
+  padding: 16px;
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.evidence-card {
+  padding: 14px;
+  display: grid;
+  gap: 6px;
+}
+
+.evidence-card strong {
+  color: var(--accent);
+}
+
+.evidence-card span {
+  color: var(--soft);
+  font-size: 0.82rem;
+}
+
+.evidence-card p {
+  color: var(--muted);
+  margin-bottom: 0;
+  line-height: 1.45;
+}
+
+.report-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.report-list li + li {
+  margin-top: 10px;
+}
+
+.share-section {
+  margin-bottom: 16px;
+}
+
+.share-preview {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px;
+  color: var(--text);
+  background: rgba(2, 6, 23, 0.48);
+  line-height: 1.6;
+}
+
+@media (max-width: 1040px) {
+  .report-grid-four,
+  .report-grid-three,
+  .evidence-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .result-hero-card,
+  .report-grid-four,
+  .report-grid-three,
+  .report-grid-two,
+  .evidence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-report-shell {
+    padding-top: 20px;
+  }
+}
