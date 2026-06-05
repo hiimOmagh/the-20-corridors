@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "phase-3.6-visual-smoke-contract-v1",
+  "smokeId": "phase-3-visual-smoke-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-3-visual-identity"
+  },
+  "files": [
+    {
+      "label": "landing",
+      "file": "src/app/page.tsx",
+      "requiredSignals": [
+        "landingSectionIndex",
+        "landingContinuityMarkers",
+        "landingTrustSignals",
+        "landing-visual-system-panel",
+        "landing-index-panel",
+        "landing-continuity-strip",
+        "Non-clinical disclaimer"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    },
+    {
+      "label": "quiz",
+      "file": "src/features/quiz/QuizClient.tsx",
+      "requiredSignals": [
+        "buildQuizVisualFrame",
+        "buildQuizOptionIdentity",
+        "buildQuizVisualFrame",
+        "buildQuizOptionIdentity",
+        "visualFrame.frameClassName",
+        "buildCompletionPanel"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    },
+    {
+      "label": "results",
+      "file": "src/features/results/ResultsClient.tsx",
+      "requiredSignals": [
+        "buildResultSectionIndex",
+        "getAxisVisualTone",
+        "getContradictionVisualTone",
+        "getPracticalVisualTone",
+        "visual-jump-nav",
+        "section-index-card",
+        "visual-tone"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    },
+    {
+      "label": "share-card",
+      "file": "src/features/results/resultShareCard.ts",
+      "requiredSignals": [
+        "buildLocalShareCardPreview",
+        "buildShareCardSignature",
+        "buildShareCardMetrics",
+        "buildShareCardVisualCues",
+        "SHARE_CARD_COPY_BOUNDARY_NOTE"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    },
+    {
+      "label": "feedback",
+      "file": "src/features/results/resultFeedback.ts",
+      "requiredSignals": [
+        "feedback",
+        "rating",
+        "submitted",
+        "local"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    },
+    {
+      "label": "visual-identity",
+      "file": "src/features/visual/visualIdentity.ts",
+      "requiredSignals": [
+        "visualIdentityTokens",
+        "visualIdentityPrinciples",
+        "Motion must be optional",
+        "--color-signal",
+        "--color-threshold"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    },
+    {
+      "label": "motion-polish",
+      "file": "src/features/visual/motionPolish.ts",
+      "requiredSignals": [
+        "motionPolishSurfaces",
+        "reducedMotionRules",
+        "No large transform motion",
+        "No looping decorative sweeps",
+        "No product-scope expansion"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    },
+    {
+      "label": "css-visual-system",
+      "file": "src/app/globals.css",
+      "requiredSignals": [
+        "Phase 3.0 visual identity system",
+        "Phase 3.1",
+        "Phase 3.2",
+        "Phase 3.2",
+        "Phase 3.4",
+        "Phase 3.5",
+        "@media (prefers-reduced-motion: reduce)",
+        ".local-share-card",
+        ".quiz-visual-frame",
+        ".visual-jump-nav",
+        ".landing-index-panel"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    }
+  ],
+  "visualIdentity": {
+    "tokenCount": 8,
+    "principleCount": 4,
+    "motionSurfaceCount": 5,
+    "reducedMotionRuleCount": 4,
+    "passed": true
+  },
+  "reducedMotion": {
+    "cssFile": "src/app/globals.css",
+    "requiredSignals": [
+      "@media (prefers-reduced-motion: reduce)",
+      "animation: none",
+      "transition-duration",
+      "transform: none",
+      ".button"
+    ],
+    "missingSignals": [],
+    "passed": true
+  },
+  "localOnlyVisualBoundary": {
+    "checkedFiles": [
+      "src/app/page.tsx",
+      "src/features/landing/landingVisualConsistency.ts",
+      "src/features/quiz/QuizClient.tsx",
+      "src/features/quiz/quizVisualIdentity.ts",
+      "src/features/results/ResultsClient.tsx",
+      "src/features/results/resultShareCard.ts",
+      "src/features/results/resultVisualConsistency.ts",
+      "src/features/results/resultFeedback.ts",
+      "src/features/visual/visualIdentity.ts",
+      "src/features/visual/motionPolish.ts"
+    ],
+    "forbiddenSignals": [
+      "fetch(",
+      "XMLHttpRequest",
+      "navigator.sendBeacon",
+      "posthog.capture",
+      "analytics.track",
+      "@supabase",
+      "new PrismaClient",
+      "OpenAI(",
+      "generateText(",
+      "streamText(",
+      "toDataURL",
+      "html2canvas",
+      "canvas.toBlob",
+      "URL.createObjectURL"
+    ],
+    "violations": [],
+    "passed": true
+  },
+  "gates": {
+    "landingVisualSmokePassed": true,
+    "quizVisualSmokePassed": true,
+    "resultVisualSmokePassed": true,
+    "shareCardVisualSmokePassed": true,
+    "feedbackVisualSmokePassed": true,
+    "visualIdentitySmokePassed": true,
+    "reducedMotionSmokePassed": true,
+    "localOnlyVisualBoundaryPassed": true,
+    "overallPassed": true
+  },
+  "issues": []
+}

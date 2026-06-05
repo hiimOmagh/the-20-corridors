@@ -25,15 +25,14 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 3.5 — Motion + Reduced-Motion Interaction Polish**
+**Phase 3.6 — Phase 3 Closure Gate + Visual Smoke Contract**
 
-This phase polishes the interaction feel across the existing local UI without changing routes, product behavior, scoring, storage, or scope:
+This phase formally closes Phase 3 by adding a visual smoke contract and closure gate for the local visual identity layer:
 
-- action buttons, option cards, review dots, report links, cards, share preview, and feedback controls now use more consistent hover/focus/active states
-- selected and focused states stay visible through static color, border, outline, and shadow cues
-- mobile/touch devices avoid unnecessary hover-lift behavior
-- reduced-motion mode removes decorative sweep/lift motion while preserving state clarity
-- backend, database, AI/LLM, auth, payments, analytics, public links, image/PDF export, and scoring methodology remain unchanged
+- verifies landing, quiz, result, share-card, feedback, visual identity, and reduced-motion smoke signals
+- records Phase 3 closure evidence snapshots
+- keeps the visual layer local-only and non-exporting
+- prepares Phase 4 transition planning without enabling backend, database, AI/LLM, auth, payments, analytics, public links, image/PDF export, or scoring changes
 
 ## Development rule
 
@@ -42,7 +41,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate
 ```
 
 ## Commands
@@ -125,6 +124,18 @@ Run the Phase 2 closure gate:
 npm run closure:phase2
 ```
 
+Run the Phase 3 visual smoke contract:
+
+```bash
+npm run smoke:visual
+```
+
+Run the Phase 3 closure gate:
+
+```bash
+npm run closure:phase3
+```
+
 Run the full local validation suite:
 
 ```bash
@@ -151,7 +162,7 @@ The public API strips internal numeric scoring diagnostics from the UI-facing re
 /results
 ```
 
-Phase 3.5 still stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, analytics, or image export yet. The landing page includes a visual identity preview, section-index navigation, continuity markers, compact trust signals, trust/methodology preview, and explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, an upgraded in-app local share-card preview, and a local-only feedback UX stub. The upgraded local share card exposes a corridor signature, card metrics, visual evidence cues, and Discord/chat-readable copy text while remaining purely local. The result report now applies consistent section tones, numbered jump anchors, and a visual section index across axis, contradiction, practical, evidence, trust, feedback, and share sections. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation. The local UI remains covered by a smoke contract and Phase 2 closure gate.
+Phase 3.5 still stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, analytics, or image export yet. The landing page includes a visual identity preview, section-index navigation, continuity markers, compact trust signals, trust/methodology preview, and explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, an upgraded in-app local share-card preview, and a local-only feedback UX stub. The upgraded local share card exposes a corridor signature, card metrics, visual evidence cues, and Discord/chat-readable copy text while remaining purely local. The result report now applies consistent section tones, numbered jump anchors, and a visual section index across axis, contradiction, practical, evidence, trust, feedback, and share sections. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation. The local UI remains covered by a smoke contract, Phase 2 closure gate, Phase 3 visual smoke contract, and Phase 3 closure gate.
 
 ## Evidence snapshots
 
@@ -189,6 +200,18 @@ The latest Phase 2 closure snapshot is written to:
 
 ```text
 docs/evidence/phase2-closure-latest.json
+```
+
+The latest Phase 3 visual smoke snapshot is written to:
+
+```text
+docs/evidence/visual-smoke-contract-latest.json
+```
+
+The latest Phase 3 closure snapshot is written to:
+
+```text
+docs/evidence/phase3-closure-latest.json
 ```
 
 These snapshots record methodology integrity, archetype reachability, contradiction coverage, serialization stability, approved UI scope, import-boundary status, local UI smoke coverage, closure readiness, and blocked backend/database/AI scope.
@@ -251,3 +274,39 @@ npm run build
 
 Scope: subtle interaction polish, hover/focus/active state consistency, mobile tap-state safety, reduced-motion rules, and motion helper tests only. No new routes, export behavior, backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, or scoring methodology changes.
 
+
+## Phase 3.6 — Phase 3 Closure Gate + Visual Smoke Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/engine-release-gate-latest.json
+docs/evidence/phase2-readiness-latest.json
+docs/evidence/ui-smoke-contract-latest.json
+docs/evidence/phase2-closure-latest.json
+docs/evidence/visual-smoke-contract-latest.json
+docs/evidence/phase3-closure-latest.json
+docs/release/phase-3-closure-review.md
+docs/ui/phase-3-6-phase-3-closure-gate-visual-smoke-contract-status.md
+docs/ui/phase-4-transition-plan.md
+scripts/visual-smoke-contract.ts
+scripts/phase3-closure-gate.ts
+src/core/release/visualSmokeContract.ts
+src/core/release/phase3ClosureGate.ts
+tests/core/visualSmokeContract.test.ts
+tests/core/phase3ClosureGate.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: formal Phase 3 closure, visual smoke coverage, reduced-motion/local-only boundary verification, Phase 4 transition planning, and evidence snapshots only. No backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, image/PDF export, or scoring methodology changes.

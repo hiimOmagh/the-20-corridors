@@ -362,3 +362,39 @@ npm run build
 
 Scope: interaction polish across existing UI states, reduced-motion-safe behavior, mobile hover suppression, and presentation helper tests only. No route changes, backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, image/PDF export, or scoring methodology changes.
 
+
+## Phase 3.6 — Phase 3 Closure Gate + Visual Smoke Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/engine-release-gate-latest.json
+docs/evidence/phase2-readiness-latest.json
+docs/evidence/ui-smoke-contract-latest.json
+docs/evidence/phase2-closure-latest.json
+docs/evidence/visual-smoke-contract-latest.json
+docs/evidence/phase3-closure-latest.json
+docs/release/phase-3-closure-review.md
+docs/ui/phase-3-6-phase-3-closure-gate-visual-smoke-contract-status.md
+docs/ui/phase-4-transition-plan.md
+scripts/visual-smoke-contract.ts
+scripts/phase3-closure-gate.ts
+src/core/release/visualSmokeContract.ts
+src/core/release/phase3ClosureGate.ts
+tests/core/visualSmokeContract.test.ts
+tests/core/phase3ClosureGate.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: Phase 3 closure gate, visual smoke contract, reduced-motion/local-only visual boundary verification, Phase 4 transition plan, and evidence snapshots only. No new route, no backend, no database, no AI/LLM, no auth, no payments, no analytics, no telemetry, no public links, no image/PDF export, and no scoring methodology changes.

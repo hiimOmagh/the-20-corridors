@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "phase-3.6-closure-gate-v1",
+  "closureId": "phase-3-closure-gate",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-3-closure",
+    "phase2ClosureSchemaVersion": "phase-2.8-closure-gate-v1",
+    "visualSmokeSchemaVersion": "phase-3.6-visual-smoke-contract-v1"
+  },
+  "gates": {
+    "phase2ClosurePassed": true,
+    "visualSmokeContractPassed": true,
+    "closureScriptExists": true,
+    "validateScriptRunsPhase3ClosureGate": true,
+    "validateScriptRunsVisualSmoke": true,
+    "phase3ClosureReviewDocExists": true,
+    "phase4TransitionDocExists": true,
+    "localOnlyVisualScopePreserved": true,
+    "noBackendAiExportScope": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "phase3ClosureReview": "docs/release/phase-3-closure-review.md",
+    "phase4Transition": "docs/ui/phase-4-transition-plan.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3",
+    "smokeVisual": "tsx scripts/visual-smoke-contract.ts",
+    "closurePhase3": "tsx scripts/phase3-closure-gate.ts"
+  },
+  "coverage": {
+    "visualFileCount": 8,
+    "visualSmokeIssueCount": 0,
+    "phase2ClosureIssueCount": 0,
+    "visualIdentityTokenCount": 8,
+    "reducedMotionRuleCount": 4
+  },
+  "issues": []
+}
