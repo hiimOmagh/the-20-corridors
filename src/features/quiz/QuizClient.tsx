@@ -20,6 +20,7 @@ import {
   buildQuizStatusSummary,
   buildReviewDots
 } from './quizPresentation';
+import { buildQuizOptionIdentity, buildQuizVisualFrame } from './quizVisualIdentity';
 
 export function QuizClient() {
   const router = useRouter();
@@ -153,10 +154,17 @@ export function QuizClient() {
 
   const currentQuestion = maybeCurrentQuestion;
   const selectedOption = answers[currentQuestion.id];
+  const visualFrame = buildQuizVisualFrame(progress, currentQuestion.id);
 
   return (
-    <main className="page-shell quiz-shell">
-      <section className="panel quiz-card quiz-card-polished" aria-labelledby="quiz-title">
+    <main className="page-shell quiz-shell quiz-shell-identity">
+      <section className="panel quiz-card quiz-card-polished quiz-card-identity" aria-labelledby="quiz-title">
+        <div className={visualFrame.frameClassName} aria-label="Quiz visual identity status">
+          <span className="quiz-corridor-mark">{visualFrame.corridorMark}</span>
+          <span>{visualFrame.phaseLabel}</span>
+          <span>{visualFrame.paceLabel}</span>
+          <span>{visualFrame.atmosphereLabel}</span>
+        </div>
         <div className="quiz-topbar">
           <div>
             <span className="kicker">Corridor {progress.currentCorridor} / {progress.totalCorridors}</span>
@@ -181,7 +189,7 @@ export function QuizClient() {
           <span>{statusSummary.keyboardHint}</span>
         </div>
 
-        <div className="quiz-question-block">
+        <div className="quiz-question-block quiz-question-identity-block">
           <p className="kicker">Question {currentQuestion.id}</p>
           <h2 id="quiz-title">{currentQuestion.text}</h2>
           <p className="lede">One answer only. Answers are local until you generate the report.</p>
@@ -190,17 +198,19 @@ export function QuizClient() {
         <div className="option-grid quiz-option-grid">
           {currentQuestion.options.map((option) => {
             const isSelected = selectedOption === option.key;
+            const optionIdentity = buildQuizOptionIdentity(option.key, isSelected);
 
             return (
               <button
                 aria-pressed={isSelected}
-                className={buildOptionButtonClassName(isSelected)}
+                className={`${buildOptionButtonClassName(isSelected)} ${optionIdentity.className}`}
                 key={option.key}
                 onClick={() => selectAnswer(option.key)}
                 type="button"
               >
                 <span className="option-key">{option.key}</span>
                 <span className="option-text">{option.text}</span>
+                <span className="option-signal">{optionIdentity.signalLabel}</span>
                 <span className="option-hint">Tap or press {option.key}</span>
               </button>
             );
@@ -226,7 +236,12 @@ export function QuizClient() {
           </aside>
         ) : null}
 
-        <div className="review-strip quiz-review-strip" aria-label="Answer review">
+        <div className="quiz-review-zone">
+          <div className="quiz-review-heading">
+            <span>Answer map</span>
+            <span>{statusSummary.answeredLabel}</span>
+          </div>
+          <div className="review-strip quiz-review-strip" aria-label="Answer review">
           {reviewDots.map((dot, index) => (
             <button
               aria-current={dot.isCurrent ? 'step' : undefined}
@@ -243,6 +258,7 @@ export function QuizClient() {
               {dot.label}
             </button>
           ))}
+          </div>
         </div>
 
         <div className="actions quiz-actions">

@@ -289,3 +289,27 @@ npm run build
 
 Scope: result report visual hierarchy, numbered section index, tone-coded jump navigation, axis/contradiction/practical card consistency, reduced-motion-safe CSS, and presentation helper tests only. No scoring changes, image export, public result links, backend, database, AI/LLM, auth, payments, analytics, or telemetry.
 
+## Phase 3.3 — Quiz Visual Identity Pass
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-3-3-quiz-visual-identity-pass-status.md
+src/app/globals.css
+src/features/quiz/QuizClient.tsx
+src/features/quiz/quizVisualIdentity.ts
+tests/ui/quizVisualIdentity.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: apply the Phase 3 visual identity system to the quiz flow, including the corridor identity frame, option signal labels, answer-map polish, completion/review rhythm, mobile hierarchy, reduced-motion-safe CSS, and helper tests only. No backend, database, AI/LLM, auth, payments, public result links, image/PDF export, analytics, telemetry, or scoring methodology changes.

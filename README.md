@@ -25,15 +25,15 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 3.2 — Result Page Visual Consistency Pass**
+**Phase 3.3 — Quiz Visual Identity Pass**
 
-This phase applies the Phase 3 identity system across the result report instead of adding new product scope:
+This phase applies the Phase 3 identity system to the quiz experience without changing quiz behavior:
 
-- the result page now has a stronger report rhythm with a visual section index
-- the jump navigation uses numbered, tone-coded anchors for mobile and desktop scanning
-- axis, contradiction, practical, evidence, and trust sections share consistent tone treatments
-- the first contradiction receives primary-tension emphasis without changing engine logic
-- share-card, feedback, local-session storage, routing, scoring, backend, AI, auth, payment, analytics, public links, and export scope remain unchanged
+- the quiz now exposes a corridor identity frame with phase, pace, and atmosphere labels
+- A/B/C/D options receive stable visual identity signals without changing scoring or keyboard behavior
+- the question area, answer map, and completion rhythm use stronger corridor-threshold styling
+- mobile quiz hierarchy is tightened for one-handed scanning and review
+- backend, database, AI/LLM, auth, payments, analytics, public links, image/PDF export, and scoring methodology remain unchanged
 
 ## Development rule
 
@@ -42,7 +42,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer
 ```
 
 ## Commands
@@ -202,3 +202,28 @@ For details, see:
 ```text
 docs/dev/package-workflow.md
 ```
+
+## Phase 3.3 — Quiz Visual Identity Pass
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-3-3-quiz-visual-identity-pass-status.md
+src/app/globals.css
+src/features/quiz/QuizClient.tsx
+src/features/quiz/quizVisualIdentity.ts
+tests/ui/quizVisualIdentity.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: quiz visual identity frame, option signal labels, answer-map rhythm, completion/review visual polish, reduced-motion-safe CSS, and helper tests only. No scoring changes, keyboard/mobile behavior changes, image export, public result links, backend, database, AI/LLM, auth, payments, analytics, or telemetry.
