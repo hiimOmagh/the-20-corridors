@@ -310,3 +310,30 @@ npm run build
 ```
 
 Scope: formal Phase 3 closure, visual smoke coverage, reduced-motion/local-only boundary verification, Phase 4 transition planning, and evidence snapshots only. No backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, image/PDF export, or scoring methodology changes.
+
+## Phase 4.0 — Local Result Export Readiness Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/local-export-readiness-latest.json
+docs/release/phase-4-local-result-export-readiness-contract.md
+docs/ui/phase-4-0-local-result-export-readiness-contract-status.md
+scripts/local-export-readiness.ts
+src/core/release/localExportReadiness.ts
+tests/core/localExportReadiness.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: export-readiness contract only. Defines local-only export boundaries, blocks raw-answer leakage, blocks full result serialization export, and prepares future local image export from the share-card surface without implementing image/PDF export, backend, AI/LLM, auth, payment, analytics, telemetry, database, or public links.
