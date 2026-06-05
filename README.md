@@ -25,19 +25,16 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 2.2 — Full Result Report UI**
+**Phase 2.4 — Local Share Card Preview**
 
-This phase renders the full deterministic result report while preserving the engine boundary:
+This phase adds a local share-card preview to the completed deterministic report while preserving the engine boundary:
 
-- full archetype and pattern overview
-- headline metrics for confidence, deep motive, primary axis, and runner-up archetype
-- dominant trait cards with evidence references
-- all six axis cards from the public report contract
-- contradiction map with tension, behavioral implication, disproven-if, and evidence references
-- strengths, failure modes, growth directions, and evidence digest sections
-- local copy-ready share summary
-- improved empty/invalid result states
-- backend/database/AI/auth/payment scope remains blocked
+- in-app share-card preview using the existing public result DTO
+- copy-ready share-card text for Discord/chat usage
+- compact legacy summary remains available behind a details disclosure
+- visual share-card layout stays local and does not generate an image or public URL
+- full result report, axis cards, contradiction map, strengths, failure modes, growth directions, and evidence digest remain intact
+- backend/database/AI/auth/payment/public-link/image-export scope remains blocked
 
 ## Development rule
 
@@ -143,7 +140,7 @@ The public API strips internal numeric scoring diagnostics from the UI-facing re
 /results
 ```
 
-Phase 2.3 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, or payment integration yet. The result page now includes full report navigation, mobile summary chips, polished local-result states, and reduced-motion safety rules.
+Phase 2.4 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, or image export yet. The result page now includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, and an in-app local share-card preview.
 
 ## Evidence snapshots
 

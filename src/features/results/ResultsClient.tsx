@@ -20,12 +20,13 @@ import {
   buildMobileResultSummary,
   getResultStateCopy
 } from '@/features/results/resultReportPresentation';
+import { buildLocalShareCardPreview } from '@/features/results/resultShareCard';
 
 export function ResultsClient() {
   const [result, setResult] = useState<CorridorsPublicResultDto | null>(null);
   const [storageState, setStorageState] = useState<StoredCorridorsResultState>({ status: 'empty' });
   const [loaded, setLoaded] = useState(false);
-  const [shareCopyState, setShareCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const [shareCopyState, setShareCopyState] = useState<'idle' | 'summary-copied' | 'card-copied' | 'failed'>('idle');
 
   const loadStoredResult = useCallback(() => {
     const nextStorageState = readCorridorsResultFromSessionStorage(window.sessionStorage);
@@ -43,15 +44,15 @@ export function ResultsClient() {
     loadStoredResult();
   }
 
-  async function copyShareSummary(viewModel: ResultReportViewModel) {
+  async function copyShareText(text: string, copiedState: 'summary-copied' | 'card-copied') {
     if (!navigator.clipboard) {
       setShareCopyState('failed');
       return;
     }
 
     try {
-      await navigator.clipboard.writeText(viewModel.shareSummary);
-      setShareCopyState('copied');
+      await navigator.clipboard.writeText(text);
+      setShareCopyState(copiedState);
     } catch {
       setShareCopyState('failed');
     }
@@ -88,6 +89,7 @@ export function ResultsClient() {
   }
 
   const viewModel = buildResultReportViewModel(result);
+  const shareCard = buildLocalShareCardPreview(result);
   const mainContradiction = viewModel.contradictionCards[0];
   const mobileSummary = buildMobileResultSummary({
     archetypeTitle: result.archetype.title,
@@ -242,23 +244,64 @@ export function ResultsClient() {
 
       <section className="panel report-section share-section" id="share-summary" aria-labelledby="share-heading">
         <SectionHeader
-          eyebrow="Local share draft"
-          title="Share summary"
-          description="Phase 2.3 provides copy-ready text only. Public links, images, and backend persistence remain blocked for later phases."
+          eyebrow="Local share preview"
+          title="Share card"
+          description="Phase 2.4 renders an in-app card preview and local copy text only. Public links, image export, and backend persistence remain blocked."
         />
-        <pre className="share-preview">{viewModel.shareSummary}</pre>
+        <div className="share-preview-layout">
+          <article className="local-share-card" aria-label="Local share card preview">
+            <div className="share-card-orb" aria-hidden="true" />
+            <div className="share-card-topline">
+              <span>{shareCard.eyebrow}</span>
+              <span>{shareCard.confidence}</span>
+            </div>
+            <div className="share-card-body">
+              <p>{shareCard.subtitle}</p>
+              <h3>{shareCard.title}</h3>
+              <blockquote>{shareCard.pattern}</blockquote>
+            </div>
+            <div className="share-card-traits" aria-label="Dominant share-card traits">
+              {shareCard.traits.map((trait) => (
+                <span key={trait.code}>{trait.label}</span>
+              ))}
+            </div>
+            <div className="share-card-meta">
+              <div>
+                <strong>Main tension</strong>
+                <span>{shareCard.mainTension}</span>
+              </div>
+              <div>
+                <strong>Deep motive</strong>
+                <span>{shareCard.deepMotive}</span>
+              </div>
+            </div>
+            <p className="share-card-footer">{shareCard.footer}</p>
+          </article>
+          <div className="share-copy-panel">
+            <h3>Copy-ready text</h3>
+            <p className="muted">Use this local text for Discord or chat. It does not create a public URL or upload the result.</p>
+            <pre className="share-preview">{shareCard.copyText}</pre>
+            <details className="legacy-share-summary">
+              <summary>Show compact legacy summary</summary>
+              <pre className="share-preview">{viewModel.shareSummary}</pre>
+            </details>
+          </div>
+        </div>
         <div className="actions">
-          <button className="button" onClick={() => void copyShareSummary(viewModel)} type="button">Copy summary</button>
+          <button className="button" onClick={() => void copyShareText(shareCard.copyText, 'card-copied')} type="button">Copy card text</button>
+          <button className="button secondary" onClick={() => void copyShareText(viewModel.shareSummary, 'summary-copied')} type="button">Copy compact summary</button>
           <Link className="button secondary" href="/quiz">Retake</Link>
           <button className="button secondary" onClick={clearStoredResult} type="button">Clear local result</button>
           <Link className="button secondary" href="/">Home</Link>
         </div>
         <p className="small live-status" aria-live="polite">
-          {shareCopyState === 'copied'
-            ? 'Summary copied to clipboard.'
-            : shareCopyState === 'failed'
-              ? 'Clipboard copy failed. Select the text manually.'
-              : 'No backend, public result URL, or external share target is used in this phase.'}
+          {shareCopyState === 'card-copied'
+            ? 'Share-card text copied to clipboard.'
+            : shareCopyState === 'summary-copied'
+              ? 'Compact summary copied to clipboard.'
+              : shareCopyState === 'failed'
+                ? 'Clipboard copy failed. Select the text manually.'
+                : 'No backend, public result URL, external share target, or image export is used in this phase.'}
         </p>
       </section>
     </main>

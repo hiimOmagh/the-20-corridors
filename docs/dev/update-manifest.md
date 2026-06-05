@@ -72,3 +72,28 @@ npm run build
 ```
 
 Scope: mobile result UX polish, report jump navigation, state-card copy helpers, reduced-motion CSS, and presentation tests only. No backend, AI, auth, payments, database, or telemetry.
+
+## Phase 2.4 — Local Share Card Preview
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-2-4-local-share-card-preview-status.md
+src/app/globals.css
+src/features/results/ResultsClient.tsx
+src/features/results/resultShareCard.ts
+tests/ui/resultShareCard.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: local in-app share-card preview, copy-ready share-card text, local-only share-card styling, and share-card helper tests. No backend, public result links, image export, AI, auth, payments, database, or telemetry.

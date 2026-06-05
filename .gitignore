@@ -12,3 +12,5 @@ yarn-error.log*
 pnpm-debug.log*
 .next/
 *.tsbuildinfo
+# Delivered update packages should not be committed.
+the-20-corridors_phase*.zip
