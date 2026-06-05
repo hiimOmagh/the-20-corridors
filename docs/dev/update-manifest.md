@@ -176,3 +176,38 @@ npm run build
 ```
 
 Scope: local-only feedback rating UI, optional local focus selection, feedback status copy, report jump-nav feedback anchor, styling, and helper tests only. No persistence, analytics, backend, AI, auth, payments, database, public result links, or image export.
+
+## Phase 2.8 — Phase 2 Closure Gate + UI Smoke Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/engine-release-gate-latest.json
+docs/evidence/phase2-readiness-latest.json
+docs/evidence/ui-smoke-contract-latest.json
+docs/evidence/phase2-closure-latest.json
+docs/release/phase-2-closure-review.md
+docs/ui/phase-2-8-phase-2-closure-gate-ui-smoke-contract-status.md
+docs/ui/phase-3-transition-plan.md
+scripts/ui-smoke-contract.ts
+scripts/phase2-closure-gate.ts
+src/core/release/uiSmokeContract.ts
+src/core/release/phase2ClosureGate.ts
+tests/core/uiSmokeContract.test.ts
+tests/core/phase2ClosureGate.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: formal Phase 2 closure gate, static UI smoke contract for `/`, `/quiz`, and `/results`, local-only boundary verification, Phase 2 closure documentation, and Phase 3 transition planning only. No backend, database, AI/LLM, auth, payments, public result links, image/PDF export, analytics, or telemetry.
+

@@ -25,16 +25,15 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 2.6 — Landing + Methodology Trust UX**
+**Phase 2.8 — Phase 2 Closure Gate + UI Smoke Contract**
 
-This phase upgrades the landing page into a trust-building product entry point while preserving the current engine and UI boundaries:
+This phase closes the local UX prototype by adding formal route smoke checks and a Phase 2 closure gate:
 
-- stronger hero hierarchy and clearer CTA flow into the quiz
-- visible non-clinical disclaimer before the user starts
-- methodology preview explaining answer-specific scoring, axes, contradictions, and falsifiers
-- included/blocked scope boundary cards for current product trust
-- landing presentation helper tests
-- backend/database/AI/auth/payment/public-link/image-export scope remains blocked
+- `npm run smoke:ui` verifies `/`, `/quiz`, and `/results` static UI contracts
+- `npm run closure:phase2` verifies Phase 2 readiness, smoke coverage, closure docs, and local-only boundaries
+- landing, quiz, and result routes remain local-only and consume only the public engine API
+- backend/database/AI/auth/payment/public-link/image-export/telemetry scope remains blocked
+- Phase 3 transition planning is documented without implementing Phase 3 features
 
 ## Development rule
 
@@ -43,7 +42,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate
 ```
 
 ## Commands
@@ -114,6 +113,18 @@ Run the Phase 2 readiness gate:
 npm run readiness:phase2
 ```
 
+Run the UI smoke contract:
+
+```bash
+npm run smoke:ui
+```
+
+Run the Phase 2 closure gate:
+
+```bash
+npm run closure:phase2
+```
+
 Run the full local validation suite:
 
 ```bash
@@ -140,7 +151,7 @@ The public API strips internal numeric scoring diagnostics from the UI-facing re
 /results
 ```
 
-Phase 2.7 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, or image export yet. The landing page includes a stronger trust/methodology preview and an explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, an in-app local share-card preview, and a local-only feedback UX stub. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation.
+Phase 2.8 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, or image export yet. The landing page includes a stronger trust/methodology preview and an explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, an in-app local share-card preview, and a local-only feedback UX stub. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation. The local UI is now covered by a smoke contract and Phase 2 closure gate.
 
 ## Evidence snapshots
 
@@ -168,7 +179,19 @@ The latest Phase 2 readiness snapshot is written to:
 docs/evidence/phase2-readiness-latest.json
 ```
 
-These snapshots record methodology integrity, archetype reachability, contradiction coverage, serialization stability, approved UI scope, import-boundary status, and blocked backend/database/AI scope.
+The latest UI smoke contract snapshot is written to:
+
+```text
+docs/evidence/ui-smoke-contract-latest.json
+```
+
+The latest Phase 2 closure snapshot is written to:
+
+```text
+docs/evidence/phase2-closure-latest.json
+```
+
+These snapshots record methodology integrity, archetype reachability, contradiction coverage, serialization stability, approved UI scope, import-boundary status, local UI smoke coverage, closure readiness, and blocked backend/database/AI scope.
 
 ## Package workflow
 

@@ -32,7 +32,7 @@
     "blockedScopeArtifacts": []
   },
   "scripts": {
-    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2",
     "releaseEngine": "tsx scripts/engine-release-gate.ts"
   },
   "coverage": {

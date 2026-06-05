@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "phase-2.8-ui-smoke-contract-v1",
+  "smokeId": "phase-2-ui-smoke-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-2-local-ui"
+  },
+  "routes": [
+    {
+      "route": "/",
+      "file": "src/app/page.tsx",
+      "requiredSignals": [
+        "landing-title",
+        "Non-clinical disclaimer",
+        "Reflective game, not a diagnosis",
+        "landingTrustCards",
+        "landingMethodSteps",
+        "landingScopeGuards",
+        "href={cta.href}"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    },
+    {
+      "route": "/quiz",
+      "file": "src/features/quiz/QuizClient.tsx",
+      "requiredSignals": [
+        "getCorridorQuestions",
+        "runCorridorsEngine",
+        "saveCorridorsResultToSessionStorage",
+        "buildCompletionPanel",
+        "buildReviewDots",
+        "parseKeyboardOptionKey",
+        "Enter",
+        "Backspace"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    },
+    {
+      "route": "/results",
+      "file": "src/features/results/ResultsClient.tsx",
+      "requiredSignals": [
+        "readCorridorsResultFromSessionStorage",
+        "buildResultReportViewModel",
+        "buildLocalShareCardPreview",
+        "FeedbackPanel",
+        "dominant-traits",
+        "axis-map",
+        "contradiction-map",
+        "evidence-digest",
+        "trust-guard",
+        "local-feedback",
+        "share-summary"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
+    }
+  ],
+  "localOnly": {
+    "checkedFiles": [
+      "src/app/page.tsx",
+      "src/features/landing/landingPresentation.ts",
+      "src/features/quiz/QuizClient.tsx",
+      "src/features/quiz/quizFlow.ts",
+      "src/features/results/ResultsClient.tsx",
+      "src/features/results/resultFeedback.ts",
+      "src/features/results/resultShareCard.ts"
+    ],
+    "forbiddenSignals": [
+      "fetch(",
+      "XMLHttpRequest",
+      "window.localStorage",
+      ".localStorage",
+      "navigator.sendBeacon",
+      "posthog.capture",
+      "analytics.track",
+      "@supabase",
+      "createClient(",
+      "new PrismaClient",
+      "OpenAI(",
+      "generateText(",
+      "streamText("
+    ],
+    "violations": [],
+    "sessionStorageAllowed": true,
+    "passed": true
+  },
+  "contentContract": {
+    "questionCount": 20,
+    "sampleResultArchetype": "The Observer Strategist",
+    "sampleResultHasReport": true,
+    "sampleResultHasShareSummary": true,
+    "passed": true
+  },
+  "gates": {
+    "landingRouteSmokePassed": true,
+    "quizRouteSmokePassed": true,
+    "resultsRouteSmokePassed": true,
+    "localOnlyBoundaryPassed": true,
+    "publicEngineSmokePassed": true,
+    "overallPassed": true
+  },
+  "issues": []
+}

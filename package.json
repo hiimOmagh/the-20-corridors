@@ -11,12 +11,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "audit:methodology": "tsx scripts/methodology-audit.ts",
-    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2",
     "snapshots:generate": "tsx scripts/generate-result-snapshots.ts",
     "snapshots:verify": "tsx scripts/verify-result-snapshots.ts",
     "release:engine": "tsx scripts/engine-release-gate.ts",
     "readiness:phase2": "tsx scripts/phase2-readiness.ts",
-    "guard:ui-imports": "tsx scripts/ui-import-boundary.ts"
+    "guard:ui-imports": "tsx scripts/ui-import-boundary.ts",
+    "smoke:ui": "tsx scripts/ui-smoke-contract.ts",
+    "closure:phase2": "tsx scripts/phase2-closure-gate.ts"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",
