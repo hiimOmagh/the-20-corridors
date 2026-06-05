@@ -313,3 +313,28 @@ npm run build
 ```
 
 Scope: apply the Phase 3 visual identity system to the quiz flow, including the corridor identity frame, option signal labels, answer-map polish, completion/review rhythm, mobile hierarchy, reduced-motion-safe CSS, and helper tests only. No backend, database, AI/LLM, auth, payments, public result links, image/PDF export, analytics, telemetry, or scoring methodology changes.
+
+## Phase 3.4 — Landing Visual Consistency Pass
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-3-4-landing-visual-consistency-pass-status.md
+src/app/globals.css
+src/app/page.tsx
+src/features/landing/landingVisualConsistency.ts
+tests/ui/landingVisualConsistency.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: landing visual consistency pass, section-index navigation, continuity markers, trust-signal strip, mobile CTA rhythm, and landing visual helper tests only. No route behavior change, backend, AI, auth, payments, database, telemetry, image export, or methodology change.

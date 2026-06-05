@@ -25,14 +25,14 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 3.3 — Quiz Visual Identity Pass**
+**Phase 3.4 — Landing Visual Consistency Pass**
 
-This phase applies the Phase 3 identity system to the quiz experience without changing quiz behavior:
+This phase applies the Phase 3 identity language consistently across the landing page without changing routes or product behavior:
 
-- the quiz now exposes a corridor identity frame with phase, pace, and atmosphere labels
-- A/B/C/D options receive stable visual identity signals without changing scoring or keyboard behavior
-- the question area, answer map, and completion rhythm use stronger corridor-threshold styling
-- mobile quiz hierarchy is tightened for one-handed scanning and review
+- the landing page now has a stable five-section index: promise, identity, trust, method, and scope
+- the hero includes local prototype / deterministic engine / non-clinical continuity markers
+- the corridor-rule panel exposes compact trust signals for the fixed flow, six-axis report spine, and local-only boundary
+- visual identity, trust, methodology, and scope sections now share stronger card rhythm and mobile spacing
 - backend, database, AI/LLM, auth, payments, analytics, public links, image/PDF export, and scoring methodology remain unchanged
 
 ## Development rule
@@ -42,7 +42,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer
 ```
 
 ## Commands
@@ -151,7 +151,7 @@ The public API strips internal numeric scoring diagnostics from the UI-facing re
 /results
 ```
 
-Phase 3.2 still stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, analytics, or image export yet. The landing page includes a visual identity preview in addition to the trust/methodology preview and explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, an upgraded in-app local share-card preview, and a local-only feedback UX stub. The upgraded local share card exposes a corridor signature, card metrics, visual evidence cues, and Discord/chat-readable copy text while remaining purely local. The result report now applies consistent section tones, numbered jump anchors, and a visual section index across axis, contradiction, practical, evidence, trust, feedback, and share sections. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation. The local UI remains covered by a smoke contract and Phase 2 closure gate.
+Phase 3.2 still stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, analytics, or image export yet. The landing page includes a visual identity preview, section-index navigation, continuity markers, compact trust signals, trust/methodology preview, and explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, an upgraded in-app local share-card preview, and a local-only feedback UX stub. The upgraded local share card exposes a corridor signature, card metrics, visual evidence cues, and Discord/chat-readable copy text while remaining purely local. The result report now applies consistent section tones, numbered jump anchors, and a visual section index across axis, contradiction, practical, evidence, trust, feedback, and share sections. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation. The local UI remains covered by a smoke contract and Phase 2 closure gate.
 
 ## Evidence snapshots
 
