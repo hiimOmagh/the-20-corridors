@@ -6,10 +6,13 @@
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "audit:methodology": "tsx scripts/methodology-audit.ts",
+    "validate": "npm run typecheck && npm test && npm run audit:methodology"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",
+    "tsx": "^4.22.4",
     "typescript": "^5.8.3",
     "vitest": "^4.1.8"
   }

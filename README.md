@@ -25,9 +25,9 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 1.3 — Report Quality Guard + Edge-Case Fixture Pack**
+**Phase 1.4 — Methodology Audit CLI + Snapshot Evidence**
 
-This phase introduces the first code foundation:
+This phase locks the first repeatable audit layer:
 
 - canonical tag taxonomy
 - 20-question methodology data
@@ -41,9 +41,11 @@ This phase introduces the first code foundation:
 - evidence-linked report cards
 - golden-profile tests
 - synthetic edge-case fixture pack
-- repeated-letter regression profiles
-- motive/behavior split guard
-- report quality guard for evidence, authority wording, fallback text, and generic flattery
+- report quality guard
+- methodology audit CLI
+- stable JSON audit snapshot
+- archetype distribution evidence
+- contradiction coverage evidence
 
 ## Development rule
 
@@ -52,7 +54,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Quality Guard
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Quality Guard → Methodology Audit Snapshot
 ```
 
 ## Commands
@@ -74,6 +76,35 @@ Run tests:
 ```bash
 npm test
 ```
+
+Run the methodology audit and regenerate the evidence snapshot:
+
+```bash
+npm run audit:methodology
+```
+
+Run the full local validation suite:
+
+```bash
+npm run validate
+```
+
+## Evidence snapshot
+
+The latest deterministic methodology audit is written to:
+
+```text
+docs/evidence/methodology-audit-latest.json
+```
+
+This snapshot records:
+
+- all locked methodology gates
+- golden-profile archetype reachability
+- contradiction coverage
+- confidence distribution
+- compact profile outputs for golden and edge-case fixtures
+- report-quality status for every fixture
 
 ## Package workflow
 

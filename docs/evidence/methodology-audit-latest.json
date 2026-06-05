@@ -1,0 +1,659 @@
+{
+  "schemaVersion": "phase-1.4-methodology-audit-v1",
+  "auditId": "methodology-lock-phase-1.4",
+  "metadata": {
+    "questionCount": 20,
+    "optionCount": 80,
+    "tagCount": 21,
+    "archetypeCount": 8,
+    "contradictionRuleCount": 8,
+    "goldenProfileCount": 8,
+    "edgeCaseProfileCount": 8
+  },
+  "gates": {
+    "allQuestionsPresent": true,
+    "allOptionsTagged": true,
+    "allTagsKnown": true,
+    "allGoldenProfilesPassed": true,
+    "allReportsPassedQuality": true,
+    "contradictionCoverageAtLeastSix": true,
+    "allArchetypesReachableByGoldenProfiles": true,
+    "noEmptyResults": true,
+    "overallPassed": true
+  },
+  "coverage": {
+    "goldenArchetypes": [
+      "observer_strategist",
+      "controlled_explorer",
+      "direct_initiator",
+      "solitary_architect",
+      "symbolic_seeker",
+      "social_navigator",
+      "stability_guardian",
+      "power_analyst"
+    ],
+    "allProfileArchetypes": [
+      "observer_strategist",
+      "controlled_explorer",
+      "direct_initiator",
+      "solitary_architect",
+      "symbolic_seeker",
+      "social_navigator",
+      "stability_guardian",
+      "power_analyst"
+    ],
+    "missingGoldenArchetypes": [],
+    "triggeredContradictions": [
+      "controlled_explorer",
+      "solitary_leader",
+      "social_watcher",
+      "knowledge_without_action",
+      "power_without_exposure",
+      "calm_avoider",
+      "responsible_avoider"
+    ],
+    "missingContradictions": [
+      "recognition_vs_independence"
+    ],
+    "goldenArchetypeDistribution": {
+      "observer_strategist": 1,
+      "controlled_explorer": 1,
+      "direct_initiator": 1,
+      "solitary_architect": 1,
+      "symbolic_seeker": 1,
+      "social_navigator": 1,
+      "stability_guardian": 1,
+      "power_analyst": 1
+    },
+    "allProfileArchetypeDistribution": {
+      "observer_strategist": 3,
+      "controlled_explorer": 1,
+      "direct_initiator": 2,
+      "solitary_architect": 3,
+      "symbolic_seeker": 1,
+      "social_navigator": 2,
+      "stability_guardian": 1,
+      "power_analyst": 3
+    },
+    "confidenceDistribution": {
+      "high": 4,
+      "moderate": 7,
+      "low": 5
+    }
+  },
+  "profiles": {
+    "golden": [
+      {
+        "id": "GP1",
+        "name": "Observer Strategist",
+        "group": "golden",
+        "sequence": "1D 2B 3B 4A 5D 6B 7B 8D 9C 10B 11A 12D 13C 14A 15A 16D 17A 18B 19D 20D",
+        "archetype": "observer_strategist",
+        "dominantTags": [
+          "ANA",
+          "CTRL",
+          "OBS",
+          "SAF",
+          "MEAN",
+          "PRAC"
+        ],
+        "deepMotive": "knowledge",
+        "confidenceBand": "high",
+        "contradictions": [
+          "knowledge_without_action"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "analytical",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "structured_control",
+          "ambiguityFear": "analyze_first",
+          "deepMotive": "knowledge"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1",
+        "expectedArchetype": "observer_strategist",
+        "archetypePassed": true,
+        "expectedContradictions": [
+          "knowledge_without_action"
+        ],
+        "expectedContradictionsCovered": true
+      },
+      {
+        "id": "GP2",
+        "name": "Controlled Explorer",
+        "group": "golden",
+        "sequence": "1C 2B 3C 4D 5B 6B 7B 8A 9C 10C 11A 12C 13C 14C 15B 16D 17B 18D 19C 20D",
+        "archetype": "controlled_explorer",
+        "dominantTags": [
+          "ANA",
+          "OBS",
+          "EXP",
+          "MEAN",
+          "CTRL",
+          "INT"
+        ],
+        "deepMotive": "knowledge",
+        "confidenceBand": "moderate",
+        "contradictions": [
+          "controlled_explorer",
+          "knowledge_without_action"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "analytical",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "indirect_control",
+          "ambiguityFear": "analyze_first",
+          "deepMotive": "knowledge"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1",
+        "expectedArchetype": "controlled_explorer",
+        "archetypePassed": true,
+        "expectedContradictions": [
+          "controlled_explorer",
+          "knowledge_without_action"
+        ],
+        "expectedContradictionsCovered": true
+      },
+      {
+        "id": "GP3",
+        "name": "Direct Initiator",
+        "group": "golden",
+        "sequence": "1A 2A 3A 4D 5A 6A 7D 8B 9A 10A 11A 12A 13B 14C 15B 16A 17C 18A 19C 20B",
+        "archetype": "direct_initiator",
+        "dominantTags": [
+          "ACT",
+          "EXP",
+          "RISK",
+          "CTRL",
+          "LEAD",
+          "REC"
+        ],
+        "deepMotive": "power",
+        "confidenceBand": "high",
+        "contradictions": [],
+        "axisDominants": {
+          "explorationSafety": "high_exploration",
+          "thinkingStyle": "action_based",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "direct_leadership",
+          "ambiguityFear": "investigate_directly",
+          "deepMotive": "power"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1",
+        "expectedArchetype": "direct_initiator",
+        "archetypePassed": true,
+        "expectedContradictions": [],
+        "expectedContradictionsCovered": true
+      },
+      {
+        "id": "GP4",
+        "name": "Solitary Architect",
+        "group": "golden",
+        "sequence": "1D 2B 3B 4A 5B 6B 7A 8D 9B 10B 11A 12D 13A 14A 15A 16D 17A 18B 19C 20D",
+        "archetype": "solitary_architect",
+        "dominantTags": [
+          "CTRL",
+          "ANA",
+          "SAF",
+          "OBS",
+          "MEAN",
+          "ACT"
+        ],
+        "deepMotive": "knowledge",
+        "confidenceBand": "moderate",
+        "contradictions": [
+          "power_without_exposure",
+          "solitary_leader",
+          "knowledge_without_action"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "analytical",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "structured_control",
+          "ambiguityFear": "analyze_first",
+          "deepMotive": "knowledge"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1",
+        "expectedArchetype": "solitary_architect",
+        "archetypePassed": true,
+        "expectedContradictions": [
+          "solitary_leader",
+          "knowledge_without_action"
+        ],
+        "expectedContradictionsCovered": true
+      },
+      {
+        "id": "GP5",
+        "name": "Symbolic Seeker",
+        "group": "golden",
+        "sequence": "1C 2B 3C 4A 5D 6D 7B 8B 9C 10C 11D 12B 13A 14C 15B 16D 17A 18D 19C 20A",
+        "archetype": "symbolic_seeker",
+        "dominantTags": [
+          "ANA",
+          "OBS",
+          "MEAN",
+          "INT",
+          "EXP",
+          "CTRL"
+        ],
+        "deepMotive": "knowledge",
+        "confidenceBand": "high",
+        "contradictions": [
+          "knowledge_without_action",
+          "controlled_explorer"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "analytical",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "indirect_control",
+          "ambiguityFear": "analyze_first",
+          "deepMotive": "knowledge"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1",
+        "expectedArchetype": "symbolic_seeker",
+        "archetypePassed": true,
+        "expectedContradictions": [
+          "knowledge_without_action",
+          "controlled_explorer"
+        ],
+        "expectedContradictionsCovered": true
+      },
+      {
+        "id": "GP6",
+        "name": "Social Navigator",
+        "group": "golden",
+        "sequence": "1A 2D 3D 4C 5C 6A 7B 8A 9D 10D 11A 12B 13D 14D 15C 16C 17D 18C 19A 20C",
+        "archetype": "social_navigator",
+        "dominantTags": [
+          "SOC",
+          "RESP",
+          "COOP",
+          "OBS",
+          "CALM",
+          "ANA"
+        ],
+        "deepMotive": "belonging",
+        "confidenceBand": "moderate",
+        "contradictions": [
+          "social_watcher"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "social_relational",
+          "relationshipPattern": "responsibility_to_others",
+          "agencyControl": "cooperative_agency",
+          "ambiguityFear": "protect_others",
+          "deepMotive": "belonging"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1",
+        "expectedArchetype": "social_navigator",
+        "archetypePassed": true,
+        "expectedContradictions": [
+          "social_watcher"
+        ],
+        "expectedContradictionsCovered": true
+      },
+      {
+        "id": "GP7",
+        "name": "Stability Guardian",
+        "group": "golden",
+        "sequence": "1D 2D 3B 4B 5C 6C 7C 8C 9B 10A 11B 12D 13D 14A 15A 16C 17D 18B 19D 20A",
+        "archetype": "stability_guardian",
+        "dominantTags": [
+          "SAF",
+          "CTRL",
+          "PRAC",
+          "RESP",
+          "MEAN",
+          "ANA"
+        ],
+        "deepMotive": "security",
+        "confidenceBand": "moderate",
+        "contradictions": [
+          "responsible_avoider"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "practical",
+          "relationshipPattern": "responsibility_to_others",
+          "agencyControl": "structured_control",
+          "ambiguityFear": "protect_others",
+          "deepMotive": "security"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1",
+        "expectedArchetype": "stability_guardian",
+        "archetypePassed": true,
+        "expectedContradictions": [
+          "responsible_avoider"
+        ],
+        "expectedContradictionsCovered": true
+      },
+      {
+        "id": "GP8",
+        "name": "Power Analyst",
+        "group": "golden",
+        "sequence": "1D 2B 3B 4A 5A 6B 7B 8B 9C 10B 11A 12D 13A 14A 15A 16D 17C 18C 19D 20B",
+        "archetype": "power_analyst",
+        "dominantTags": [
+          "ANA",
+          "CTRL",
+          "SAF",
+          "OBS",
+          "LEAD",
+          "MEAN"
+        ],
+        "deepMotive": "power",
+        "confidenceBand": "high",
+        "contradictions": [
+          "power_without_exposure",
+          "knowledge_without_action"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "analytical",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "structured_control",
+          "ambiguityFear": "analyze_first",
+          "deepMotive": "power"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1",
+        "expectedArchetype": "power_analyst",
+        "archetypePassed": true,
+        "expectedContradictions": [
+          "power_without_exposure",
+          "knowledge_without_action"
+        ],
+        "expectedContradictionsCovered": true
+      }
+    ],
+    "edgeCases": [
+      {
+        "id": "EC1",
+        "name": "Alternating Letter Stress Profile",
+        "group": "edge",
+        "sequence": "1A 2B 3C 4D 5A 6B 7C 8D 9A 10B 11C 12D 13A 14B 15C 16D 17A 18B 19C 20D",
+        "archetype": "observer_strategist",
+        "dominantTags": [
+          "ANA",
+          "CTRL",
+          "SAF",
+          "OBS",
+          "MEAN",
+          "EXP"
+        ],
+        "deepMotive": "knowledge",
+        "confidenceBand": "low",
+        "contradictions": [
+          "controlled_explorer",
+          "knowledge_without_action"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "analytical",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "structured_control",
+          "ambiguityFear": "analyze_first",
+          "deepMotive": "knowledge"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1"
+      },
+      {
+        "id": "EC2",
+        "name": "All-A Synthetic Input",
+        "group": "edge",
+        "sequence": "1A 2A 3A 4A 5A 6A 7A 8A 9A 10A 11A 12A 13A 14A 15A 16A 17A 18A 19A 20A",
+        "archetype": "direct_initiator",
+        "dominantTags": [
+          "ACT",
+          "CTRL",
+          "LEAD",
+          "EXP",
+          "MEAN",
+          "RISK"
+        ],
+        "deepMotive": "truth",
+        "confidenceBand": "moderate",
+        "contradictions": [
+          "controlled_explorer"
+        ],
+        "axisDominants": {
+          "explorationSafety": "high_exploration",
+          "thinkingStyle": "action_based",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "direct_leadership",
+          "ambiguityFear": "investigate_directly",
+          "deepMotive": "truth"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1"
+      },
+      {
+        "id": "EC3",
+        "name": "All-B Synthetic Input",
+        "group": "edge",
+        "sequence": "1B 2B 3B 4B 5B 6B 7B 8B 9B 10B 11B 12B 13B 14B 15B 16B 17B 18B 19B 20B",
+        "archetype": "power_analyst",
+        "dominantTags": [
+          "SAF",
+          "CTRL",
+          "ANA",
+          "OBS",
+          "CALM",
+          "PRAC"
+        ],
+        "deepMotive": "security",
+        "confidenceBand": "moderate",
+        "contradictions": [
+          "solitary_leader",
+          "calm_avoider"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "analytical",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "structured_control",
+          "ambiguityFear": "analyze_first",
+          "deepMotive": "security"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1"
+      },
+      {
+        "id": "EC4",
+        "name": "All-C Synthetic Input",
+        "group": "edge",
+        "sequence": "1C 2C 3C 4C 5C 6C 7C 8C 9C 10C 11C 12C 13C 14C 15C 16C 17C 18C 19C 20C",
+        "archetype": "social_navigator",
+        "dominantTags": [
+          "SOC",
+          "SAF",
+          "COOP",
+          "INT",
+          "ANA",
+          "MEAN"
+        ],
+        "deepMotive": "belonging",
+        "confidenceBand": "low",
+        "contradictions": [
+          "social_watcher"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "social_relational",
+          "relationshipPattern": "responsibility_to_others",
+          "agencyControl": "cooperative_agency",
+          "ambiguityFear": "protect_others",
+          "deepMotive": "belonging"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1"
+      },
+      {
+        "id": "EC5",
+        "name": "All-D Synthetic Input",
+        "group": "edge",
+        "sequence": "1D 2D 3D 4D 5D 6D 7D 8D 9D 10D 11D 12D 13D 14D 15D 16D 17D 18D 19D 20D",
+        "archetype": "observer_strategist",
+        "dominantTags": [
+          "IND",
+          "SAF",
+          "ANA",
+          "CALM",
+          "MEAN",
+          "OBS"
+        ],
+        "deepMotive": "knowledge",
+        "confidenceBand": "low",
+        "contradictions": [
+          "calm_avoider"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "analytical",
+          "relationshipPattern": "independence",
+          "agencyControl": "withdrawal_non_engagement",
+          "ambiguityFear": "analyze_first",
+          "deepMotive": "knowledge"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1"
+      },
+      {
+        "id": "EC6",
+        "name": "Motive-Behavior Split Profile",
+        "group": "edge",
+        "sequence": "1D 2C 3B 4B 5B 6D 7C 8D 9B 10B 11B 12D 13A 14A 15D 16B 17B 18D 19B 20B",
+        "archetype": "solitary_architect",
+        "dominantTags": [
+          "SAF",
+          "IND",
+          "AVD",
+          "CTRL",
+          "CALM",
+          "WAIT"
+        ],
+        "deepMotive": "security",
+        "confidenceBand": "low",
+        "contradictions": [
+          "calm_avoider"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "practical",
+          "relationshipPattern": "independence",
+          "agencyControl": "withdrawal_non_engagement",
+          "ambiguityFear": "avoid",
+          "deepMotive": "security"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1"
+      },
+      {
+        "id": "EC7",
+        "name": "Broad Mixed Low-Signal Profile",
+        "group": "edge",
+        "sequence": "1B 2D 3A 4C 5D 6C 7A 8B 9C 10A 11D 12C 13B 14D 15A 16C 17A 18B 19D 20C",
+        "archetype": "solitary_architect",
+        "dominantTags": [
+          "CTRL",
+          "SOC",
+          "ANA",
+          "RESP",
+          "SAF",
+          "ACT"
+        ],
+        "deepMotive": "belonging",
+        "confidenceBand": "low",
+        "contradictions": [
+          "social_watcher"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "analytical",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "cooperative_agency",
+          "ambiguityFear": "protect_others",
+          "deepMotive": "belonging"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1"
+      },
+      {
+        "id": "EC8",
+        "name": "Close Archetype Collision Profile",
+        "group": "edge",
+        "sequence": "1C 2B 3B 4A 5D 6B 7B 8B 9C 10C 11A 12D 13A 14A 15A 16D 17A 18C 19D 20B",
+        "archetype": "power_analyst",
+        "dominantTags": [
+          "ANA",
+          "CTRL",
+          "OBS",
+          "SAF",
+          "INT",
+          "MEAN"
+        ],
+        "deepMotive": "knowledge",
+        "confidenceBand": "moderate",
+        "contradictions": [
+          "power_without_exposure",
+          "knowledge_without_action"
+        ],
+        "axisDominants": {
+          "explorationSafety": "safety_control_dominant",
+          "thinkingStyle": "analytical",
+          "relationshipPattern": "social_observation",
+          "agencyControl": "structured_control",
+          "ambiguityFear": "analyze_first",
+          "deepMotive": "knowledge"
+        },
+        "qualityPassed": true,
+        "qualityErrorCount": 0,
+        "qualityWarningCount": 0,
+        "reportSchemaVersion": "phase-1.2-report-v1"
+      }
+    ]
+  },
+  "issues": []
+}
