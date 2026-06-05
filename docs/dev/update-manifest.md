@@ -2,35 +2,33 @@
 
 ## Package
 
-`the-20-corridors_phase1_8_phase2_readiness_contract.zip`
+`the-20-corridors_phase2_1_quiz_ux_hardening.zip`
 
 ## Phase
 
-Phase 1.8 — Engine Closure Review + Phase 2 UI Readiness Contract
+Phase 2.1 — Quiz UX Hardening + Keyboard/Progress Contract
 
 ## Purpose
 
-Close the deterministic engine phase formally and define the exact contract for starting Phase 2 UI work without breaking the public engine API boundary.
+Harden the first playable quiz interaction layer without expanding into backend, database, AI, auth, payments, analytics, PDF export, or share-card generation.
 
-This package still does **not** add UI implementation. It adds closure/release documentation, a Phase 2 readiness gate, and evidence that the repository is ready to transition into UI scaffolding in the next package.
+This package adds keyboard input, review/undo behavior, progress status, safer local result storage, and explicit invalid-result handling.
 
 ## Files included
 
 Only new or modified files are included in this update package:
 
 ```text
+.gitignore
 README.md
-package.json
 docs/dev/update-manifest.md
-docs/evidence/engine-release-gate-latest.json
-docs/evidence/phase2-readiness-latest.json
-docs/release/engine-closure-review.md
-docs/ui/phase-2-ui-readiness-contract.md
-docs/ui/import-boundary-contract.md
-docs/ui/phase-2-transition-plan.md
-scripts/phase2-readiness.ts
-src/core/release/phase2Readiness.ts
-tests/core/phase2Readiness.test.ts
+docs/ui/phase-2-1-quiz-ux-status.md
+vitest.config.ts
+src/app/globals.css
+src/features/quiz/QuizClient.tsx
+src/features/quiz/quizFlow.ts
+src/features/results/ResultsClient.tsx
+tests/ui/quizFlow.test.ts
 ```
 
 ## Files intentionally not included
@@ -42,13 +40,14 @@ unchanged report composer files
 unchanged quality guard files
 unchanged audit files
 unchanged public API files
-unchanged serialization files
-unchanged engine release-gate source
-unchanged existing tests
+unchanged serialization core files
+unchanged app route files
+unchanged package-lock.json
+unchanged package.json
 node_modules/
-Next.js app files
-React UI components
-CSS/Tailwind files
+.next/
+dist/
+coverage/
 database files
 AI report generation
 PDF/share-card generation
@@ -59,34 +58,25 @@ Reason: the project rule is changed-files-only update packaging.
 ## What changed
 
 ```text
-Added engine closure review document.
-Added Phase 2 UI readiness contract.
-Added UI import-boundary contract.
-Added Phase 2 transition plan.
-Added npm run readiness:phase2.
-Updated npm run validate to include the Phase 2 readiness gate.
-Added Phase 2 readiness core report.
-Added Phase 2 readiness evidence snapshot.
-Updated engine release-gate evidence snapshot because package.json validate changed.
-Added Phase 2 readiness regression tests.
-Updated README with closure/readiness workflow and evidence location.
-```
-
-## Phase 2 readiness checks
-
-```text
-engine release gate passes
-engine closure review exists
-UI readiness contract exists
-import-boundary contract exists
-Phase 2 transition plan exists
-public core entrypoint exists and exports required functions
-public engine wrapper exists
-public publicTypes module exists
-package.json exposes npm run readiness:phase2
-npm run validate includes npm run readiness:phase2
-transition plan keeps backend/database/AI scope blocked
-UI contract requires public API only
+Updated gitignore for Next.js and TypeScript build-info artifacts.
+Added pure quiz flow helper module.
+Added A/B/C/D keyboard option parsing.
+Added quiz progress helper.
+Added answer sequence builder with missing-answer guard.
+Added versioned sessionStorage write helper.
+Added hardened sessionStorage read helper.
+Added legacy Phase 2.0 raw-result compatibility.
+Added explicit invalid-result state in results UI.
+Added clear local result action.
+Added answer review dots for all 20 corridors.
+Added selected answer visual state.
+Added Backspace undo behavior.
+Added ArrowLeft review behavior.
+Added Vitest alias support for @/ imports in UI/helper tests.
+Added UI behavior tests for quiz flow/session helpers.
+Updated CSS for instruction, review, selected, live-status, and error states.
+Updated README and Phase 2.1 UX status doc.
+Release/readiness evidence snapshots were verified current and did not require package inclusion.
 ```
 
 ## Apply instructions
@@ -94,18 +84,20 @@ UI contract requires public API only
 From repository root:
 
 ```bash
-unzip -o the-20-corridors_phase1_8_phase2_readiness_contract.zip
+unzip -o the-20-corridors_phase2_1_quiz_ux_hardening.zip
 npm run validate
 npm audit --omit=dev
 npm audit
+npm run build
+rm -rf .next
 git status --short
 ```
 
 Then commit:
 
 ```bash
-git add README.md package.json docs/dev/update-manifest.md docs/evidence/engine-release-gate-latest.json docs/evidence/phase2-readiness-latest.json docs/release/engine-closure-review.md docs/ui/phase-2-ui-readiness-contract.md docs/ui/import-boundary-contract.md docs/ui/phase-2-transition-plan.md scripts/phase2-readiness.ts src/core/release/phase2Readiness.ts tests/core/phase2Readiness.test.ts
-git commit -m "docs: close engine phase and define ui readiness contract"
+git add .gitignore README.md docs/dev/update-manifest.md docs/ui/phase-2-1-quiz-ux-status.md vitest.config.ts src/app/globals.css src/features/quiz/QuizClient.tsx src/features/quiz/quizFlow.ts src/features/results/ResultsClient.tsx tests/ui/quizFlow.test.ts
+git commit -m "feat: harden quiz ux and session handoff"
 ```
 
 ## Validation performed before packaging
@@ -114,47 +106,52 @@ git commit -m "docs: close engine phase and define ui readiness contract"
 npm run validate
 npm audit --omit=dev
 npm audit
+npm run build
 ```
 
 Observed validation result:
 
 ```text
 typecheck: passed
-tests: 14 files passed, 105 tests passed
+tests: 16 files passed, 119 tests passed
+UI import boundary: passed
 engine release gate: passed
 phase 2 readiness gate: passed
 methodology audit: passed
 methodology evidence current: yes
 golden snapshots current: yes
 forbidden generated artifacts: 0
-premature scope artifacts: 0
+blocked backend/database/AI scope artifacts: 0
 production dependency audit: 0 vulnerabilities
 full dependency audit: 0 vulnerabilities
+Next.js production build: passed
 ```
+
+Note: `.next/` was deleted after build validation and is intentionally not packaged.
 
 ## Acceptance gate status
 
 ```text
-Engine closure review exists: passed
-Phase 2 UI readiness contract exists: passed
-UI import-boundary contract exists: passed
-Phase 2 transition plan exists: passed
-Phase 2 readiness command exists: passed
-validate runs Phase 2 readiness gate: passed
-Public engine API remains the only UI boundary: passed
-Backend/database/AI scope remains blocked for Phase 2.0: passed
-No UI implementation introduced yet: passed
+Keyboard A/B/C/D input: passed by helper tests and build
+Progress contract: passed by helper tests
+Undo/review helper behavior: passed by helper tests
+Versioned result storage: passed by helper tests
+Legacy raw-result compatibility: passed by helper tests
+Invalid result state: implemented
+UI import boundary: passed
+Backend/database/AI/auth/payment remain blocked: passed
+No generated artifacts packaged: passed
 ```
 
 ## Next recommended milestone
 
-Phase 2.0 — UI Scaffold + Release Gate Relaxation
+Phase 2.2 — Full Result Report UI
 
 Scope:
 
-- introduce the Next.js/app UI scaffold
-- relax the release gate to allow approved UI paths only
-- keep backend/database/AI/auth/payment blocked
-- add UI import-boundary scanner
-- create landing, instructions, quiz, and result route skeletons
-- consume only `getCorridorQuestions()` and `runCorridorsEngine()` from the public core API
+- render all six axis cards
+- render full contradiction map
+- render strengths/failure/growth sections
+- render evidence digest references
+- keep local-session only
+- keep backend/AI/auth/payment blocked

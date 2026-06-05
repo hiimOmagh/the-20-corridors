@@ -1,9 +1,10 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { runEngineReleaseGate } from './releaseGate';
+import { runUiImportBoundary } from './uiImportBoundary';
 
-export const PHASE_2_READINESS_SCHEMA_VERSION = 'phase-1.8-phase2-readiness-v1' as const;
-export const PHASE_2_READINESS_ID = 'phase-2-ui-readiness-contract' as const;
+export const PHASE_2_READINESS_SCHEMA_VERSION = 'phase-2.0-ui-scaffold-readiness-v1' as const;
+export const PHASE_2_READINESS_ID = 'phase-2-ui-scaffold-readiness' as const;
 
 export interface Phase2ReadinessOptions {
   readonly repoRoot?: string;
@@ -16,30 +17,28 @@ export interface Phase2ReadinessReport {
     readonly checkedAt: 'static';
     readonly repoRootName: string;
     readonly engineReleaseGateSchemaVersion: string;
+    readonly uiImportBoundarySchemaVersion: string;
   };
   readonly gates: {
     readonly engineReleaseGatePassed: boolean;
-    readonly closureReviewExists: boolean;
-    readonly uiReadinessContractExists: boolean;
-    readonly importBoundaryContractExists: boolean;
-    readonly transitionPlanExists: boolean;
+    readonly uiImportBoundaryPassed: boolean;
+    readonly nextConfigExists: boolean;
+    readonly appLayoutExists: boolean;
+    readonly landingRouteExists: boolean;
+    readonly quizRouteExists: boolean;
+    readonly resultsRouteExists: boolean;
+    readonly quizClientExists: boolean;
+    readonly resultsClientExists: boolean;
+    readonly globalStylesExist: boolean;
     readonly publicCoreEntrypointExists: boolean;
-    readonly publicEngineWrapperExists: boolean;
-    readonly publicTypesExist: boolean;
-    readonly readinessScriptExists: boolean;
     readonly validateScriptRunsReadinessGate: boolean;
-    readonly transitionKeepsBackendAiBlocked: boolean;
-    readonly contractRequiresPublicApiOnly: boolean;
+    readonly validateScriptRunsUiImportGuard: boolean;
+    readonly stillNoBackendAiAuthPaymentScope: boolean;
+    readonly routeSkeletonsUsePublicApiOnly: boolean;
     readonly overallPassed: boolean;
   };
-  readonly documents: {
-    readonly closureReview: string;
-    readonly uiReadinessContract: string;
-    readonly importBoundaryContract: string;
-    readonly transitionPlan: string;
-  };
-  readonly allowedPhase2Scope: readonly string[];
-  readonly stillBlockedScope: readonly string[];
+  readonly requiredUiFiles: readonly string[];
+  readonly blockedScope: readonly string[];
   readonly publicApi: {
     readonly entrypoint: string;
     readonly requiredExports: readonly string[];
@@ -48,30 +47,28 @@ export interface Phase2ReadinessReport {
   readonly scripts: {
     readonly validate?: string;
     readonly readinessPhase2?: string;
+    readonly guardUiImports?: string;
   };
   readonly issues: readonly string[];
 }
 
-const CLOSURE_REVIEW_PATH = 'docs/release/engine-closure-review.md';
-const UI_READINESS_CONTRACT_PATH = 'docs/ui/phase-2-ui-readiness-contract.md';
-const IMPORT_BOUNDARY_CONTRACT_PATH = 'docs/ui/import-boundary-contract.md';
-const TRANSITION_PLAN_PATH = 'docs/ui/phase-2-transition-plan.md';
-
-export const APPROVED_PHASE_2_SCOPE = [
-  'app/',
-  'src/app/',
-  'src/components/',
-  'src/components/ui/',
-  'src/features/quiz/',
-  'src/features/results/',
-  'src/styles/',
-  'public/'
+const REQUIRED_UI_FILES = [
+  'next.config.ts',
+  'next-env.d.ts',
+  'src/app/layout.tsx',
+  'src/app/page.tsx',
+  'src/app/quiz/page.tsx',
+  'src/app/results/page.tsx',
+  'src/app/globals.css',
+  'src/features/quiz/QuizClient.tsx',
+  'src/features/results/ResultsClient.tsx'
 ] as const;
 
-export const STILL_BLOCKED_PHASE_2_SCOPE = [
+const STILL_BLOCKED_SCOPE = [
   'src/server/',
   'src/api/',
-  'app/api/',
+  'src/app/api/',
+  'pages/',
   'pages/api/',
   'server/',
   'api/',
@@ -87,18 +84,20 @@ export const STILL_BLOCKED_PHASE_2_SCOPE = [
   'src/llm/',
   'src/prompts/',
   'src/core/ai/',
-  'src/core/llm/'
+  'src/core/llm/',
+  'auth/',
+  'payments/'
 ] as const;
 
-export const REQUIRED_PUBLIC_EXPORTS = ['getCorridorQuestions', 'runCorridorsEngine'] as const;
+const REQUIRED_PUBLIC_EXPORTS = ['getCorridorQuestions', 'runCorridorsEngine'] as const;
 
-export const FORBIDDEN_UI_IMPORT_PREFIXES = [
-  'src/core/methodology/',
-  'src/core/scoring/',
-  'src/core/report/',
-  'src/core/audit/',
-  'src/core/release/',
-  'src/core/serialization/'
+const FORBIDDEN_UI_IMPORT_PREFIXES = [
+  '@/core/methodology',
+  '@/core/scoring',
+  '@/core/report',
+  '@/core/audit',
+  '@/core/release',
+  '@/core/serialization'
 ] as const;
 
 interface PackageJsonSubset {
@@ -108,50 +107,38 @@ interface PackageJsonSubset {
 export function runPhase2Readiness(options: Phase2ReadinessOptions = {}): Phase2ReadinessReport {
   const repoRoot = path.resolve(options.repoRoot ?? process.cwd());
   const engineReleaseGate = runEngineReleaseGate({ repoRoot });
+  const uiImportBoundary = runUiImportBoundary({ repoRoot });
   const packageJson = readPackageJson(repoRoot);
-
-  const documents = {
-    closureReview: CLOSURE_REVIEW_PATH,
-    uiReadinessContract: UI_READINESS_CONTRACT_PATH,
-    importBoundaryContract: IMPORT_BOUNDARY_CONTRACT_PATH,
-    transitionPlan: TRANSITION_PLAN_PATH
-  };
-
-  const closureReviewExists = existsInRepo(repoRoot, CLOSURE_REVIEW_PATH);
-  const uiReadinessContractExists = existsInRepo(repoRoot, UI_READINESS_CONTRACT_PATH);
-  const importBoundaryContractExists = existsInRepo(repoRoot, IMPORT_BOUNDARY_CONTRACT_PATH);
-  const transitionPlanExists = existsInRepo(repoRoot, TRANSITION_PLAN_PATH);
-  const publicCoreEntrypointExists = existsInRepo(repoRoot, 'src/core/index.ts');
-  const publicEngineWrapperExists = existsInRepo(repoRoot, 'src/core/engine.ts');
-  const publicTypesExist = existsInRepo(repoRoot, 'src/core/publicTypes.ts');
-  const readinessScriptExists = packageJson.scripts?.['readiness:phase2'] === 'tsx scripts/phase2-readiness.ts';
-  const validateScriptRunsReadinessGate = Boolean(packageJson.scripts?.validate?.includes('npm run readiness:phase2'));
-  const transitionPlan = readFileIfExists(repoRoot, TRANSITION_PLAN_PATH);
-  const uiReadinessContract = readFileIfExists(repoRoot, UI_READINESS_CONTRACT_PATH);
+  const validateScript = packageJson.scripts?.validate ?? '';
   const publicIndex = readFileIfExists(repoRoot, 'src/core/index.ts');
+  const quizClient = readFileIfExists(repoRoot, 'src/features/quiz/QuizClient.tsx');
+  const resultsClient = readFileIfExists(repoRoot, 'src/features/results/ResultsClient.tsx');
 
-  const transitionKeepsBackendAiBlocked = STILL_BLOCKED_PHASE_2_SCOPE.every((blockedPath) =>
-    transitionPlan.includes(blockedPath)
-  );
-  const contractRequiresPublicApiOnly =
-    uiReadinessContract.includes('getCorridorQuestions') &&
-    uiReadinessContract.includes('runCorridorsEngine') &&
-    FORBIDDEN_UI_IMPORT_PREFIXES.every((forbiddenImport) => uiReadinessContract.includes(forbiddenImport));
+  const missingBlockedScope = STILL_BLOCKED_SCOPE.filter((blockedPath) => existsInRepo(repoRoot, blockedPath.replace(/\/$/, '')));
   const publicExportsPresent = REQUIRED_PUBLIC_EXPORTS.every((requiredExport) => publicIndex.includes(requiredExport));
+  const routeSkeletonsUsePublicApiOnly =
+    quizClient.includes("from '@/core'") &&
+    resultsClient.includes("from '@/core'") &&
+    FORBIDDEN_UI_IMPORT_PREFIXES.every(
+      (forbiddenImport) => !quizClient.includes(forbiddenImport) && !resultsClient.includes(forbiddenImport)
+    );
 
   const gates = {
     engineReleaseGatePassed: engineReleaseGate.gates.overallPassed,
-    closureReviewExists,
-    uiReadinessContractExists,
-    importBoundaryContractExists,
-    transitionPlanExists,
-    publicCoreEntrypointExists: publicCoreEntrypointExists && publicExportsPresent,
-    publicEngineWrapperExists,
-    publicTypesExist,
-    readinessScriptExists,
-    validateScriptRunsReadinessGate,
-    transitionKeepsBackendAiBlocked,
-    contractRequiresPublicApiOnly,
+    uiImportBoundaryPassed: uiImportBoundary.gates.overallPassed,
+    nextConfigExists: existsInRepo(repoRoot, 'next.config.ts'),
+    appLayoutExists: existsInRepo(repoRoot, 'src/app/layout.tsx'),
+    landingRouteExists: existsInRepo(repoRoot, 'src/app/page.tsx'),
+    quizRouteExists: existsInRepo(repoRoot, 'src/app/quiz/page.tsx'),
+    resultsRouteExists: existsInRepo(repoRoot, 'src/app/results/page.tsx'),
+    quizClientExists: existsInRepo(repoRoot, 'src/features/quiz/QuizClient.tsx'),
+    resultsClientExists: existsInRepo(repoRoot, 'src/features/results/ResultsClient.tsx'),
+    globalStylesExist: existsInRepo(repoRoot, 'src/app/globals.css'),
+    publicCoreEntrypointExists: existsInRepo(repoRoot, 'src/core/index.ts') && publicExportsPresent,
+    validateScriptRunsReadinessGate: validateScript.includes('npm run readiness:phase2'),
+    validateScriptRunsUiImportGuard: validateScript.includes('npm run guard:ui-imports'),
+    stillNoBackendAiAuthPaymentScope: missingBlockedScope.length === 0,
+    routeSkeletonsUsePublicApiOnly,
     overallPassed: false
   };
 
@@ -170,46 +157,55 @@ export function runPhase2Readiness(options: Phase2ReadinessOptions = {}): Phase2
     metadata: {
       checkedAt: 'static',
       repoRootName: 'repository',
-      engineReleaseGateSchemaVersion: engineReleaseGate.schemaVersion
+      engineReleaseGateSchemaVersion: engineReleaseGate.schemaVersion,
+      uiImportBoundarySchemaVersion: uiImportBoundary.schemaVersion
     },
     gates: completeGates,
-    documents,
-    allowedPhase2Scope: APPROVED_PHASE_2_SCOPE,
-    stillBlockedScope: STILL_BLOCKED_PHASE_2_SCOPE,
+    requiredUiFiles: REQUIRED_UI_FILES,
+    blockedScope: STILL_BLOCKED_SCOPE,
     publicApi: {
       entrypoint: 'src/core/index.ts',
       requiredExports: REQUIRED_PUBLIC_EXPORTS,
       forbiddenUiImports: FORBIDDEN_UI_IMPORT_PREFIXES
     },
     scripts: buildScriptSummary(packageJson),
-    issues: buildIssues(completeGates)
+    issues: buildIssues(completeGates, missingBlockedScope, uiImportBoundary.issues)
   };
 }
 
 function buildScriptSummary(packageJson: PackageJsonSubset): Phase2ReadinessReport['scripts'] {
-  const scripts: { validate?: string; readinessPhase2?: string } = {};
+  const scripts: { validate?: string; readinessPhase2?: string; guardUiImports?: string } = {};
 
   const validate = packageJson.scripts?.validate;
   const readinessPhase2 = packageJson.scripts?.['readiness:phase2'];
+  const guardUiImports = packageJson.scripts?.['guard:ui-imports'];
 
-  if (validate !== undefined) {
-    scripts.validate = validate;
-  }
-
-  if (readinessPhase2 !== undefined) {
-    scripts.readinessPhase2 = readinessPhase2;
-  }
+  if (validate !== undefined) scripts.validate = validate;
+  if (readinessPhase2 !== undefined) scripts.readinessPhase2 = readinessPhase2;
+  if (guardUiImports !== undefined) scripts.guardUiImports = guardUiImports;
 
   return scripts;
 }
 
-function buildIssues(gates: Phase2ReadinessReport['gates']): string[] {
+function buildIssues(
+  gates: Phase2ReadinessReport['gates'],
+  blockedScope: readonly string[],
+  uiImportIssues: readonly string[]
+): string[] {
   const issues: string[] = [];
 
   for (const [key, value] of Object.entries(gates)) {
     if (key !== 'overallPassed' && value !== true) {
       issues.push(`phase2_readiness_gate_failed:${key}`);
     }
+  }
+
+  for (const blockedPath of blockedScope) {
+    issues.push(`blocked_scope_artifact:${blockedPath}`);
+  }
+
+  for (const uiIssue of uiImportIssues) {
+    issues.push(uiIssue);
   }
 
   return issues;

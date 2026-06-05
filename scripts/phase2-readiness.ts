@@ -1,23 +1,22 @@
-import { mkdir, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { writeFileSync } from 'node:fs';
+import path from 'node:path';
 import { runPhase2Readiness } from '../src/core/release/phase2Readiness';
 
-const outputPath = resolve(process.cwd(), 'docs/evidence/phase2-readiness-latest.json');
 const report = runPhase2Readiness();
-const serialized = `${JSON.stringify(report, null, 2)}\n`;
-
-await mkdir(dirname(outputPath), { recursive: true });
-await writeFile(outputPath, serialized, 'utf8');
-
-const status = report.gates.overallPassed ? 'passed' : 'failed';
-console.log(`Phase 2 readiness gate ${status}.`);
-console.log(`Engine release gate: ${report.gates.engineReleaseGatePassed ? 'passed' : 'failed'}.`);
-console.log(`Contract docs ready: ${report.gates.uiReadinessContractExists ? 'yes' : 'no'}.`);
-console.log(`Public API boundary ready: ${report.gates.publicCoreEntrypointExists ? 'yes' : 'no'}.`);
-console.log(`Backend/AI still blocked in transition plan: ${report.gates.transitionKeepsBackendAiBlocked ? 'yes' : 'no'}.`);
-console.log(`Evidence written: ${outputPath}`);
+const evidencePath = path.join(process.cwd(), 'docs/evidence/phase2-readiness-latest.json');
+writeFileSync(evidencePath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 
 if (!report.gates.overallPassed) {
-  console.error(JSON.stringify(report.issues, null, 2));
-  process.exitCode = 1;
+  console.error('Phase 2 readiness gate failed.');
+  for (const issue of report.issues) {
+    console.error(`- ${issue}`);
+  }
+  process.exit(1);
 }
+
+console.log('Phase 2 readiness gate passed.');
+console.log(`Engine release gate: ${report.gates.engineReleaseGatePassed ? 'passed' : 'failed'}.`);
+console.log(`UI import boundary: ${report.gates.uiImportBoundaryPassed ? 'passed' : 'failed'}.`);
+console.log(`Route skeletons ready: ${report.gates.routeSkeletonsUsePublicApiOnly ? 'yes' : 'no'}.`);
+console.log(`Backend/AI/auth/payment scope blocked: ${report.gates.stillNoBackendAiAuthPaymentScope ? 'yes' : 'no'}.`);
+console.log(`Evidence written: ${evidencePath}`);

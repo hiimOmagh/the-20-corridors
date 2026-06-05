@@ -25,44 +25,21 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 1.8 — Engine Closure Review + Phase 2 UI Readiness Contract**
+**Phase 2.1 — Quiz UX Hardening + Keyboard/Progress Contract**
 
-This phase locks the first repeatable audit layer:
+This phase hardens the quiz interaction layer while preserving the engine boundary:
 
-- canonical tag taxonomy
-- 20-question methodology data
-- weighted tag scoring
-- six-axis scoring
-- archetype resolution
-- contradiction detection
-- confidence banding
-- report seed contract
-- deterministic composed report sections
-- evidence-linked report cards
-- golden-profile tests
-- synthetic edge-case fixture pack
-- report quality guard
-- methodology audit CLI
-- stable JSON audit snapshot
-- archetype distribution evidence
-- contradiction coverage evidence
-- public engine API boundary
-- UI-safe question DTOs
-- UI-safe result DTOs
-- import-boundary tests
-- result serialization envelope
-- stable golden public-result snapshots
-- snapshot verification command
-- engine release gate
-- repository hygiene guard
-- premature UI/backend/AI scope guard
-- release-gate evidence snapshot
-- engine closure review
-- Phase 2 UI readiness contract
-- UI import-boundary contract
-- Phase 2 transition plan
-- Phase 2 readiness gate
-- readiness evidence snapshot
+- A/B/C/D keyboard shortcuts
+- ArrowLeft review shortcut
+- Backspace undo shortcut
+- explicit instruction strip inside the quiz route
+- answer review dots for all 20 corridors
+- selected-answer state on reviewed questions
+- versioned sessionStorage result serialization
+- legacy result compatibility for Phase 2.0 local sessions
+- invalid local-result error state and clear action
+- pure UI behavior helper tests
+- backend/database/AI/auth/payment scope remains blocked
 
 ## Development rule
 
@@ -71,7 +48,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → Phase 2 Readiness Gate
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate
 ```
 
 ## Commands
@@ -80,6 +57,18 @@ Install dependencies:
 
 ```bash
 npm install
+```
+
+Run the local dev server:
+
+```bash
+npm run dev
+```
+
+Create a production build:
+
+```bash
+npm run build
 ```
 
 Run type checks:
@@ -92,6 +81,12 @@ Run tests:
 
 ```bash
 npm test
+```
+
+Run the UI import-boundary guard:
+
+```bash
+npm run guard:ui-imports
 ```
 
 Run the methodology audit and regenerate the methodology evidence snapshot:
@@ -130,18 +125,29 @@ Run the full local validation suite:
 npm run validate
 ```
 
-
 ## Public engine API
 
-Future UI/app layers should import the engine only from:
+UI/app layers must import the engine only from:
 
 ```ts
-import { getCorridorQuestions, runCorridorsEngine } from './src/core';
+import { getCorridorQuestions, runCorridorsEngine } from '@/core';
 ```
 
-Do not import UI code from internal methodology, scoring, report, or audit modules. The public API strips internal numeric scoring diagnostics from the UI-facing result while keeping evidence references and report sections available.
+Do not import UI code from internal methodology, scoring, report, audit, release, or serialization modules.
 
-## Evidence snapshot
+The public API strips internal numeric scoring diagnostics from the UI-facing result while keeping evidence references and report sections available.
+
+## Current UI routes
+
+```text
+/
+/quiz
+/results
+```
+
+Phase 2.1 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence yet.
+
+## Evidence snapshots
 
 The latest deterministic methodology audit is written to:
 
@@ -167,23 +173,7 @@ The latest Phase 2 readiness snapshot is written to:
 docs/evidence/phase2-readiness-latest.json
 ```
 
-These snapshots record:
-
-- all locked methodology gates
-- golden-profile archetype reachability
-- contradiction coverage
-- confidence distribution
-- compact profile outputs for golden and edge-case fixtures
-- report-quality status for every fixture
-- serialized public outputs for all golden profiles
-- schema/version evidence for future share-link/backend work
-- release-gate evidence before Phase 2 UI work
-- repository hygiene status for forbidden generated artifacts
-- confirmation that UI/backend/AI scope has not been introduced prematurely
-- engine closure review status
-- Phase 2 UI contract status
-- approved UI paths for the next phase
-- still-blocked backend/database/AI scope for the next phase
+These snapshots record methodology integrity, archetype reachability, contradiction coverage, serialization stability, approved UI scope, import-boundary status, and blocked backend/database/AI scope.
 
 ## Package workflow
 

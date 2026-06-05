@@ -1,0 +1,5095 @@
+{
+  "engineApiVersion": "phase-1.5-engine-public-v1",
+  "profileCount": 8,
+  "profiles": [
+    {
+      "expectedArchetype": "observer_strategist",
+      "expectedContradictions": [
+        "knowledge_without_action"
+      ],
+      "expectedDominantTags": [
+        "ANA",
+        "OBS",
+        "CTRL",
+        "SAF",
+        "MEAN"
+      ],
+      "id": "GP1",
+      "name": "Observer Strategist",
+      "resultEnvelope": {
+        "engineApiVersion": "phase-1.5-engine-public-v1",
+        "result": {
+          "answers": [
+            {
+              "answerText": "المخارج والاتجاهات",
+              "option": "D",
+              "questionId": 1
+            },
+            {
+              "answerText": "تراقبه أولًا",
+              "option": "B",
+              "questionId": 2
+            },
+            {
+              "answerText": "طويل وآمن",
+              "option": "B",
+              "questionId": 3
+            },
+            {
+              "answerText": "تتعلم شيء",
+              "option": "A",
+              "questionId": 4
+            },
+            {
+              "answerText": "بومة",
+              "option": "D",
+              "questionId": 5
+            },
+            {
+              "answerText": "المخطط",
+              "option": "B",
+              "questionId": 6
+            },
+            {
+              "answerText": "تطلع لمكان مرتفع",
+              "option": "B",
+              "questionId": 7
+            },
+            {
+              "answerText": "غرفة هادئة",
+              "option": "D",
+              "questionId": 8
+            },
+            {
+              "answerText": "تبحث عن قصته",
+              "option": "C",
+              "questionId": 9
+            },
+            {
+              "answerText": "الذكي الهادئ",
+              "option": "B",
+              "questionId": 10
+            },
+            {
+              "answerText": "تتصرف بسرعة",
+              "option": "A",
+              "questionId": 11
+            },
+            {
+              "answerText": "أرض",
+              "option": "D",
+              "questionId": 12
+            },
+            {
+              "answerText": "غموض",
+              "option": "C",
+              "questionId": 13
+            },
+            {
+              "answerText": "الفوضى",
+              "option": "A",
+              "questionId": 14
+            },
+            {
+              "answerText": "تبني نظام",
+              "option": "A",
+              "questionId": 15
+            },
+            {
+              "answerText": "تراقب بصمت",
+              "option": "D",
+              "questionId": 16
+            },
+            {
+              "answerText": "أسود",
+              "option": "A",
+              "questionId": 17
+            },
+            {
+              "answerText": "تهتم بالجائزة",
+              "option": "B",
+              "questionId": 18
+            },
+            {
+              "answerText": "التنبؤ",
+              "option": "D",
+              "questionId": 19
+            },
+            {
+              "answerText": "المعرفة",
+              "option": "D",
+              "questionId": 20
+            }
+          ],
+          "apiVersion": "phase-1.5-engine-public-v1",
+          "archetype": {
+            "disprovenIf": "Direct action and risk signals are stronger than observation and control signals.",
+            "failureMode": "Over-observation and delayed execution.",
+            "id": "observer_strategist",
+            "strength": "Pattern recognition, timing, and strategic patience.",
+            "summary": "Reduces uncertainty by reading the environment before acting.",
+            "title": "The Observer Strategist"
+          },
+          "axes": [
+            {
+              "band": "dominant",
+              "dominantKey": "safety_control_dominant",
+              "dominantLabel": "safety-control dominant",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "explorationSafety",
+              "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+              "label": "Exploration vs Safety-Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "analytical",
+              "dominantLabel": "analytical thinking",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "thinkingStyle",
+              "interpretation": "You process situations by organizing signals, comparing options, and looking for structure before committing.",
+              "label": "Thinking Style"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "social_observation",
+              "dominantLabel": "social observation",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "relationshipPattern",
+              "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+              "label": "Relationship and Distance Pattern"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "structured_control",
+              "dominantLabel": "structured control",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "agencyControl",
+              "interpretation": "You exert agency by creating structure, rules, order, and practical control.",
+              "label": "Agency, Leadership, and Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "analyze_first",
+              "dominantLabel": "analysis before action",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "ambiguityFear",
+              "interpretation": "When information is incomplete, your first tendency is to observe, map the situation, and reduce uncertainty.",
+              "label": "Ambiguity and Fear Response"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "knowledge",
+              "dominantLabel": "knowledge motive",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "deepMotive",
+              "interpretation": "The strongest motive signal points toward understanding, explanation, and conceptual depth.",
+              "label": "Deep Motive Structure"
+            }
+          ],
+          "confidenceBand": "high",
+          "contradictions": [
+            {
+              "behavioralImplication": "Reflective depth may create execution drag if not converted into action.",
+              "disprovenIf": "Direct action appears strongly across ambiguity and pressure questions.",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "explanation": "Meaning and analysis are stronger than immediate movement or risk.",
+              "id": "knowledge_without_action",
+              "tension": "The tension is between insight and movement: understanding can become a substitute for testing.",
+              "title": "Knowledge Without Action"
+            }
+          ],
+          "deepMotive": {
+            "band": "dominant",
+            "evidenceRefs": [
+              "Q19D",
+              "Q20D",
+              "Q2B",
+              "Q7B"
+            ],
+            "key": "knowledge",
+            "label": "knowledge motive"
+          },
+          "dominantTraits": [
+            {
+              "code": "ANA",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20D",
+                "Q2B"
+              ],
+              "label": "analytical processing"
+            },
+            {
+              "code": "CTRL",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20D",
+                "Q11A"
+              ],
+              "label": "control and structure"
+            },
+            {
+              "code": "OBS",
+              "evidenceRefs": [
+                "Q19D",
+                "Q2B",
+                "Q7B"
+              ],
+              "label": "observation before action"
+            }
+          ],
+          "report": {
+            "axisCards": [
+              {
+                "band": "dominant",
+                "dominantKey": "safety_control_dominant",
+                "dominantLabel": "safety-control dominant",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "explorationSafety",
+                "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+                "label": "Exploration vs Safety-Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "analytical",
+                "dominantLabel": "analytical thinking",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "thinkingStyle",
+                "interpretation": "You process situations by organizing signals, comparing options, and looking for structure before committing.",
+                "label": "Thinking Style"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "social_observation",
+                "dominantLabel": "social observation",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "relationshipPattern",
+                "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+                "label": "Relationship and Distance Pattern"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "structured_control",
+                "dominantLabel": "structured control",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "agencyControl",
+                "interpretation": "You exert agency by creating structure, rules, order, and practical control.",
+                "label": "Agency, Leadership, and Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "analyze_first",
+                "dominantLabel": "analysis before action",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "ambiguityFear",
+                "interpretation": "When information is incomplete, your first tendency is to observe, map the situation, and reduce uncertainty.",
+                "label": "Ambiguity and Fear Response"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "knowledge",
+                "dominantLabel": "knowledge motive",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "deepMotive",
+                "interpretation": "The strongest motive signal points toward understanding, explanation, and conceptual depth.",
+                "label": "Deep Motive Structure"
+              }
+            ],
+            "contradictionMap": [
+              {
+                "behavioralImplication": "Reflective depth may create execution drag if not converted into action.",
+                "disprovenIf": "Direct action appears strongly across ambiguity and pressure questions.",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "explanation": "Meaning and analysis are stronger than immediate movement or risk.",
+                "id": "knowledge_without_action",
+                "tension": "The tension is between insight and movement: understanding can become a substitute for testing.",
+                "title": "Knowledge Without Action"
+              }
+            ],
+            "disprovenIf": [
+              "Direct action and risk signals are stronger than observation and control signals.",
+              "Direct action appears strongly across ambiguity and pressure questions.",
+              "This reading is weaker if the choices were made for aesthetic preference rather than instinctive self-recognition.",
+              "This reading is weaker if the answers describe admired fictional traits rather than likely behavior under pressure."
+            ],
+            "evidenceDigest": [
+              {
+                "answerText": "التنبؤ",
+                "option": "D",
+                "questionId": 19,
+                "ref": "Q19D"
+              },
+              {
+                "answerText": "المعرفة",
+                "option": "D",
+                "questionId": 20,
+                "ref": "Q20D"
+              },
+              {
+                "answerText": "تراقبه أولًا",
+                "option": "B",
+                "questionId": 2,
+                "ref": "Q2B"
+              },
+              {
+                "answerText": "تطلع لمكان مرتفع",
+                "option": "B",
+                "questionId": 7,
+                "ref": "Q7B"
+              },
+              {
+                "answerText": "تتصرف بسرعة",
+                "option": "A",
+                "questionId": 11,
+                "ref": "Q11A"
+              },
+              {
+                "answerText": "تراقب بصمت",
+                "option": "D",
+                "questionId": 16,
+                "ref": "Q16D"
+              },
+              {
+                "answerText": "تبحث عن قصته",
+                "option": "C",
+                "questionId": 9,
+                "ref": "Q9C"
+              },
+              {
+                "answerText": "تبني نظام",
+                "option": "A",
+                "questionId": 15,
+                "ref": "Q15A"
+              },
+              {
+                "answerText": "المخارج والاتجاهات",
+                "option": "D",
+                "questionId": 1,
+                "ref": "Q1D"
+              },
+              {
+                "answerText": "طويل وآمن",
+                "option": "B",
+                "questionId": 3,
+                "ref": "Q3B"
+              },
+              {
+                "answerText": "تتعلم شيء",
+                "option": "A",
+                "questionId": 4,
+                "ref": "Q4A"
+              },
+              {
+                "answerText": "بومة",
+                "option": "D",
+                "questionId": 5,
+                "ref": "Q5D"
+              },
+              {
+                "answerText": "المخطط",
+                "option": "B",
+                "questionId": 6,
+                "ref": "Q6B"
+              },
+              {
+                "answerText": "الذكي الهادئ",
+                "option": "B",
+                "questionId": 10,
+                "ref": "Q10B"
+              },
+              {
+                "answerText": "غموض",
+                "option": "C",
+                "questionId": 13,
+                "ref": "Q13C"
+              },
+              {
+                "answerText": "الفوضى",
+                "option": "A",
+                "questionId": 14,
+                "ref": "Q14A"
+              },
+              {
+                "answerText": "تهتم بالجائزة",
+                "option": "B",
+                "questionId": 18,
+                "ref": "Q18B"
+              },
+              {
+                "answerText": "غرفة هادئة",
+                "option": "D",
+                "questionId": 8,
+                "ref": "Q8D"
+              },
+              {
+                "answerText": "أرض",
+                "option": "D",
+                "questionId": 12,
+                "ref": "Q12D"
+              },
+              {
+                "answerText": "أسود",
+                "option": "A",
+                "questionId": 17,
+                "ref": "Q17A"
+              }
+            ],
+            "failureModes": [
+              {
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20D",
+                  "Q2B"
+                ],
+                "title": "Delayed execution"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Over-reading the environment"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2B",
+                  "Q7B",
+                  "Q11A"
+                ],
+                "title": "Waiting too long for cleaner information"
+              }
+            ],
+            "growthDirections": [
+              {
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20D",
+                  "Q2B"
+                ],
+                "title": "Use a time limit before deciding"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Separate useful observation from defensive delay"
+              }
+            ],
+            "overview": {
+              "archetypeTitle": "The Observer Strategist",
+              "confidenceBand": "high",
+              "confidenceExplanation": "High consistency: repeated evidence supports the main reading across several sections.",
+              "deepMotive": "knowledge",
+              "dominantTraits": [
+                {
+                  "code": "ANA",
+                  "evidenceRefs": [
+                    "Q19D",
+                    "Q20D",
+                    "Q2B"
+                  ],
+                  "label": "analytical processing"
+                },
+                {
+                  "code": "CTRL",
+                  "evidenceRefs": [
+                    "Q19D",
+                    "Q20D",
+                    "Q11A"
+                  ],
+                  "label": "control and structure"
+                },
+                {
+                  "code": "OBS",
+                  "evidenceRefs": [
+                    "Q19D",
+                    "Q2B",
+                    "Q7B"
+                  ],
+                  "label": "observation before action"
+                }
+              ],
+              "mainContradiction": "Knowledge Without Action",
+              "patternSummary": "Reduces uncertainty by reading the environment before acting.",
+              "primaryAxis": "safety_control_dominant"
+            },
+            "strengths": [
+              {
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20D",
+                  "Q2B"
+                ],
+                "title": "Pattern recognition"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Strategic patience"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2B",
+                  "Q7B",
+                  "Q11A"
+                ],
+                "title": "Information advantage before movement"
+              }
+            ]
+          },
+          "runnerUp": {
+            "gapBand": "clear",
+            "id": "power_analyst",
+            "title": "The Power Analyst"
+          },
+          "schemaVersion": "phase-1.5-engine-public-v1"
+        },
+        "serializationVersion": "phase-1.6-result-serialization-v1"
+      },
+      "sequence": "1D 2B 3B 4A 5D 6B 7B 8D 9C 10B 11A 12D 13C 14A 15A 16D 17A 18B 19D 20D"
+    },
+    {
+      "expectedArchetype": "controlled_explorer",
+      "expectedContradictions": [
+        "controlled_explorer",
+        "knowledge_without_action"
+      ],
+      "expectedDominantTags": [
+        "EXP",
+        "ANA",
+        "OBS",
+        "CTRL",
+        "INT",
+        "MEAN"
+      ],
+      "id": "GP2",
+      "name": "Controlled Explorer",
+      "resultEnvelope": {
+        "engineApiVersion": "phase-1.5-engine-public-v1",
+        "result": {
+          "answers": [
+            {
+              "answerText": "الأصوات",
+              "option": "C",
+              "questionId": 1
+            },
+            {
+              "answerText": "تراقبه أولًا",
+              "option": "B",
+              "questionId": 2
+            },
+            {
+              "answerText": "مجهول لكنه جميل",
+              "option": "C",
+              "questionId": 3
+            },
+            {
+              "answerText": "تخرج تستكشف",
+              "option": "D",
+              "questionId": 4
+            },
+            {
+              "answerText": "قط",
+              "option": "B",
+              "questionId": 5
+            },
+            {
+              "answerText": "المخطط",
+              "option": "B",
+              "questionId": 6
+            },
+            {
+              "answerText": "تطلع لمكان مرتفع",
+              "option": "B",
+              "questionId": 7
+            },
+            {
+              "answerText": "بحر",
+              "option": "A",
+              "questionId": 8
+            },
+            {
+              "answerText": "تبحث عن قصته",
+              "option": "C",
+              "questionId": 9
+            },
+            {
+              "answerText": "الشرير المعقد",
+              "option": "C",
+              "questionId": 10
+            },
+            {
+              "answerText": "تتصرف بسرعة",
+              "option": "A",
+              "questionId": 11
+            },
+            {
+              "answerText": "هواء",
+              "option": "C",
+              "questionId": 12
+            },
+            {
+              "answerText": "غموض",
+              "option": "C",
+              "questionId": 13
+            },
+            {
+              "answerText": "الملل",
+              "option": "C",
+              "questionId": 14
+            },
+            {
+              "answerText": "تستكشفها",
+              "option": "B",
+              "questionId": 15
+            },
+            {
+              "answerText": "تراقب بصمت",
+              "option": "D",
+              "questionId": 16
+            },
+            {
+              "answerText": "أزرق",
+              "option": "B",
+              "questionId": 17
+            },
+            {
+              "answerText": "تنسى بسرعة",
+              "option": "D",
+              "questionId": 18
+            },
+            {
+              "answerText": "إيقاف الزمن",
+              "option": "C",
+              "questionId": 19
+            },
+            {
+              "answerText": "المعرفة",
+              "option": "D",
+              "questionId": 20
+            }
+          ],
+          "apiVersion": "phase-1.5-engine-public-v1",
+          "archetype": {
+            "disprovenIf": "Exploration is high while safety and control are weak.",
+            "failureMode": "Can over-prepare before acting.",
+            "id": "controlled_explorer",
+            "strength": "Curious but not reckless.",
+            "summary": "Wants discovery, but prefers to enter the unknown with an information advantage.",
+            "title": "The Controlled Explorer"
+          },
+          "axes": [
+            {
+              "band": "dominant",
+              "dominantKey": "safety_control_dominant",
+              "dominantLabel": "safety-control dominant",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "explorationSafety",
+              "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+              "label": "Exploration vs Safety-Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "analytical",
+              "dominantLabel": "analytical thinking",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "thinkingStyle",
+              "interpretation": "You process situations by organizing signals, comparing options, and looking for structure before committing.",
+              "label": "Thinking Style"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "social_observation",
+              "dominantLabel": "social observation",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "relationshipPattern",
+              "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+              "label": "Relationship and Distance Pattern"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "indirect_control",
+              "dominantLabel": "indirect control",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "agencyControl",
+              "interpretation": "You exert agency by watching, timing, and using information before direct movement.",
+              "label": "Agency, Leadership, and Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "analyze_first",
+              "dominantLabel": "analysis before action",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "ambiguityFear",
+              "interpretation": "When information is incomplete, your first tendency is to observe, map the situation, and reduce uncertainty.",
+              "label": "Ambiguity and Fear Response"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "knowledge",
+              "dominantLabel": "knowledge motive",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "deepMotive",
+              "interpretation": "The strongest motive signal points toward understanding, explanation, and conceptual depth.",
+              "label": "Deep Motive Structure"
+            }
+          ],
+          "confidenceBand": "moderate",
+          "contradictions": [
+            {
+              "behavioralImplication": "New situations are more likely to be entered after an information buffer is created.",
+              "disprovenIf": "Risk and direct action dominate safety and observation.",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "explanation": "Curiosity is present, but it is filtered through safety, control, or observation.",
+              "id": "controlled_explorer",
+              "tension": "The tension is not between curiosity and fear; it is between discovery and the need to stay oriented.",
+              "title": "Controlled Explorer"
+            },
+            {
+              "behavioralImplication": "Reflective depth may create execution drag if not converted into action.",
+              "disprovenIf": "Direct action appears strongly across ambiguity and pressure questions.",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7B"
+              ],
+              "explanation": "Meaning and analysis are stronger than immediate movement or risk.",
+              "id": "knowledge_without_action",
+              "tension": "The tension is between insight and movement: understanding can become a substitute for testing.",
+              "title": "Knowledge Without Action"
+            }
+          ],
+          "deepMotive": {
+            "band": "dominant",
+            "evidenceRefs": [
+              "Q19C",
+              "Q20D",
+              "Q2B",
+              "Q7B"
+            ],
+            "key": "knowledge",
+            "label": "knowledge motive"
+          },
+          "dominantTraits": [
+            {
+              "code": "ANA",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B"
+              ],
+              "label": "analytical processing"
+            },
+            {
+              "code": "OBS",
+              "evidenceRefs": [
+                "Q2B",
+                "Q7B",
+                "Q16D"
+              ],
+              "label": "observation before action"
+            },
+            {
+              "code": "EXP",
+              "evidenceRefs": [
+                "Q15B",
+                "Q3C",
+                "Q4D"
+              ],
+              "label": "controlled curiosity"
+            }
+          ],
+          "report": {
+            "axisCards": [
+              {
+                "band": "dominant",
+                "dominantKey": "safety_control_dominant",
+                "dominantLabel": "safety-control dominant",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "explorationSafety",
+                "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+                "label": "Exploration vs Safety-Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "analytical",
+                "dominantLabel": "analytical thinking",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "thinkingStyle",
+                "interpretation": "You process situations by organizing signals, comparing options, and looking for structure before committing.",
+                "label": "Thinking Style"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "social_observation",
+                "dominantLabel": "social observation",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "relationshipPattern",
+                "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+                "label": "Relationship and Distance Pattern"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "indirect_control",
+                "dominantLabel": "indirect control",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "agencyControl",
+                "interpretation": "You exert agency by watching, timing, and using information before direct movement.",
+                "label": "Agency, Leadership, and Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "analyze_first",
+                "dominantLabel": "analysis before action",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "ambiguityFear",
+                "interpretation": "When information is incomplete, your first tendency is to observe, map the situation, and reduce uncertainty.",
+                "label": "Ambiguity and Fear Response"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "knowledge",
+                "dominantLabel": "knowledge motive",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "deepMotive",
+                "interpretation": "The strongest motive signal points toward understanding, explanation, and conceptual depth.",
+                "label": "Deep Motive Structure"
+              }
+            ],
+            "contradictionMap": [
+              {
+                "behavioralImplication": "New situations are more likely to be entered after an information buffer is created.",
+                "disprovenIf": "Risk and direct action dominate safety and observation.",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "explanation": "Curiosity is present, but it is filtered through safety, control, or observation.",
+                "id": "controlled_explorer",
+                "tension": "The tension is not between curiosity and fear; it is between discovery and the need to stay oriented.",
+                "title": "Controlled Explorer"
+              },
+              {
+                "behavioralImplication": "Reflective depth may create execution drag if not converted into action.",
+                "disprovenIf": "Direct action appears strongly across ambiguity and pressure questions.",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "explanation": "Meaning and analysis are stronger than immediate movement or risk.",
+                "id": "knowledge_without_action",
+                "tension": "The tension is between insight and movement: understanding can become a substitute for testing.",
+                "title": "Knowledge Without Action"
+              }
+            ],
+            "disprovenIf": [
+              "Exploration is high while safety and control are weak.",
+              "Risk and direct action dominate safety and observation.",
+              "Direct action appears strongly across ambiguity and pressure questions.",
+              "This reading is weaker if the choices were made for aesthetic preference rather than instinctive self-recognition."
+            ],
+            "evidenceDigest": [
+              {
+                "answerText": "إيقاف الزمن",
+                "option": "C",
+                "questionId": 19,
+                "ref": "Q19C"
+              },
+              {
+                "answerText": "المعرفة",
+                "option": "D",
+                "questionId": 20,
+                "ref": "Q20D"
+              },
+              {
+                "answerText": "تراقبه أولًا",
+                "option": "B",
+                "questionId": 2,
+                "ref": "Q2B"
+              },
+              {
+                "answerText": "تطلع لمكان مرتفع",
+                "option": "B",
+                "questionId": 7,
+                "ref": "Q7B"
+              },
+              {
+                "answerText": "تتصرف بسرعة",
+                "option": "A",
+                "questionId": 11,
+                "ref": "Q11A"
+              },
+              {
+                "answerText": "تراقب بصمت",
+                "option": "D",
+                "questionId": 16,
+                "ref": "Q16D"
+              },
+              {
+                "answerText": "تبحث عن قصته",
+                "option": "C",
+                "questionId": 9,
+                "ref": "Q9C"
+              },
+              {
+                "answerText": "تستكشفها",
+                "option": "B",
+                "questionId": 15,
+                "ref": "Q15B"
+              },
+              {
+                "answerText": "مجهول لكنه جميل",
+                "option": "C",
+                "questionId": 3,
+                "ref": "Q3C"
+              },
+              {
+                "answerText": "قط",
+                "option": "B",
+                "questionId": 5,
+                "ref": "Q5B"
+              },
+              {
+                "answerText": "المخطط",
+                "option": "B",
+                "questionId": 6,
+                "ref": "Q6B"
+              },
+              {
+                "answerText": "الشرير المعقد",
+                "option": "C",
+                "questionId": 10,
+                "ref": "Q10C"
+              },
+              {
+                "answerText": "غموض",
+                "option": "C",
+                "questionId": 13,
+                "ref": "Q13C"
+              },
+              {
+                "answerText": "تنسى بسرعة",
+                "option": "D",
+                "questionId": 18,
+                "ref": "Q18D"
+              },
+              {
+                "answerText": "الأصوات",
+                "option": "C",
+                "questionId": 1,
+                "ref": "Q1C"
+              },
+              {
+                "answerText": "تخرج تستكشف",
+                "option": "D",
+                "questionId": 4,
+                "ref": "Q4D"
+              },
+              {
+                "answerText": "الملل",
+                "option": "C",
+                "questionId": 14,
+                "ref": "Q14C"
+              },
+              {
+                "answerText": "بحر",
+                "option": "A",
+                "questionId": 8,
+                "ref": "Q8A"
+              },
+              {
+                "answerText": "هواء",
+                "option": "C",
+                "questionId": 12,
+                "ref": "Q12C"
+              },
+              {
+                "answerText": "أزرق",
+                "option": "B",
+                "questionId": 17,
+                "ref": "Q17B"
+              }
+            ],
+            "failureModes": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B"
+                ],
+                "title": "Over-preparation"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Turning exploration into planning only"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2B",
+                  "Q7B",
+                  "Q11A"
+                ],
+                "title": "Avoiding useful uncertainty"
+              }
+            ],
+            "growthDirections": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B"
+                ],
+                "title": "Define the minimum safe test"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Move once enough information exists, not once all information exists"
+              }
+            ],
+            "overview": {
+              "archetypeTitle": "The Controlled Explorer",
+              "confidenceBand": "moderate",
+              "confidenceExplanation": "Moderate consistency: one pattern is visible, but competing evidence or contradictions remain important.",
+              "deepMotive": "knowledge",
+              "dominantTraits": [
+                {
+                  "code": "ANA",
+                  "evidenceRefs": [
+                    "Q19C",
+                    "Q20D",
+                    "Q2B"
+                  ],
+                  "label": "analytical processing"
+                },
+                {
+                  "code": "OBS",
+                  "evidenceRefs": [
+                    "Q2B",
+                    "Q7B",
+                    "Q16D"
+                  ],
+                  "label": "observation before action"
+                },
+                {
+                  "code": "EXP",
+                  "evidenceRefs": [
+                    "Q15B",
+                    "Q3C",
+                    "Q4D"
+                  ],
+                  "label": "controlled curiosity"
+                }
+              ],
+              "mainContradiction": "Controlled Explorer",
+              "patternSummary": "Wants discovery, but prefers to enter the unknown with an information advantage.",
+              "primaryAxis": "safety_control_dominant"
+            },
+            "strengths": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B"
+                ],
+                "title": "Curiosity with safeguards"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20D",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Measured discovery"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2B",
+                  "Q7B",
+                  "Q11A"
+                ],
+                "title": "Learning without reckless exposure"
+              }
+            ]
+          },
+          "runnerUp": {
+            "gapBand": "clear",
+            "id": "observer_strategist",
+            "title": "The Observer Strategist"
+          },
+          "schemaVersion": "phase-1.5-engine-public-v1"
+        },
+        "serializationVersion": "phase-1.6-result-serialization-v1"
+      },
+      "sequence": "1C 2B 3C 4D 5B 6B 7B 8A 9C 10C 11A 12C 13C 14C 15B 16D 17B 18D 19C 20D"
+    },
+    {
+      "expectedArchetype": "direct_initiator",
+      "expectedContradictions": [],
+      "expectedDominantTags": [
+        "ACT",
+        "RISK",
+        "EXP",
+        "LEAD",
+        "CTRL"
+      ],
+      "id": "GP3",
+      "name": "Direct Initiator",
+      "resultEnvelope": {
+        "engineApiVersion": "phase-1.5-engine-public-v1",
+        "result": {
+          "answers": [
+            {
+              "answerText": "الناس",
+              "option": "A",
+              "questionId": 1
+            },
+            {
+              "answerText": "تفتحه فورًا",
+              "option": "A",
+              "questionId": 2
+            },
+            {
+              "answerText": "قصير وخطير",
+              "option": "A",
+              "questionId": 3
+            },
+            {
+              "answerText": "تخرج تستكشف",
+              "option": "D",
+              "questionId": 4
+            },
+            {
+              "answerText": "ذئب",
+              "option": "A",
+              "questionId": 5
+            },
+            {
+              "answerText": "القائد",
+              "option": "A",
+              "questionId": 6
+            },
+            {
+              "answerText": "تجرب طرق مختلفة",
+              "option": "D",
+              "questionId": 7
+            },
+            {
+              "answerText": "مدينة ليلًا",
+              "option": "B",
+              "questionId": 8
+            },
+            {
+              "answerText": "تجرب كل الأبواب",
+              "option": "A",
+              "questionId": 9
+            },
+            {
+              "answerText": "البطل",
+              "option": "A",
+              "questionId": 10
+            },
+            {
+              "answerText": "تتصرف بسرعة",
+              "option": "A",
+              "questionId": 11
+            },
+            {
+              "answerText": "نار",
+              "option": "A",
+              "questionId": 12
+            },
+            {
+              "answerText": "مغامرة",
+              "option": "B",
+              "questionId": 13
+            },
+            {
+              "answerText": "الملل",
+              "option": "C",
+              "questionId": 14
+            },
+            {
+              "answerText": "تستكشفها",
+              "option": "B",
+              "questionId": 15
+            },
+            {
+              "answerText": "تروح تشوف",
+              "option": "A",
+              "questionId": 16
+            },
+            {
+              "answerText": "أحمر",
+              "option": "C",
+              "questionId": 17
+            },
+            {
+              "answerText": "تفرح بالفوز",
+              "option": "A",
+              "questionId": 18
+            },
+            {
+              "answerText": "إيقاف الزمن",
+              "option": "C",
+              "questionId": 19
+            },
+            {
+              "answerText": "القوة",
+              "option": "B",
+              "questionId": 20
+            }
+          ],
+          "apiVersion": "phase-1.5-engine-public-v1",
+          "archetype": {
+            "disprovenIf": "Observation and safety dominate direct action.",
+            "failureMode": "Under-analysis and avoidable exposure.",
+            "id": "direct_initiator",
+            "strength": "Momentum, courage, and fast response.",
+            "summary": "Moves toward uncertainty directly and learns through action.",
+            "title": "The Direct Initiator"
+          },
+          "axes": [
+            {
+              "band": "dominant",
+              "dominantKey": "high_exploration",
+              "dominantLabel": "high exploration",
+              "evidenceRefs": [
+                "Q2A",
+                "Q7D",
+                "Q11A",
+                "Q16A"
+              ],
+              "id": "explorationSafety",
+              "interpretation": "Your choices repeatedly move toward novelty, unknown paths, and direct contact with uncertainty.",
+              "label": "Exploration vs Safety-Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "action_based",
+              "dominantLabel": "action-based thinking",
+              "evidenceRefs": [
+                "Q20B",
+                "Q2A",
+                "Q7D",
+                "Q11A"
+              ],
+              "id": "thinkingStyle",
+              "interpretation": "You process situations by moving, testing, and learning through direct contact.",
+              "label": "Thinking Style"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "social_observation",
+              "dominantLabel": "social observation",
+              "evidenceRefs": [
+                "Q19C",
+                "Q1A",
+                "Q8B"
+              ],
+              "id": "relationshipPattern",
+              "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+              "label": "Relationship and Distance Pattern"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "direct_leadership",
+              "dominantLabel": "direct leadership",
+              "evidenceRefs": [
+                "Q20B",
+                "Q2A",
+                "Q7D",
+                "Q11A"
+              ],
+              "id": "agencyControl",
+              "interpretation": "You exert agency by initiating, moving first, or taking visible responsibility.",
+              "label": "Agency, Leadership, and Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "investigate_directly",
+              "dominantLabel": "direct investigation",
+              "evidenceRefs": [
+                "Q2A",
+                "Q7D",
+                "Q11A",
+                "Q16A"
+              ],
+              "id": "ambiguityFear",
+              "interpretation": "When information is incomplete, your first tendency is to move toward the source and test reality directly.",
+              "label": "Ambiguity and Fear Response"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "power",
+              "dominantLabel": "power motive",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20B",
+                "Q11A",
+                "Q5A"
+              ],
+              "id": "deepMotive",
+              "interpretation": "The strongest motive signal points toward influence, leverage, control, and visible effect.",
+              "label": "Deep Motive Structure"
+            }
+          ],
+          "confidenceBand": "high",
+          "contradictions": [],
+          "deepMotive": {
+            "band": "dominant",
+            "evidenceRefs": [
+              "Q19C",
+              "Q20B",
+              "Q11A",
+              "Q5A"
+            ],
+            "key": "power",
+            "label": "power motive"
+          },
+          "dominantTraits": [
+            {
+              "code": "ACT",
+              "evidenceRefs": [
+                "Q2A",
+                "Q7D",
+                "Q11A"
+              ],
+              "label": "direct action"
+            },
+            {
+              "code": "EXP",
+              "evidenceRefs": [
+                "Q2A",
+                "Q7D",
+                "Q16A"
+              ],
+              "label": "controlled curiosity"
+            },
+            {
+              "code": "RISK",
+              "evidenceRefs": [
+                "Q2A",
+                "Q7D",
+                "Q16A"
+              ],
+              "label": "risk exposure"
+            }
+          ],
+          "report": {
+            "axisCards": [
+              {
+                "band": "dominant",
+                "dominantKey": "high_exploration",
+                "dominantLabel": "high exploration",
+                "evidenceRefs": [
+                  "Q2A",
+                  "Q7D",
+                  "Q11A",
+                  "Q16A"
+                ],
+                "id": "explorationSafety",
+                "interpretation": "Your choices repeatedly move toward novelty, unknown paths, and direct contact with uncertainty.",
+                "label": "Exploration vs Safety-Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "action_based",
+                "dominantLabel": "action-based thinking",
+                "evidenceRefs": [
+                  "Q20B",
+                  "Q2A",
+                  "Q7D",
+                  "Q11A"
+                ],
+                "id": "thinkingStyle",
+                "interpretation": "You process situations by moving, testing, and learning through direct contact.",
+                "label": "Thinking Style"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "social_observation",
+                "dominantLabel": "social observation",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q1A",
+                  "Q8B"
+                ],
+                "id": "relationshipPattern",
+                "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+                "label": "Relationship and Distance Pattern"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "direct_leadership",
+                "dominantLabel": "direct leadership",
+                "evidenceRefs": [
+                  "Q20B",
+                  "Q2A",
+                  "Q7D",
+                  "Q11A"
+                ],
+                "id": "agencyControl",
+                "interpretation": "You exert agency by initiating, moving first, or taking visible responsibility.",
+                "label": "Agency, Leadership, and Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "investigate_directly",
+                "dominantLabel": "direct investigation",
+                "evidenceRefs": [
+                  "Q2A",
+                  "Q7D",
+                  "Q11A",
+                  "Q16A"
+                ],
+                "id": "ambiguityFear",
+                "interpretation": "When information is incomplete, your first tendency is to move toward the source and test reality directly.",
+                "label": "Ambiguity and Fear Response"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "power",
+                "dominantLabel": "power motive",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20B",
+                  "Q11A",
+                  "Q5A"
+                ],
+                "id": "deepMotive",
+                "interpretation": "The strongest motive signal points toward influence, leverage, control, and visible effect.",
+                "label": "Deep Motive Structure"
+              }
+            ],
+            "contradictionMap": [],
+            "disprovenIf": [
+              "Observation and safety dominate direct action.",
+              "This reading is weaker if the choices were made for aesthetic preference rather than instinctive self-recognition.",
+              "This reading is weaker if the answers describe admired fictional traits rather than likely behavior under pressure."
+            ],
+            "evidenceDigest": [
+              {
+                "answerText": "إيقاف الزمن",
+                "option": "C",
+                "questionId": 19,
+                "ref": "Q19C"
+              },
+              {
+                "answerText": "القوة",
+                "option": "B",
+                "questionId": 20,
+                "ref": "Q20B"
+              },
+              {
+                "answerText": "تفتحه فورًا",
+                "option": "A",
+                "questionId": 2,
+                "ref": "Q2A"
+              },
+              {
+                "answerText": "تجرب طرق مختلفة",
+                "option": "D",
+                "questionId": 7,
+                "ref": "Q7D"
+              },
+              {
+                "answerText": "تتصرف بسرعة",
+                "option": "A",
+                "questionId": 11,
+                "ref": "Q11A"
+              },
+              {
+                "answerText": "تروح تشوف",
+                "option": "A",
+                "questionId": 16,
+                "ref": "Q16A"
+              },
+              {
+                "answerText": "تجرب كل الأبواب",
+                "option": "A",
+                "questionId": 9,
+                "ref": "Q9A"
+              },
+              {
+                "answerText": "تستكشفها",
+                "option": "B",
+                "questionId": 15,
+                "ref": "Q15B"
+              },
+              {
+                "answerText": "قصير وخطير",
+                "option": "A",
+                "questionId": 3,
+                "ref": "Q3A"
+              },
+              {
+                "answerText": "ذئب",
+                "option": "A",
+                "questionId": 5,
+                "ref": "Q5A"
+              },
+              {
+                "answerText": "القائد",
+                "option": "A",
+                "questionId": 6,
+                "ref": "Q6A"
+              },
+              {
+                "answerText": "البطل",
+                "option": "A",
+                "questionId": 10,
+                "ref": "Q10A"
+              },
+              {
+                "answerText": "مغامرة",
+                "option": "B",
+                "questionId": 13,
+                "ref": "Q13B"
+              },
+              {
+                "answerText": "تفرح بالفوز",
+                "option": "A",
+                "questionId": 18,
+                "ref": "Q18A"
+              },
+              {
+                "answerText": "أحمر",
+                "option": "C",
+                "questionId": 17,
+                "ref": "Q17C"
+              },
+              {
+                "answerText": "الناس",
+                "option": "A",
+                "questionId": 1,
+                "ref": "Q1A"
+              },
+              {
+                "answerText": "تخرج تستكشف",
+                "option": "D",
+                "questionId": 4,
+                "ref": "Q4D"
+              },
+              {
+                "answerText": "الملل",
+                "option": "C",
+                "questionId": 14,
+                "ref": "Q14C"
+              },
+              {
+                "answerText": "مدينة ليلًا",
+                "option": "B",
+                "questionId": 8,
+                "ref": "Q8B"
+              },
+              {
+                "answerText": "نار",
+                "option": "A",
+                "questionId": 12,
+                "ref": "Q12A"
+              }
+            ],
+            "failureModes": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20B",
+                  "Q2A"
+                ],
+                "title": "Under-analysis"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20B",
+                  "Q2A",
+                  "Q7D"
+                ],
+                "title": "Avoidable exposure"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2A",
+                  "Q7D",
+                  "Q11A"
+                ],
+                "title": "Confusing speed with correctness"
+              }
+            ],
+            "growthDirections": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20B",
+                  "Q2A"
+                ],
+                "title": "Add one cheap check before action"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20B",
+                  "Q2A",
+                  "Q7D"
+                ],
+                "title": "Treat risk as a variable, not as proof of courage"
+              }
+            ],
+            "overview": {
+              "archetypeTitle": "The Direct Initiator",
+              "confidenceBand": "high",
+              "confidenceExplanation": "High consistency: repeated evidence supports the main reading across several sections.",
+              "deepMotive": "power",
+              "dominantTraits": [
+                {
+                  "code": "ACT",
+                  "evidenceRefs": [
+                    "Q2A",
+                    "Q7D",
+                    "Q11A"
+                  ],
+                  "label": "direct action"
+                },
+                {
+                  "code": "EXP",
+                  "evidenceRefs": [
+                    "Q2A",
+                    "Q7D",
+                    "Q16A"
+                  ],
+                  "label": "controlled curiosity"
+                },
+                {
+                  "code": "RISK",
+                  "evidenceRefs": [
+                    "Q2A",
+                    "Q7D",
+                    "Q16A"
+                  ],
+                  "label": "risk exposure"
+                }
+              ],
+              "mainContradiction": null,
+              "patternSummary": "Moves toward uncertainty directly and learns through action.",
+              "primaryAxis": "high_exploration"
+            },
+            "strengths": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20B",
+                  "Q2A"
+                ],
+                "title": "Momentum"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20B",
+                  "Q2A",
+                  "Q7D"
+                ],
+                "title": "Fast response"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2A",
+                  "Q7D",
+                  "Q11A"
+                ],
+                "title": "Learning by contact with reality"
+              }
+            ]
+          },
+          "runnerUp": {
+            "gapBand": "clear",
+            "id": "power_analyst",
+            "title": "The Power Analyst"
+          },
+          "schemaVersion": "phase-1.5-engine-public-v1"
+        },
+        "serializationVersion": "phase-1.6-result-serialization-v1"
+      },
+      "sequence": "1A 2A 3A 4D 5A 6A 7D 8B 9A 10A 11A 12A 13B 14C 15B 16A 17C 18A 19C 20B"
+    },
+    {
+      "expectedArchetype": "solitary_architect",
+      "expectedContradictions": [
+        "solitary_leader",
+        "knowledge_without_action"
+      ],
+      "expectedDominantTags": [
+        "CTRL",
+        "ANA",
+        "SAF",
+        "IND",
+        "MEAN"
+      ],
+      "id": "GP4",
+      "name": "Solitary Architect",
+      "resultEnvelope": {
+        "engineApiVersion": "phase-1.5-engine-public-v1",
+        "result": {
+          "answers": [
+            {
+              "answerText": "المخارج والاتجاهات",
+              "option": "D",
+              "questionId": 1
+            },
+            {
+              "answerText": "تراقبه أولًا",
+              "option": "B",
+              "questionId": 2
+            },
+            {
+              "answerText": "طويل وآمن",
+              "option": "B",
+              "questionId": 3
+            },
+            {
+              "answerText": "تتعلم شيء",
+              "option": "A",
+              "questionId": 4
+            },
+            {
+              "answerText": "قط",
+              "option": "B",
+              "questionId": 5
+            },
+            {
+              "answerText": "المخطط",
+              "option": "B",
+              "questionId": 6
+            },
+            {
+              "answerText": "تتبع اتجاه ثابت",
+              "option": "A",
+              "questionId": 7
+            },
+            {
+              "answerText": "غرفة هادئة",
+              "option": "D",
+              "questionId": 8
+            },
+            {
+              "answerText": "تخزنه",
+              "option": "B",
+              "questionId": 9
+            },
+            {
+              "answerText": "الذكي الهادئ",
+              "option": "B",
+              "questionId": 10
+            },
+            {
+              "answerText": "تتصرف بسرعة",
+              "option": "A",
+              "questionId": 11
+            },
+            {
+              "answerText": "أرض",
+              "option": "D",
+              "questionId": 12
+            },
+            {
+              "answerText": "فلسفة",
+              "option": "A",
+              "questionId": 13
+            },
+            {
+              "answerText": "الفوضى",
+              "option": "A",
+              "questionId": 14
+            },
+            {
+              "answerText": "تبني نظام",
+              "option": "A",
+              "questionId": 15
+            },
+            {
+              "answerText": "تراقب بصمت",
+              "option": "D",
+              "questionId": 16
+            },
+            {
+              "answerText": "أسود",
+              "option": "A",
+              "questionId": 17
+            },
+            {
+              "answerText": "تهتم بالجائزة",
+              "option": "B",
+              "questionId": 18
+            },
+            {
+              "answerText": "إيقاف الزمن",
+              "option": "C",
+              "questionId": 19
+            },
+            {
+              "answerText": "المعرفة",
+              "option": "D",
+              "questionId": 20
+            }
+          ],
+          "apiVersion": "phase-1.5-engine-public-v1",
+          "archetype": {
+            "disprovenIf": "Social and cooperative signals are stronger than independence.",
+            "failureMode": "Emotional distance and over-isolation.",
+            "id": "solitary_architect",
+            "strength": "Independence, system-building, and low dependency.",
+            "summary": "Builds structure around autonomy and prefers self-directed environments.",
+            "title": "The Solitary Architect"
+          },
+          "axes": [
+            {
+              "band": "dominant",
+              "dominantKey": "safety_control_dominant",
+              "dominantLabel": "safety-control dominant",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7A"
+              ],
+              "id": "explorationSafety",
+              "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+              "label": "Exploration vs Safety-Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "analytical",
+              "dominantLabel": "analytical thinking",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7A"
+              ],
+              "id": "thinkingStyle",
+              "interpretation": "You process situations by organizing signals, comparing options, and looking for structure before committing.",
+              "label": "Thinking Style"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "social_observation",
+              "dominantLabel": "social observation",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q16D"
+              ],
+              "id": "relationshipPattern",
+              "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+              "label": "Relationship and Distance Pattern"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "structured_control",
+              "dominantLabel": "structured control",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7A"
+              ],
+              "id": "agencyControl",
+              "interpretation": "You exert agency by creating structure, rules, order, and practical control.",
+              "label": "Agency, Leadership, and Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "analyze_first",
+              "dominantLabel": "analysis before action",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7A"
+              ],
+              "id": "ambiguityFear",
+              "interpretation": "When information is incomplete, your first tendency is to observe, map the situation, and reduce uncertainty.",
+              "label": "Ambiguity and Fear Response"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "knowledge",
+              "dominantLabel": "knowledge motive",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7A"
+              ],
+              "id": "deepMotive",
+              "interpretation": "The strongest motive signal points toward understanding, explanation, and conceptual depth.",
+              "label": "Deep Motive Structure"
+            }
+          ],
+          "confidenceBand": "moderate",
+          "contradictions": [
+            {
+              "behavioralImplication": "Influence may be pursued through indirect, low-risk paths.",
+              "disprovenIf": "Risk and direct confrontation signals are also high.",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7A"
+              ],
+              "explanation": "Control, leadership, or recognition signals appear with safety and low exposure.",
+              "id": "power_without_exposure",
+              "tension": "The tension is between wanting influence and preferring lower-exposure routes to it.",
+              "title": "Power Without Exposure"
+            },
+            {
+              "behavioralImplication": "Leadership is more functional than socially dependent.",
+              "disprovenIf": "Social and cooperative signals clearly exceed independence.",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q7A",
+                "Q11A"
+              ],
+              "explanation": "Leadership and control signals appear together with autonomy and distance signals.",
+              "id": "solitary_leader",
+              "tension": "The tension is between being able to direct a system and not wanting to be socially absorbed by it.",
+              "title": "Solitary Leader"
+            },
+            {
+              "behavioralImplication": "Reflective depth may create execution drag if not converted into action.",
+              "disprovenIf": "Direct action appears strongly across ambiguity and pressure questions.",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B",
+                "Q7A"
+              ],
+              "explanation": "Meaning and analysis are stronger than immediate movement or risk.",
+              "id": "knowledge_without_action",
+              "tension": "The tension is between insight and movement: understanding can become a substitute for testing.",
+              "title": "Knowledge Without Action"
+            }
+          ],
+          "deepMotive": {
+            "band": "dominant",
+            "evidenceRefs": [
+              "Q19C",
+              "Q20D",
+              "Q2B",
+              "Q7A"
+            ],
+            "key": "knowledge",
+            "label": "knowledge motive"
+          },
+          "dominantTraits": [
+            {
+              "code": "CTRL",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q7A"
+              ],
+              "label": "control and structure"
+            },
+            {
+              "code": "ANA",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20D",
+                "Q2B"
+              ],
+              "label": "analytical processing"
+            },
+            {
+              "code": "SAF",
+              "evidenceRefs": [
+                "Q19C",
+                "Q2B",
+                "Q7A"
+              ],
+              "label": "safety orientation"
+            }
+          ],
+          "report": {
+            "axisCards": [
+              {
+                "band": "dominant",
+                "dominantKey": "safety_control_dominant",
+                "dominantLabel": "safety-control dominant",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7A"
+                ],
+                "id": "explorationSafety",
+                "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+                "label": "Exploration vs Safety-Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "analytical",
+                "dominantLabel": "analytical thinking",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7A"
+                ],
+                "id": "thinkingStyle",
+                "interpretation": "You process situations by organizing signals, comparing options, and looking for structure before committing.",
+                "label": "Thinking Style"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "social_observation",
+                "dominantLabel": "social observation",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q16D"
+                ],
+                "id": "relationshipPattern",
+                "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+                "label": "Relationship and Distance Pattern"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "structured_control",
+                "dominantLabel": "structured control",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7A"
+                ],
+                "id": "agencyControl",
+                "interpretation": "You exert agency by creating structure, rules, order, and practical control.",
+                "label": "Agency, Leadership, and Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "analyze_first",
+                "dominantLabel": "analysis before action",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7A"
+                ],
+                "id": "ambiguityFear",
+                "interpretation": "When information is incomplete, your first tendency is to observe, map the situation, and reduce uncertainty.",
+                "label": "Ambiguity and Fear Response"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "knowledge",
+                "dominantLabel": "knowledge motive",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7A"
+                ],
+                "id": "deepMotive",
+                "interpretation": "The strongest motive signal points toward understanding, explanation, and conceptual depth.",
+                "label": "Deep Motive Structure"
+              }
+            ],
+            "contradictionMap": [
+              {
+                "behavioralImplication": "Influence may be pursued through indirect, low-risk paths.",
+                "disprovenIf": "Risk and direct confrontation signals are also high.",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7A"
+                ],
+                "explanation": "Control, leadership, or recognition signals appear with safety and low exposure.",
+                "id": "power_without_exposure",
+                "tension": "The tension is between wanting influence and preferring lower-exposure routes to it.",
+                "title": "Power Without Exposure"
+              },
+              {
+                "behavioralImplication": "Leadership is more functional than socially dependent.",
+                "disprovenIf": "Social and cooperative signals clearly exceed independence.",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q7A",
+                  "Q11A"
+                ],
+                "explanation": "Leadership and control signals appear together with autonomy and distance signals.",
+                "id": "solitary_leader",
+                "tension": "The tension is between being able to direct a system and not wanting to be socially absorbed by it.",
+                "title": "Solitary Leader"
+              },
+              {
+                "behavioralImplication": "Reflective depth may create execution drag if not converted into action.",
+                "disprovenIf": "Direct action appears strongly across ambiguity and pressure questions.",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B",
+                  "Q7A"
+                ],
+                "explanation": "Meaning and analysis are stronger than immediate movement or risk.",
+                "id": "knowledge_without_action",
+                "tension": "The tension is between insight and movement: understanding can become a substitute for testing.",
+                "title": "Knowledge Without Action"
+              }
+            ],
+            "disprovenIf": [
+              "Social and cooperative signals are stronger than independence.",
+              "Risk and direct confrontation signals are also high.",
+              "Social and cooperative signals clearly exceed independence.",
+              "This reading is weaker if the choices were made for aesthetic preference rather than instinctive self-recognition."
+            ],
+            "evidenceDigest": [
+              {
+                "answerText": "إيقاف الزمن",
+                "option": "C",
+                "questionId": 19,
+                "ref": "Q19C"
+              },
+              {
+                "answerText": "المعرفة",
+                "option": "D",
+                "questionId": 20,
+                "ref": "Q20D"
+              },
+              {
+                "answerText": "تراقبه أولًا",
+                "option": "B",
+                "questionId": 2,
+                "ref": "Q2B"
+              },
+              {
+                "answerText": "تتبع اتجاه ثابت",
+                "option": "A",
+                "questionId": 7,
+                "ref": "Q7A"
+              },
+              {
+                "answerText": "تتصرف بسرعة",
+                "option": "A",
+                "questionId": 11,
+                "ref": "Q11A"
+              },
+              {
+                "answerText": "تراقب بصمت",
+                "option": "D",
+                "questionId": 16,
+                "ref": "Q16D"
+              },
+              {
+                "answerText": "تخزنه",
+                "option": "B",
+                "questionId": 9,
+                "ref": "Q9B"
+              },
+              {
+                "answerText": "تبني نظام",
+                "option": "A",
+                "questionId": 15,
+                "ref": "Q15A"
+              },
+              {
+                "answerText": "المخارج والاتجاهات",
+                "option": "D",
+                "questionId": 1,
+                "ref": "Q1D"
+              },
+              {
+                "answerText": "طويل وآمن",
+                "option": "B",
+                "questionId": 3,
+                "ref": "Q3B"
+              },
+              {
+                "answerText": "تتعلم شيء",
+                "option": "A",
+                "questionId": 4,
+                "ref": "Q4A"
+              },
+              {
+                "answerText": "قط",
+                "option": "B",
+                "questionId": 5,
+                "ref": "Q5B"
+              },
+              {
+                "answerText": "المخطط",
+                "option": "B",
+                "questionId": 6,
+                "ref": "Q6B"
+              },
+              {
+                "answerText": "الذكي الهادئ",
+                "option": "B",
+                "questionId": 10,
+                "ref": "Q10B"
+              },
+              {
+                "answerText": "الفوضى",
+                "option": "A",
+                "questionId": 14,
+                "ref": "Q14A"
+              },
+              {
+                "answerText": "فلسفة",
+                "option": "A",
+                "questionId": 13,
+                "ref": "Q13A"
+              },
+              {
+                "answerText": "تهتم بالجائزة",
+                "option": "B",
+                "questionId": 18,
+                "ref": "Q18B"
+              },
+              {
+                "answerText": "غرفة هادئة",
+                "option": "D",
+                "questionId": 8,
+                "ref": "Q8D"
+              },
+              {
+                "answerText": "أرض",
+                "option": "D",
+                "questionId": 12,
+                "ref": "Q12D"
+              },
+              {
+                "answerText": "أسود",
+                "option": "A",
+                "questionId": 17,
+                "ref": "Q17A"
+              }
+            ],
+            "failureModes": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B"
+                ],
+                "title": "Over-isolation"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20D",
+                  "Q2B",
+                  "Q7A"
+                ],
+                "title": "Emotional distance"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2B",
+                  "Q7A",
+                  "Q11A"
+                ],
+                "title": "Trying to solve relational problems structurally"
+              }
+            ],
+            "growthDirections": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B"
+                ],
+                "title": "Choose one trusted feedback loop"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20D",
+                  "Q2B",
+                  "Q7A"
+                ],
+                "title": "Keep autonomy without cutting off useful signal"
+              }
+            ],
+            "overview": {
+              "archetypeTitle": "The Solitary Architect",
+              "confidenceBand": "moderate",
+              "confidenceExplanation": "Moderate consistency: one pattern is visible, but competing evidence or contradictions remain important.",
+              "deepMotive": "knowledge",
+              "dominantTraits": [
+                {
+                  "code": "CTRL",
+                  "evidenceRefs": [
+                    "Q19C",
+                    "Q20D",
+                    "Q7A"
+                  ],
+                  "label": "control and structure"
+                },
+                {
+                  "code": "ANA",
+                  "evidenceRefs": [
+                    "Q19C",
+                    "Q20D",
+                    "Q2B"
+                  ],
+                  "label": "analytical processing"
+                },
+                {
+                  "code": "SAF",
+                  "evidenceRefs": [
+                    "Q19C",
+                    "Q2B",
+                    "Q7A"
+                  ],
+                  "label": "safety orientation"
+                }
+              ],
+              "mainContradiction": "Power Without Exposure",
+              "patternSummary": "Builds structure around autonomy and prefers self-directed environments.",
+              "primaryAxis": "safety_control_dominant"
+            },
+            "strengths": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20D",
+                  "Q2B"
+                ],
+                "title": "Autonomy"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20D",
+                  "Q2B",
+                  "Q7A"
+                ],
+                "title": "System-building"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2B",
+                  "Q7A",
+                  "Q11A"
+                ],
+                "title": "Low dependency on group approval"
+              }
+            ]
+          },
+          "runnerUp": {
+            "gapBand": "clear",
+            "id": "observer_strategist",
+            "title": "The Observer Strategist"
+          },
+          "schemaVersion": "phase-1.5-engine-public-v1"
+        },
+        "serializationVersion": "phase-1.6-result-serialization-v1"
+      },
+      "sequence": "1D 2B 3B 4A 5B 6B 7A 8D 9B 10B 11A 12D 13A 14A 15A 16D 17A 18B 19C 20D"
+    },
+    {
+      "expectedArchetype": "symbolic_seeker",
+      "expectedContradictions": [
+        "knowledge_without_action",
+        "controlled_explorer"
+      ],
+      "expectedDominantTags": [
+        "INT",
+        "MEAN",
+        "ANA",
+        "OBS",
+        "EXP"
+      ],
+      "id": "GP5",
+      "name": "Symbolic Seeker",
+      "resultEnvelope": {
+        "engineApiVersion": "phase-1.5-engine-public-v1",
+        "result": {
+          "answers": [
+            {
+              "answerText": "الأصوات",
+              "option": "C",
+              "questionId": 1
+            },
+            {
+              "answerText": "تراقبه أولًا",
+              "option": "B",
+              "questionId": 2
+            },
+            {
+              "answerText": "مجهول لكنه جميل",
+              "option": "C",
+              "questionId": 3
+            },
+            {
+              "answerText": "تتعلم شيء",
+              "option": "A",
+              "questionId": 4
+            },
+            {
+              "answerText": "بومة",
+              "option": "D",
+              "questionId": 5
+            },
+            {
+              "answerText": "المراقب",
+              "option": "D",
+              "questionId": 6
+            },
+            {
+              "answerText": "تطلع لمكان مرتفع",
+              "option": "B",
+              "questionId": 7
+            },
+            {
+              "answerText": "مدينة ليلًا",
+              "option": "B",
+              "questionId": 8
+            },
+            {
+              "answerText": "تبحث عن قصته",
+              "option": "C",
+              "questionId": 9
+            },
+            {
+              "answerText": "الشرير المعقد",
+              "option": "C",
+              "questionId": 10
+            },
+            {
+              "answerText": "تستمتع بالهدوء",
+              "option": "D",
+              "questionId": 11
+            },
+            {
+              "answerText": "ماء",
+              "option": "B",
+              "questionId": 12
+            },
+            {
+              "answerText": "فلسفة",
+              "option": "A",
+              "questionId": 13
+            },
+            {
+              "answerText": "الملل",
+              "option": "C",
+              "questionId": 14
+            },
+            {
+              "answerText": "تستكشفها",
+              "option": "B",
+              "questionId": 15
+            },
+            {
+              "answerText": "تراقب بصمت",
+              "option": "D",
+              "questionId": 16
+            },
+            {
+              "answerText": "أسود",
+              "option": "A",
+              "questionId": 17
+            },
+            {
+              "answerText": "تنسى بسرعة",
+              "option": "D",
+              "questionId": 18
+            },
+            {
+              "answerText": "إيقاف الزمن",
+              "option": "C",
+              "questionId": 19
+            },
+            {
+              "answerText": "الحقيقة",
+              "option": "A",
+              "questionId": 20
+            }
+          ],
+          "apiVersion": "phase-1.5-engine-public-v1",
+          "archetype": {
+            "disprovenIf": "Practicality and action dominate meaning and intuition.",
+            "failureMode": "Can over-read signals or prefer meaning over action.",
+            "id": "symbolic_seeker",
+            "strength": "Interpretation, depth, and imaginative pattern detection.",
+            "summary": "Searches for hidden layers, meaning, mystery, and symbolic depth.",
+            "title": "The Symbolic Seeker"
+          },
+          "axes": [
+            {
+              "band": "dominant",
+              "dominantKey": "safety_control_dominant",
+              "dominantLabel": "safety-control dominant",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20A",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "explorationSafety",
+              "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+              "label": "Exploration vs Safety-Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "analytical",
+              "dominantLabel": "analytical thinking",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20A",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "thinkingStyle",
+              "interpretation": "You process situations by organizing signals, comparing options, and looking for structure before committing.",
+              "label": "Thinking Style"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "social_observation",
+              "dominantLabel": "social observation",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20A",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "relationshipPattern",
+              "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+              "label": "Relationship and Distance Pattern"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "indirect_control",
+              "dominantLabel": "indirect control",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20A",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "agencyControl",
+              "interpretation": "You exert agency by watching, timing, and using information before direct movement.",
+              "label": "Agency, Leadership, and Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "analyze_first",
+              "dominantLabel": "analysis before action",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20A",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "ambiguityFear",
+              "interpretation": "When information is incomplete, your first tendency is to observe, map the situation, and reduce uncertainty.",
+              "label": "Ambiguity and Fear Response"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "knowledge",
+              "dominantLabel": "knowledge motive",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20A",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "deepMotive",
+              "interpretation": "The strongest motive signal points toward understanding, explanation, and conceptual depth.",
+              "label": "Deep Motive Structure"
+            }
+          ],
+          "confidenceBand": "high",
+          "contradictions": [
+            {
+              "behavioralImplication": "Reflective depth may create execution drag if not converted into action.",
+              "disprovenIf": "Direct action appears strongly across ambiguity and pressure questions.",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20A",
+                "Q2B",
+                "Q7B"
+              ],
+              "explanation": "Meaning and analysis are stronger than immediate movement or risk.",
+              "id": "knowledge_without_action",
+              "tension": "The tension is between insight and movement: understanding can become a substitute for testing.",
+              "title": "Knowledge Without Action"
+            },
+            {
+              "behavioralImplication": "New situations are more likely to be entered after an information buffer is created.",
+              "disprovenIf": "Risk and direct action dominate safety and observation.",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20A",
+                "Q2B",
+                "Q7B"
+              ],
+              "explanation": "Curiosity is present, but it is filtered through safety, control, or observation.",
+              "id": "controlled_explorer",
+              "tension": "The tension is not between curiosity and fear; it is between discovery and the need to stay oriented.",
+              "title": "Controlled Explorer"
+            }
+          ],
+          "deepMotive": {
+            "band": "dominant",
+            "evidenceRefs": [
+              "Q19C",
+              "Q20A",
+              "Q2B",
+              "Q7B"
+            ],
+            "key": "knowledge",
+            "label": "knowledge motive"
+          },
+          "dominantTraits": [
+            {
+              "code": "ANA",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20A",
+                "Q2B"
+              ],
+              "label": "analytical processing"
+            },
+            {
+              "code": "OBS",
+              "evidenceRefs": [
+                "Q2B",
+                "Q7B",
+                "Q16D"
+              ],
+              "label": "observation before action"
+            },
+            {
+              "code": "MEAN",
+              "evidenceRefs": [
+                "Q19C",
+                "Q20A",
+                "Q11D"
+              ],
+              "label": "meaning orientation"
+            }
+          ],
+          "report": {
+            "axisCards": [
+              {
+                "band": "dominant",
+                "dominantKey": "safety_control_dominant",
+                "dominantLabel": "safety-control dominant",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "explorationSafety",
+                "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+                "label": "Exploration vs Safety-Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "analytical",
+                "dominantLabel": "analytical thinking",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "thinkingStyle",
+                "interpretation": "You process situations by organizing signals, comparing options, and looking for structure before committing.",
+                "label": "Thinking Style"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "social_observation",
+                "dominantLabel": "social observation",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "relationshipPattern",
+                "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+                "label": "Relationship and Distance Pattern"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "indirect_control",
+                "dominantLabel": "indirect control",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "agencyControl",
+                "interpretation": "You exert agency by watching, timing, and using information before direct movement.",
+                "label": "Agency, Leadership, and Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "analyze_first",
+                "dominantLabel": "analysis before action",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "ambiguityFear",
+                "interpretation": "When information is incomplete, your first tendency is to observe, map the situation, and reduce uncertainty.",
+                "label": "Ambiguity and Fear Response"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "knowledge",
+                "dominantLabel": "knowledge motive",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "deepMotive",
+                "interpretation": "The strongest motive signal points toward understanding, explanation, and conceptual depth.",
+                "label": "Deep Motive Structure"
+              }
+            ],
+            "contradictionMap": [
+              {
+                "behavioralImplication": "Reflective depth may create execution drag if not converted into action.",
+                "disprovenIf": "Direct action appears strongly across ambiguity and pressure questions.",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "explanation": "Meaning and analysis are stronger than immediate movement or risk.",
+                "id": "knowledge_without_action",
+                "tension": "The tension is between insight and movement: understanding can become a substitute for testing.",
+                "title": "Knowledge Without Action"
+              },
+              {
+                "behavioralImplication": "New situations are more likely to be entered after an information buffer is created.",
+                "disprovenIf": "Risk and direct action dominate safety and observation.",
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "explanation": "Curiosity is present, but it is filtered through safety, control, or observation.",
+                "id": "controlled_explorer",
+                "tension": "The tension is not between curiosity and fear; it is between discovery and the need to stay oriented.",
+                "title": "Controlled Explorer"
+              }
+            ],
+            "disprovenIf": [
+              "Practicality and action dominate meaning and intuition.",
+              "Direct action appears strongly across ambiguity and pressure questions.",
+              "Risk and direct action dominate safety and observation.",
+              "This reading is weaker if the choices were made for aesthetic preference rather than instinctive self-recognition."
+            ],
+            "evidenceDigest": [
+              {
+                "answerText": "إيقاف الزمن",
+                "option": "C",
+                "questionId": 19,
+                "ref": "Q19C"
+              },
+              {
+                "answerText": "الحقيقة",
+                "option": "A",
+                "questionId": 20,
+                "ref": "Q20A"
+              },
+              {
+                "answerText": "تراقبه أولًا",
+                "option": "B",
+                "questionId": 2,
+                "ref": "Q2B"
+              },
+              {
+                "answerText": "تطلع لمكان مرتفع",
+                "option": "B",
+                "questionId": 7,
+                "ref": "Q7B"
+              },
+              {
+                "answerText": "تستمتع بالهدوء",
+                "option": "D",
+                "questionId": 11,
+                "ref": "Q11D"
+              },
+              {
+                "answerText": "تراقب بصمت",
+                "option": "D",
+                "questionId": 16,
+                "ref": "Q16D"
+              },
+              {
+                "answerText": "تبحث عن قصته",
+                "option": "C",
+                "questionId": 9,
+                "ref": "Q9C"
+              },
+              {
+                "answerText": "تستكشفها",
+                "option": "B",
+                "questionId": 15,
+                "ref": "Q15B"
+              },
+              {
+                "answerText": "مجهول لكنه جميل",
+                "option": "C",
+                "questionId": 3,
+                "ref": "Q3C"
+              },
+              {
+                "answerText": "تتعلم شيء",
+                "option": "A",
+                "questionId": 4,
+                "ref": "Q4A"
+              },
+              {
+                "answerText": "بومة",
+                "option": "D",
+                "questionId": 5,
+                "ref": "Q5D"
+              },
+              {
+                "answerText": "المراقب",
+                "option": "D",
+                "questionId": 6,
+                "ref": "Q6D"
+              },
+              {
+                "answerText": "الشرير المعقد",
+                "option": "C",
+                "questionId": 10,
+                "ref": "Q10C"
+              },
+              {
+                "answerText": "تنسى بسرعة",
+                "option": "D",
+                "questionId": 18,
+                "ref": "Q18D"
+              },
+              {
+                "answerText": "الأصوات",
+                "option": "C",
+                "questionId": 1,
+                "ref": "Q1C"
+              },
+              {
+                "answerText": "فلسفة",
+                "option": "A",
+                "questionId": 13,
+                "ref": "Q13A"
+              },
+              {
+                "answerText": "الملل",
+                "option": "C",
+                "questionId": 14,
+                "ref": "Q14C"
+              },
+              {
+                "answerText": "مدينة ليلًا",
+                "option": "B",
+                "questionId": 8,
+                "ref": "Q8B"
+              },
+              {
+                "answerText": "ماء",
+                "option": "B",
+                "questionId": 12,
+                "ref": "Q12B"
+              },
+              {
+                "answerText": "أسود",
+                "option": "A",
+                "questionId": 17,
+                "ref": "Q17A"
+              }
+            ],
+            "failureModes": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B"
+                ],
+                "title": "Over-reading weak signals"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Preferring meaning over execution"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2B",
+                  "Q7B",
+                  "Q11D"
+                ],
+                "title": "Staying in interpretation too long"
+              }
+            ],
+            "growthDirections": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B"
+                ],
+                "title": "Test interpretations against behavior"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Translate one insight into one concrete action"
+              }
+            ],
+            "overview": {
+              "archetypeTitle": "The Symbolic Seeker",
+              "confidenceBand": "high",
+              "confidenceExplanation": "High consistency: repeated evidence supports the main reading across several sections.",
+              "deepMotive": "knowledge",
+              "dominantTraits": [
+                {
+                  "code": "ANA",
+                  "evidenceRefs": [
+                    "Q19C",
+                    "Q20A",
+                    "Q2B"
+                  ],
+                  "label": "analytical processing"
+                },
+                {
+                  "code": "OBS",
+                  "evidenceRefs": [
+                    "Q2B",
+                    "Q7B",
+                    "Q16D"
+                  ],
+                  "label": "observation before action"
+                },
+                {
+                  "code": "MEAN",
+                  "evidenceRefs": [
+                    "Q19C",
+                    "Q20A",
+                    "Q11D"
+                  ],
+                  "label": "meaning orientation"
+                }
+              ],
+              "mainContradiction": "Knowledge Without Action",
+              "patternSummary": "Searches for hidden layers, meaning, mystery, and symbolic depth.",
+              "primaryAxis": "safety_control_dominant"
+            },
+            "strengths": [
+              {
+                "evidenceRefs": [
+                  "Q19C",
+                  "Q20A",
+                  "Q2B"
+                ],
+                "title": "Depth interpretation"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20A",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Meaning detection"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2B",
+                  "Q7B",
+                  "Q11D"
+                ],
+                "title": "Imaginative pattern recognition"
+              }
+            ]
+          },
+          "runnerUp": {
+            "gapBand": "clear",
+            "id": "observer_strategist",
+            "title": "The Observer Strategist"
+          },
+          "schemaVersion": "phase-1.5-engine-public-v1"
+        },
+        "serializationVersion": "phase-1.6-result-serialization-v1"
+      },
+      "sequence": "1C 2B 3C 4A 5D 6D 7B 8B 9C 10C 11D 12B 13A 14C 15B 16D 17A 18D 19C 20A"
+    },
+    {
+      "expectedArchetype": "social_navigator",
+      "expectedContradictions": [
+        "social_watcher"
+      ],
+      "expectedDominantTags": [
+        "SOC",
+        "COOP",
+        "RESP",
+        "REC",
+        "OBS"
+      ],
+      "id": "GP6",
+      "name": "Social Navigator",
+      "resultEnvelope": {
+        "engineApiVersion": "phase-1.5-engine-public-v1",
+        "result": {
+          "answers": [
+            {
+              "answerText": "الناس",
+              "option": "A",
+              "questionId": 1
+            },
+            {
+              "answerText": "تبحث لمن يخص",
+              "option": "D",
+              "questionId": 2
+            },
+            {
+              "answerText": "طريق الناس الكل ماشية فيه",
+              "option": "D",
+              "questionId": 3
+            },
+            {
+              "answerText": "تتواصل مع شخص",
+              "option": "C",
+              "questionId": 4
+            },
+            {
+              "answerText": "حصان",
+              "option": "C",
+              "questionId": 5
+            },
+            {
+              "answerText": "القائد",
+              "option": "A",
+              "questionId": 6
+            },
+            {
+              "answerText": "تطلع لمكان مرتفع",
+              "option": "B",
+              "questionId": 7
+            },
+            {
+              "answerText": "بحر",
+              "option": "A",
+              "questionId": 8
+            },
+            {
+              "answerText": "تعطيه لغيرك",
+              "option": "D",
+              "questionId": 9
+            },
+            {
+              "answerText": "الشخصية المضحكة",
+              "option": "D",
+              "questionId": 10
+            },
+            {
+              "answerText": "تتصرف بسرعة",
+              "option": "A",
+              "questionId": 11
+            },
+            {
+              "answerText": "ماء",
+              "option": "B",
+              "questionId": 12
+            },
+            {
+              "answerText": "سيرة ذاتية",
+              "option": "D",
+              "questionId": 13
+            },
+            {
+              "answerText": "كثرة الناس",
+              "option": "D",
+              "questionId": 14
+            },
+            {
+              "answerText": "تدعو ناس",
+              "option": "C",
+              "questionId": 15
+            },
+            {
+              "answerText": "تحذر غيرك",
+              "option": "C",
+              "questionId": 16
+            },
+            {
+              "answerText": "أخضر",
+              "option": "D",
+              "questionId": 17
+            },
+            {
+              "answerText": "تحب الاعتراف",
+              "option": "C",
+              "questionId": 18
+            },
+            {
+              "answerText": "قراءة الأفكار",
+              "option": "A",
+              "questionId": 19
+            },
+            {
+              "answerText": "الحب",
+              "option": "C",
+              "questionId": 20
+            }
+          ],
+          "apiVersion": "phase-1.5-engine-public-v1",
+          "archetype": {
+            "disprovenIf": "Independence and avoidance dominate social engagement.",
+            "failureMode": "May depend too much on external response or group atmosphere.",
+            "id": "social_navigator",
+            "strength": "Social reading, relational intelligence, and influence.",
+            "summary": "Understands the world through people, reactions, recognition, and group dynamics.",
+            "title": "The Social Navigator"
+          },
+          "axes": [
+            {
+              "band": "dominant",
+              "dominantKey": "safety_control_dominant",
+              "dominantLabel": "safety-control dominant",
+              "evidenceRefs": [
+                "Q19A",
+                "Q7B",
+                "Q11A",
+                "Q16C"
+              ],
+              "id": "explorationSafety",
+              "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+              "label": "Exploration vs Safety-Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "social_relational",
+              "dominantLabel": "social-relational thinking",
+              "evidenceRefs": [
+                "Q19A",
+                "Q20C",
+                "Q2D",
+                "Q16C"
+              ],
+              "id": "thinkingStyle",
+              "interpretation": "You process situations through people, reactions, recognition, and group dynamics.",
+              "label": "Thinking Style"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "responsibility_to_others",
+              "dominantLabel": "responsibility toward others",
+              "evidenceRefs": [
+                "Q19A",
+                "Q20C",
+                "Q2D",
+                "Q11A"
+              ],
+              "id": "relationshipPattern",
+              "interpretation": "Your social pattern is shaped by duty, protection, or care for others.",
+              "label": "Relationship and Distance Pattern"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "cooperative_agency",
+              "dominantLabel": "cooperative agency",
+              "evidenceRefs": [
+                "Q19A",
+                "Q20C",
+                "Q2D",
+                "Q11A"
+              ],
+              "id": "agencyControl",
+              "interpretation": "You exert agency through coordination, support, and shared responsibility.",
+              "label": "Agency, Leadership, and Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "protect_others",
+              "dominantLabel": "protective response",
+              "evidenceRefs": [
+                "Q19A",
+                "Q20C",
+                "Q2D",
+                "Q7B"
+              ],
+              "id": "ambiguityFear",
+              "interpretation": "When information is incomplete, your first tendency is to make the situation safer for others.",
+              "label": "Ambiguity and Fear Response"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "belonging",
+              "dominantLabel": "belonging motive",
+              "evidenceRefs": [
+                "Q19A",
+                "Q20C",
+                "Q2D",
+                "Q16C"
+              ],
+              "id": "deepMotive",
+              "interpretation": "The strongest motive signal points toward connection, closeness, and relational meaning.",
+              "label": "Deep Motive Structure"
+            }
+          ],
+          "confidenceBand": "moderate",
+          "contradictions": [
+            {
+              "behavioralImplication": "The person may enter social spaces by reading dynamics before fully participating.",
+              "disprovenIf": "Social evidence is isolated and not repeated.",
+              "evidenceRefs": [
+                "Q19A",
+                "Q20C",
+                "Q2D",
+                "Q7B"
+              ],
+              "explanation": "People-orientation appears with observation and analysis.",
+              "id": "social_watcher",
+              "tension": "The tension is between social attention and social caution: people matter, but they are read before they are trusted.",
+              "title": "Social Watcher"
+            }
+          ],
+          "deepMotive": {
+            "band": "dominant",
+            "evidenceRefs": [
+              "Q19A",
+              "Q20C",
+              "Q2D",
+              "Q16C"
+            ],
+            "key": "belonging",
+            "label": "belonging motive"
+          },
+          "dominantTraits": [
+            {
+              "code": "SOC",
+              "evidenceRefs": [
+                "Q19A",
+                "Q20C",
+                "Q2D"
+              ],
+              "label": "people orientation"
+            },
+            {
+              "code": "RESP",
+              "evidenceRefs": [
+                "Q2D",
+                "Q11A",
+                "Q16C"
+              ],
+              "label": "protective responsibility"
+            },
+            {
+              "code": "COOP",
+              "evidenceRefs": [
+                "Q20C",
+                "Q9D",
+                "Q15C"
+              ],
+              "label": "cooperative orientation"
+            }
+          ],
+          "report": {
+            "axisCards": [
+              {
+                "band": "dominant",
+                "dominantKey": "safety_control_dominant",
+                "dominantLabel": "safety-control dominant",
+                "evidenceRefs": [
+                  "Q19A",
+                  "Q7B",
+                  "Q11A",
+                  "Q16C"
+                ],
+                "id": "explorationSafety",
+                "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+                "label": "Exploration vs Safety-Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "social_relational",
+                "dominantLabel": "social-relational thinking",
+                "evidenceRefs": [
+                  "Q19A",
+                  "Q20C",
+                  "Q2D",
+                  "Q16C"
+                ],
+                "id": "thinkingStyle",
+                "interpretation": "You process situations through people, reactions, recognition, and group dynamics.",
+                "label": "Thinking Style"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "responsibility_to_others",
+                "dominantLabel": "responsibility toward others",
+                "evidenceRefs": [
+                  "Q19A",
+                  "Q20C",
+                  "Q2D",
+                  "Q11A"
+                ],
+                "id": "relationshipPattern",
+                "interpretation": "Your social pattern is shaped by duty, protection, or care for others.",
+                "label": "Relationship and Distance Pattern"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "cooperative_agency",
+                "dominantLabel": "cooperative agency",
+                "evidenceRefs": [
+                  "Q19A",
+                  "Q20C",
+                  "Q2D",
+                  "Q11A"
+                ],
+                "id": "agencyControl",
+                "interpretation": "You exert agency through coordination, support, and shared responsibility.",
+                "label": "Agency, Leadership, and Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "protect_others",
+                "dominantLabel": "protective response",
+                "evidenceRefs": [
+                  "Q19A",
+                  "Q20C",
+                  "Q2D",
+                  "Q7B"
+                ],
+                "id": "ambiguityFear",
+                "interpretation": "When information is incomplete, your first tendency is to make the situation safer for others.",
+                "label": "Ambiguity and Fear Response"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "belonging",
+                "dominantLabel": "belonging motive",
+                "evidenceRefs": [
+                  "Q19A",
+                  "Q20C",
+                  "Q2D",
+                  "Q16C"
+                ],
+                "id": "deepMotive",
+                "interpretation": "The strongest motive signal points toward connection, closeness, and relational meaning.",
+                "label": "Deep Motive Structure"
+              }
+            ],
+            "contradictionMap": [
+              {
+                "behavioralImplication": "The person may enter social spaces by reading dynamics before fully participating.",
+                "disprovenIf": "Social evidence is isolated and not repeated.",
+                "evidenceRefs": [
+                  "Q19A",
+                  "Q20C",
+                  "Q2D",
+                  "Q7B"
+                ],
+                "explanation": "People-orientation appears with observation and analysis.",
+                "id": "social_watcher",
+                "tension": "The tension is between social attention and social caution: people matter, but they are read before they are trusted.",
+                "title": "Social Watcher"
+              }
+            ],
+            "disprovenIf": [
+              "Independence and avoidance dominate social engagement.",
+              "Social evidence is isolated and not repeated.",
+              "This reading is weaker if the choices were made for aesthetic preference rather than instinctive self-recognition.",
+              "This reading is weaker if the answers describe admired fictional traits rather than likely behavior under pressure."
+            ],
+            "evidenceDigest": [
+              {
+                "answerText": "قراءة الأفكار",
+                "option": "A",
+                "questionId": 19,
+                "ref": "Q19A"
+              },
+              {
+                "answerText": "الحب",
+                "option": "C",
+                "questionId": 20,
+                "ref": "Q20C"
+              },
+              {
+                "answerText": "تبحث لمن يخص",
+                "option": "D",
+                "questionId": 2,
+                "ref": "Q2D"
+              },
+              {
+                "answerText": "تطلع لمكان مرتفع",
+                "option": "B",
+                "questionId": 7,
+                "ref": "Q7B"
+              },
+              {
+                "answerText": "تتصرف بسرعة",
+                "option": "A",
+                "questionId": 11,
+                "ref": "Q11A"
+              },
+              {
+                "answerText": "تحذر غيرك",
+                "option": "C",
+                "questionId": 16,
+                "ref": "Q16C"
+              },
+              {
+                "answerText": "تعطيه لغيرك",
+                "option": "D",
+                "questionId": 9,
+                "ref": "Q9D"
+              },
+              {
+                "answerText": "تدعو ناس",
+                "option": "C",
+                "questionId": 15,
+                "ref": "Q15C"
+              },
+              {
+                "answerText": "طريق الناس الكل ماشية فيه",
+                "option": "D",
+                "questionId": 3,
+                "ref": "Q3D"
+              },
+              {
+                "answerText": "حصان",
+                "option": "C",
+                "questionId": 5,
+                "ref": "Q5C"
+              },
+              {
+                "answerText": "القائد",
+                "option": "A",
+                "questionId": 6,
+                "ref": "Q6A"
+              },
+              {
+                "answerText": "الشخصية المضحكة",
+                "option": "D",
+                "questionId": 10,
+                "ref": "Q10D"
+              },
+              {
+                "answerText": "سيرة ذاتية",
+                "option": "D",
+                "questionId": 13,
+                "ref": "Q13D"
+              },
+              {
+                "answerText": "كثرة الناس",
+                "option": "D",
+                "questionId": 14,
+                "ref": "Q14D"
+              },
+              {
+                "answerText": "الناس",
+                "option": "A",
+                "questionId": 1,
+                "ref": "Q1A"
+              },
+              {
+                "answerText": "تتواصل مع شخص",
+                "option": "C",
+                "questionId": 4,
+                "ref": "Q4C"
+              },
+              {
+                "answerText": "تحب الاعتراف",
+                "option": "C",
+                "questionId": 18,
+                "ref": "Q18C"
+              },
+              {
+                "answerText": "بحر",
+                "option": "A",
+                "questionId": 8,
+                "ref": "Q8A"
+              },
+              {
+                "answerText": "ماء",
+                "option": "B",
+                "questionId": 12,
+                "ref": "Q12B"
+              },
+              {
+                "answerText": "أخضر",
+                "option": "D",
+                "questionId": 17,
+                "ref": "Q17D"
+              }
+            ],
+            "failureModes": [
+              {
+                "evidenceRefs": [
+                  "Q19A",
+                  "Q20C",
+                  "Q2D"
+                ],
+                "title": "External validation dependency"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20C",
+                  "Q2D",
+                  "Q7B"
+                ],
+                "title": "Over-adjusting to social atmosphere"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2D",
+                  "Q7B",
+                  "Q11A"
+                ],
+                "title": "Confusing recognition with direction"
+              }
+            ],
+            "growthDirections": [
+              {
+                "evidenceRefs": [
+                  "Q19A",
+                  "Q20C",
+                  "Q2D"
+                ],
+                "title": "Separate what the group rewards from what is true"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20C",
+                  "Q2D",
+                  "Q7B"
+                ],
+                "title": "Keep one private standard outside social feedback"
+              }
+            ],
+            "overview": {
+              "archetypeTitle": "The Social Navigator",
+              "confidenceBand": "moderate",
+              "confidenceExplanation": "Moderate consistency: one pattern is visible, but competing evidence or contradictions remain important.",
+              "deepMotive": "belonging",
+              "dominantTraits": [
+                {
+                  "code": "SOC",
+                  "evidenceRefs": [
+                    "Q19A",
+                    "Q20C",
+                    "Q2D"
+                  ],
+                  "label": "people orientation"
+                },
+                {
+                  "code": "RESP",
+                  "evidenceRefs": [
+                    "Q2D",
+                    "Q11A",
+                    "Q16C"
+                  ],
+                  "label": "protective responsibility"
+                },
+                {
+                  "code": "COOP",
+                  "evidenceRefs": [
+                    "Q20C",
+                    "Q9D",
+                    "Q15C"
+                  ],
+                  "label": "cooperative orientation"
+                }
+              ],
+              "mainContradiction": "Social Watcher",
+              "patternSummary": "Understands the world through people, reactions, recognition, and group dynamics.",
+              "primaryAxis": "safety_control_dominant"
+            },
+            "strengths": [
+              {
+                "evidenceRefs": [
+                  "Q19A",
+                  "Q20C",
+                  "Q2D"
+                ],
+                "title": "Reading people"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20C",
+                  "Q2D",
+                  "Q7B"
+                ],
+                "title": "Relational timing"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2D",
+                  "Q7B",
+                  "Q11A"
+                ],
+                "title": "Influence through group awareness"
+              }
+            ]
+          },
+          "runnerUp": {
+            "gapBand": "clear",
+            "id": "stability_guardian",
+            "title": "The Stability Guardian"
+          },
+          "schemaVersion": "phase-1.5-engine-public-v1"
+        },
+        "serializationVersion": "phase-1.6-result-serialization-v1"
+      },
+      "sequence": "1A 2D 3D 4C 5C 6A 7B 8A 9D 10D 11A 12B 13D 14D 15C 16C 17D 18C 19A 20C"
+    },
+    {
+      "expectedArchetype": "stability_guardian",
+      "expectedContradictions": [
+        "responsible_avoider"
+      ],
+      "expectedDominantTags": [
+        "SAF",
+        "RESP",
+        "CTRL",
+        "PRAC",
+        "CALM"
+      ],
+      "id": "GP7",
+      "name": "Stability Guardian",
+      "resultEnvelope": {
+        "engineApiVersion": "phase-1.5-engine-public-v1",
+        "result": {
+          "answers": [
+            {
+              "answerText": "المخارج والاتجاهات",
+              "option": "D",
+              "questionId": 1
+            },
+            {
+              "answerText": "تبحث لمن يخص",
+              "option": "D",
+              "questionId": 2
+            },
+            {
+              "answerText": "طويل وآمن",
+              "option": "B",
+              "questionId": 3
+            },
+            {
+              "answerText": "ترتاح",
+              "option": "B",
+              "questionId": 4
+            },
+            {
+              "answerText": "حصان",
+              "option": "C",
+              "questionId": 5
+            },
+            {
+              "answerText": "المنفذ",
+              "option": "C",
+              "questionId": 6
+            },
+            {
+              "answerText": "تبقى مكانك",
+              "option": "C",
+              "questionId": 7
+            },
+            {
+              "answerText": "جبل",
+              "option": "C",
+              "questionId": 8
+            },
+            {
+              "answerText": "تخزنه",
+              "option": "B",
+              "questionId": 9
+            },
+            {
+              "answerText": "البطل",
+              "option": "A",
+              "questionId": 10
+            },
+            {
+              "answerText": "تنتظر",
+              "option": "B",
+              "questionId": 11
+            },
+            {
+              "answerText": "أرض",
+              "option": "D",
+              "questionId": 12
+            },
+            {
+              "answerText": "سيرة ذاتية",
+              "option": "D",
+              "questionId": 13
+            },
+            {
+              "answerText": "الفوضى",
+              "option": "A",
+              "questionId": 14
+            },
+            {
+              "answerText": "تبني نظام",
+              "option": "A",
+              "questionId": 15
+            },
+            {
+              "answerText": "تحذر غيرك",
+              "option": "C",
+              "questionId": 16
+            },
+            {
+              "answerText": "أخضر",
+              "option": "D",
+              "questionId": 17
+            },
+            {
+              "answerText": "تهتم بالجائزة",
+              "option": "B",
+              "questionId": 18
+            },
+            {
+              "answerText": "التنبؤ",
+              "option": "D",
+              "questionId": 19
+            },
+            {
+              "answerText": "الحقيقة",
+              "option": "A",
+              "questionId": 20
+            }
+          ],
+          "apiVersion": "phase-1.5-engine-public-v1",
+          "archetype": {
+            "disprovenIf": "Risk and exploration repeatedly override safety.",
+            "failureMode": "Over-caution and missed opportunity.",
+            "id": "stability_guardian",
+            "strength": "Reliability, duty, and risk management.",
+            "summary": "Prioritizes stability, protection, predictability, and reduced exposure.",
+            "title": "The Stability Guardian"
+          },
+          "axes": [
+            {
+              "band": "dominant",
+              "dominantKey": "safety_control_dominant",
+              "dominantLabel": "safety-control dominant",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20A",
+                "Q7C",
+                "Q11B"
+              ],
+              "id": "explorationSafety",
+              "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+              "label": "Exploration vs Safety-Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "practical",
+              "dominantLabel": "practical thinking",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20A",
+                "Q7C",
+                "Q11B"
+              ],
+              "id": "thinkingStyle",
+              "interpretation": "You process situations through usefulness, stability, comfort, and concrete outcomes.",
+              "label": "Thinking Style"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "responsibility_to_others",
+              "dominantLabel": "responsibility toward others",
+              "evidenceRefs": [
+                "Q2D",
+                "Q16C",
+                "Q6C",
+                "Q5C"
+              ],
+              "id": "relationshipPattern",
+              "interpretation": "Your social pattern is shaped by duty, protection, or care for others.",
+              "label": "Relationship and Distance Pattern"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "structured_control",
+              "dominantLabel": "structured control",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20A",
+                "Q2D",
+                "Q9B"
+              ],
+              "id": "agencyControl",
+              "interpretation": "You exert agency by creating structure, rules, order, and practical control.",
+              "label": "Agency, Leadership, and Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "protect_others",
+              "dominantLabel": "protective response",
+              "evidenceRefs": [
+                "Q19D",
+                "Q2D",
+                "Q7C",
+                "Q11B"
+              ],
+              "id": "ambiguityFear",
+              "interpretation": "When information is incomplete, your first tendency is to make the situation safer for others.",
+              "label": "Ambiguity and Fear Response"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "security",
+              "dominantLabel": "security motive",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20A",
+                "Q7C",
+                "Q11B"
+              ],
+              "id": "deepMotive",
+              "interpretation": "The strongest motive signal points toward predictability, protection, and reducing future surprise.",
+              "label": "Deep Motive Structure"
+            }
+          ],
+          "confidenceBand": "moderate",
+          "contradictions": [
+            {
+              "behavioralImplication": "The person may warn, delegate, or organize instead of personally entering danger.",
+              "disprovenIf": "Responsibility appears only once and avoidance is not repeated.",
+              "evidenceRefs": [
+                "Q19D",
+                "Q2D",
+                "Q7C",
+                "Q11B"
+              ],
+              "explanation": "Protective or duty-oriented signals appear with avoidance or safety signals.",
+              "id": "responsible_avoider",
+              "tension": "The tension is between care and self-protection: the person may protect indirectly instead of entering danger directly.",
+              "title": "Responsible Avoider"
+            }
+          ],
+          "deepMotive": {
+            "band": "dominant",
+            "evidenceRefs": [
+              "Q19D",
+              "Q20A",
+              "Q7C",
+              "Q11B"
+            ],
+            "key": "security",
+            "label": "security motive"
+          },
+          "dominantTraits": [
+            {
+              "code": "SAF",
+              "evidenceRefs": [
+                "Q19D",
+                "Q7C",
+                "Q11B"
+              ],
+              "label": "safety orientation"
+            },
+            {
+              "code": "CTRL",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20A",
+                "Q9B"
+              ],
+              "label": "control and structure"
+            },
+            {
+              "code": "PRAC",
+              "evidenceRefs": [
+                "Q15A",
+                "Q6C",
+                "Q3B"
+              ],
+              "label": "practical utility"
+            }
+          ],
+          "report": {
+            "axisCards": [
+              {
+                "band": "dominant",
+                "dominantKey": "safety_control_dominant",
+                "dominantLabel": "safety-control dominant",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20A",
+                  "Q7C",
+                  "Q11B"
+                ],
+                "id": "explorationSafety",
+                "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+                "label": "Exploration vs Safety-Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "practical",
+                "dominantLabel": "practical thinking",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20A",
+                  "Q7C",
+                  "Q11B"
+                ],
+                "id": "thinkingStyle",
+                "interpretation": "You process situations through usefulness, stability, comfort, and concrete outcomes.",
+                "label": "Thinking Style"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "responsibility_to_others",
+                "dominantLabel": "responsibility toward others",
+                "evidenceRefs": [
+                  "Q2D",
+                  "Q16C",
+                  "Q6C",
+                  "Q5C"
+                ],
+                "id": "relationshipPattern",
+                "interpretation": "Your social pattern is shaped by duty, protection, or care for others.",
+                "label": "Relationship and Distance Pattern"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "structured_control",
+                "dominantLabel": "structured control",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20A",
+                  "Q2D",
+                  "Q9B"
+                ],
+                "id": "agencyControl",
+                "interpretation": "You exert agency by creating structure, rules, order, and practical control.",
+                "label": "Agency, Leadership, and Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "protect_others",
+                "dominantLabel": "protective response",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q2D",
+                  "Q7C",
+                  "Q11B"
+                ],
+                "id": "ambiguityFear",
+                "interpretation": "When information is incomplete, your first tendency is to make the situation safer for others.",
+                "label": "Ambiguity and Fear Response"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "security",
+                "dominantLabel": "security motive",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20A",
+                  "Q7C",
+                  "Q11B"
+                ],
+                "id": "deepMotive",
+                "interpretation": "The strongest motive signal points toward predictability, protection, and reducing future surprise.",
+                "label": "Deep Motive Structure"
+              }
+            ],
+            "contradictionMap": [
+              {
+                "behavioralImplication": "The person may warn, delegate, or organize instead of personally entering danger.",
+                "disprovenIf": "Responsibility appears only once and avoidance is not repeated.",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q2D",
+                  "Q7C",
+                  "Q11B"
+                ],
+                "explanation": "Protective or duty-oriented signals appear with avoidance or safety signals.",
+                "id": "responsible_avoider",
+                "tension": "The tension is between care and self-protection: the person may protect indirectly instead of entering danger directly.",
+                "title": "Responsible Avoider"
+              }
+            ],
+            "disprovenIf": [
+              "Risk and exploration repeatedly override safety.",
+              "Responsibility appears only once and avoidance is not repeated.",
+              "This reading is weaker if the choices were made for aesthetic preference rather than instinctive self-recognition.",
+              "This reading is weaker if the answers describe admired fictional traits rather than likely behavior under pressure."
+            ],
+            "evidenceDigest": [
+              {
+                "answerText": "التنبؤ",
+                "option": "D",
+                "questionId": 19,
+                "ref": "Q19D"
+              },
+              {
+                "answerText": "الحقيقة",
+                "option": "A",
+                "questionId": 20,
+                "ref": "Q20A"
+              },
+              {
+                "answerText": "تبحث لمن يخص",
+                "option": "D",
+                "questionId": 2,
+                "ref": "Q2D"
+              },
+              {
+                "answerText": "تبقى مكانك",
+                "option": "C",
+                "questionId": 7,
+                "ref": "Q7C"
+              },
+              {
+                "answerText": "تنتظر",
+                "option": "B",
+                "questionId": 11,
+                "ref": "Q11B"
+              },
+              {
+                "answerText": "تحذر غيرك",
+                "option": "C",
+                "questionId": 16,
+                "ref": "Q16C"
+              },
+              {
+                "answerText": "تخزنه",
+                "option": "B",
+                "questionId": 9,
+                "ref": "Q9B"
+              },
+              {
+                "answerText": "تبني نظام",
+                "option": "A",
+                "questionId": 15,
+                "ref": "Q15A"
+              },
+              {
+                "answerText": "المنفذ",
+                "option": "C",
+                "questionId": 6,
+                "ref": "Q6C"
+              },
+              {
+                "answerText": "المخارج والاتجاهات",
+                "option": "D",
+                "questionId": 1,
+                "ref": "Q1D"
+              },
+              {
+                "answerText": "طويل وآمن",
+                "option": "B",
+                "questionId": 3,
+                "ref": "Q3B"
+              },
+              {
+                "answerText": "ترتاح",
+                "option": "B",
+                "questionId": 4,
+                "ref": "Q4B"
+              },
+              {
+                "answerText": "حصان",
+                "option": "C",
+                "questionId": 5,
+                "ref": "Q5C"
+              },
+              {
+                "answerText": "البطل",
+                "option": "A",
+                "questionId": 10,
+                "ref": "Q10A"
+              },
+              {
+                "answerText": "سيرة ذاتية",
+                "option": "D",
+                "questionId": 13,
+                "ref": "Q13D"
+              },
+              {
+                "answerText": "الفوضى",
+                "option": "A",
+                "questionId": 14,
+                "ref": "Q14A"
+              },
+              {
+                "answerText": "تهتم بالجائزة",
+                "option": "B",
+                "questionId": 18,
+                "ref": "Q18B"
+              },
+              {
+                "answerText": "جبل",
+                "option": "C",
+                "questionId": 8,
+                "ref": "Q8C"
+              },
+              {
+                "answerText": "أرض",
+                "option": "D",
+                "questionId": 12,
+                "ref": "Q12D"
+              },
+              {
+                "answerText": "أخضر",
+                "option": "D",
+                "questionId": 17,
+                "ref": "Q17D"
+              }
+            ],
+            "failureModes": [
+              {
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20A",
+                  "Q2D"
+                ],
+                "title": "Over-caution"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20A",
+                  "Q2D",
+                  "Q7C"
+                ],
+                "title": "Missed opportunity"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2D",
+                  "Q7C",
+                  "Q11B"
+                ],
+                "title": "Treating novelty as threat by default"
+              }
+            ],
+            "growthDirections": [
+              {
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20A",
+                  "Q2D"
+                ],
+                "title": "Classify risk by reversibility"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20A",
+                  "Q2D",
+                  "Q7C"
+                ],
+                "title": "Allow low-cost experiments while protecting essentials"
+              }
+            ],
+            "overview": {
+              "archetypeTitle": "The Stability Guardian",
+              "confidenceBand": "moderate",
+              "confidenceExplanation": "Moderate consistency: one pattern is visible, but competing evidence or contradictions remain important.",
+              "deepMotive": "security",
+              "dominantTraits": [
+                {
+                  "code": "SAF",
+                  "evidenceRefs": [
+                    "Q19D",
+                    "Q7C",
+                    "Q11B"
+                  ],
+                  "label": "safety orientation"
+                },
+                {
+                  "code": "CTRL",
+                  "evidenceRefs": [
+                    "Q19D",
+                    "Q20A",
+                    "Q9B"
+                  ],
+                  "label": "control and structure"
+                },
+                {
+                  "code": "PRAC",
+                  "evidenceRefs": [
+                    "Q15A",
+                    "Q6C",
+                    "Q3B"
+                  ],
+                  "label": "practical utility"
+                }
+              ],
+              "mainContradiction": "Responsible Avoider",
+              "patternSummary": "Prioritizes stability, protection, predictability, and reduced exposure.",
+              "primaryAxis": "safety_control_dominant"
+            },
+            "strengths": [
+              {
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20A",
+                  "Q2D"
+                ],
+                "title": "Reliability"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20A",
+                  "Q2D",
+                  "Q7C"
+                ],
+                "title": "Protective responsibility"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2D",
+                  "Q7C",
+                  "Q11B"
+                ],
+                "title": "Risk management"
+              }
+            ]
+          },
+          "runnerUp": {
+            "gapBand": "clear",
+            "id": "solitary_architect",
+            "title": "The Solitary Architect"
+          },
+          "schemaVersion": "phase-1.5-engine-public-v1"
+        },
+        "serializationVersion": "phase-1.6-result-serialization-v1"
+      },
+      "sequence": "1D 2D 3B 4B 5C 6C 7C 8C 9B 10A 11B 12D 13D 14A 15A 16C 17D 18B 19D 20A"
+    },
+    {
+      "expectedArchetype": "power_analyst",
+      "expectedContradictions": [
+        "power_without_exposure",
+        "knowledge_without_action"
+      ],
+      "expectedDominantTags": [
+        "CTRL",
+        "ANA",
+        "OBS",
+        "LEAD",
+        "REC"
+      ],
+      "id": "GP8",
+      "name": "Power Analyst",
+      "resultEnvelope": {
+        "engineApiVersion": "phase-1.5-engine-public-v1",
+        "result": {
+          "answers": [
+            {
+              "answerText": "المخارج والاتجاهات",
+              "option": "D",
+              "questionId": 1
+            },
+            {
+              "answerText": "تراقبه أولًا",
+              "option": "B",
+              "questionId": 2
+            },
+            {
+              "answerText": "طويل وآمن",
+              "option": "B",
+              "questionId": 3
+            },
+            {
+              "answerText": "تتعلم شيء",
+              "option": "A",
+              "questionId": 4
+            },
+            {
+              "answerText": "ذئب",
+              "option": "A",
+              "questionId": 5
+            },
+            {
+              "answerText": "المخطط",
+              "option": "B",
+              "questionId": 6
+            },
+            {
+              "answerText": "تطلع لمكان مرتفع",
+              "option": "B",
+              "questionId": 7
+            },
+            {
+              "answerText": "مدينة ليلًا",
+              "option": "B",
+              "questionId": 8
+            },
+            {
+              "answerText": "تبحث عن قصته",
+              "option": "C",
+              "questionId": 9
+            },
+            {
+              "answerText": "الذكي الهادئ",
+              "option": "B",
+              "questionId": 10
+            },
+            {
+              "answerText": "تتصرف بسرعة",
+              "option": "A",
+              "questionId": 11
+            },
+            {
+              "answerText": "أرض",
+              "option": "D",
+              "questionId": 12
+            },
+            {
+              "answerText": "فلسفة",
+              "option": "A",
+              "questionId": 13
+            },
+            {
+              "answerText": "الفوضى",
+              "option": "A",
+              "questionId": 14
+            },
+            {
+              "answerText": "تبني نظام",
+              "option": "A",
+              "questionId": 15
+            },
+            {
+              "answerText": "تراقب بصمت",
+              "option": "D",
+              "questionId": 16
+            },
+            {
+              "answerText": "أحمر",
+              "option": "C",
+              "questionId": 17
+            },
+            {
+              "answerText": "تحب الاعتراف",
+              "option": "C",
+              "questionId": 18
+            },
+            {
+              "answerText": "التنبؤ",
+              "option": "D",
+              "questionId": 19
+            },
+            {
+              "answerText": "القوة",
+              "option": "B",
+              "questionId": 20
+            }
+          ],
+          "apiVersion": "phase-1.5-engine-public-v1",
+          "archetype": {
+            "disprovenIf": "Belonging, calm, or avoidance motives dominate power and control.",
+            "failureMode": "Can become too controlling or status-sensitive.",
+            "id": "power_analyst",
+            "strength": "Strategy, influence, and planning depth.",
+            "summary": "Seeks leverage through knowledge, timing, prediction, and control.",
+            "title": "The Power Analyst"
+          },
+          "axes": [
+            {
+              "band": "dominant",
+              "dominantKey": "safety_control_dominant",
+              "dominantLabel": "safety-control dominant",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20B",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "explorationSafety",
+              "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+              "label": "Exploration vs Safety-Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "analytical",
+              "dominantLabel": "analytical thinking",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20B",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "thinkingStyle",
+              "interpretation": "You process situations by organizing signals, comparing options, and looking for structure before committing.",
+              "label": "Thinking Style"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "social_observation",
+              "dominantLabel": "social observation",
+              "evidenceRefs": [
+                "Q19D",
+                "Q2B",
+                "Q7B",
+                "Q16D"
+              ],
+              "id": "relationshipPattern",
+              "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+              "label": "Relationship and Distance Pattern"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "structured_control",
+              "dominantLabel": "structured control",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20B",
+                "Q2B",
+                "Q7B"
+              ],
+              "id": "agencyControl",
+              "interpretation": "You exert agency by creating structure, rules, order, and practical control.",
+              "label": "Agency, Leadership, and Control"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "analyze_first",
+              "dominantLabel": "analysis before action",
+              "evidenceRefs": [
+                "Q19D",
+                "Q2B",
+                "Q7B",
+                "Q16D"
+              ],
+              "id": "ambiguityFear",
+              "interpretation": "When information is incomplete, your first tendency is to observe, map the situation, and reduce uncertainty.",
+              "label": "Ambiguity and Fear Response"
+            },
+            {
+              "band": "dominant",
+              "dominantKey": "power",
+              "dominantLabel": "power motive",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20B",
+                "Q11A",
+                "Q15A"
+              ],
+              "id": "deepMotive",
+              "interpretation": "The strongest motive signal points toward influence, leverage, control, and visible effect.",
+              "label": "Deep Motive Structure"
+            }
+          ],
+          "confidenceBand": "high",
+          "contradictions": [
+            {
+              "behavioralImplication": "Influence may be pursued through indirect, low-risk paths.",
+              "disprovenIf": "Risk and direct confrontation signals are also high.",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20B",
+                "Q2B",
+                "Q7B"
+              ],
+              "explanation": "Control, leadership, or recognition signals appear with safety and low exposure.",
+              "id": "power_without_exposure",
+              "tension": "The tension is between wanting influence and preferring lower-exposure routes to it.",
+              "title": "Power Without Exposure"
+            },
+            {
+              "behavioralImplication": "Reflective depth may create execution drag if not converted into action.",
+              "disprovenIf": "Direct action appears strongly across ambiguity and pressure questions.",
+              "evidenceRefs": [
+                "Q19D",
+                "Q2B",
+                "Q7B",
+                "Q11A"
+              ],
+              "explanation": "Meaning and analysis are stronger than immediate movement or risk.",
+              "id": "knowledge_without_action",
+              "tension": "The tension is between insight and movement: understanding can become a substitute for testing.",
+              "title": "Knowledge Without Action"
+            }
+          ],
+          "deepMotive": {
+            "band": "dominant",
+            "evidenceRefs": [
+              "Q19D",
+              "Q20B",
+              "Q11A",
+              "Q15A"
+            ],
+            "key": "power",
+            "label": "power motive"
+          },
+          "dominantTraits": [
+            {
+              "code": "ANA",
+              "evidenceRefs": [
+                "Q19D",
+                "Q2B",
+                "Q7B"
+              ],
+              "label": "analytical processing"
+            },
+            {
+              "code": "CTRL",
+              "evidenceRefs": [
+                "Q19D",
+                "Q20B",
+                "Q11A"
+              ],
+              "label": "control and structure"
+            },
+            {
+              "code": "SAF",
+              "evidenceRefs": [
+                "Q19D",
+                "Q2B",
+                "Q7B"
+              ],
+              "label": "safety orientation"
+            }
+          ],
+          "report": {
+            "axisCards": [
+              {
+                "band": "dominant",
+                "dominantKey": "safety_control_dominant",
+                "dominantLabel": "safety-control dominant",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20B",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "explorationSafety",
+                "interpretation": "Your choices repeatedly reduce exposure through safety, control, observation, or delayed movement.",
+                "label": "Exploration vs Safety-Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "analytical",
+                "dominantLabel": "analytical thinking",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20B",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "thinkingStyle",
+                "interpretation": "You process situations by organizing signals, comparing options, and looking for structure before committing.",
+                "label": "Thinking Style"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "social_observation",
+                "dominantLabel": "social observation",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q2B",
+                  "Q7B",
+                  "Q16D"
+                ],
+                "id": "relationshipPattern",
+                "interpretation": "Your social pattern reads people and group atmosphere before fully entering.",
+                "label": "Relationship and Distance Pattern"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "structured_control",
+                "dominantLabel": "structured control",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20B",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "id": "agencyControl",
+                "interpretation": "You exert agency by creating structure, rules, order, and practical control.",
+                "label": "Agency, Leadership, and Control"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "analyze_first",
+                "dominantLabel": "analysis before action",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q2B",
+                  "Q7B",
+                  "Q16D"
+                ],
+                "id": "ambiguityFear",
+                "interpretation": "When information is incomplete, your first tendency is to observe, map the situation, and reduce uncertainty.",
+                "label": "Ambiguity and Fear Response"
+              },
+              {
+                "band": "dominant",
+                "dominantKey": "power",
+                "dominantLabel": "power motive",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20B",
+                  "Q11A",
+                  "Q15A"
+                ],
+                "id": "deepMotive",
+                "interpretation": "The strongest motive signal points toward influence, leverage, control, and visible effect.",
+                "label": "Deep Motive Structure"
+              }
+            ],
+            "contradictionMap": [
+              {
+                "behavioralImplication": "Influence may be pursued through indirect, low-risk paths.",
+                "disprovenIf": "Risk and direct confrontation signals are also high.",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20B",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "explanation": "Control, leadership, or recognition signals appear with safety and low exposure.",
+                "id": "power_without_exposure",
+                "tension": "The tension is between wanting influence and preferring lower-exposure routes to it.",
+                "title": "Power Without Exposure"
+              },
+              {
+                "behavioralImplication": "Reflective depth may create execution drag if not converted into action.",
+                "disprovenIf": "Direct action appears strongly across ambiguity and pressure questions.",
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q2B",
+                  "Q7B",
+                  "Q11A"
+                ],
+                "explanation": "Meaning and analysis are stronger than immediate movement or risk.",
+                "id": "knowledge_without_action",
+                "tension": "The tension is between insight and movement: understanding can become a substitute for testing.",
+                "title": "Knowledge Without Action"
+              }
+            ],
+            "disprovenIf": [
+              "Belonging, calm, or avoidance motives dominate power and control.",
+              "Risk and direct confrontation signals are also high.",
+              "Direct action appears strongly across ambiguity and pressure questions.",
+              "This reading is weaker if the choices were made for aesthetic preference rather than instinctive self-recognition."
+            ],
+            "evidenceDigest": [
+              {
+                "answerText": "التنبؤ",
+                "option": "D",
+                "questionId": 19,
+                "ref": "Q19D"
+              },
+              {
+                "answerText": "القوة",
+                "option": "B",
+                "questionId": 20,
+                "ref": "Q20B"
+              },
+              {
+                "answerText": "تراقبه أولًا",
+                "option": "B",
+                "questionId": 2,
+                "ref": "Q2B"
+              },
+              {
+                "answerText": "تطلع لمكان مرتفع",
+                "option": "B",
+                "questionId": 7,
+                "ref": "Q7B"
+              },
+              {
+                "answerText": "تتصرف بسرعة",
+                "option": "A",
+                "questionId": 11,
+                "ref": "Q11A"
+              },
+              {
+                "answerText": "تراقب بصمت",
+                "option": "D",
+                "questionId": 16,
+                "ref": "Q16D"
+              },
+              {
+                "answerText": "تبحث عن قصته",
+                "option": "C",
+                "questionId": 9,
+                "ref": "Q9C"
+              },
+              {
+                "answerText": "تبني نظام",
+                "option": "A",
+                "questionId": 15,
+                "ref": "Q15A"
+              },
+              {
+                "answerText": "المخارج والاتجاهات",
+                "option": "D",
+                "questionId": 1,
+                "ref": "Q1D"
+              },
+              {
+                "answerText": "طويل وآمن",
+                "option": "B",
+                "questionId": 3,
+                "ref": "Q3B"
+              },
+              {
+                "answerText": "تتعلم شيء",
+                "option": "A",
+                "questionId": 4,
+                "ref": "Q4A"
+              },
+              {
+                "answerText": "ذئب",
+                "option": "A",
+                "questionId": 5,
+                "ref": "Q5A"
+              },
+              {
+                "answerText": "المخطط",
+                "option": "B",
+                "questionId": 6,
+                "ref": "Q6B"
+              },
+              {
+                "answerText": "الذكي الهادئ",
+                "option": "B",
+                "questionId": 10,
+                "ref": "Q10B"
+              },
+              {
+                "answerText": "الفوضى",
+                "option": "A",
+                "questionId": 14,
+                "ref": "Q14A"
+              },
+              {
+                "answerText": "أحمر",
+                "option": "C",
+                "questionId": 17,
+                "ref": "Q17C"
+              },
+              {
+                "answerText": "فلسفة",
+                "option": "A",
+                "questionId": 13,
+                "ref": "Q13A"
+              },
+              {
+                "answerText": "تحب الاعتراف",
+                "option": "C",
+                "questionId": 18,
+                "ref": "Q18C"
+              },
+              {
+                "answerText": "مدينة ليلًا",
+                "option": "B",
+                "questionId": 8,
+                "ref": "Q8B"
+              },
+              {
+                "answerText": "أرض",
+                "option": "D",
+                "questionId": 12,
+                "ref": "Q12D"
+              }
+            ],
+            "failureModes": [
+              {
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20B",
+                  "Q2B"
+                ],
+                "title": "Over-control"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20B",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Status sensitivity"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2B",
+                  "Q7B",
+                  "Q11A"
+                ],
+                "title": "Treating ambiguity as something to dominate"
+              }
+            ],
+            "growthDirections": [
+              {
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20B",
+                  "Q2B"
+                ],
+                "title": "Define what control is actually for"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20B",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Convert influence into responsibility, not only advantage"
+              }
+            ],
+            "overview": {
+              "archetypeTitle": "The Power Analyst",
+              "confidenceBand": "high",
+              "confidenceExplanation": "High consistency: repeated evidence supports the main reading across several sections.",
+              "deepMotive": "power",
+              "dominantTraits": [
+                {
+                  "code": "ANA",
+                  "evidenceRefs": [
+                    "Q19D",
+                    "Q2B",
+                    "Q7B"
+                  ],
+                  "label": "analytical processing"
+                },
+                {
+                  "code": "CTRL",
+                  "evidenceRefs": [
+                    "Q19D",
+                    "Q20B",
+                    "Q11A"
+                  ],
+                  "label": "control and structure"
+                },
+                {
+                  "code": "SAF",
+                  "evidenceRefs": [
+                    "Q19D",
+                    "Q2B",
+                    "Q7B"
+                  ],
+                  "label": "safety orientation"
+                }
+              ],
+              "mainContradiction": "Power Without Exposure",
+              "patternSummary": "Seeks leverage through knowledge, timing, prediction, and control.",
+              "primaryAxis": "safety_control_dominant"
+            },
+            "strengths": [
+              {
+                "evidenceRefs": [
+                  "Q19D",
+                  "Q20B",
+                  "Q2B"
+                ],
+                "title": "Strategic leverage"
+              },
+              {
+                "evidenceRefs": [
+                  "Q20B",
+                  "Q2B",
+                  "Q7B"
+                ],
+                "title": "Planning depth"
+              },
+              {
+                "evidenceRefs": [
+                  "Q2B",
+                  "Q7B",
+                  "Q11A"
+                ],
+                "title": "Timing and influence"
+              }
+            ]
+          },
+          "runnerUp": {
+            "gapBand": "clear",
+            "id": "observer_strategist",
+            "title": "The Observer Strategist"
+          },
+          "schemaVersion": "phase-1.5-engine-public-v1"
+        },
+        "serializationVersion": "phase-1.6-result-serialization-v1"
+      },
+      "sequence": "1D 2B 3B 4A 5A 6B 7B 8B 9C 10B 11A 12D 13A 14A 15A 16D 17C 18C 19D 20B"
+    }
+  ],
+  "schemaVersion": "phase-1.6-golden-public-results-v1",
+  "serializationVersion": "phase-1.6-result-serialization-v1",
+  "snapshotId": "golden-public-results-phase-1.6"
+}

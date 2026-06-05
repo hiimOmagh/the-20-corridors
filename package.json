@@ -4,20 +4,34 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
     "test": "vitest run",
     "test:watch": "vitest",
     "audit:methodology": "tsx scripts/methodology-audit.ts",
-    "validate": "npm run typecheck && npm test && npm run release:engine && npm run readiness:phase2",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2",
     "snapshots:generate": "tsx scripts/generate-result-snapshots.ts",
     "snapshots:verify": "tsx scripts/verify-result-snapshots.ts",
     "release:engine": "tsx scripts/engine-release-gate.ts",
-    "readiness:phase2": "tsx scripts/phase2-readiness.ts"
+    "readiness:phase2": "tsx scripts/phase2-readiness.ts",
+    "guard:ui-imports": "tsx scripts/ui-import-boundary.ts"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",
+    "@types/react": "^19.2.6",
+    "@types/react-dom": "^19.2.3",
     "tsx": "^4.22.4",
     "typescript": "^5.8.3",
     "vitest": "^4.1.8"
+  },
+  "dependencies": {
+    "next": "^16.0.10",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
   }
 }

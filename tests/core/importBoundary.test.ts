@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const repoRoot = process.cwd();
 const publicIndex = path.join(repoRoot, 'src/core/index.ts');
-const allowedPublicExports = ['./engine', './publicTypes'];
+const allowedPublicExports = ['./engine', './publicTypes', './serialization/resultSerialization', './serialization/goldenSnapshots'];
 const uiRoots = ['app', 'components', 'ui', 'src/app', 'src/components', 'src/ui'];
 const forbiddenInternalImportPatterns = [
   /from\s+['"][^'"]*core\/methodology[^'"]*['"]/,

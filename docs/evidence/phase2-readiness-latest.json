@@ -1,46 +1,46 @@
 {
-  "schemaVersion": "phase-1.8-phase2-readiness-v1",
-  "readinessId": "phase-2-ui-readiness-contract",
+  "schemaVersion": "phase-2.0-ui-scaffold-readiness-v1",
+  "readinessId": "phase-2-ui-scaffold-readiness",
   "metadata": {
     "checkedAt": "static",
     "repoRootName": "repository",
-    "engineReleaseGateSchemaVersion": "phase-1.7-engine-release-gate-v1"
+    "engineReleaseGateSchemaVersion": "phase-2.0-engine-release-gate-v1",
+    "uiImportBoundarySchemaVersion": "phase-2.0-ui-import-boundary-v1"
   },
   "gates": {
     "engineReleaseGatePassed": true,
-    "closureReviewExists": true,
-    "uiReadinessContractExists": true,
-    "importBoundaryContractExists": true,
-    "transitionPlanExists": true,
+    "uiImportBoundaryPassed": true,
+    "nextConfigExists": true,
+    "appLayoutExists": true,
+    "landingRouteExists": true,
+    "quizRouteExists": true,
+    "resultsRouteExists": true,
+    "quizClientExists": true,
+    "resultsClientExists": true,
+    "globalStylesExist": true,
     "publicCoreEntrypointExists": true,
-    "publicEngineWrapperExists": true,
-    "publicTypesExist": true,
-    "readinessScriptExists": true,
     "validateScriptRunsReadinessGate": true,
-    "transitionKeepsBackendAiBlocked": true,
-    "contractRequiresPublicApiOnly": true,
+    "validateScriptRunsUiImportGuard": true,
+    "stillNoBackendAiAuthPaymentScope": true,
+    "routeSkeletonsUsePublicApiOnly": true,
     "overallPassed": true
   },
-  "documents": {
-    "closureReview": "docs/release/engine-closure-review.md",
-    "uiReadinessContract": "docs/ui/phase-2-ui-readiness-contract.md",
-    "importBoundaryContract": "docs/ui/import-boundary-contract.md",
-    "transitionPlan": "docs/ui/phase-2-transition-plan.md"
-  },
-  "allowedPhase2Scope": [
-    "app/",
-    "src/app/",
-    "src/components/",
-    "src/components/ui/",
-    "src/features/quiz/",
-    "src/features/results/",
-    "src/styles/",
-    "public/"
+  "requiredUiFiles": [
+    "next.config.ts",
+    "next-env.d.ts",
+    "src/app/layout.tsx",
+    "src/app/page.tsx",
+    "src/app/quiz/page.tsx",
+    "src/app/results/page.tsx",
+    "src/app/globals.css",
+    "src/features/quiz/QuizClient.tsx",
+    "src/features/results/ResultsClient.tsx"
   ],
-  "stillBlockedScope": [
+  "blockedScope": [
     "src/server/",
     "src/api/",
-    "app/api/",
+    "src/app/api/",
+    "pages/",
     "pages/api/",
     "server/",
     "api/",
@@ -56,7 +56,9 @@
     "src/llm/",
     "src/prompts/",
     "src/core/ai/",
-    "src/core/llm/"
+    "src/core/llm/",
+    "auth/",
+    "payments/"
   ],
   "publicApi": {
     "entrypoint": "src/core/index.ts",
@@ -65,17 +67,18 @@
       "runCorridorsEngine"
     ],
     "forbiddenUiImports": [
-      "src/core/methodology/",
-      "src/core/scoring/",
-      "src/core/report/",
-      "src/core/audit/",
-      "src/core/release/",
-      "src/core/serialization/"
+      "@/core/methodology",
+      "@/core/scoring",
+      "@/core/report",
+      "@/core/audit",
+      "@/core/release",
+      "@/core/serialization"
     ]
   },
   "scripts": {
-    "validate": "npm run typecheck && npm test && npm run release:engine && npm run readiness:phase2",
-    "readinessPhase2": "tsx scripts/phase2-readiness.ts"
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2",
+    "readinessPhase2": "tsx scripts/phase2-readiness.ts",
+    "guardUiImports": "tsx scripts/ui-import-boundary.ts"
   },
   "issues": []
 }

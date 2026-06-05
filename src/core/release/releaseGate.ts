@@ -3,8 +3,8 @@ import path from 'node:path';
 import { runMethodologyAudit } from '../audit/methodologyAudit';
 import { serializeGoldenProfileSnapshotDocument } from '../serialization/goldenSnapshots';
 
-export const ENGINE_RELEASE_GATE_SCHEMA_VERSION = 'phase-1.7-engine-release-gate-v1' as const;
-export const ENGINE_RELEASE_GATE_ID = 'engine-release-gate-phase-1.7' as const;
+export const ENGINE_RELEASE_GATE_SCHEMA_VERSION = 'phase-2.0-engine-release-gate-v1' as const;
+export const ENGINE_RELEASE_GATE_ID = 'engine-release-gate-phase-2.0' as const;
 
 export interface EngineReleaseGateOptions {
   readonly repoRoot?: string;
@@ -18,20 +18,23 @@ export interface EngineReleaseGateReport {
     readonly repoRootName: string;
     readonly methodologyAuditSchemaVersion: string;
     readonly goldenSnapshotSchemaVersion: string;
+    readonly phaseScope: 'phase-2-ui-scaffold';
   };
   readonly gates: {
     readonly methodologyAuditPassed: boolean;
     readonly methodologyEvidenceCurrent: boolean;
     readonly goldenSnapshotsCurrent: boolean;
     readonly noForbiddenGeneratedArtifacts: boolean;
-    readonly noPrematureUiBackendAiScope: boolean;
+    readonly approvedUiScopeAllowed: boolean;
+    readonly noBlockedBackendDatabaseAiScope: boolean;
     readonly validateScriptRunsReleaseGate: boolean;
     readonly releaseScriptExists: boolean;
     readonly overallPassed: boolean;
   };
   readonly hygiene: {
     readonly forbiddenGeneratedArtifacts: readonly string[];
-    readonly prematureScopeArtifacts: readonly string[];
+    readonly approvedUiScopeArtifacts: readonly string[];
+    readonly blockedScopeArtifacts: readonly string[];
   };
   readonly scripts: {
     readonly validate?: string;
@@ -63,25 +66,31 @@ const FORBIDDEN_GENERATED_ARTIFACTS = [
   'test-results'
 ] as const;
 
-const PREMATURE_SCOPE_ARTIFACTS = [
-  'app',
-  'pages',
-  'components',
-  'ui',
+const APPROVED_UI_SCOPE_ARTIFACTS = [
+  'next.config.ts',
+  'next-env.d.ts',
   'public',
-  'styles',
   'src/app',
-  'src/pages',
   'src/components',
-  'src/ui',
+  'src/features',
+  'src/styles'
+] as const;
+
+const BLOCKED_SCOPE_ARTIFACTS = [
+  'app/api',
+  'pages',
+  'pages/api',
+  'src/app/api',
+  'src/pages',
+  'src/pages/api',
   'src/server',
   'src/api',
-  'app/api',
-  'pages/api',
   'server',
   'api',
   'db',
   'database',
+  'src/db',
+  'src/database',
   'prisma',
   'supabase',
   'migrations',
@@ -93,13 +102,11 @@ const PREMATURE_SCOPE_ARTIFACTS = [
   'src/prompts',
   'src/core/ai',
   'src/core/llm',
-  'next.config.js',
-  'next.config.mjs',
-  'next.config.ts',
-  'tailwind.config.js',
-  'tailwind.config.ts',
-  'postcss.config.js',
-  'postcss.config.mjs'
+  'src/core/prompts',
+  'auth',
+  'src/auth',
+  'payments',
+  'src/payments'
 ] as const;
 
 export function runEngineReleaseGate(options: EngineReleaseGateOptions = {}): EngineReleaseGateReport {
@@ -110,7 +117,8 @@ export function runEngineReleaseGate(options: EngineReleaseGateOptions = {}): En
   const packageJson = readPackageJson(repoRoot);
 
   const forbiddenGeneratedArtifacts = existingPaths(repoRoot, FORBIDDEN_GENERATED_ARTIFACTS);
-  const prematureScopeArtifacts = existingPaths(repoRoot, PREMATURE_SCOPE_ARTIFACTS);
+  const approvedUiScopeArtifacts = existingPaths(repoRoot, APPROVED_UI_SCOPE_ARTIFACTS);
+  const blockedScopeArtifacts = existingPaths(repoRoot, BLOCKED_SCOPE_ARTIFACTS);
   const methodologyEvidenceCurrent = fileContentEquals(repoRoot, METHODOLOGY_EVIDENCE_PATH, expectedMethodologyEvidence);
   const goldenSnapshotsCurrent = fileContentEquals(repoRoot, GOLDEN_SNAPSHOT_PATH, expectedGoldenSnapshot);
   const releaseScriptExists = packageJson.scripts?.['release:engine'] === 'tsx scripts/engine-release-gate.ts';
@@ -121,7 +129,8 @@ export function runEngineReleaseGate(options: EngineReleaseGateOptions = {}): En
     methodologyEvidenceCurrent,
     goldenSnapshotsCurrent,
     noForbiddenGeneratedArtifacts: forbiddenGeneratedArtifacts.length === 0,
-    noPrematureUiBackendAiScope: prematureScopeArtifacts.length === 0,
+    approvedUiScopeAllowed: true,
+    noBlockedBackendDatabaseAiScope: blockedScopeArtifacts.length === 0,
     validateScriptRunsReleaseGate,
     releaseScriptExists,
     overallPassed: false
@@ -136,8 +145,6 @@ export function runEngineReleaseGate(options: EngineReleaseGateOptions = {}): En
     overallPassed
   };
 
-  const scripts = buildScriptSummary(packageJson);
-
   return {
     schemaVersion: ENGINE_RELEASE_GATE_SCHEMA_VERSION,
     gateId: ENGINE_RELEASE_GATE_ID,
@@ -145,24 +152,25 @@ export function runEngineReleaseGate(options: EngineReleaseGateOptions = {}): En
       checkedAt: 'static',
       repoRootName: 'repository',
       methodologyAuditSchemaVersion: methodologyAudit.schemaVersion,
-      goldenSnapshotSchemaVersion: 'phase-1.6-golden-public-results-v1'
+      goldenSnapshotSchemaVersion: 'phase-1.6-golden-public-results-v1',
+      phaseScope: 'phase-2-ui-scaffold'
     },
     gates: completeGates,
     hygiene: {
       forbiddenGeneratedArtifacts,
-      prematureScopeArtifacts
+      approvedUiScopeArtifacts,
+      blockedScopeArtifacts
     },
-    scripts,
+    scripts: buildScriptSummary(packageJson),
     coverage: {
       triggeredContradictionCount: methodologyAudit.coverage.triggeredContradictions.length,
       contradictionRuleCount: methodologyAudit.metadata.contradictionRuleCount,
       goldenProfileCount: methodologyAudit.metadata.goldenProfileCount,
       edgeCaseProfileCount: methodologyAudit.metadata.edgeCaseProfileCount
     },
-    issues: buildIssues(completeGates, forbiddenGeneratedArtifacts, prematureScopeArtifacts)
+    issues: buildIssues(completeGates, forbiddenGeneratedArtifacts, blockedScopeArtifacts)
   };
 }
-
 
 function buildScriptSummary(packageJson: PackageJsonSubset): EngineReleaseGateReport['scripts'] {
   const scripts: { validate?: string; releaseEngine?: string } = {};
@@ -220,7 +228,7 @@ function fileContentEquals(repoRoot: string, relativePath: string, expected: str
 function buildIssues(
   gates: EngineReleaseGateReport['gates'],
   forbiddenGeneratedArtifacts: readonly string[],
-  prematureScopeArtifacts: readonly string[]
+  blockedScopeArtifacts: readonly string[]
 ): string[] {
   const issues: string[] = [];
 
@@ -240,8 +248,8 @@ function buildIssues(
     issues.push(`forbidden_generated_artifact:${artifact}`);
   }
 
-  for (const artifact of prematureScopeArtifacts) {
-    issues.push(`premature_scope_artifact:${artifact}`);
+  for (const artifact of blockedScopeArtifacts) {
+    issues.push(`blocked_scope_artifact:${artifact}`);
   }
 
   if (!gates.releaseScriptExists) {

@@ -7,13 +7,14 @@ import { runEngineReleaseGate } from '../../src/core/release/releaseGate';
 const report = runEngineReleaseGate();
 
 describe('engine release gate', () => {
-  it('passes the repository-level pre-UI engine release gates', () => {
+  it('passes the repository-level Phase 2 UI-scaffold release gates', () => {
     expect(report.gates).toMatchObject({
       methodologyAuditPassed: true,
       methodologyEvidenceCurrent: true,
       goldenSnapshotsCurrent: true,
       noForbiddenGeneratedArtifacts: true,
-      noPrematureUiBackendAiScope: true,
+      approvedUiScopeAllowed: true,
+      noBlockedBackendDatabaseAiScope: true,
       validateScriptRunsReleaseGate: true,
       releaseScriptExists: true,
       overallPassed: true
@@ -22,8 +23,9 @@ describe('engine release gate', () => {
   });
 
   it('records stable release-gate metadata and coverage facts', () => {
-    expect(report.schemaVersion).toBe('phase-1.7-engine-release-gate-v1');
-    expect(report.gateId).toBe('engine-release-gate-phase-1.7');
+    expect(report.schemaVersion).toBe('phase-2.0-engine-release-gate-v1');
+    expect(report.gateId).toBe('engine-release-gate-phase-2.0');
+    expect(report.metadata.phaseScope).toBe('phase-2-ui-scaffold');
     expect(report.coverage).toMatchObject({
       triggeredContradictionCount: 7,
       contradictionRuleCount: 8,
@@ -32,30 +34,37 @@ describe('engine release gate', () => {
     });
   });
 
-  it('detects premature UI/backend/AI scope files', () => {
+  it('allows approved Phase 2 UI scaffold paths', () => {
+    expect(report.hygiene.approvedUiScopeArtifacts).toEqual(
+      expect.arrayContaining(['next.config.ts', 'next-env.d.ts', 'public', 'src/app', 'src/components', 'src/features'])
+    );
+    expect(report.hygiene.blockedScopeArtifacts).toEqual([]);
+  });
+
+  it('detects blocked backend/database/AI scope files', () => {
     const tempRoot = makeTempRepoRoot();
-    mkdirSync(path.join(tempRoot, 'src/app'), { recursive: true });
-    writeFileSync(path.join(tempRoot, 'src/app/page.tsx'), 'export default function Page() { return null; }\n');
+    mkdirSync(path.join(tempRoot, 'src/app/api'), { recursive: true });
+    writeFileSync(path.join(tempRoot, 'src/app/api/route.ts'), 'export function GET() { return Response.json({}); }\n');
 
     const tempReport = runEngineReleaseGate({ repoRoot: tempRoot });
 
-    expect(tempReport.gates.noPrematureUiBackendAiScope).toBe(false);
-    expect(tempReport.hygiene.prematureScopeArtifacts).toContain('src/app');
-    expect(tempReport.issues).toContain('premature_scope_artifact:src/app');
+    expect(tempReport.gates.noBlockedBackendDatabaseAiScope).toBe(false);
+    expect(tempReport.hygiene.blockedScopeArtifacts).toContain('src/app/api');
+    expect(tempReport.issues).toContain('blocked_scope_artifact:src/app/api');
 
     rmSync(tempRoot, { recursive: true, force: true });
   });
 
   it('detects forbidden generated artifacts', () => {
     const tempRoot = makeTempRepoRoot();
-    mkdirSync(path.join(tempRoot, 'dist'), { recursive: true });
-    writeFileSync(path.join(tempRoot, 'dist/output.js'), 'console.log("generated");\n');
+    mkdirSync(path.join(tempRoot, '.next'), { recursive: true });
+    writeFileSync(path.join(tempRoot, '.next/build-id'), 'generated\n');
 
     const tempReport = runEngineReleaseGate({ repoRoot: tempRoot });
 
     expect(tempReport.gates.noForbiddenGeneratedArtifacts).toBe(false);
-    expect(tempReport.hygiene.forbiddenGeneratedArtifacts).toContain('dist');
-    expect(tempReport.issues).toContain('forbidden_generated_artifact:dist');
+    expect(tempReport.hygiene.forbiddenGeneratedArtifacts).toContain('.next');
+    expect(tempReport.issues).toContain('forbidden_generated_artifact:.next');
 
     rmSync(tempRoot, { recursive: true, force: true });
   });

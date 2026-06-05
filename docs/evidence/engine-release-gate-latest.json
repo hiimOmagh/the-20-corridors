@@ -1,28 +1,38 @@
 {
-  "schemaVersion": "phase-1.7-engine-release-gate-v1",
-  "gateId": "engine-release-gate-phase-1.7",
+  "schemaVersion": "phase-2.0-engine-release-gate-v1",
+  "gateId": "engine-release-gate-phase-2.0",
   "metadata": {
     "checkedAt": "static",
     "repoRootName": "repository",
     "methodologyAuditSchemaVersion": "phase-1.4-methodology-audit-v1",
-    "goldenSnapshotSchemaVersion": "phase-1.6-golden-public-results-v1"
+    "goldenSnapshotSchemaVersion": "phase-1.6-golden-public-results-v1",
+    "phaseScope": "phase-2-ui-scaffold"
   },
   "gates": {
     "methodologyAuditPassed": true,
     "methodologyEvidenceCurrent": true,
     "goldenSnapshotsCurrent": true,
     "noForbiddenGeneratedArtifacts": true,
-    "noPrematureUiBackendAiScope": true,
+    "approvedUiScopeAllowed": true,
+    "noBlockedBackendDatabaseAiScope": true,
     "validateScriptRunsReleaseGate": true,
     "releaseScriptExists": true,
     "overallPassed": true
   },
   "hygiene": {
     "forbiddenGeneratedArtifacts": [],
-    "prematureScopeArtifacts": []
+    "approvedUiScopeArtifacts": [
+      "next-env.d.ts",
+      "next.config.ts",
+      "public",
+      "src/app",
+      "src/components",
+      "src/features"
+    ],
+    "blockedScopeArtifacts": []
   },
   "scripts": {
-    "validate": "npm run typecheck && npm test && npm run release:engine && npm run readiness:phase2",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2",
     "releaseEngine": "tsx scripts/engine-release-gate.ts"
   },
   "coverage": {
