@@ -211,3 +211,28 @@ npm run build
 
 Scope: formal Phase 2 closure gate, static UI smoke contract for `/`, `/quiz`, and `/results`, local-only boundary verification, Phase 2 closure documentation, and Phase 3 transition planning only. No backend, database, AI/LLM, auth, payments, public result links, image/PDF export, analytics, or telemetry.
 
+
+## Phase 3.0 — Visual Identity System
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-3-0-visual-identity-system-status.md
+src/app/globals.css
+src/app/page.tsx
+src/features/visual/visualIdentity.ts
+tests/ui/visualIdentity.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: visual identity tokens, corridor atmosphere, landing visual-system preview, typography/surface/focus refinements, reduced-motion-safe styling, and design-token tests only. No backend, database, AI/LLM, auth, payments, analytics, public result links, image/PDF export, or scoring methodology changes.

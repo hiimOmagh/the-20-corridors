@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { PhaseBadge } from '@/components/PhaseBadge';
+import { visualIdentityPrinciples, visualIdentityTokens } from '@/features/visual/visualIdentity';
 import {
   landingCtas,
   landingMethodSteps,
@@ -12,7 +13,7 @@ export default function HomePage() {
     <main className="page-shell landing-shell">
       <section className="hero-grid landing-hero-grid" aria-labelledby="landing-title">
         <div className="panel hero-panel landing-hero-panel">
-          <PhaseBadge label="Phase 2.6 trust UX" />
+          <PhaseBadge label="Phase 3.0 visual identity" />
           <p className="kicker">The 20 Corridors</p>
           <h1 id="landing-title">Walk through 20 symbolic corridors.</h1>
           <p className="lede">
@@ -43,6 +44,33 @@ export default function HomePage() {
             <span>Contradictions are treated as signal, not noise.</span>
           </div>
         </aside>
+      </section>
+
+
+      <section className="panel landing-visual-system-panel" aria-labelledby="visual-system-title">
+        <div className="section-heading">
+          <p className="kicker">Visual identity system</p>
+          <h2 id="visual-system-title">A corridor atmosphere with explicit design rules.</h2>
+          <p className="lede">
+            Phase 3.0 turns the existing local prototype into a more coherent visual system: dark cinematic
+            surfaces, controlled glow, stable evidence cards, and reduced-motion-safe polish.
+          </p>
+        </div>
+        <div className="identity-principle-grid">
+          {visualIdentityPrinciples.map((principle) => (
+            <article className="identity-principle-card" key={principle.title}>
+              <h3>{principle.title}</h3>
+              <p>{principle.rule}</p>
+            </article>
+          ))}
+        </div>
+        <div className="identity-token-strip" aria-label="Visual identity token preview">
+          {visualIdentityTokens.slice(0, 5).map((token) => (
+            <span className={`identity-token-chip ${token.category}`} key={token.cssVariable}>
+              {token.name}
+            </span>
+          ))}
+        </div>
       </section>
 
       <section className="landing-section" aria-labelledby="trust-title">

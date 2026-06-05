@@ -1,20 +1,38 @@
 :root {
   color-scheme: dark;
-  --bg: #070912;
+  --color-void: #050711;
+  --color-depth: #070912;
+  --color-panel: #0f172a;
+  --color-signal: #7dd3fc;
+  --color-signal-strong: #38bdf8;
+  --color-echo: #a78bfa;
+  --color-threshold: #fbbf24;
+  --color-danger: #fca5a5;
+  --color-success: #86efac;
+  --bg: var(--color-depth);
   --bg-elevated: rgba(17, 24, 39, 0.72);
   --bg-card: rgba(15, 23, 42, 0.78);
+  --surface-panel: linear-gradient(145deg, rgba(15, 23, 42, 0.82), rgba(2, 6, 23, 0.74));
+  --surface-panel-strong: linear-gradient(145deg, rgba(15, 23, 42, 0.92), rgba(8, 47, 73, 0.34));
+  --surface-glass: rgba(15, 23, 42, 0.58);
   --line: rgba(148, 163, 184, 0.22);
   --line-strong: rgba(125, 211, 252, 0.34);
+  --line-threshold: rgba(251, 191, 36, 0.28);
   --text: #e5edf7;
   --muted: #9caec4;
   --soft: #6b7d93;
-  --accent: #7dd3fc;
-  --accent-strong: #38bdf8;
-  --danger: #fca5a5;
-  --success: #86efac;
+  --accent: var(--color-signal);
+  --accent-strong: var(--color-signal-strong);
+  --danger: var(--color-danger);
+  --success: var(--color-success);
+  --radius-xl: 36px;
   --radius-lg: 28px;
   --radius-md: 18px;
   --shadow: 0 30px 80px rgba(0, 0, 0, 0.38);
+  --shadow-lift: 0 28px 90px rgba(0, 0, 0, 0.42);
+  --motion-fast: 160ms ease;
+  --motion-medium: 240ms ease;
+  --space-section: clamp(22px, 4vw, 38px);
 }
 
 * {
@@ -31,9 +49,10 @@ body {
   margin: 0;
   color: var(--text);
   background:
-    radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.16), transparent 34rem),
-    radial-gradient(circle at 80% 10%, rgba(124, 58, 237, 0.13), transparent 36rem),
-    linear-gradient(180deg, #070912 0%, #0b1020 52%, #070912 100%);
+    radial-gradient(circle at 16% -4%, rgba(125, 211, 252, 0.18), transparent 34rem),
+    radial-gradient(circle at 84% 6%, rgba(167, 139, 250, 0.14), transparent 36rem),
+    radial-gradient(circle at 50% 104%, rgba(251, 191, 36, 0.06), transparent 30rem),
+    linear-gradient(180deg, var(--color-void) 0%, #0b1020 52%, var(--color-void) 100%);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -71,7 +90,7 @@ button {
 .panel {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: var(--bg-card);
+  background: var(--surface-panel);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
 }
@@ -138,7 +157,7 @@ h3 {
   color: #061018;
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
   font-weight: 800;
-  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+  transition: transform var(--motion-fast), border-color var(--motion-fast), background var(--motion-fast);
 }
 
 .button:hover {
@@ -233,7 +252,7 @@ h3 {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--accent), var(--accent-strong));
-  transition: width 220ms ease;
+  transition: width var(--motion-medium);
 }
 
 .option-grid {
@@ -251,7 +270,7 @@ h3 {
   padding: 18px;
   color: var(--text);
   background: rgba(15, 23, 42, 0.56);
-  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+  transition: transform var(--motion-fast), border-color var(--motion-fast), background var(--motion-fast);
 }
 
 .option-button:hover,
@@ -758,7 +777,7 @@ h3 {
 .bullet-card,
 .evidence-card,
 .report-metric-card {
-  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+  transition: transform var(--motion-fast), border-color var(--motion-fast), background var(--motion-fast);
 }
 
 .trait-card:hover,
@@ -1592,7 +1611,7 @@ h3 {
   border: 1px solid var(--line);
   background: rgba(15, 23, 42, 0.5);
   cursor: pointer;
-  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+  transition: transform var(--motion-fast), border-color var(--motion-fast), background var(--motion-fast);
 }
 
 .feedback-rating {
@@ -1689,5 +1708,195 @@ h3 {
 
   .feedback-boundary-note {
     display: grid;
+  }
+}
+
+
+/* Phase 3.0 visual identity system */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(125, 211, 252, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 211, 252, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 72%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.12;
+  background: repeating-linear-gradient(90deg, transparent 0 17px, rgba(255, 255, 255, 0.08) 18px, transparent 19px);
+  mix-blend-mode: screen;
+}
+
+.panel,
+.quiz-card,
+.result-card,
+.result-hero-card,
+.report-section,
+.landing-scope-panel,
+.local-share-card,
+.feedback-status-card {
+  box-shadow: var(--shadow-lift);
+}
+
+.panel::selection,
+.local-share-card::selection,
+.share-preview::selection {
+  color: #061018;
+  background: var(--color-threshold);
+}
+
+.button {
+  box-shadow: 0 12px 34px rgba(56, 189, 248, 0.14);
+}
+
+.button.secondary {
+  box-shadow: none;
+}
+
+.button:focus-visible,
+.option-button:focus-visible,
+.review-dot:focus-visible,
+.feedback-rating:focus-visible,
+.feedback-focus-chip:focus-visible {
+  outline: 2px solid rgba(251, 191, 36, 0.74);
+  outline-offset: 3px;
+}
+
+.corridor-lines {
+  box-shadow: inset 0 0 90px rgba(2, 6, 23, 0.78), 0 24px 80px rgba(0, 0, 0, 0.24);
+}
+
+.corridor-lines::before {
+  background: linear-gradient(120deg, transparent 0%, rgba(125, 211, 252, 0.12) 44%, rgba(251, 191, 36, 0.08) 52%, transparent 62%);
+}
+
+.identity-signature-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.58), rgba(251, 191, 36, 0.4), transparent);
+}
+
+.landing-visual-system-panel {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-section);
+  border-color: rgba(251, 191, 36, 0.18);
+}
+
+.landing-visual-system-panel::before {
+  content: "";
+  position: absolute;
+  inset: -18% auto auto -12%;
+  width: 340px;
+  height: 340px;
+  border-radius: 999px;
+  background: rgba(251, 191, 36, 0.08);
+  filter: blur(48px);
+  pointer-events: none;
+}
+
+.landing-visual-system-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.identity-principle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.identity-principle-card {
+  min-height: 188px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 18px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(125, 211, 252, 0.1), transparent 12rem),
+    rgba(15, 23, 42, 0.46);
+}
+
+.identity-principle-card h3 {
+  letter-spacing: -0.02em;
+}
+
+.identity-principle-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.identity-token-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.identity-token-chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 12px;
+  color: var(--muted);
+  background: rgba(15, 23, 42, 0.44);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.identity-token-chip.color,
+.identity-token-chip.surface {
+  color: var(--accent);
+  border-color: rgba(125, 211, 252, 0.3);
+}
+
+.identity-token-chip.motion {
+  color: var(--color-threshold);
+  border-color: var(--line-threshold);
+}
+
+.result-hero-card,
+.quiz-card-polished,
+.landing-hero-panel {
+  border-color: rgba(125, 211, 252, 0.24);
+}
+
+.trait-card:hover,
+.axis-report-card:hover,
+.contradiction-report-card:hover,
+.bullet-card:hover,
+.evidence-card:hover,
+.report-metric-card:hover,
+.identity-principle-card:hover {
+  border-color: rgba(251, 191, 36, 0.28);
+}
+
+@media (max-width: 1040px) {
+  .identity-principle-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .identity-principle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .identity-principle-card {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after {
+    opacity: 0.04;
   }
 }
