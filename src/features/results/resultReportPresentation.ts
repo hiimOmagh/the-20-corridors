@@ -52,6 +52,12 @@ export const REPORT_SECTION_ANCHORS: readonly ReportSectionAnchor[] = [
     description: 'Disproven-if conditions and non-clinical limits.'
   },
   {
+    id: 'local-feedback',
+    label: 'Local feedback',
+    shortLabel: 'Feedback',
+    description: 'Local-only feedback UX stub; no persistence or telemetry.'
+  },
+  {
     id: 'share-summary',
     label: 'Share summary',
     shortLabel: 'Share',

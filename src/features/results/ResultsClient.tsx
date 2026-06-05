@@ -20,6 +20,19 @@ import {
   buildMobileResultSummary,
   getResultStateCopy
 } from '@/features/results/resultReportPresentation';
+import {
+  LOCAL_FEEDBACK_FOCUS_OPTIONS,
+  LOCAL_FEEDBACK_RATINGS,
+  createInitialLocalFeedbackState,
+  getLocalFeedbackStatusCopy,
+  resetLocalFeedback,
+  selectLocalFeedbackFocus,
+  selectLocalFeedbackRating,
+  submitLocalFeedback,
+  type LocalFeedbackFocusOption,
+  type LocalFeedbackOption,
+  type LocalFeedbackState
+} from '@/features/results/resultFeedback';
 import { buildLocalShareCardPreview } from '@/features/results/resultShareCard';
 
 export function ResultsClient() {
@@ -27,6 +40,7 @@ export function ResultsClient() {
   const [storageState, setStorageState] = useState<StoredCorridorsResultState>({ status: 'empty' });
   const [loaded, setLoaded] = useState(false);
   const [shareCopyState, setShareCopyState] = useState<'idle' | 'summary-copied' | 'card-copied' | 'failed'>('idle');
+  const [feedbackState, setFeedbackState] = useState<LocalFeedbackState>(() => createInitialLocalFeedbackState());
 
   const loadStoredResult = useCallback(() => {
     const nextStorageState = readCorridorsResultFromSessionStorage(window.sessionStorage);
@@ -56,6 +70,22 @@ export function ResultsClient() {
     } catch {
       setShareCopyState('failed');
     }
+  }
+
+  function selectFeedbackRating(rating: LocalFeedbackOption['rating']) {
+    setFeedbackState((current) => selectLocalFeedbackRating(current, rating));
+  }
+
+  function selectFeedbackFocus(focusArea: LocalFeedbackFocusOption['id']) {
+    setFeedbackState((current) => selectLocalFeedbackFocus(current, focusArea));
+  }
+
+  function submitFeedbackStub() {
+    setFeedbackState((current) => submitLocalFeedback(current));
+  }
+
+  function resetFeedbackStub() {
+    setFeedbackState(resetLocalFeedback());
   }
 
   if (!loaded) {
@@ -242,6 +272,21 @@ export function ResultsClient() {
         </ul>
       </section>
 
+      <section className="panel report-section feedback-section" id="local-feedback" aria-labelledby="feedback-heading">
+        <SectionHeader
+          eyebrow="Local feedback stub"
+          title="Did the report feel specific?"
+          description="Phase 2.7 previews the future feedback experience using local component state only. Nothing is saved, sent, analyzed, or persisted."
+        />
+        <FeedbackPanel
+          state={feedbackState}
+          onReset={resetFeedbackStub}
+          onSelectFocus={selectFeedbackFocus}
+          onSelectRating={selectFeedbackRating}
+          onSubmit={submitFeedbackStub}
+        />
+      </section>
+
       <section className="panel report-section share-section" id="share-summary" aria-labelledby="share-heading">
         <SectionHeader
           eyebrow="Local share preview"
@@ -379,5 +424,74 @@ function BulletPanel({ eyebrow, title, items }: Readonly<{ eyebrow: string; titl
         ))}
       </div>
     </section>
+  );
+}
+
+function FeedbackPanel({
+  state,
+  onReset,
+  onSelectFocus,
+  onSelectRating,
+  onSubmit
+}: Readonly<{
+  state: LocalFeedbackState;
+  onReset: () => void;
+  onSelectFocus: (focusArea: LocalFeedbackFocusOption['id']) => void;
+  onSelectRating: (rating: LocalFeedbackOption['rating']) => void;
+  onSubmit: () => void;
+}>) {
+  const statusCopy = getLocalFeedbackStatusCopy(state);
+
+  return (
+    <div className="feedback-panel">
+      <div className="feedback-status-card" aria-live="polite">
+        <p className="kicker">{statusCopy.eyebrow}</p>
+        <h3>{statusCopy.title}</h3>
+        <p>{statusCopy.description}</p>
+      </div>
+
+      <div className="feedback-rating-grid" aria-label="Local report-specificity rating">
+        {LOCAL_FEEDBACK_RATINGS.map((option) => (
+          <button
+            aria-pressed={state.rating === option.rating}
+            className={state.rating === option.rating ? 'feedback-rating active' : 'feedback-rating'}
+            key={option.rating}
+            onClick={() => onSelectRating(option.rating)}
+            type="button"
+          >
+            <strong>{option.label}</strong>
+            <span>{option.description}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="feedback-focus-area" aria-label="Local feedback focus area">
+        <p className="small strong-muted">Optional focus area</p>
+        <div className="feedback-focus-grid">
+          {LOCAL_FEEDBACK_FOCUS_OPTIONS.map((option) => (
+            <button
+              aria-pressed={state.focusArea === option.id}
+              className={state.focusArea === option.id ? 'feedback-focus-chip active' : 'feedback-focus-chip'}
+              key={option.id}
+              onClick={() => onSelectFocus(option.id)}
+              title={option.description}
+              type="button"
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="feedback-boundary-note">
+        <strong>Boundary:</strong>
+        <span>Local state only. No sessionStorage, localStorage, cookies, analytics event, API request, account, or database write.</span>
+      </div>
+
+      <div className="actions feedback-actions">
+        <button className="button" onClick={onSubmit} type="button">Mark feedback locally</button>
+        <button className="button secondary" onClick={onReset} type="button">Reset local feedback</button>
+      </div>
+    </div>
   );
 }

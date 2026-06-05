@@ -149,3 +149,30 @@ npm run build
 ```
 
 Scope: landing-page visual hierarchy, methodology/trust preview, non-clinical disclaimer visibility, included/blocked scope cards, CTA flow refinement, and landing presentation tests only. No backend, AI, auth, payments, database, public result links, image export, or telemetry.
+
+## Phase 2.7 — Local Feedback UX Stub
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-2-7-local-feedback-ux-stub-status.md
+src/app/globals.css
+src/features/results/ResultsClient.tsx
+src/features/results/resultFeedback.ts
+src/features/results/resultReportPresentation.ts
+tests/ui/resultFeedback.test.ts
+tests/ui/resultReportPresentation.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: local-only feedback rating UI, optional local focus selection, feedback status copy, report jump-nav feedback anchor, styling, and helper tests only. No persistence, analytics, backend, AI, auth, payments, database, public result links, or image export.

@@ -140,7 +140,7 @@ The public API strips internal numeric scoring diagnostics from the UI-facing re
 /results
 ```
 
-Phase 2.6 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, or image export yet. The landing page now includes a stronger trust/methodology preview and an explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, and an in-app local share-card preview. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation.
+Phase 2.7 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, or image export yet. The landing page includes a stronger trust/methodology preview and an explicit non-clinical scope boundary. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, an in-app local share-card preview, and a local-only feedback UX stub. The quiz page includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation.
 
 ## Evidence snapshots
 
