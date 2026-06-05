@@ -3073,3 +3073,41 @@ body::after {
     animation: none !important;
   }
 }
+
+/* Phase 4.1 — local share-card image export prototype */
+.share-export-boundary {
+  margin-top: 16px;
+  border: 1px solid rgba(250, 204, 21, 0.22);
+  border-radius: 18px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.1), rgba(15, 23, 42, 0.46));
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.share-export-boundary strong {
+  color: var(--gold);
+}
+
+.share-section .button:disabled {
+  cursor: progress;
+  opacity: 0.66;
+  transform: none;
+}
+
+.share-section .live-status {
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(2, 6, 23, 0.34);
+}
+
+@media (max-width: 720px) {
+  .share-export-boundary {
+    padding: 12px;
+  }
+
+  .share-section .live-status {
+    border-radius: 18px;
+  }
+}

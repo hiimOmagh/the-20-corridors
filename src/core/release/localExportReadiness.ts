@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { runPhase3ClosureGate } from './phase3ClosureGate';
 
-export const LOCAL_EXPORT_READINESS_SCHEMA_VERSION = 'phase-4.0-local-export-readiness-v1' as const;
+export const LOCAL_EXPORT_READINESS_SCHEMA_VERSION = 'phase-4.1-local-export-readiness-v1' as const;
 export const LOCAL_EXPORT_READINESS_ID = 'phase-4-local-result-export-readiness' as const;
 
 export interface LocalExportReadinessOptions {
@@ -17,7 +17,7 @@ export interface LocalExportReadinessReport {
     readonly repoRootName: string;
     readonly phaseScope: 'phase-4-local-export-readiness';
     readonly phase3ClosureSchemaVersion: string;
-    readonly exportMode: 'local-readiness-only';
+    readonly exportMode: 'local-share-card-image-export-prototype';
   };
   readonly gates: {
     readonly phase3ClosurePassed: boolean;
@@ -26,9 +26,11 @@ export interface LocalExportReadinessReport {
     readonly exportReadinessContractDocExists: boolean;
     readonly phase4StatusDocExists: boolean;
     readonly localOnlyExportSurfacesDefined: boolean;
-    readonly noRawAnswerLeakageInShareCard: boolean;
+    readonly noRawAnswerLeakageInExportSurface: boolean;
     readonly noFullResultSerializationExport: boolean;
-    readonly noActualImageExportImplementation: boolean;
+    readonly localImageExportPrototypeExists: boolean;
+    readonly approvedLocalImageExportImplementation: boolean;
+    readonly noDisallowedImageExportImplementation: boolean;
     readonly noBackendAiAuthPaymentPersistenceScope: boolean;
     readonly allowedExportSurfaceUsesShareCardModel: boolean;
     readonly overallPassed: boolean;
@@ -51,7 +53,8 @@ export interface LocalExportReadinessReport {
   readonly privacy: {
     readonly rawAnswerLeakageSignals: readonly string[];
     readonly serializationExportSignals: readonly string[];
-    readonly actualImageExportSignals: readonly string[];
+    readonly approvedImageExportSignals: readonly string[];
+    readonly disallowedImageExportSignals: readonly string[];
     readonly backendAiAuthPaymentPersistenceSignals: readonly string[];
   };
   readonly coverage: {
@@ -59,6 +62,7 @@ export interface LocalExportReadinessReport {
     readonly phase3ClosureIssueCount: number;
     readonly rawLeakageIssueCount: number;
     readonly implementationIssueCount: number;
+    readonly approvedImageExportSignalCount: number;
     readonly blockedScopeIssueCount: number;
   };
   readonly issues: readonly string[];
@@ -74,17 +78,24 @@ const PHASE_4_TRANSITION_DOC = 'docs/ui/phase-4-transition-plan.md';
 
 const SHARE_CARD_FILE = 'src/features/results/resultShareCard.ts';
 const RESULT_CLIENT_FILE = 'src/features/results/ResultsClient.tsx';
+const SHARE_IMAGE_EXPORT_FILE = 'src/features/results/resultShareImageExport.ts';
 
 const ALLOWED_LOCAL_EXPORT_SURFACES = [
   'local-share-card-preview',
   'copy-ready-share-card-text',
-  'future-local-image-export-from-share-card-only'
+  'local-image-export-from-share-card-only'
 ] as const;
 
 const CHECKED_EXPORT_FILES = [
   SHARE_CARD_FILE,
   RESULT_CLIENT_FILE,
+  SHARE_IMAGE_EXPORT_FILE,
   'src/app/results/page.tsx'
+] as const;
+
+const RAW_ANSWER_CHECK_FILES = [
+  SHARE_CARD_FILE,
+  SHARE_IMAGE_EXPORT_FILE
 ] as const;
 
 const SHARE_CARD_RAW_ANSWER_LEAKAGE_SIGNALS = [
@@ -106,16 +117,23 @@ const SERIALIZATION_EXPORT_SIGNALS = [
   'sessionStorage.setItem("corridors-result-export'
 ] as const;
 
-const ACTUAL_IMAGE_EXPORT_IMPLEMENTATION_SIGNALS = [
-  'html2canvas',
-  'toDataURL',
+const APPROVED_IMAGE_EXPORT_IMPLEMENTATION_SIGNALS = [
+  'buildLocalShareCardExportSvg',
+  'exportLocalShareCardPng',
+  'LocalShareCardPreview',
   'canvas.toBlob',
   'URL.createObjectURL',
   'new Blob(',
-  'download=',
-  'download:',
+  'anchor.download'
+] as const;
+
+const DISALLOWED_IMAGE_EXPORT_IMPLEMENTATION_SIGNALS = [
+  'html2canvas',
+  'toDataURL',
   'FileSaver',
-  'saveAs('
+  'saveAs(',
+  'serializeCorridorsResultEnvelope',
+  'buildSerializableCorridorsResult'
 ] as const;
 
 const BLOCKED_SCOPE_SIGNALS = [
@@ -145,17 +163,30 @@ export function runLocalExportReadiness(options: LocalExportReadinessOptions = {
   const readinessScriptExists = packageJson.scripts?.['readiness:export'] === 'tsx scripts/local-export-readiness.ts';
   const validateScriptRunsExportReadiness = Boolean(packageJson.scripts?.validate?.includes('npm run readiness:export'));
   const existingCheckedFiles = CHECKED_EXPORT_FILES.filter((relativeFile) => existsSync(path.join(repoRoot, relativeFile)));
-  const localOnlyExportSurfacesDefined = ALLOWED_LOCAL_EXPORT_SURFACES.length === 3 && existingCheckedFiles.includes(SHARE_CARD_FILE);
-  const rawAnswerLeakageSignals = findSignals(repoRoot, [SHARE_CARD_FILE], SHARE_CARD_RAW_ANSWER_LEAKAGE_SIGNALS);
+  const localOnlyExportSurfacesDefined =
+    ALLOWED_LOCAL_EXPORT_SURFACES.length === 3 &&
+    existingCheckedFiles.includes(SHARE_CARD_FILE) &&
+    existingCheckedFiles.includes(SHARE_IMAGE_EXPORT_FILE);
+  const rawAnswerLeakageSignals = findSignals(repoRoot, RAW_ANSWER_CHECK_FILES, SHARE_CARD_RAW_ANSWER_LEAKAGE_SIGNALS);
   const serializationExportSignals = findSignals(repoRoot, CHECKED_EXPORT_FILES, SERIALIZATION_EXPORT_SIGNALS);
-  const actualImageExportSignals = findSignals(repoRoot, CHECKED_EXPORT_FILES, ACTUAL_IMAGE_EXPORT_IMPLEMENTATION_SIGNALS);
+  const approvedImageExportSignals = findSignals(repoRoot, [SHARE_IMAGE_EXPORT_FILE], APPROVED_IMAGE_EXPORT_IMPLEMENTATION_SIGNALS);
+  const disallowedImageExportSignals = findSignals(repoRoot, CHECKED_EXPORT_FILES, DISALLOWED_IMAGE_EXPORT_IMPLEMENTATION_SIGNALS);
   const backendAiAuthPaymentPersistenceSignals = findSignals(repoRoot, CHECKED_EXPORT_FILES, BLOCKED_SCOPE_SIGNALS);
   const resultClientSource = readOptionalFile(repoRoot, RESULT_CLIENT_FILE);
   const shareCardSource = readOptionalFile(repoRoot, SHARE_CARD_FILE);
+  const shareImageExportSource = readOptionalFile(repoRoot, SHARE_IMAGE_EXPORT_FILE);
+  const localImageExportPrototypeExists =
+    shareImageExportSource.includes('LOCAL_SHARE_IMAGE_EXPORT_SCHEMA_VERSION') &&
+    shareImageExportSource.includes('buildLocalShareCardExportSvg') &&
+    shareImageExportSource.includes('exportLocalShareCardPng');
+  const approvedLocalImageExportImplementation =
+    APPROVED_IMAGE_EXPORT_IMPLEMENTATION_SIGNALS.every((signal) => shareImageExportSource.includes(signal));
   const allowedExportSurfaceUsesShareCardModel =
     resultClientSource.includes('buildLocalShareCardPreview') &&
+    resultClientSource.includes('exportLocalShareCardPng') &&
     shareCardSource.includes('buildLocalShareCardPreview') &&
-    shareCardSource.includes('SHARE_CARD_COPY_BOUNDARY_NOTE');
+    shareCardSource.includes('SHARE_CARD_COPY_BOUNDARY_NOTE') &&
+    shareImageExportSource.includes('LocalShareCardPreview');
 
   const gates = {
     phase3ClosurePassed: phase3Closure.gates.overallPassed,
@@ -164,9 +195,11 @@ export function runLocalExportReadiness(options: LocalExportReadinessOptions = {
     exportReadinessContractDocExists,
     phase4StatusDocExists,
     localOnlyExportSurfacesDefined,
-    noRawAnswerLeakageInShareCard: rawAnswerLeakageSignals.length === 0,
+    noRawAnswerLeakageInExportSurface: rawAnswerLeakageSignals.length === 0,
     noFullResultSerializationExport: serializationExportSignals.length === 0,
-    noActualImageExportImplementation: actualImageExportSignals.length === 0,
+    localImageExportPrototypeExists,
+    approvedLocalImageExportImplementation,
+    noDisallowedImageExportImplementation: disallowedImageExportSignals.length === 0,
     noBackendAiAuthPaymentPersistenceScope: backendAiAuthPaymentPersistenceSignals.length === 0,
     allowedExportSurfaceUsesShareCardModel,
     overallPassed: false
@@ -185,7 +218,7 @@ export function runLocalExportReadiness(options: LocalExportReadinessOptions = {
       repoRootName: 'repository',
       phaseScope: 'phase-4-local-export-readiness',
       phase3ClosureSchemaVersion: phase3Closure.schemaVersion,
-      exportMode: 'local-readiness-only'
+      exportMode: 'local-share-card-image-export-prototype'
     },
     gates: completeGates,
     docs: {
@@ -203,20 +236,23 @@ export function runLocalExportReadiness(options: LocalExportReadinessOptions = {
     privacy: {
       rawAnswerLeakageSignals,
       serializationExportSignals,
-      actualImageExportSignals,
+      approvedImageExportSignals,
+      disallowedImageExportSignals,
       backendAiAuthPaymentPersistenceSignals
     },
     coverage: {
       checkedFileCount: existingCheckedFiles.length,
       phase3ClosureIssueCount: phase3Closure.issues.length,
       rawLeakageIssueCount: rawAnswerLeakageSignals.length,
-      implementationIssueCount: serializationExportSignals.length + actualImageExportSignals.length,
+      implementationIssueCount: serializationExportSignals.length + disallowedImageExportSignals.length,
+      approvedImageExportSignalCount: approvedImageExportSignals.length,
       blockedScopeIssueCount: backendAiAuthPaymentPersistenceSignals.length
     },
     issues: buildIssues(completeGates, phase3Closure.issues, {
       rawAnswerLeakageSignals,
       serializationExportSignals,
-      actualImageExportSignals,
+      approvedImageExportSignals,
+      disallowedImageExportSignals,
       backendAiAuthPaymentPersistenceSignals
     })
   };
@@ -240,7 +276,8 @@ function buildIssues(
     LocalExportReadinessReport['privacy'],
     | 'rawAnswerLeakageSignals'
     | 'serializationExportSignals'
-    | 'actualImageExportSignals'
+    | 'approvedImageExportSignals'
+    | 'disallowedImageExportSignals'
     | 'backendAiAuthPaymentPersistenceSignals'
   >
 ): string[] {
@@ -264,8 +301,8 @@ function buildIssues(
     issues.push(`local_export_full_serialization_signal:${signal}`);
   }
 
-  for (const signal of signalGroups.actualImageExportSignals) {
-    issues.push(`local_export_actual_image_export_signal:${signal}`);
+  for (const signal of signalGroups.disallowedImageExportSignals) {
+    issues.push(`local_export_disallowed_image_export_signal:${signal}`);
   }
 
   for (const signal of signalGroups.backendAiAuthPaymentPersistenceSignals) {

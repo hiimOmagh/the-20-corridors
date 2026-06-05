@@ -1,44 +1,53 @@
-# Phase 4.0 — Local Result Export Readiness Contract
+# Phase 4 — Local Result Export Contract
 
 ## Purpose
 
-Phase 4.0 prepares The 20 Corridors for a future local result-export feature without implementing export behavior yet.
+Phase 4 defines the local result-export boundary for The 20 Corridors.
 
-This phase defines what may be exported, what must never leak, and which local-only boundaries must stay intact before any image/PDF/download capability is introduced.
+The allowed goal is narrow: export a local PNG image from the compressed share-card summary surface. The export must remain browser-local and must not create public links, upload data, serialize the full result, or expose answer-level data.
 
-## Allowed future export surface
+## Approved export surface
 
-The only approved future export source is the local share-card preview model:
+The only approved export source is the local share-card model and image-export helper:
 
 ```text
 src/features/results/resultShareCard.ts
+src/features/results/resultShareImageExport.ts
 ```
 
-A future image export may render the visible share-card preview. It must not export the full public result payload or serialized result envelope.
+The result client may call the export helper:
 
-## Explicitly allowed in Phase 4.0
+```text
+src/features/results/ResultsClient.tsx
+```
 
-- Export-readiness documentation.
-- Export-readiness automated gate.
-- Privacy and leakage checks.
-- Local-only share-card surface definition.
-- Evidence snapshot for readiness status.
+## Explicitly allowed in Phase 4.1
 
-## Explicitly blocked in Phase 4.0
+- Local PNG export from the share-card surface.
+- SVG generated from the compressed share-card preview.
+- Browser-local canvas conversion.
+- Local download trigger.
+- Export status copy in component state.
+- Export-readiness gate verification.
+- Tests for image-export helper safety.
 
-- No image export.
-- No PNG/JPEG generation.
-- No PDF generation.
-- No public result links.
+## Explicitly blocked
+
 - No backend persistence.
+- No database or object storage.
+- No public result links.
 - No analytics or telemetry.
 - No AI/LLM report generation.
 - No auth or payment flow.
-- No database or object storage.
+- No PDF export.
+- No full result JSON export.
+- No serialized public-result envelope export.
+- No raw answer-level export.
+- No third-party screenshot library such as html2canvas.
 
-## Raw-answer leakage rule
+## Answer-level leakage rule
 
-The exportable share-card surface must not include raw question-level answer data such as:
+The exportable share-card image must not include answer-level material such as:
 
 - selected answer list
 - question IDs
@@ -48,7 +57,7 @@ The exportable share-card surface must not include raw question-level answer dat
 - internal tag scores
 - axis-score internals
 
-The share-card may include only compressed public summary material:
+The image may include only compressed public summary material:
 
 - archetype title
 - signature
@@ -59,7 +68,10 @@ The share-card may include only compressed public summary material:
 - confidence band
 - local-only non-clinical note
 
-## Future implementation rule
+## Implementation rule
 
-A future image-export implementation must consume the existing share-card preview surface and must be verified by a dedicated export implementation gate before shipping.
+The implementation must consume `LocalShareCardPreview`, not `CorridorsPublicResultDto` directly. This keeps the export layer downstream of the already-compressed share-card view model.
 
+## Validation rule
+
+`npm run readiness:export` must pass before export changes are committed.

@@ -17,7 +17,7 @@ if (!report.gates.overallPassed) {
 } else {
   console.log('Local export readiness gate passed.');
   console.log(`Phase 3 closure: ${report.gates.phase3ClosurePassed ? 'passed' : 'failed'}.`);
-  console.log(`Raw-answer leakage in share card: ${report.privacy.rawAnswerLeakageSignals.length}.`);
-  console.log(`Actual image export implementation signals: ${report.privacy.actualImageExportSignals.length}.`);
+  console.log(`Raw-answer leakage in export surface: ${report.privacy.rawAnswerLeakageSignals.length}.`);
+  console.log(`Approved local image export signals: ${report.privacy.approvedImageExportSignals.length}; disallowed signals: ${report.privacy.disallowedImageExportSignals.length}.`);
   console.log(`Evidence written: ${outputPath}`);
 }

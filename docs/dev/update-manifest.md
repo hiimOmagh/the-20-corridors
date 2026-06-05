@@ -425,3 +425,33 @@ npm run build
 ```
 
 Scope: Phase 4 export-readiness contract, local-only export boundary, raw-answer leakage guard, full-result serialization export guard, and evidence snapshot only. No image/PDF export implementation, no backend, no database, no AI/LLM, no auth, no payments, no analytics, no telemetry, and no public result links.
+
+## Phase 4.1 — Local Share Card Image Export Prototype
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/evidence/local-export-readiness-latest.json
+docs/release/phase-4-local-result-export-readiness-contract.md
+docs/ui/phase-4-1-local-share-card-image-export-prototype-status.md
+scripts/local-export-readiness.ts
+src/app/globals.css
+src/core/release/localExportReadiness.ts
+src/features/results/ResultsClient.tsx
+src/features/results/resultShareImageExport.ts
+tests/core/localExportReadiness.test.ts
+tests/ui/resultShareImageExport.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: local PNG export prototype from the share-card preview model only. No backend, database, AI/LLM, auth, payment, analytics, telemetry, public links, PDF export, full-result serialization export, or answer-level data export.

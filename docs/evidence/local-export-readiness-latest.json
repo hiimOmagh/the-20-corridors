@@ -1,12 +1,12 @@
 {
-  "schemaVersion": "phase-4.0-local-export-readiness-v1",
+  "schemaVersion": "phase-4.1-local-export-readiness-v1",
   "readinessId": "phase-4-local-result-export-readiness",
   "metadata": {
     "checkedAt": "static",
     "repoRootName": "repository",
     "phaseScope": "phase-4-local-export-readiness",
     "phase3ClosureSchemaVersion": "phase-3.6-closure-gate-v1",
-    "exportMode": "local-readiness-only"
+    "exportMode": "local-share-card-image-export-prototype"
   },
   "gates": {
     "phase3ClosurePassed": true,
@@ -15,9 +15,11 @@
     "exportReadinessContractDocExists": true,
     "phase4StatusDocExists": true,
     "localOnlyExportSurfacesDefined": true,
-    "noRawAnswerLeakageInShareCard": true,
+    "noRawAnswerLeakageInExportSurface": true,
     "noFullResultSerializationExport": true,
-    "noActualImageExportImplementation": true,
+    "localImageExportPrototypeExists": true,
+    "approvedLocalImageExportImplementation": true,
+    "noDisallowedImageExportImplementation": true,
     "noBackendAiAuthPaymentPersistenceScope": true,
     "allowedExportSurfaceUsesShareCardModel": true,
     "overallPassed": true
@@ -35,11 +37,12 @@
     "allowedLocalExportSurfaces": [
       "local-share-card-preview",
       "copy-ready-share-card-text",
-      "future-local-image-export-from-share-card-only"
+      "local-image-export-from-share-card-only"
     ],
     "checkedFiles": [
       "src/features/results/resultShareCard.ts",
       "src/features/results/ResultsClient.tsx",
+      "src/features/results/resultShareImageExport.ts",
       "src/app/results/page.tsx"
     ],
     "shareCardFile": "src/features/results/resultShareCard.ts",
@@ -48,14 +51,24 @@
   "privacy": {
     "rawAnswerLeakageSignals": [],
     "serializationExportSignals": [],
-    "actualImageExportSignals": [],
+    "approvedImageExportSignals": [
+      "src/features/results/resultShareImageExport.ts:LocalShareCardPreview",
+      "src/features/results/resultShareImageExport.ts:URL.createObjectURL",
+      "src/features/results/resultShareImageExport.ts:anchor.download",
+      "src/features/results/resultShareImageExport.ts:buildLocalShareCardExportSvg",
+      "src/features/results/resultShareImageExport.ts:canvas.toBlob",
+      "src/features/results/resultShareImageExport.ts:exportLocalShareCardPng",
+      "src/features/results/resultShareImageExport.ts:new Blob("
+    ],
+    "disallowedImageExportSignals": [],
     "backendAiAuthPaymentPersistenceSignals": []
   },
   "coverage": {
-    "checkedFileCount": 3,
+    "checkedFileCount": 4,
     "phase3ClosureIssueCount": 0,
     "rawLeakageIssueCount": 0,
     "implementationIssueCount": 0,
+    "approvedImageExportSignalCount": 7,
     "blockedScopeIssueCount": 0
   },
   "issues": []
