@@ -97,3 +97,30 @@ npm run build
 ```
 
 Scope: local in-app share-card preview, copy-ready share-card text, local-only share-card styling, and share-card helper tests. No backend, public result links, image export, AI, auth, payments, database, or telemetry.
+
+## Phase 2.5 — Quiz Visual Polish + Mobile Completion UX
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/ui/phase-2-5-quiz-visual-polish-mobile-completion-ux-status.md
+src/app/globals.css
+src/features/quiz/QuizClient.tsx
+src/features/quiz/quizFlow.ts
+src/features/quiz/quizPresentation.ts
+tests/ui/quizFlow.test.ts
+tests/ui/quizPresentation.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: quiz visual hierarchy, mobile option polish, completion review panel, next-unanswered navigation, Enter-to-generate keyboard completion, review-dot presentation helpers, and UI tests only. No backend, AI, auth, payments, database, public result links, image export, or telemetry.

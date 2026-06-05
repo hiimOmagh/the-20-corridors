@@ -7,6 +7,7 @@ import {
   CORRIDORS_SESSION_STORAGE_KEY,
   getLastAnsweredQuestionIndex,
   getNextQuestionIndex,
+  getNextUnansweredQuestionIndex,
   getPreviousQuestionIndex,
   parseKeyboardOptionKey,
   readCorridorsResultFromSessionStorage,
@@ -92,6 +93,21 @@ describe('quiz flow helpers', () => {
     const nextAnswers = removeAnswerForQuestion(answers, 7);
     expect(nextAnswers[7]).toBeUndefined();
     expect(answers[7]).toBe('D');
+  });
+
+  it('finds the next unanswered corridor with wraparound for completion review flow', () => {
+    const answers: DraftCorridorsAnswers = Object.fromEntries(
+      QUESTIONS.map((question) => [question.id, 'A' satisfies CorridorsOptionKey])
+    );
+    delete answers[4];
+    delete answers[19];
+
+    expect(getNextUnansweredQuestionIndex(QUESTIONS, answers, 3)).toBe(18);
+    expect(getNextUnansweredQuestionIndex(QUESTIONS, answers, 18)).toBe(3);
+
+    answers[4] = 'B';
+    answers[19] = 'C';
+    expect(getNextUnansweredQuestionIndex(QUESTIONS, answers, 18)).toBeNull();
   });
 });
 

@@ -100,6 +100,28 @@ export function getLastAnsweredQuestionIndex(
   return null;
 }
 
+
+export function getNextUnansweredQuestionIndex(
+  questions: readonly CorridorsQuestionDto[],
+  answers: DraftCorridorsAnswers,
+  currentIndex: number
+): number | null {
+  if (questions.length === 0) {
+    return null;
+  }
+
+  for (let offset = 1; offset <= questions.length; offset += 1) {
+    const index = (currentIndex + offset) % questions.length;
+    const question = questions[index];
+
+    if (question !== undefined && answers[question.id] === undefined) {
+      return index;
+    }
+  }
+
+  return null;
+}
+
 export function removeAnswerForQuestion(
   answers: DraftCorridorsAnswers,
   questionId: CorridorsQuestionId

@@ -25,15 +25,16 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 2.4 — Local Share Card Preview**
+**Phase 2.5 — Quiz Visual Polish + Mobile Completion UX**
 
-This phase adds a local share-card preview to the completed deterministic report while preserving the engine boundary:
+This phase polishes the quiz-taking experience for mobile completion and review while preserving the engine boundary:
 
-- in-app share-card preview using the existing public result DTO
-- copy-ready share-card text for Discord/chat usage
-- compact legacy summary remains available behind a details disclosure
-- visual share-card layout stays local and does not generate an image or public URL
-- full result report, axis cards, contradiction map, strengths, failure modes, growth directions, and evidence digest remain intact
+- mobile-first quiz hierarchy with a compact progress summary
+- clearer A/B/C/D option cards with tap/keyboard hints
+- completion review panel before deterministic result generation
+- Enter-to-generate behavior only after all 20 corridors are answered
+- next-unanswered navigation after each answer, including review-mode wraparound
+- refined answer review dots and disabled action states
 - backend/database/AI/auth/payment/public-link/image-export scope remains blocked
 
 ## Development rule
@@ -140,7 +141,7 @@ The public API strips internal numeric scoring diagnostics from the UI-facing re
 /results
 ```
 
-Phase 2.4 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, or image export yet. The result page now includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, and an in-app local share-card preview.
+Phase 2.5 stores the last completed result as a versioned serialization envelope in `sessionStorage` only. It can still read the legacy raw public-result object written by Phase 2.0. There is no backend persistence, public share link, AI report generation, auth, payment integration, or image export yet. The result page includes full report navigation, mobile summary chips, polished local-result states, reduced-motion safety rules, and an in-app local share-card preview. The quiz page now includes mobile-first option hierarchy, next-unanswered navigation, review dots, and a completion panel before result generation.
 
 ## Evidence snapshots
 
