@@ -25,19 +25,19 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 0 — Methodology Lock**
+**Phase 1.1 — Deterministic Scoring Engine**
 
-This phase locks the non-code foundation:
+This phase introduces the first code foundation:
 
-- question list
-- tag taxonomy
-- answer-to-tag mapping
-- scoring model
-- axis model
-- archetype rules
-- contradiction rules
-- report contract
-- golden profiles
+- canonical tag taxonomy
+- 20-question methodology data
+- weighted tag scoring
+- six-axis scoring
+- archetype resolution
+- contradiction detection
+- confidence banding
+- report seed contract
+- golden-profile tests
 
 ## Development rule
 
@@ -47,6 +47,26 @@ Canonical pipeline:
 
 ```text
 Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed
+```
+
+## Commands
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run type checks:
+
+```bash
+npm run typecheck
+```
+
+Run tests:
+
+```bash
+npm test
 ```
 
 ## Package workflow
