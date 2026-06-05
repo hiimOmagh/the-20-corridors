@@ -11,7 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "audit:methodology": "tsx scripts/methodology-audit.ts",
-    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual",
     "snapshots:generate": "tsx scripts/generate-result-snapshots.ts",
     "snapshots:verify": "tsx scripts/verify-result-snapshots.ts",
     "release:engine": "tsx scripts/engine-release-gate.ts",
@@ -21,7 +21,8 @@
     "closure:phase2": "tsx scripts/phase2-closure-gate.ts",
     "smoke:visual": "tsx scripts/visual-smoke-contract.ts",
     "closure:phase3": "tsx scripts/phase3-closure-gate.ts",
-    "readiness:export": "tsx scripts/local-export-readiness.ts"
+    "readiness:export": "tsx scripts/local-export-readiness.ts",
+    "qa:export-visual": "tsx scripts/export-visual-qa.ts"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",

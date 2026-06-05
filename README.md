@@ -396,3 +396,29 @@ npm run build
 ```
 
 Scope: hardens the local PNG export prototype with visible filename, dimensions, browser capability, fallback/failure-state copy, and privacy-boundary details. Still no backend, database, AI/LLM, auth, payments, analytics, telemetry, public links, PDF export, full-result serialization export, or raw-answer export.
+
+## Phase 4.3 — Export Visual QA + Download Contract
+
+Phase 4.3 adds a local export QA gate for the share-card PNG surface.
+
+Run:
+
+```bash
+npm run qa:export-visual
+```
+
+The gate verifies:
+
+- SVG dimensions: `1200 × 1600`.
+- SVG viewBox: `0 0 1200 1600`.
+- Required visible labels and local-only boundary text.
+- XML escaping for unsafe text.
+- Stable download filename contract.
+- No raw-answer leakage.
+- No backend, database, AI, auth, payment, analytics, telemetry, or persistence signals.
+
+The gate is included in:
+
+```bash
+npm run validate
+```

@@ -484,3 +484,31 @@ npm run build
 ```
 
 Scope: local PNG export UX hardening, visible filename/dimension/capability details, unsupported/failure copy polish, and privacy-boundary presentation. No backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, PDF export, full-result serialization export, or answer-level export surface.
+
+## Phase 4.3 — Export Visual QA + Download Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/export-visual-qa-latest.json
+docs/release/phase-4-export-visual-qa-download-contract.md
+docs/release/phase-4-closure-criteria.md
+docs/ui/phase-4-3-export-visual-qa-download-contract-status.md
+scripts/export-visual-qa.ts
+src/core/release/exportVisualQa.ts
+tests/core/exportVisualQa.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: export visual QA and download contract for the local share-card PNG surface. Verifies SVG dimensions, required labels, boundary text, unsafe text escaping, stable filename, local-only signals, and blocked-scope absence. No backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, PDF export, full-result JSON export, or answer-level data export.

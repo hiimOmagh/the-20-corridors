@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "phase-4.3-export-visual-qa-v1",
+  "qaId": "phase-4-export-visual-qa-download-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-4-local-export-visual-qa",
+    "localExportReadinessSchemaVersion": "phase-4.2-local-export-readiness-v1",
+    "exportMode": "local-share-card-image-export-visual-qa"
+  },
+  "gates": {
+    "localExportReadinessPassed": true,
+    "qaScriptExists": true,
+    "validateScriptRunsExportVisualQa": true,
+    "qaContractDocExists": true,
+    "phase43StatusDocExists": true,
+    "phase4ClosureCriteriaPrepared": true,
+    "shareImageExportFileExists": true,
+    "svgDimensionsCorrect": true,
+    "svgViewBoxCorrect": true,
+    "svgContainsRequiredLabels": true,
+    "svgContainsBoundaryNote": true,
+    "svgEscapesUnsafeText": true,
+    "svgDoesNotExposeRawAnswers": true,
+    "downloadFilenameContractStable": true,
+    "localOnlyBehaviorPreserved": true,
+    "noBackendAiAuthPaymentPersistenceScope": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "exportVisualQaContract": "docs/release/phase-4-export-visual-qa-download-contract.md",
+    "phase43Status": "docs/ui/phase-4-3-export-visual-qa-download-contract-status.md",
+    "phase4ClosureCriteria": "docs/release/phase-4-closure-criteria.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual",
+    "exportVisualQa": "tsx scripts/export-visual-qa.ts"
+  },
+  "visual": {
+    "width": 1200,
+    "height": 1600,
+    "viewBox": "0 0 1200 1600",
+    "requiredLabels": [
+      "The 20 Corridors",
+      "Corridor signature",
+      "Dominant traits",
+      "Main tension",
+      "Consistency",
+      "Motive",
+      "Local PNG export only. No upload, account, public URL, or answer-level data."
+    ],
+    "missingLabels": [],
+    "boundaryNote": "Local PNG export only. No upload, account, public URL, or answer-level data.",
+    "escapedUnsafeSamples": [
+      "&lt;script&gt;alert(&quot;x&quot;)&lt;/script&gt;",
+      "A &amp; B &lt; C &gt; D"
+    ]
+  },
+  "download": {
+    "sampleTitle": "The Observer Strategist",
+    "expectedFileName": "the-20-corridors-the-observer-strategist.png",
+    "actualFileName": "the-20-corridors-the-observer-strategist.png",
+    "stable": true
+  },
+  "privacy": {
+    "rawAnswerLeakageSignals": [],
+    "blockedScopeSignals": [],
+    "localOnlySignals": [
+      "Local PNG export only",
+      "anchor.download",
+      "canvas.toBlob",
+      "document.createElement('canvas')",
+      "new Blob([svg]",
+      "window.URL.createObjectURL",
+      "window.URL.revokeObjectURL"
+    ]
+  },
+  "coverage": {
+    "localExportReadinessIssueCount": 0,
+    "requiredLabelCount": 7,
+    "missingLabelCount": 0,
+    "rawLeakageIssueCount": 0,
+    "blockedScopeIssueCount": 0,
+    "localOnlySignalCount": 7
+  },
+  "issues": []
+}
