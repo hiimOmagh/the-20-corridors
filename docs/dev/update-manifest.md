@@ -2,17 +2,17 @@
 
 ## Package
 
-`the-20-corridors_phase1_7_engine_release_gate.zip`
+`the-20-corridors_phase1_8_phase2_readiness_contract.zip`
 
 ## Phase
 
-Phase 1.7 — Engine Release Gate + Repository Hygiene Guard
+Phase 1.8 — Engine Closure Review + Phase 2 UI Readiness Contract
 
 ## Purpose
 
-Add a single pre-Phase-2 release gate for the deterministic engine. The gate verifies that methodology evidence and golden public-result snapshots are current, that no forbidden generated artifacts are present, and that UI/backend/AI scope has not been introduced before the engine layer is formally closed.
+Close the deterministic engine phase formally and define the exact contract for starting Phase 2 UI work without breaking the public engine API boundary.
 
-This package remains UI-free and backend-free. It does not add React, Next.js, CSS, database logic, AI generation, PDF export, accounts, or sharing.
+This package still does **not** add UI implementation. It adds closure/release documentation, a Phase 2 readiness gate, and evidence that the repository is ready to transition into UI scaffolding in the next package.
 
 ## Files included
 
@@ -23,9 +23,14 @@ README.md
 package.json
 docs/dev/update-manifest.md
 docs/evidence/engine-release-gate-latest.json
-scripts/engine-release-gate.ts
-src/core/release/releaseGate.ts
-tests/core/releaseGate.test.ts
+docs/evidence/phase2-readiness-latest.json
+docs/release/engine-closure-review.md
+docs/ui/phase-2-ui-readiness-contract.md
+docs/ui/import-boundary-contract.md
+docs/ui/phase-2-transition-plan.md
+scripts/phase2-readiness.ts
+src/core/release/phase2Readiness.ts
+tests/core/phase2Readiness.test.ts
 ```
 
 ## Files intentionally not included
@@ -38,6 +43,7 @@ unchanged quality guard files
 unchanged audit files
 unchanged public API files
 unchanged serialization files
+unchanged engine release-gate source
 unchanged existing tests
 node_modules/
 Next.js app files
@@ -53,26 +59,34 @@ Reason: the project rule is changed-files-only update packaging.
 ## What changed
 
 ```text
-Added npm run release:engine.
-Updated npm run validate to run the engine release gate after typecheck and tests.
-Added engine release-gate core report.
-Added repository hygiene scan for generated artifacts.
-Added premature UI/backend/AI scope guard.
-Added release-gate evidence snapshot at docs/evidence/engine-release-gate-latest.json.
-Added release-gate regression tests.
-Updated README with release-gate workflow and evidence location.
+Added engine closure review document.
+Added Phase 2 UI readiness contract.
+Added UI import-boundary contract.
+Added Phase 2 transition plan.
+Added npm run readiness:phase2.
+Updated npm run validate to include the Phase 2 readiness gate.
+Added Phase 2 readiness core report.
+Added Phase 2 readiness evidence snapshot.
+Updated engine release-gate evidence snapshot because package.json validate changed.
+Added Phase 2 readiness regression tests.
+Updated README with closure/readiness workflow and evidence location.
 ```
 
-## Engine release-gate checks
+## Phase 2 readiness checks
 
 ```text
-methodology audit passes
-methodology evidence snapshot is current
-golden public-result snapshots are current
-no forbidden generated artifacts exist
-no premature UI/backend/AI scope exists
-package.json exposes npm run release:engine
-npm run validate includes npm run release:engine
+engine release gate passes
+engine closure review exists
+UI readiness contract exists
+import-boundary contract exists
+Phase 2 transition plan exists
+public core entrypoint exists and exports required functions
+public engine wrapper exists
+public publicTypes module exists
+package.json exposes npm run readiness:phase2
+npm run validate includes npm run readiness:phase2
+transition plan keeps backend/database/AI scope blocked
+UI contract requires public API only
 ```
 
 ## Apply instructions
@@ -80,7 +94,7 @@ npm run validate includes npm run release:engine
 From repository root:
 
 ```bash
-unzip -o the-20-corridors_phase1_7_engine_release_gate.zip
+unzip -o the-20-corridors_phase1_8_phase2_readiness_contract.zip
 npm run validate
 npm audit --omit=dev
 npm audit
@@ -90,8 +104,8 @@ git status --short
 Then commit:
 
 ```bash
-git add README.md package.json docs/dev/update-manifest.md docs/evidence/engine-release-gate-latest.json scripts/engine-release-gate.ts src/core/release/releaseGate.ts tests/core/releaseGate.test.ts
-git commit -m "test: add engine release gate"
+git add README.md package.json docs/dev/update-manifest.md docs/evidence/engine-release-gate-latest.json docs/evidence/phase2-readiness-latest.json docs/release/engine-closure-review.md docs/ui/phase-2-ui-readiness-contract.md docs/ui/import-boundary-contract.md docs/ui/phase-2-transition-plan.md scripts/phase2-readiness.ts src/core/release/phase2Readiness.ts tests/core/phase2Readiness.test.ts
+git commit -m "docs: close engine phase and define ui readiness contract"
 ```
 
 ## Validation performed before packaging
@@ -106,8 +120,9 @@ Observed validation result:
 
 ```text
 typecheck: passed
-tests: 13 files passed, 101 tests passed
+tests: 14 files passed, 105 tests passed
 engine release gate: passed
+phase 2 readiness gate: passed
 methodology audit: passed
 methodology evidence current: yes
 golden snapshots current: yes
@@ -120,33 +135,26 @@ full dependency audit: 0 vulnerabilities
 ## Acceptance gate status
 
 ```text
-Single engine release-gate command exists: passed
-validate runs release gate: passed
-methodology audit verified by release gate: passed
-methodology evidence freshness verified: passed
-golden snapshot freshness verified: passed
-forbidden generated artifact guard exists: passed
-premature UI/backend/AI guard exists: passed
-release-gate evidence file exists: passed
-No UI/backend/AI scope introduced: passed
+Engine closure review exists: passed
+Phase 2 UI readiness contract exists: passed
+UI import-boundary contract exists: passed
+Phase 2 transition plan exists: passed
+Phase 2 readiness command exists: passed
+validate runs Phase 2 readiness gate: passed
+Public engine API remains the only UI boundary: passed
+Backend/database/AI scope remains blocked for Phase 2.0: passed
+No UI implementation introduced yet: passed
 ```
-
-## Known non-blocking audit note
-
-```text
-recognition_vs_independence still does not trigger in the current 16-profile audit corpus.
-```
-
-This remains non-blocking because the locked audit gate requires at least 6 contradiction rules triggered, and 7/8 currently trigger.
 
 ## Next recommended milestone
 
-Phase 1.8 — Engine Closure Review + Phase 2 UI Readiness Contract
+Phase 2.0 — UI Scaffold + Release Gate Relaxation
 
 Scope:
 
-- create a concise engine closure document
-- define the Phase 2 UI contract against the public engine API
-- define allowed UI directory structure and import rules for Phase 2
-- remove/relax the temporary no-UI release gate only when Phase 2 begins
-- still no UI implementation in the closure package
+- introduce the Next.js/app UI scaffold
+- relax the release gate to allow approved UI paths only
+- keep backend/database/AI/auth/payment blocked
+- add UI import-boundary scanner
+- create landing, instructions, quiz, and result route skeletons
+- consume only `getCorridorQuestions()` and `runCorridorsEngine()` from the public core API

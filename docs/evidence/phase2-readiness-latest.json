@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "phase-1.8-phase2-readiness-v1",
+  "readinessId": "phase-2-ui-readiness-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "engineReleaseGateSchemaVersion": "phase-1.7-engine-release-gate-v1"
+  },
+  "gates": {
+    "engineReleaseGatePassed": true,
+    "closureReviewExists": true,
+    "uiReadinessContractExists": true,
+    "importBoundaryContractExists": true,
+    "transitionPlanExists": true,
+    "publicCoreEntrypointExists": true,
+    "publicEngineWrapperExists": true,
+    "publicTypesExist": true,
+    "readinessScriptExists": true,
+    "validateScriptRunsReadinessGate": true,
+    "transitionKeepsBackendAiBlocked": true,
+    "contractRequiresPublicApiOnly": true,
+    "overallPassed": true
+  },
+  "documents": {
+    "closureReview": "docs/release/engine-closure-review.md",
+    "uiReadinessContract": "docs/ui/phase-2-ui-readiness-contract.md",
+    "importBoundaryContract": "docs/ui/import-boundary-contract.md",
+    "transitionPlan": "docs/ui/phase-2-transition-plan.md"
+  },
+  "allowedPhase2Scope": [
+    "app/",
+    "src/app/",
+    "src/components/",
+    "src/components/ui/",
+    "src/features/quiz/",
+    "src/features/results/",
+    "src/styles/",
+    "public/"
+  ],
+  "stillBlockedScope": [
+    "src/server/",
+    "src/api/",
+    "app/api/",
+    "pages/api/",
+    "server/",
+    "api/",
+    "db/",
+    "database/",
+    "prisma/",
+    "supabase/",
+    "migrations/",
+    "ai/",
+    "llm/",
+    "prompts/",
+    "src/ai/",
+    "src/llm/",
+    "src/prompts/",
+    "src/core/ai/",
+    "src/core/llm/"
+  ],
+  "publicApi": {
+    "entrypoint": "src/core/index.ts",
+    "requiredExports": [
+      "getCorridorQuestions",
+      "runCorridorsEngine"
+    ],
+    "forbiddenUiImports": [
+      "src/core/methodology/",
+      "src/core/scoring/",
+      "src/core/report/",
+      "src/core/audit/",
+      "src/core/release/",
+      "src/core/serialization/"
+    ]
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run release:engine && npm run readiness:phase2",
+    "readinessPhase2": "tsx scripts/phase2-readiness.ts"
+  },
+  "issues": []
+}

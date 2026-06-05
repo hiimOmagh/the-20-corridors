@@ -25,7 +25,7 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 1.7 — Engine Release Gate + Repository Hygiene Guard**
+**Phase 1.8 — Engine Closure Review + Phase 2 UI Readiness Contract**
 
 This phase locks the first repeatable audit layer:
 
@@ -57,6 +57,12 @@ This phase locks the first repeatable audit layer:
 - repository hygiene guard
 - premature UI/backend/AI scope guard
 - release-gate evidence snapshot
+- engine closure review
+- Phase 2 UI readiness contract
+- UI import-boundary contract
+- Phase 2 transition plan
+- Phase 2 readiness gate
+- readiness evidence snapshot
 
 ## Development rule
 
@@ -65,7 +71,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → Phase 2 Readiness Gate
 ```
 
 ## Commands
@@ -112,6 +118,12 @@ Run the engine release gate:
 npm run release:engine
 ```
 
+Run the Phase 2 readiness gate:
+
+```bash
+npm run readiness:phase2
+```
+
 Run the full local validation suite:
 
 ```bash
@@ -149,6 +161,12 @@ The latest engine release-gate snapshot is written to:
 docs/evidence/engine-release-gate-latest.json
 ```
 
+The latest Phase 2 readiness snapshot is written to:
+
+```text
+docs/evidence/phase2-readiness-latest.json
+```
+
 These snapshots record:
 
 - all locked methodology gates
@@ -162,6 +180,10 @@ These snapshots record:
 - release-gate evidence before Phase 2 UI work
 - repository hygiene status for forbidden generated artifacts
 - confirmation that UI/backend/AI scope has not been introduced prematurely
+- engine closure review status
+- Phase 2 UI contract status
+- approved UI paths for the next phase
+- still-blocked backend/database/AI scope for the next phase
 
 ## Package workflow
 
