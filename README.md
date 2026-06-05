@@ -25,7 +25,7 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 1.5 — Engine Public API Boundary + Import Hygiene**
+**Phase 1.7 — Engine Release Gate + Repository Hygiene Guard**
 
 This phase locks the first repeatable audit layer:
 
@@ -50,6 +50,13 @@ This phase locks the first repeatable audit layer:
 - UI-safe question DTOs
 - UI-safe result DTOs
 - import-boundary tests
+- result serialization envelope
+- stable golden public-result snapshots
+- snapshot verification command
+- engine release gate
+- repository hygiene guard
+- premature UI/backend/AI scope guard
+- release-gate evidence snapshot
 
 ## Development rule
 
@@ -58,7 +65,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Quality Guard → Methodology Audit Snapshot
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate
 ```
 
 ## Commands
@@ -81,10 +88,28 @@ Run tests:
 npm test
 ```
 
-Run the methodology audit and regenerate the evidence snapshot:
+Run the methodology audit and regenerate the methodology evidence snapshot:
 
 ```bash
 npm run audit:methodology
+```
+
+Generate stable golden public-result snapshots:
+
+```bash
+npm run snapshots:generate
+```
+
+Verify committed golden snapshots are current:
+
+```bash
+npm run snapshots:verify
+```
+
+Run the engine release gate:
+
+```bash
+npm run release:engine
 ```
 
 Run the full local validation suite:
@@ -112,7 +137,19 @@ The latest deterministic methodology audit is written to:
 docs/evidence/methodology-audit-latest.json
 ```
 
-This snapshot records:
+The latest golden public-result snapshot is written to:
+
+```text
+docs/evidence/golden-public-results-latest.json
+```
+
+The latest engine release-gate snapshot is written to:
+
+```text
+docs/evidence/engine-release-gate-latest.json
+```
+
+These snapshots record:
 
 - all locked methodology gates
 - golden-profile archetype reachability
@@ -120,6 +157,11 @@ This snapshot records:
 - confidence distribution
 - compact profile outputs for golden and edge-case fixtures
 - report-quality status for every fixture
+- serialized public outputs for all golden profiles
+- schema/version evidence for future share-link/backend work
+- release-gate evidence before Phase 2 UI work
+- repository hygiene status for forbidden generated artifacts
+- confirmation that UI/backend/AI scope has not been introduced prematurely
 
 ## Package workflow
 

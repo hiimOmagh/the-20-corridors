@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "phase-1.7-engine-release-gate-v1",
+  "gateId": "engine-release-gate-phase-1.7",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "methodologyAuditSchemaVersion": "phase-1.4-methodology-audit-v1",
+    "goldenSnapshotSchemaVersion": "phase-1.6-golden-public-results-v1"
+  },
+  "gates": {
+    "methodologyAuditPassed": true,
+    "methodologyEvidenceCurrent": true,
+    "goldenSnapshotsCurrent": true,
+    "noForbiddenGeneratedArtifacts": true,
+    "noPrematureUiBackendAiScope": true,
+    "validateScriptRunsReleaseGate": true,
+    "releaseScriptExists": true,
+    "overallPassed": true
+  },
+  "hygiene": {
+    "forbiddenGeneratedArtifacts": [],
+    "prematureScopeArtifacts": []
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run release:engine",
+    "releaseEngine": "tsx scripts/engine-release-gate.ts"
+  },
+  "coverage": {
+    "triggeredContradictionCount": 7,
+    "contradictionRuleCount": 8,
+    "goldenProfileCount": 8,
+    "edgeCaseProfileCount": 8
+  },
+  "issues": []
+}

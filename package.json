@@ -8,7 +8,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "audit:methodology": "tsx scripts/methodology-audit.ts",
-    "validate": "npm run typecheck && npm test && npm run audit:methodology"
+    "validate": "npm run typecheck && npm test && npm run release:engine",
+    "snapshots:generate": "tsx scripts/generate-result-snapshots.ts",
+    "snapshots:verify": "tsx scripts/verify-result-snapshots.ts",
+    "release:engine": "tsx scripts/engine-release-gate.ts"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",
