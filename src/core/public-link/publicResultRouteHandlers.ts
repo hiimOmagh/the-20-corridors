@@ -13,6 +13,10 @@ import {
 } from './publicResultApi';
 import { createInMemoryPublicResultStorageAdapter } from './inMemoryPublicResultStorage';
 import {
+  resolvePublicResultRouteStorageAdapter,
+  resolvePublicResultStorageRuntimeSelection
+} from './publicResultStorageRuntimeSelection';
+import {
   handlePublicResultCreateDryRun,
   handlePublicResultDeleteDryRun,
   handlePublicResultReadDryRun
@@ -53,6 +57,7 @@ export const PUBLIC_RESULT_ROUTE_HANDLER_BOUNDARIES = [
   'actual-next-route-files-created-in-phase-7-3',
   'dry-run-handler-functions-only',
   'in-memory-adapter-only',
+  'database-runtime-selection-fails-closed-before-client-binding',
   'public-result-api-dto-only',
   'no-database-client',
   'no-auth-payment-ai-analytics',
@@ -61,7 +66,11 @@ export const PUBLIC_RESULT_ROUTE_HANDLER_BOUNDARIES = [
 ] as const;
 
 export function getPublicResultRouteAdapter(): PublicResultStorageAdapter {
-  return routeAdapter;
+  return resolvePublicResultRouteStorageAdapter({ env: process.env, memoryAdapter: routeAdapter });
+}
+
+export function getPublicResultRouteRuntimeSelection() {
+  return resolvePublicResultStorageRuntimeSelection(process.env);
 }
 
 export async function handlePublicResultCreateRouteBody(
@@ -73,7 +82,7 @@ export async function handlePublicResultCreateRouteBody(
 
   const request = buildPublicResultCreateRequestDto(parsed.body.dto, parsed.body.clientNonce);
   const result = await handlePublicResultCreateDryRun({
-    adapter: options.adapter ?? routeAdapter,
+    adapter: options.adapter ?? getPublicResultRouteAdapter(),
     nowIso: options.nowIso ?? new Date().toISOString(),
     request,
     deleteToken: parsed.body.deleteToken
@@ -88,7 +97,7 @@ export async function handlePublicResultReadRoute(
   options: PublicResultRouteOptions = {}
 ): Promise<PublicResultRouteResponse> {
   const result = await handlePublicResultReadDryRun({
-    adapter: options.adapter ?? routeAdapter,
+    adapter: options.adapter ?? getPublicResultRouteAdapter(),
     nowIso: options.nowIso ?? new Date().toISOString(),
     publicId
   });
@@ -106,7 +115,7 @@ export async function handlePublicResultDeleteRouteBody(
   if (!parsed.ok) return errorRouteResponse(parsed.code, parsed.message);
 
   const result = await handlePublicResultDeleteDryRun({
-    adapter: options.adapter ?? routeAdapter,
+    adapter: options.adapter ?? getPublicResultRouteAdapter(),
     nowIso: options.nowIso ?? new Date().toISOString(),
     request: parsed.body
   });

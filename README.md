@@ -25,17 +25,18 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 8.0 — Database Adapter Contract**
+**Phase 8.1 — Database Adapter Runtime Selection Guard**
 
-This phase defines the production persistence adapter boundary without implementing production persistence.
+This phase adds a fail-closed runtime-selection guard without implementing production persistence.
 
-- defines `DatabasePublicResultStorageAdapterContract` against `PublicResultStorageAdapter`
-- defines database records for minimized `PublicResultDto` payloads only
-- locks `publicId`, `deleteTokenHash`, `createdAt`, `expiresAt`, `deletedAt`, and schema-version fields
-- defines migration/version expectations without adding migration files
-- defines a server-only access boundary
+- defines `PUBLIC_RESULT_STORAGE_MODE=memory` and `PUBLIC_RESULT_STORAGE_MODE=database`
+- keeps unset/default mode on in-memory dry-run behavior
+- blocks invalid storage modes
+- blocks database mode when required server-only env vars are missing
+- recognizes complete database env as contract-only, not route-bound
+- blocks client-exposed database env vars
 - keeps route handlers on dry-run in-memory behavior
-- adds `npm run contract:database-adapter` and evidence at `docs/evidence/database-adapter-contract-latest.json`
+- adds `npm run guard:database-runtime-selection` and evidence at `docs/evidence/database-adapter-runtime-selection-guard-latest.json`
 - keeps production database client, migrations, auth, payment, analytics, AI, and persistent `/r/[publicId]` lookup blocked
 
 ## Development rule
@@ -45,7 +46,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard
 ```
 
 ## Commands
@@ -625,3 +626,23 @@ npm run closure:phase7
 ```
 
 The closure gate confirms DTO-only transport, approved API route files, delete-token response boundaries, status mapping, no raw answers/full-result transport, and no database/auth/payment/AI/analytics implementation. Phase 8 is now constrained to begin with a database adapter contract.
+
+## Phase 8.0 — Database Adapter Contract
+
+Phase 8.0 defines the production persistence adapter boundary without implementing production persistence. It defines the database record shape, hash-only delete-token persistence, `deletedAt` semantics, migration/version expectations, and server-only access rules while keeping route handlers in dry-run memory mode.
+
+Validation now includes:
+
+```text
+npm run contract:database-adapter
+```
+
+## Phase 8.1 — Database Adapter Runtime Selection Guard
+
+Phase 8.1 adds runtime selection safety before any real database client exists. Unset/default storage mode remains memory. Database mode requires explicit server-only environment values, fails closed when incomplete, and remains contract-only even when complete. Route handlers do not silently switch to a real database adapter.
+
+Validation now includes:
+
+```text
+npm run guard:database-runtime-selection
+```

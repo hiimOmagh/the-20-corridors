@@ -33,3 +33,27 @@ Required scope:
 - Raw answers and private score internals remain excluded from persistence.
 - Delete-token hash is stored; raw delete token is never stored.
 - Expired/deleted read behavior is specified before implementation.
+
+## Second milestone
+
+**Phase 8.1 — Database Adapter Runtime Selection Guard**
+
+Required scope:
+
+- Add a controlled runtime-selection resolver for public-result storage.
+- Define `PUBLIC_RESULT_STORAGE_MODE=memory` and `PUBLIC_RESULT_STORAGE_MODE=database`.
+- Keep unset/default mode on in-memory dry-run behavior.
+- Fail closed for invalid storage modes.
+- Fail closed for database mode when required server-only environment values are missing.
+- Recognize complete database configuration as contract-only, not route-bound.
+- Block client-exposed database env vars.
+- Keep route handlers from silently switching to a real database adapter.
+
+Acceptance criteria:
+
+- Phase 8.0 database adapter contract remains green.
+- Route handlers remain dry-run in-memory by default.
+- Database mode cannot activate accidentally.
+- Missing database env vars fail closed.
+- Complete database env remains blocked from route binding until a later database-client phase.
+- No production database client, migrations, auth, payment, analytics, AI, or persistent `/r/[publicId]` route is introduced.

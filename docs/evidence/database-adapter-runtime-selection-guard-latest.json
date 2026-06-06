@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "phase-8.1-database-adapter-runtime-selection-guard-v1",
+  "guardId": "phase-8-database-adapter-runtime-selection-guard",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-8-1-runtime-selection-guard-only",
+    "databaseAdapterContractSchemaVersion": "phase-8.0-database-adapter-contract-v1",
+    "runtimeSelectionSchemaVersion": "phase-8.1-database-adapter-runtime-selection-guard-v1",
+    "routeHandlerMode": "next-route-files-dry-run-in-memory-only"
+  },
+  "gates": {
+    "databaseAdapterContractPassed": true,
+    "runtimeSelectionScriptExists": true,
+    "validateScriptRunsRuntimeSelectionGuard": true,
+    "runtimeSelectionModuleExists": true,
+    "runtimeSelectionGuardModuleExists": true,
+    "runtimeSelectionDocExists": true,
+    "phase81StatusDocExists": true,
+    "runtimeSelectionDefinesExpectedEnvMode": true,
+    "defaultUnsetModeSelectsMemory": true,
+    "explicitMemoryModeSelectsMemory": true,
+    "invalidModeFailsClosed": true,
+    "databaseModeWithoutEnvFailsClosed": true,
+    "databaseModeWithCompleteEnvIsContractOnly": true,
+    "routeAdapterFailsClosedForDatabaseMode": true,
+    "clientExposedDatabaseEnvBlocked": true,
+    "routeHandlersRemainDryRunInMemory": true,
+    "noDatabaseClientOrMigrationImplementation": true,
+    "noAuthPaymentAiAnalyticsImplementation": true,
+    "noPersistentPublicLookupRoute": true,
+    "noRawAnswerOrFullResultTransportExpansion": true,
+    "overallPassed": true
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers && npm run routes:backend-handlers && npm run smoke:backend-routes && npm run closure:phase7 && npm run contract:database-adapter && npm run guard:database-runtime-selection",
+    "databaseAdapterContract": "tsx scripts/database-adapter-contract.ts",
+    "runtimeSelectionGuard": "tsx scripts/database-adapter-runtime-selection-guard.ts"
+  },
+  "docs": {
+    "runtimeSelectionGuard": "docs/release/phase-8-database-adapter-runtime-selection-guard.md",
+    "phase81Status": "docs/ui/phase-8-1-database-adapter-runtime-selection-guard-status.md",
+    "phase8Transition": "docs/ui/phase-8-transition-plan.md"
+  },
+  "runtimeSelection": {
+    "modeEnv": "PUBLIC_RESULT_STORAGE_MODE",
+    "allowedModes": [
+      "memory",
+      "database"
+    ],
+    "requiredDatabaseEnvKeys": [
+      "PUBLIC_RESULT_DATABASE_URL",
+      "PUBLIC_RESULT_DATABASE_PROVIDER",
+      "PUBLIC_RESULT_DATABASE_SCHEMA_VERSION"
+    ],
+    "forbiddenPublicDatabaseEnvKeys": [
+      "NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_URL",
+      "NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_PROVIDER",
+      "NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_SCHEMA_VERSION"
+    ],
+    "guardRules": [
+      "phase:phase-8.1-database-adapter-runtime-selection-guard",
+      "schema:phase-8.1-database-adapter-runtime-selection-guard-v1",
+      "unset-storage-mode-defaults-to-memory",
+      "explicit-memory-mode-selects-in-memory-adapter",
+      "invalid-storage-mode-fails-closed",
+      "database-mode-requires-explicit-env-contract",
+      "database-mode-with-missing-env-fails-closed",
+      "client-exposed-database-env-vars-are-blocked",
+      "database-mode-is-contract-only-before-client-binding",
+      "route-handlers-must-not-silently-switch-to-database",
+      "route-handlers-remain-dry-run-in-memory-by-default"
+    ],
+    "defaultStatus": "memory-selected",
+    "defaultAdapterKind": "in-memory-public-result-storage-adapter",
+    "explicitMemoryStatus": "memory-selected",
+    "invalidModeStatus": "invalid-mode-blocked",
+    "missingDatabaseEnvStatus": "database-blocked",
+    "completeDatabaseEnvStatus": "database-configured-contract-only",
+    "completeDatabaseAdapterKind": "server-only-public-result-database-adapter",
+    "completeDatabaseRouteBindingAllowed": false
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/publicResultStorageRuntimeSelection.ts",
+      "src/core/public-link/publicResultRouteHandlers.ts",
+      "docs/release/phase-8-database-adapter-runtime-selection-guard.md",
+      "docs/ui/phase-8-1-database-adapter-runtime-selection-guard-status.md",
+      "docs/ui/phase-8-transition-plan.md"
+    ],
+    "blockedPaths": [],
+    "blockedIntegrationSignals": [],
+    "persistentPublicLookupRouteFiles": [],
+    "rawOrFullResultSignals": [],
+    "missingContractPhrases": []
+  },
+  "coverage": {
+    "databaseAdapterIssueCount": 0,
+    "checkedFileCount": 5,
+    "guardRuleCount": 9,
+    "requiredDatabaseEnvKeyCount": 3,
+    "forbiddenPublicDatabaseEnvKeyCount": 3,
+    "blockedPathCount": 0,
+    "blockedIntegrationSignalCount": 0
+  },
+  "issues": []
+}

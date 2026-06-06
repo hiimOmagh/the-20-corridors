@@ -915,3 +915,43 @@ Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm
 
 Scope: contract-only database adapter boundary. Defines database record shape, adapter contract against `PublicResultStorageAdapter`, delete-token hash-only persistence, `deletedAt` semantics, migration/version expectations, and server-only access rules. Route handlers remain dry-run in-memory. No production database client, migration files, auth, payment, AI, analytics, or persistent `/r/[publicId]` lookup route is introduced.
 
+
+## Phase 8.1 — Database Adapter Runtime Selection Guard
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/database-adapter-runtime-selection-guard-latest.json
+docs/release/phase-8-database-adapter-runtime-selection-guard.md
+docs/ui/phase-8-1-database-adapter-runtime-selection-guard-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/database-adapter-runtime-selection-guard.ts
+src/core/public-link/publicResultRouteHandlers.ts
+src/core/public-link/publicResultStorageRuntimeSelection.ts
+src/core/release/databaseAdapterRuntimeSelectionGuard.ts
+tests/core/databaseAdapterRuntimeSelectionGuard.test.ts
+tests/core/publicResultStorageRuntimeSelection.test.ts
+```
+
+Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
+
+Scope: runtime-selection guard only. Defines `PUBLIC_RESULT_STORAGE_MODE=memory|database`, keeps default memory behavior, fails closed for invalid/missing database configuration, blocks client-exposed database environment variables, and prevents route handlers from silently switching to a real database adapter. No production database client, migrations, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced.
+
+## Phase 8.1.1 — Runtime Selection Guard Validation Hotfix
+
+Changed files only. Stabilizes Phase 8.1 validation after the runtime-selection helper added one additional approved route-handler boundary signal. Also forces production builds through Webpack for Windows environments where Application Control blocks the native Next SWC binary required by Turbopack.
+
+Changed files:
+
+```text
+package.json
+docs/dev/update-manifest.md
+tests/core/backendRouteHandlersContract.test.ts
+```
+
+Validation target: `npm run typecheck`, `npm test`, `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
+
+Scope: validation/build hygiene only. No runtime behavior, database client, route persistence, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced.
