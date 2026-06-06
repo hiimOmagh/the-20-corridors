@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "phase-4.4-export-smoke-contract-v1",
+  "smokeId": "phase-4-export-smoke-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-4-local-export-smoke",
+    "localExportReadinessSchemaVersion": "phase-4.2-local-export-readiness-v1",
+    "exportVisualQaSchemaVersion": "phase-4.3-export-visual-qa-v1"
+  },
+  "gates": {
+    "localExportReadinessPassed": true,
+    "exportVisualQaPassed": true,
+    "smokeScriptExists": true,
+    "validateScriptRunsExportSmoke": true,
+    "exportSmokeStatusDocExists": true,
+    "phase4ClosureCriteriaDocExists": true,
+    "shareImageExportRuntimeExists": true,
+    "shareCardActionSurfaceExists": true,
+    "downloadContractVisibleInUi": true,
+    "localOnlyRuntimeSignalsPreserved": true,
+    "noRawAnswerLeakageInExportSmoke": true,
+    "noFullResultSerializationExport": true,
+    "noBackendAiAuthPaymentPersistenceScope": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "exportSmokeStatus": "docs/ui/phase-4-4-phase-4-closure-gate-export-smoke-contract-status.md",
+    "phase4ClosureCriteria": "docs/release/phase-4-closure-criteria.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto",
+    "smokeExport": "tsx scripts/export-smoke-contract.ts"
+  },
+  "surfaces": {
+    "checkedFiles": [
+      "src/features/results/resultShareImageExport.ts",
+      "src/features/results/ResultsClient.tsx",
+      "src/features/results/resultShareCard.ts"
+    ],
+    "runtimeSignals": [
+      "buildLocalShareCardExportSvg",
+      "exportLocalShareCardPng",
+      "buildLocalShareImageFileName",
+      "buildLocalShareImageExportUxDetails",
+      "getLocalShareImageExportCapability",
+      "canvas.toBlob",
+      "window.URL.createObjectURL",
+      "anchor.download",
+      "window.URL.revokeObjectURL",
+      "LOCAL_SHARE_IMAGE_EXPORT_BOUNDARY_NOTE"
+    ],
+    "uiSignals": [
+      "Export PNG locally",
+      "Copy card text",
+      "Filename",
+      "Size",
+      "Capability",
+      "Local PNG export details",
+      "Local export privacy boundary",
+      "PNG export is generated locally from this share-card summary only",
+      "It does not export the answer list, full result JSON, or a public URL"
+    ],
+    "missingRuntimeSignals": [],
+    "missingUiSignals": []
+  },
+  "privacy": {
+    "rawAnswerLeakageSignals": [],
+    "serializationExportSignals": [],
+    "backendAiAuthPaymentPersistenceSignals": []
+  },
+  "coverage": {
+    "localExportReadinessIssueCount": 0,
+    "exportVisualQaIssueCount": 0,
+    "checkedFileCount": 3,
+    "runtimeSignalCount": 10,
+    "uiSignalCount": 9,
+    "rawLeakageIssueCount": 0,
+    "blockedScopeIssueCount": 0
+  },
+  "issues": []
+}

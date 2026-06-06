@@ -475,3 +475,9 @@ The full validation chain now includes:
 ```bash
 npm run privacy:public-link
 ```
+
+## Phase 5.1 — Public Result DTO Builder Contract
+
+Phase 5.1 adds a minimized public result DTO builder. The builder derives from the public engine result and externally supplied anonymous metadata, excludes raw choices/private scoring internals, and does not add backend storage, public routes, authentication, payment, or AI.
+
+Validation includes `npm run contract:public-dto` through `npm run validate`.

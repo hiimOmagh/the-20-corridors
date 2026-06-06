@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "phase-5.1-public-result-dto-contract-v1",
+  "contractId": "phase-5-public-result-dto-builder-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "publicLinkPrivacySchemaVersion": "phase-5.0-public-link-privacy-v1",
+    "dtoSchemaVersion": "phase-5.1-public-result-dto-v1",
+    "phaseScope": "phase-5-public-result-dto-contract",
+    "implementationMode": "dto-builder-only-no-route-no-backend"
+  },
+  "gates": {
+    "publicLinkPrivacyPassed": true,
+    "dtoBuilderExists": true,
+    "dtoContractScriptExists": true,
+    "validateScriptRunsDtoContract": true,
+    "dtoStatusDocExists": true,
+    "dtoContractDocExists": true,
+    "dtoShapeIsMinimized": true,
+    "dtoExcludesForbiddenFields": true,
+    "dtoUsesPublicEngineResultOnly": true,
+    "noPublicRouteYet": true,
+    "noBackendDatabaseAuthPaymentAi": true,
+    "noRawAnswerLeakage": true,
+    "noFullResultSerializationExport": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "dtoContract": "docs/release/phase-5-public-result-dto-builder-contract.md",
+    "phase51Status": "docs/ui/phase-5-1-public-result-dto-builder-contract-status.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto",
+    "publicResultDtoContract": "tsx scripts/public-result-dto-contract.ts"
+  },
+  "dtoContract": {
+    "allowedKeys": [
+      "schemaVersion",
+      "resultId",
+      "createdAt",
+      "expiresAt",
+      "archetype",
+      "confidenceBand",
+      "dominantTags",
+      "deepMotive",
+      "axisSummaries",
+      "contradictionSummaries",
+      "shareCard",
+      "reportOverview",
+      "deleteTokenHash"
+    ],
+    "forbiddenKeys": [
+      "answers",
+      "rawAnswers",
+      "questionAnswers",
+      "selectedAnswer",
+      "questionId",
+      "answerText",
+      "tagScores",
+      "axisScoresRaw",
+      "privateReportSeed",
+      "sessionStorageEnvelope",
+      "evidenceDigest",
+      "evidenceRefs",
+      "ipAddress",
+      "email",
+      "name",
+      "userId",
+      "deviceFingerprint"
+    ],
+    "sampleKeys": [
+      "archetype",
+      "axisSummaries",
+      "confidenceBand",
+      "contradictionSummaries",
+      "createdAt",
+      "deepMotive",
+      "deleteTokenHash",
+      "dominantTags",
+      "expiresAt",
+      "reportOverview",
+      "resultId",
+      "schemaVersion",
+      "shareCard"
+    ],
+    "sampleSerializedBytes": 2839
+  },
+  "implementationScan": {
+    "blockedPaths": [],
+    "blockedSignals": [],
+    "rawLeakSignals": [],
+    "fullSerializationSignals": []
+  },
+  "coverage": {
+    "publicLinkPrivacyIssueCount": 0,
+    "allowedKeyCount": 13,
+    "forbiddenKeyCount": 17,
+    "sampleAxisSummaryCount": 6,
+    "sampleContradictionSummaryCount": 1
+  },
+  "issues": []
+}

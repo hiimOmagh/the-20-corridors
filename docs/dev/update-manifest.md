@@ -571,3 +571,19 @@ npm run build
 ```
 
 Scope: contract-only privacy gate for future public result links. Defines public DTO minimization, anonymous result ID policy, raw-answer exclusion, delete/expiry expectations, and future public-link smoke gates. No backend, database, AI/LLM, auth, payments, analytics, telemetry, persistence, public routes, or public-link implementation.
+
+## Phase 5.1 — Public Result DTO Builder Contract
+
+Changed/new files:
+
+- `README.md`
+- `package.json`
+- `docs/dev/update-manifest.md`
+- `docs/evidence/public-result-dto-latest.json`
+- `docs/release/phase-5-public-result-dto-builder-contract.md`
+- `docs/ui/phase-5-1-public-result-dto-builder-contract-status.md`
+- `scripts/public-result-dto-contract.ts`
+- `src/core/public-link/publicResultDto.ts`
+- `src/core/release/publicResultDtoContract.ts`
+- `tests/core/publicResultDto.test.ts`
+- `tests/core/publicResultDtoContract.test.ts`

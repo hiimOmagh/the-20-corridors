@@ -11,7 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "audit:methodology": "tsx scripts/methodology-audit.ts",
-    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto",
     "snapshots:generate": "tsx scripts/generate-result-snapshots.ts",
     "snapshots:verify": "tsx scripts/verify-result-snapshots.ts",
     "release:engine": "tsx scripts/engine-release-gate.ts",
@@ -25,7 +25,8 @@
     "qa:export-visual": "tsx scripts/export-visual-qa.ts",
     "smoke:export": "tsx scripts/export-smoke-contract.ts",
     "closure:phase4": "tsx scripts/phase4-closure-gate.ts",
-    "privacy:public-link": "tsx scripts/public-link-privacy.ts"
+    "privacy:public-link": "tsx scripts/public-link-privacy.ts",
+    "contract:public-dto": "tsx scripts/public-result-dto-contract.ts"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",

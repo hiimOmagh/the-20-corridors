@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "phase-4.4-closure-gate-v1",
+  "closureId": "phase-4-closure-gate",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-4-closure",
+    "phase3ClosureSchemaVersion": "phase-3.6-closure-gate-v1",
+    "localExportReadinessSchemaVersion": "phase-4.2-local-export-readiness-v1",
+    "exportVisualQaSchemaVersion": "phase-4.3-export-visual-qa-v1",
+    "exportSmokeSchemaVersion": "phase-4.4-export-smoke-contract-v1"
+  },
+  "gates": {
+    "phase3ClosurePassed": true,
+    "localExportReadinessPassed": true,
+    "exportVisualQaPassed": true,
+    "exportSmokeContractPassed": true,
+    "closureScriptExists": true,
+    "validateScriptRunsPhase4ClosureGate": true,
+    "validateScriptRunsExportSmoke": true,
+    "phase4ClosureReviewDocExists": true,
+    "phase5TransitionDocExists": true,
+    "localOnlyExportScopePreserved": true,
+    "noFullResultSerializationExportScope": true,
+    "noBackendAiAuthPaymentPersistenceScope": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "phase4ClosureReview": "docs/release/phase-4-closure-review.md",
+    "phase5Transition": "docs/ui/phase-5-transition-plan.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto",
+    "smokeExport": "tsx scripts/export-smoke-contract.ts",
+    "closurePhase4": "tsx scripts/phase4-closure-gate.ts"
+  },
+  "coverage": {
+    "readinessIssueCount": 0,
+    "visualQaIssueCount": 0,
+    "exportSmokeIssueCount": 0,
+    "phase3ClosureIssueCount": 0,
+    "exportRuntimeSignalCount": 10,
+    "exportUiSignalCount": 9,
+    "checkedExportFileCount": 3
+  },
+  "issues": []
+}
