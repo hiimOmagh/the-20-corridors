@@ -500,3 +500,27 @@ npm run validate
 ```
 
 The updated checks verify DTO-only rendering, polished empty/invalid states, preview-section navigation, public preview metric cards, route smoke signals for `/r/preview`, and absence of raw choices/private internals.
+
+## Phase 5.4 — Public-Link Preview Closure Gate
+
+Phase 5.4 closes the local public-link preview phase. The `/r/preview` route remains a local-session DTO preview only; no persistent public result ID lookup, backend API, database, authentication, payment, analytics, telemetry, or AI is introduced.
+
+Run:
+
+```bash
+npm run closure:phase5
+```
+
+The gate verifies:
+
+- Phase 4 closure still passes.
+- `privacy:public-link`, `contract:public-dto`, and `preview:public-link` all pass.
+- `/r/preview` remains the only public-link preview route.
+- The preview surface is DTO-only and excludes raw choices/private internals.
+- No persistent public result route, backend API, database, auth, payment, AI, analytics, telemetry, or public ID lookup exists.
+
+The full validation chain now includes:
+
+```bash
+npm run closure:phase5
+```

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "phase-5.4-preview-closure-gate-v1",
+  "closureId": "phase-5-public-link-preview-closure-gate",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-5-preview-closure",
+    "phase4ClosureSchemaVersion": "phase-4.4-closure-gate-v1",
+    "publicLinkPrivacySchemaVersion": "phase-5.0-public-link-privacy-v1",
+    "publicResultDtoSchemaVersion": "phase-5.1-public-result-dto-contract-v1",
+    "publicLinkPreviewSchemaVersion": "phase-5.3-public-link-preview-v1"
+  },
+  "gates": {
+    "phase4ClosurePassed": true,
+    "publicLinkPrivacyPassed": true,
+    "publicResultDtoContractPassed": true,
+    "publicLinkPreviewContractPassed": true,
+    "closureScriptExists": true,
+    "validateScriptRunsPhase5ClosureGate": true,
+    "validateScriptRunsPublicLinkPrivacy": true,
+    "validateScriptRunsPublicResultDto": true,
+    "validateScriptRunsPublicLinkPreview": true,
+    "phase5ClosureReviewDocExists": true,
+    "phase6TransitionDocExists": true,
+    "dtoOnlyPreviewScopePreserved": true,
+    "localPreviewRouteOnly": true,
+    "noPersistentPublicIdLookupScope": true,
+    "noBackendApiDatabaseAuthPaymentAiScope": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "phase5ClosureReview": "docs/release/phase-5-preview-closure-review.md",
+    "phase6Transition": "docs/ui/phase-6-transition-plan.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5",
+    "privacyPublicLink": "tsx scripts/public-link-privacy.ts",
+    "contractPublicDto": "tsx scripts/public-result-dto-contract.ts",
+    "previewPublicLink": "tsx scripts/public-link-preview-contract.ts",
+    "closurePhase5": "tsx scripts/phase5-preview-closure-gate.ts"
+  },
+  "coverage": {
+    "phase4IssueCount": 0,
+    "privacyIssueCount": 0,
+    "dtoIssueCount": 0,
+    "previewIssueCount": 0,
+    "previewRouteCount": 1,
+    "previewDtoKeyCount": 13,
+    "previewSectionCount": 4,
+    "checkedPreviewFileCount": 4,
+    "blockedSignalCount": 0,
+    "persistentRouteFileCount": 0
+  },
+  "files": {
+    "previewRoute": "src/app/r/preview/page.tsx",
+    "previewClient": "src/features/public-link/PublicLinkPreviewClient.tsx",
+    "previewHelper": "src/features/public-link/publicLinkPreview.ts",
+    "phase5ClosureReview": "docs/release/phase-5-preview-closure-review.md",
+    "phase6Transition": "docs/ui/phase-6-transition-plan.md"
+  },
+  "signalScan": {
+    "blockedScopeSignals": [],
+    "persistentPublicRouteFiles": [],
+    "missingDtoBoundarySignals": []
+  },
+  "issues": []
+}

@@ -623,3 +623,44 @@ npm run build
 ```
 
 Scope: polish `/r/preview`, improve empty/invalid local-preview states, add DTO-only section/metric presentation models, upgrade route smoke to include `/r/preview`, and strengthen DTO-only rendering checks. No backend, API route, database, auth, payment, analytics, telemetry, AI, persistence, or public result ID lookup.
+
+## Phase 5.4 — Public-Link Preview Closure Gate
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/engine-release-gate-latest.json
+docs/evidence/phase2-readiness-latest.json
+docs/evidence/ui-smoke-contract-latest.json
+docs/evidence/phase2-closure-latest.json
+docs/evidence/visual-smoke-contract-latest.json
+docs/evidence/phase3-closure-latest.json
+docs/evidence/local-export-readiness-latest.json
+docs/evidence/export-visual-qa-latest.json
+docs/evidence/export-smoke-contract-latest.json
+docs/evidence/phase4-closure-latest.json
+docs/evidence/public-link-privacy-latest.json
+docs/evidence/public-result-dto-latest.json
+docs/evidence/public-link-preview-latest.json
+docs/evidence/phase5-preview-closure-latest.json
+docs/release/phase-5-preview-closure-review.md
+docs/ui/phase-5-4-public-link-preview-closure-gate-status.md
+docs/ui/phase-6-transition-plan.md
+scripts/phase5-preview-closure-gate.ts
+src/core/release/phase5PreviewClosureGate.ts
+tests/core/phase5PreviewClosureGate.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: formal closure gate for the local public-link preview phase. Verifies Phase 4 closure, public-link privacy, public DTO, preview route contract, DTO-only rendering, local-only `/r/preview` scope, and absence of backend/API/database/auth/payment/AI/public result lookup. No persistence or public-link backend is implemented.
