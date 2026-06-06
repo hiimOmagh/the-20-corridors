@@ -108,3 +108,38 @@ Acceptance criteria:
 - Client-exposed DB env names are blocked.
 - Database URL/service key validation is contract-only.
 - No production database client, SDK import, migrations, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced.
+
+## Phase 8.4 — Database SDK Selection Decision Record
+
+Goal: lock the future database SDK decision before importing or installing any database package.
+
+Scope:
+
+- select PostgreSQL as the provider target
+- select `@neondatabase/serverless` as the future SDK
+- document rejected alternatives
+- document serverless runtime assumptions
+- document the secret-handling model
+- document the failure model
+- prove the SDK is not installed
+- prove the SDK is not imported
+- prove factory database adapter creation remains blocked
+- prove routes still use memory/dry-run behavior
+
+Acceptance gate:
+
+```text
+Provider decision record exists.
+SDK choice is documented but not installed/imported.
+Rejected alternatives are documented.
+Serverless/runtime constraints are documented.
+Secret-handling model is documented.
+Failure modes are defined before client binding.
+No real DB SDK import exists.
+Factory still cannot create a database adapter.
+Routes still use memory/dry-run behavior.
+Phase 8.0–8.3 gates remain green.
+Full validate remains green.
+```
+
+Next intended phase: Phase 8.5 — Database Query Contract, still without route binding unless the SDK/client gate explicitly allows it.

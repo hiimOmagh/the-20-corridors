@@ -25,18 +25,22 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 8.3 — Database Client Configuration Contract**
+**Phase 8.4 — Database SDK Selection Decision Record**
 
-This phase centralizes the future database-client configuration contract without implementing production persistence.
+This phase locks the future database SDK decision without installing, importing, or binding a real database client.
 
-- centralizes required DB env names
-- defines server-only database env access
-- blocks client-exposed DB env names
-- validates database URL/provider/schema/service-key shape as contract-only
+- selects PostgreSQL as the provider target
+- selects `@neondatabase/serverless` as the future SDK
+- documents rejected alternatives
+- documents serverless runtime assumptions
+- documents the secret-handling model
+- documents the database failure model
+- proves the selected SDK is not installed
+- proves the selected SDK is not imported
 - keeps database client creation disabled
 - keeps adapter factory database creation disabled
 - keeps route handlers on dry-run in-memory behavior
-- adds `npm run contract:database-client-config` and evidence at `docs/evidence/database-client-configuration-contract-latest.json`
+- adds `npm run contract:database-sdk-decision` and evidence at `docs/evidence/database-sdk-selection-decision-record-latest.json`
 - keeps production database client, SDK imports, migrations, auth, payment, analytics, AI, telemetry, and persistent `/r/[publicId]` lookup blocked
 
 ## Development rule
@@ -46,7 +50,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record
 ```
 
 ## Commands
@@ -139,6 +143,12 @@ Run the Phase 3 closure gate:
 
 ```bash
 npm run closure:phase3
+```
+
+Run the Phase 8.4 database SDK decision record gate:
+
+```bash
+npm run contract:database-sdk-decision
 ```
 
 Run the full local validation suite:

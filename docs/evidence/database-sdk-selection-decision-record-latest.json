@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "phase-8.4-database-sdk-selection-decision-record-v1",
+  "contractId": "phase-8-database-sdk-selection-decision-record",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-8-4-database-sdk-selection-decision-record-only",
+    "decisionSchemaVersion": "phase-8.4-database-sdk-selection-decision-v1",
+    "routeHandlerMode": "next-route-files-dry-run-in-memory-only"
+  },
+  "gates": {
+    "databaseClientConfigContractPassed": true,
+    "decisionScriptExists": true,
+    "validateScriptRunsDecisionRecord": true,
+    "decisionModuleExists": true,
+    "decisionGuardModuleExists": true,
+    "decisionDocExists": true,
+    "phase84StatusDocExists": true,
+    "providerDecisionRecordExists": true,
+    "selectedSdkDocumented": true,
+    "selectedSdkNotInstalled": true,
+    "selectedSdkNotImported": true,
+    "rejectedAlternativesDocumented": true,
+    "serverlessRuntimeAssumptionsDocumented": true,
+    "secretHandlingModelDocumented": true,
+    "failureModesDefined": true,
+    "databaseClientCreationStillBlocked": true,
+    "factoryStillCannotCreateDatabaseAdapter": true,
+    "routesRemainMemoryDryRun": true,
+    "noDatabaseSdkImportOrMigrationImplementation": true,
+    "noAuthPaymentAiAnalyticsImplementation": true,
+    "noPersistentPublicLookupRoute": true,
+    "overallPassed": true
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers && npm run routes:backend-handlers && npm run smoke:backend-routes && npm run closure:phase7 && npm run contract:database-adapter && npm run guard:database-runtime-selection && npm run contract:database-adapter-factory && npm run contract:database-client-config && npm run contract:database-sdk-decision",
+    "databaseClientConfigContract": "tsx scripts/database-client-configuration-contract.ts",
+    "databaseSdkDecisionRecord": "tsx scripts/database-sdk-selection-decision-record.ts"
+  },
+  "docs": {
+    "decisionRecord": "docs/release/phase-8-database-sdk-selection-decision-record.md",
+    "phase84Status": "docs/ui/phase-8-4-database-sdk-selection-decision-record-status.md",
+    "phase8Transition": "docs/ui/phase-8-transition-plan.md"
+  },
+  "decision": {
+    "status": "sdk-selected-contract-only",
+    "selectedProvider": "postgresql",
+    "selectedSdkName": "@neondatabase/serverless",
+    "selectedRuntime": "next-route-handlers-node-runtime",
+    "selectedAdapterStrategy": "thin-sql-adapter-over-public-result-storage-contract",
+    "sdkInstallAllowed": false,
+    "sdkImportAllowed": false,
+    "databaseClientCreationAllowed": false,
+    "routeBindingAllowed": false,
+    "factoryBindingAllowed": false,
+    "decisionRules": [
+      "phase:phase-8.4-database-sdk-selection-decision-record",
+      "schema:phase-8.4-database-sdk-selection-decision-v1",
+      "selected-sdk:@neondatabase/serverless",
+      "selected-provider:postgresql",
+      "provider-decision-record-exists",
+      "selected-sdk-is-documented-but-not-installed",
+      "selected-sdk-is-documented-but-not-imported",
+      "rejected-alternatives-are-documented",
+      "serverless-runtime-assumptions-are-documented",
+      "secret-handling-model-is-documented",
+      "failure-modes-are-defined-before-client-binding",
+      "database-client-creation-remains-blocked",
+      "factory-database-adapter-creation-remains-blocked",
+      "routes-remain-memory-dry-run"
+    ],
+    "reasons": [
+      "selected-sdk-targets-serverless-postgresql-access",
+      "selected-sdk-keeps-storage-record-schema-explicit",
+      "selected-sdk-avoids-orm-schema-abstraction-before-sql-contract",
+      "selected-sdk-fits-route-handler-server-only-boundary",
+      "selected-sdk-can-use-centralized-server-only-env-contract-later",
+      "decision-does-not-install-or-import-the-sdk-in-phase-8-4"
+    ],
+    "rejectedAlternatives": [
+      {
+        "name": "@supabase/supabase-js",
+        "reason": "rejected-for-this-phase-to-avoid-platform-auth-storage-coupling-before-minimal-result-persistence"
+      },
+      {
+        "name": "prisma/@prisma-client",
+        "reason": "rejected-for-this-phase-to-avoid-orm-client-and-migration-complexity-before-the-sql-contract"
+      },
+      {
+        "name": "drizzle-orm",
+        "reason": "rejected-for-this-phase-to-avoid-schema-abstraction-before-the-storage-query-contract-is-locked"
+      },
+      {
+        "name": "pg",
+        "reason": "rejected-for-this-phase-to-avoid-raw-tcp-pooling-assumptions-in-serverless-route-handlers"
+      },
+      {
+        "name": "mongoose",
+        "reason": "rejected-because-the-phase-8-storage-record-contract-is-postgresql-oriented-not-document-store-oriented"
+      }
+    ],
+    "failureModes": [
+      {
+        "code": "missing-env",
+        "routeBehavior": "fail-closed-before-adapter-creation",
+        "publicResponse": "no-public-result-created",
+        "evidenceSource": "database-client-config-contract"
+      },
+      {
+        "code": "invalid-env",
+        "routeBehavior": "fail-closed-before-adapter-creation",
+        "publicResponse": "no-public-result-created",
+        "evidenceSource": "database-client-config-contract"
+      },
+      {
+        "code": "database-unavailable",
+        "routeBehavior": "return-controlled-server-error-without-raw-result-or-token-leakage",
+        "publicResponse": "generic-temporary-failure-copy",
+        "evidenceSource": "future-database-adapter-runtime-smoke"
+      },
+      {
+        "code": "write-failure",
+        "routeBehavior": "do-not-issue-public-id-as-persisted-success",
+        "publicResponse": "generic-create-failure-copy",
+        "evidenceSource": "future-database-adapter-runtime-smoke"
+      },
+      {
+        "code": "read-miss",
+        "routeBehavior": "return-not-found-null-record",
+        "publicResponse": "not-found-or-expired-result-copy",
+        "evidenceSource": "database-adapter-contract"
+      },
+      {
+        "code": "read-expired",
+        "routeBehavior": "return-expired-null-public-dto-response-upstream",
+        "publicResponse": "expired-result-copy",
+        "evidenceSource": "database-adapter-contract"
+      },
+      {
+        "code": "delete-token-mismatch",
+        "routeBehavior": "reject-delete-without-mutating-record",
+        "publicResponse": "generic-delete-failure-copy",
+        "evidenceSource": "public-storage-contract"
+      },
+      {
+        "code": "delete-failure",
+        "routeBehavior": "preserve-existing-record-state-and-return-controlled-failure",
+        "publicResponse": "generic-delete-failure-copy",
+        "evidenceSource": "future-database-adapter-runtime-smoke"
+      },
+      {
+        "code": "schema-version-mismatch",
+        "routeBehavior": "reject-record-before-public-response-mapping",
+        "publicResponse": "generic-unavailable-result-copy",
+        "evidenceSource": "database-adapter-contract"
+      }
+    ],
+    "securityModel": [
+      "database-env-vars-are-server-only",
+      "service-key-stays-in-PUBLIC_RESULT_DATABASE_SERVICE_KEY",
+      "next-public-database-env-vars-are-forbidden",
+      "stored-payload-is-minimized-public-result-dto-only",
+      "raw-answers-and-private-score-internals-are-not-persisted",
+      "raw-delete-token-is-never-persisted",
+      "delete-token-hash-is-the-only-delete-token-record-field",
+      "public-id-must-remain-anonymous-and-non-sequential",
+      "route-responses-must-not-expose-database-errors-or-env-values"
+    ]
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/publicResultDatabaseSdkDecision.ts",
+      "src/core/public-link/publicResultDatabaseClientConfig.ts",
+      "src/core/public-link/publicResultStorageAdapterFactory.ts",
+      "src/core/public-link/publicResultRouteHandlers.ts",
+      "docs/release/phase-8-database-sdk-selection-decision-record.md",
+      "docs/ui/phase-8-4-database-sdk-selection-decision-record-status.md",
+      "docs/ui/phase-8-transition-plan.md"
+    ],
+    "implementationFiles": [
+      "src/core/public-link/publicResultDatabaseClientConfig.ts",
+      "src/core/public-link/publicResultStorageAdapterFactory.ts",
+      "src/core/public-link/publicResultRouteHandlers.ts"
+    ],
+    "blockedPaths": [],
+    "installedDatabasePackages": [],
+    "importedDatabaseSdkSignals": [],
+    "blockedIntegrationSignals": [],
+    "persistentPublicLookupRouteFiles": [],
+    "missingDecisionPhrases": []
+  },
+  "coverage": {
+    "databaseClientConfigIssueCount": 0,
+    "checkedFileCount": 7,
+    "implementationFileCount": 3,
+    "decisionRuleCount": 10,
+    "rejectedAlternativeCount": 5,
+    "failureModeCount": 9,
+    "securityRuleCount": 9,
+    "blockedPathCount": 0,
+    "installedDatabasePackageCount": 0,
+    "importedDatabaseSdkSignalCount": 0,
+    "blockedIntegrationSignalCount": 0,
+    "persistentRouteCount": 0
+  },
+  "issues": []
+}
