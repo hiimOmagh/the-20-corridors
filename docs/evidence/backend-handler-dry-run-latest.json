@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "phase-7.2-backend-handler-dry-run-contract-v1",
+  "contractId": "phase-7-backend-handler-dry-run-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-7-handler-dry-run-only",
+    "routeSkeletonSchemaVersion": "phase-7.1-backend-route-skeleton-guard-v1",
+    "handlerDryRunSchemaVersion": "phase-7.2-backend-handler-dry-run-v1",
+    "implementationMode": "handler-logic-only-no-next-route-files"
+  },
+  "gates": {
+    "backendRouteSkeletonGuardPassed": true,
+    "dryRunScriptExists": true,
+    "validateScriptRunsDryRunContract": true,
+    "dryRunModuleExists": true,
+    "dryRunContractDocExists": true,
+    "phase72StatusDocExists": true,
+    "handlerBoundariesDefined": true,
+    "createReadDeleteDryRunFlowPassed": true,
+    "invalidDeleteTokenHandled": true,
+    "expiredReadHidesDto": true,
+    "deletedReadHidesDto": true,
+    "dtoOnlyResponsesPreserved": true,
+    "payloadSizeWithinLimit": true,
+    "noNextRouteFilesYet": true,
+    "noRequestObjectOrNextResponseDependency": true,
+    "noDatabaseAuthPaymentAiAnalyticsImplementation": true,
+    "noRawAnswerOrFullResultTransport": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "dryRunContract": "docs/release/phase-7-backend-handler-dry-run-adapter.md",
+    "phase72Status": "docs/ui/phase-7-2-backend-route-handler-dry-run-adapter-status.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers",
+    "dryRunContract": "tsx scripts/backend-handler-dry-run-contract.ts",
+    "backendRouteSkeletonGuard": "tsx scripts/backend-route-skeleton-guard.ts"
+  },
+  "dryRun": {
+    "mode": "handler-logic-only-no-next-route-files",
+    "boundaryCount": 11,
+    "createStatus": "created",
+    "readStatus": "active",
+    "wrongDeleteStatus": "invalid-delete-token",
+    "deleteStatus": "deleted",
+    "readAfterDeleteStatus": "deleted",
+    "expiredReadStatus": "expired",
+    "responsePayloadBytes": 6814
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/publicResultHandlerDryRun.ts",
+      "docs/release/phase-7-backend-handler-dry-run-adapter.md",
+      "docs/ui/phase-7-2-backend-route-handler-dry-run-adapter-status.md",
+      "src/core/public-link/publicResultApi.ts",
+      "src/core/public-link/publicResultStorage.ts",
+      "src/core/public-link/inMemoryPublicResultStorage.ts"
+    ],
+    "actualRouteFiles": [],
+    "requestObjectOrNextResponseSignals": [],
+    "blockedImplementationSignals": [],
+    "rawOrFullResultSignals": [],
+    "missingContractPhrases": []
+  },
+  "coverage": {
+    "routeSkeletonIssueCount": 0,
+    "checkedFileCount": 6,
+    "actualRouteFileCount": 0,
+    "handlerBoundaryCount": 8,
+    "dryRunMethodCount": 3
+  },
+  "issues": []
+}

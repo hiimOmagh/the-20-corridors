@@ -11,7 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "audit:methodology": "tsx scripts/methodology-audit.ts",
-    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers",
     "snapshots:generate": "tsx scripts/generate-result-snapshots.ts",
     "snapshots:verify": "tsx scripts/verify-result-snapshots.ts",
     "release:engine": "tsx scripts/engine-release-gate.ts",
@@ -35,7 +35,8 @@
     "lifecycle:public-link-ui": "tsx scripts/public-link-lifecycle-ui-contract.ts",
     "closure:phase6": "tsx scripts/phase6-closure-gate.ts",
     "contract:backend-api": "tsx scripts/backend-api-boundary-contract.ts",
-    "guard:backend-routes": "tsx scripts/backend-route-skeleton-guard.ts"
+    "guard:backend-routes": "tsx scripts/backend-route-skeleton-guard.ts",
+    "dryrun:backend-handlers": "tsx scripts/backend-handler-dry-run-contract.ts"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",
