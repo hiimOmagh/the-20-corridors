@@ -68,9 +68,9 @@ describe('database adapter runtime selection guard', () => {
     expect(report.coverage).toMatchObject({
       databaseAdapterIssueCount: 0,
       checkedFileCount: 5,
-      guardRuleCount: 9,
+      guardRuleCount: 10,
       requiredDatabaseEnvKeyCount: 3,
-      forbiddenPublicDatabaseEnvKeyCount: 3,
+      forbiddenPublicDatabaseEnvKeyCount: 4,
       blockedPathCount: 0,
       blockedIntegrationSignalCount: 0
     });

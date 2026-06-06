@@ -82,3 +82,29 @@ Acceptance criteria:
 - Factory cannot bind database mode to routes.
 - Missing database env still fails closed.
 - No Supabase, Prisma, Drizzle, migration, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced.
+
+
+## Fourth milestone
+
+**Phase 8.3 — Database Client Configuration Contract**
+
+Required scope:
+
+- Centralize required DB env names before adding any real database SDK.
+- Define server-only database configuration access.
+- Block client-exposed database env names.
+- Validate database URL/provider/schema/service-key shape as contract-only.
+- Keep database client creation disabled.
+- Keep factory database adapter creation disabled.
+- Keep route handlers on memory/dry-run behavior.
+
+Acceptance criteria:
+
+- Phase 8.0 database adapter contract remains green.
+- Phase 8.1 runtime selection guard remains green.
+- Phase 8.2 adapter factory contract remains green.
+- Required DB env names are centralized.
+- Server-only env access is enforced.
+- Client-exposed DB env names are blocked.
+- Database URL/service key validation is contract-only.
+- No production database client, SDK import, migrations, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced.

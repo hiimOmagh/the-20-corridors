@@ -25,19 +25,19 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 8.1 — Database Adapter Runtime Selection Guard**
+**Phase 8.3 — Database Client Configuration Contract**
 
-This phase adds a fail-closed runtime-selection guard without implementing production persistence.
+This phase centralizes the future database-client configuration contract without implementing production persistence.
 
-- defines `PUBLIC_RESULT_STORAGE_MODE=memory` and `PUBLIC_RESULT_STORAGE_MODE=database`
-- keeps unset/default mode on in-memory dry-run behavior
-- blocks invalid storage modes
-- blocks database mode when required server-only env vars are missing
-- recognizes complete database env as contract-only, not route-bound
-- blocks client-exposed database env vars
+- centralizes required DB env names
+- defines server-only database env access
+- blocks client-exposed DB env names
+- validates database URL/provider/schema/service-key shape as contract-only
+- keeps database client creation disabled
+- keeps adapter factory database creation disabled
 - keeps route handlers on dry-run in-memory behavior
-- adds `npm run guard:database-runtime-selection` and evidence at `docs/evidence/database-adapter-runtime-selection-guard-latest.json`
-- keeps production database client, migrations, auth, payment, analytics, AI, and persistent `/r/[publicId]` lookup blocked
+- adds `npm run contract:database-client-config` and evidence at `docs/evidence/database-client-configuration-contract-latest.json`
+- keeps production database client, SDK imports, migrations, auth, payment, analytics, AI, telemetry, and persistent `/r/[publicId]` lookup blocked
 
 ## Development rule
 
@@ -46,7 +46,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract
 ```
 
 ## Commands
@@ -658,3 +658,16 @@ npm run contract:database-adapter-factory
 ```
 
 The factory confirms memory remains the default, configured database mode does not create an adapter, database route binding remains blocked, and no Supabase/Prisma/Drizzle client, migration, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route exists.
+
+## Phase 8.3 — Database Client Configuration Contract
+
+Phase 8.3 centralizes the future database-client configuration contract before any real database SDK is imported. It validates server-only database env names, blocks `NEXT_PUBLIC_` database env leakage, and keeps database URL/service-key validation contract-only.
+
+Validation now includes:
+
+```text
+npm run contract:database-client-config
+```
+
+The contract confirms that no production database client exists, the adapter factory still cannot create a database adapter, and routes still use memory/dry-run behavior.
+

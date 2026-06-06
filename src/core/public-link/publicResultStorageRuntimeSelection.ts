@@ -1,8 +1,12 @@
 import { createInMemoryPublicResultStorageAdapter } from './inMemoryPublicResultStorage';
+import { DATABASE_PUBLIC_RESULT_STORAGE_ADAPTER_KIND } from './databasePublicResultStorage';
 import {
-  DATABASE_PUBLIC_RESULT_STORAGE_ADAPTER_KIND,
-  DATABASE_PUBLIC_RESULT_STORAGE_RECORD_SCHEMA_VERSION
-} from './databasePublicResultStorage';
+  NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_SERVICE_KEY_ENV,
+  PUBLIC_RESULT_DATABASE_FORBIDDEN_PUBLIC_ENV_KEYS as PUBLIC_RESULT_DATABASE_FORBIDDEN_PUBLIC_ENV_KEYS_FROM_CONFIG,
+  PUBLIC_RESULT_DATABASE_REQUIRED_ENV_KEYS as PUBLIC_RESULT_DATABASE_REQUIRED_ENV_KEYS_FROM_CONFIG,
+  PUBLIC_RESULT_DATABASE_SERVICE_KEY_ENV,
+  resolvePublicResultDatabaseClientConfigContract
+} from './publicResultDatabaseClientConfig';
 import type { PublicResultStorageAdapter } from './publicResultStorage';
 
 export const PUBLIC_RESULT_STORAGE_RUNTIME_SELECTION_SCHEMA_VERSION =
@@ -36,9 +40,11 @@ export interface PublicResultStorageRuntimeEnvironment {
   readonly PUBLIC_RESULT_DATABASE_URL?: string;
   readonly PUBLIC_RESULT_DATABASE_PROVIDER?: string;
   readonly PUBLIC_RESULT_DATABASE_SCHEMA_VERSION?: string;
+  readonly [PUBLIC_RESULT_DATABASE_SERVICE_KEY_ENV]?: string;
   readonly NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_URL?: string;
   readonly NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_PROVIDER?: string;
   readonly NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_SCHEMA_VERSION?: string;
+  readonly [NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_SERVICE_KEY_ENV]?: string;
 }
 
 export interface PublicResultStorageRuntimeSelection {
@@ -64,17 +70,9 @@ export interface PublicResultStorageRuntimeAdapterResolutionOptions {
   readonly memoryAdapter?: PublicResultStorageAdapter;
 }
 
-export const PUBLIC_RESULT_DATABASE_REQUIRED_ENV_KEYS = [
-  'PUBLIC_RESULT_DATABASE_URL',
-  'PUBLIC_RESULT_DATABASE_PROVIDER',
-  'PUBLIC_RESULT_DATABASE_SCHEMA_VERSION'
-] as const;
+export const PUBLIC_RESULT_DATABASE_REQUIRED_ENV_KEYS = PUBLIC_RESULT_DATABASE_REQUIRED_ENV_KEYS_FROM_CONFIG;
 
-export const PUBLIC_RESULT_DATABASE_FORBIDDEN_PUBLIC_ENV_KEYS = [
-  'NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_URL',
-  'NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_PROVIDER',
-  'NEXT_PUBLIC_PUBLIC_RESULT_DATABASE_SCHEMA_VERSION'
-] as const;
+export const PUBLIC_RESULT_DATABASE_FORBIDDEN_PUBLIC_ENV_KEYS = PUBLIC_RESULT_DATABASE_FORBIDDEN_PUBLIC_ENV_KEYS_FROM_CONFIG;
 
 export const PUBLIC_RESULT_STORAGE_RUNTIME_SELECTION_GUARDS = [
   'unset-storage-mode-defaults-to-memory',
@@ -83,6 +81,7 @@ export const PUBLIC_RESULT_STORAGE_RUNTIME_SELECTION_GUARDS = [
   'database-mode-requires-explicit-env-contract',
   'database-mode-with-missing-env-fails-closed',
   'client-exposed-database-env-vars-are-blocked',
+  'database-client-config-env-names-are-centralized',
   'database-mode-is-contract-only-before-client-binding',
   'route-handlers-must-not-silently-switch-to-database',
   'route-handlers-remain-dry-run-in-memory-by-default'
@@ -143,14 +142,8 @@ export function resolvePublicResultStorageRuntimeSelection(
     };
   }
 
-  const schemaVersion = normalizeOptionalEnvValue(env.PUBLIC_RESULT_DATABASE_SCHEMA_VERSION);
-  const schemaVersionMismatch =
-    schemaVersion !== undefined && schemaVersion !== DATABASE_PUBLIC_RESULT_STORAGE_RECORD_SCHEMA_VERSION;
-  const issues = [
-    ...missingDatabaseEnvKeys.map((key) => `missing_database_env:${key}`),
-    ...forbiddenPublicDatabaseEnvKeys.map((key) => `forbidden_public_database_env:${key}`),
-    ...(schemaVersionMismatch ? [`database_schema_version_mismatch:${schemaVersion}`] : [])
-  ];
+  const databaseClientConfig = resolvePublicResultDatabaseClientConfigContract(env);
+  const issues = [...databaseClientConfig.issues];
 
   if (issues.length > 0) {
     return {

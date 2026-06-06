@@ -979,3 +979,29 @@ tests/core/publicResultStorageAdapterFactory.test.ts
 Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
 
 Scope: factory contract only. Adds the storage adapter factory interface, keeps memory as the default route-bound adapter, keeps database mode contract-only, and proves configured database mode cannot create or bind a route adapter yet. No production database client, migrations, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced.
+
+
+## Phase 8.3 — Database Client Configuration Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/database-client-configuration-contract-latest.json
+docs/release/phase-8-database-client-configuration-contract.md
+docs/ui/phase-8-3-database-client-configuration-contract-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/database-client-configuration-contract.ts
+src/core/public-link/publicResultDatabaseClientConfig.ts
+src/core/public-link/publicResultStorageRuntimeSelection.ts
+src/core/release/databaseClientConfigurationContract.ts
+tests/core/databaseClientConfigurationContract.test.ts
+tests/core/databaseAdapterRuntimeSelectionGuard.test.ts
+tests/core/publicResultDatabaseClientConfig.test.ts
+```
+
+Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
+
+Scope: database-client configuration contract only. Centralizes server-only database env names, blocks client-exposed DB env names, validates database URL/provider/schema/service-key shape as contract-only, and proves no database client, SDK import, migration, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced. Factory database adapter creation and route binding remain blocked.
