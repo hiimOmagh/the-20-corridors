@@ -486,3 +486,17 @@ Validation includes `npm run contract:public-dto` through `npm run validate`.
 ### Phase 5.2 — Local public-link preview route stub
 
 Adds `/r/preview` as a local-only simulation of a future public result link. It renders the minimized `PublicResultDto` from the browser session result only. No persistence, backend API, database, auth, payment, analytics, AI, or public result lookup is introduced.
+
+### Phase 5.3 — Public-link preview UX polish + route smoke upgrade
+
+Phase 5.3 polishes the local `/r/preview` route and upgrades route smoke coverage to include the public-link preview surface. The route remains a local-only DTO preview: no persistence, public ID lookup, backend API, database, auth, payment, analytics, telemetry, or AI is introduced.
+
+Validation keeps using:
+
+```bash
+npm run preview:public-link
+npm run smoke:ui
+npm run validate
+```
+
+The updated checks verify DTO-only rendering, polished empty/invalid states, preview-section navigation, public preview metric cards, route smoke signals for `/r/preview`, and absence of raw choices/private internals.

@@ -29,7 +29,7 @@ describe('Phase 2 closure gate', () => {
     expect(report.scripts.smokeUi).toBe('tsx scripts/ui-smoke-contract.ts');
     expect(report.scripts.closurePhase2).toBe('tsx scripts/phase2-closure-gate.ts');
     expect(report.coverage).toMatchObject({
-      smokeRouteCount: 3,
+      smokeRouteCount: 4,
       uiSmokeIssueCount: 0,
       readinessIssueCount: 0
     });

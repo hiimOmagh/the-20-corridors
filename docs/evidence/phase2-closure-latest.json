@@ -30,8 +30,8 @@
     "closurePhase2": "tsx scripts/phase2-closure-gate.ts"
   },
   "coverage": {
-    "smokeRouteCount": 3,
-    "smokeCheckedLocalOnlyFileCount": 7,
+    "smokeRouteCount": 4,
+    "smokeCheckedLocalOnlyFileCount": 9,
     "uiSmokeIssueCount": 0,
     "readinessIssueCount": 0
   },

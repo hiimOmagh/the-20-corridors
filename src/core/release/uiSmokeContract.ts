@@ -10,7 +10,7 @@ export interface UiSmokeContractOptions {
 }
 
 export interface UiSmokeRouteStatus {
-  readonly route: '/' | '/quiz' | '/results';
+  readonly route: '/' | '/quiz' | '/results' | '/r/preview';
   readonly file: string;
   readonly exists: boolean;
   readonly requiredSignals: readonly string[];
@@ -45,6 +45,7 @@ export interface UiSmokeContractReport {
     readonly landingRouteSmokePassed: boolean;
     readonly quizRouteSmokePassed: boolean;
     readonly resultsRouteSmokePassed: boolean;
+    readonly publicPreviewRouteSmokePassed: boolean;
     readonly localOnlyBoundaryPassed: boolean;
     readonly publicEngineSmokePassed: boolean;
     readonly overallPassed: boolean;
@@ -96,6 +97,19 @@ const ROUTE_REQUIREMENTS: readonly Omit<UiSmokeRouteStatus, 'exists' | 'missingS
       'local-feedback',
       'share-summary'
     ]
+  },
+  {
+    route: '/r/preview',
+    file: 'src/features/public-link/PublicLinkPreviewClient.tsx',
+    requiredSignals: [
+      'PublicLinkPreviewReport',
+      'public-preview-route-smoke',
+      'DTO-only public preview rendering',
+      'public-preview-nav',
+      'Privacy boundary',
+      'Forbidden private keys: 0',
+      'Back to full local result'
+    ]
   }
 ] as const;
 
@@ -106,7 +120,9 @@ const LOCAL_ONLY_FILES = [
   'src/features/quiz/quizFlow.ts',
   'src/features/results/ResultsClient.tsx',
   'src/features/results/resultFeedback.ts',
-  'src/features/results/resultShareCard.ts'
+  'src/features/results/resultShareCard.ts',
+  'src/features/public-link/PublicLinkPreviewClient.tsx',
+  'src/features/public-link/publicLinkPreview.ts'
 ] as const;
 
 const FORBIDDEN_LOCAL_ONLY_SIGNALS = [
@@ -136,11 +152,13 @@ export function runUiSmokeContract(options: UiSmokeContractOptions = {}): UiSmok
   const landingRouteSmokePassed = Boolean(routes.find((route) => route.route === '/')?.passed);
   const quizRouteSmokePassed = Boolean(routes.find((route) => route.route === '/quiz')?.passed);
   const resultsRouteSmokePassed = Boolean(routes.find((route) => route.route === '/results')?.passed);
+  const publicPreviewRouteSmokePassed = Boolean(routes.find((route) => route.route === '/r/preview')?.passed);
 
   const gates = {
     landingRouteSmokePassed,
     quizRouteSmokePassed,
     resultsRouteSmokePassed,
+    publicPreviewRouteSmokePassed,
     localOnlyBoundaryPassed: localOnly.passed,
     publicEngineSmokePassed: contentContract.passed,
     overallPassed: false

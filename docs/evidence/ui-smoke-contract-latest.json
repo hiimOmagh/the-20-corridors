@@ -59,6 +59,22 @@
       "exists": true,
       "missingSignals": [],
       "passed": true
+    },
+    {
+      "route": "/r/preview",
+      "file": "src/features/public-link/PublicLinkPreviewClient.tsx",
+      "requiredSignals": [
+        "PublicLinkPreviewReport",
+        "public-preview-route-smoke",
+        "DTO-only public preview rendering",
+        "public-preview-nav",
+        "Privacy boundary",
+        "Forbidden private keys: 0",
+        "Back to full local result"
+      ],
+      "exists": true,
+      "missingSignals": [],
+      "passed": true
     }
   ],
   "localOnly": {
@@ -69,7 +85,9 @@
       "src/features/quiz/quizFlow.ts",
       "src/features/results/ResultsClient.tsx",
       "src/features/results/resultFeedback.ts",
-      "src/features/results/resultShareCard.ts"
+      "src/features/results/resultShareCard.ts",
+      "src/features/public-link/PublicLinkPreviewClient.tsx",
+      "src/features/public-link/publicLinkPreview.ts"
     ],
     "forbiddenSignals": [
       "fetch(",
@@ -101,6 +119,7 @@
     "landingRouteSmokePassed": true,
     "quizRouteSmokePassed": true,
     "resultsRouteSmokePassed": true,
+    "publicPreviewRouteSmokePassed": true,
     "localOnlyBoundaryPassed": true,
     "publicEngineSmokePassed": true,
     "overallPassed": true

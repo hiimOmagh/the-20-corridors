@@ -3317,3 +3317,189 @@ body::after {
     width: 100%;
   }
 }
+
+/* Phase 5.3 — Public-link preview UX polish */
+.public-preview-route-smoke {
+  --preview-accent: rgba(237, 198, 116, 0.92);
+  --preview-panel: rgba(13, 19, 33, 0.82);
+}
+
+.public-preview-polished {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(237, 198, 116, 0.28);
+  background:
+    radial-gradient(circle at top left, rgba(237, 198, 116, 0.16), transparent 38%),
+    radial-gradient(circle at bottom right, rgba(111, 181, 255, 0.12), transparent 34%),
+    var(--preview-panel);
+}
+
+.public-preview-polished::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 24%, transparent 72%, rgba(237,198,116,0.08));
+  opacity: 0.7;
+}
+
+.public-preview-nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.9rem;
+}
+
+.public-preview-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 0.72rem 0.85rem;
+  color: var(--text-soft);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.035);
+  transition: border-color 160ms ease, color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.public-preview-nav a:hover,
+.public-preview-nav a:focus-visible {
+  transform: translateY(-1px);
+  color: var(--text-main);
+  border-color: rgba(237, 198, 116, 0.44);
+  background: rgba(237, 198, 116, 0.08);
+}
+
+.public-preview-nav span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  color: #0d1321;
+  background: var(--preview-accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.public-preview-metrics span {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.12rem;
+}
+
+.public-preview-metrics strong {
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.public-preview-traitline {
+  margin-top: 0.5rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(237, 198, 116, 0.14);
+  border-radius: 1rem;
+  background: rgba(237, 198, 116, 0.055);
+}
+
+.public-preview-trait-card,
+.public-preview-axis-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.public-preview-trait-card::after,
+.public-preview-axis-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, rgba(237, 198, 116, 0.85), rgba(111, 181, 255, 0.18));
+}
+
+.public-preview-boundary-list li {
+  border-color: rgba(111, 181, 255, 0.15);
+  background: rgba(111, 181, 255, 0.045);
+}
+
+.public-preview-state {
+  position: relative;
+  overflow: hidden;
+}
+
+.public-preview-state .state-orb {
+  position: absolute;
+  width: 9rem;
+  height: 9rem;
+  right: -3rem;
+  top: -3rem;
+  border-radius: 999px;
+  opacity: 0.22;
+  background: radial-gradient(circle, rgba(237,198,116,0.8), transparent 65%);
+}
+
+.public-preview-state-ready .state-orb {
+  background: radial-gradient(circle, rgba(121, 224, 164, 0.72), transparent 65%);
+}
+
+.public-preview-state-warning .state-orb,
+.public-preview-state-locked .state-orb {
+  background: radial-gradient(circle, rgba(237, 198, 116, 0.72), transparent 65%);
+}
+
+.public-preview-checklist {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.public-preview-checklist li {
+  padding: 0.72rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 0.9rem;
+  color: var(--text-soft);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.public-preview-actions {
+  margin-top: 1.2rem;
+}
+
+@media (max-width: 760px) {
+  .public-preview-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .public-preview-nav a {
+    border-radius: 1rem;
+    padding: 0.7rem;
+  }
+
+  .public-preview-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .public-preview-actions .button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .public-preview-nav a {
+    transition: none;
+  }
+
+  .public-preview-nav a:hover,
+  .public-preview-nav a:focus-visible {
+    transform: none;
+  }
+}

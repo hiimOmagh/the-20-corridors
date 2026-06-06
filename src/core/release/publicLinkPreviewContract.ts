@@ -9,8 +9,8 @@ import {
 } from '../../features/public-link/publicLinkPreview';
 import { runPublicResultDtoContract } from './publicResultDtoContract';
 
-export const PUBLIC_LINK_PREVIEW_CONTRACT_SCHEMA_VERSION = 'phase-5.2-public-link-preview-v1' as const;
-export const PUBLIC_LINK_PREVIEW_CONTRACT_ID = 'phase-5-local-public-link-preview-route-stub' as const;
+export const PUBLIC_LINK_PREVIEW_CONTRACT_SCHEMA_VERSION = 'phase-5.3-public-link-preview-v1' as const;
+export const PUBLIC_LINK_PREVIEW_CONTRACT_ID = 'phase-5-public-link-preview-ux-polish-route-smoke' as const;
 
 export interface PublicLinkPreviewContractOptions {
   readonly repoRoot?: string;
@@ -22,7 +22,7 @@ export interface PublicLinkPreviewContractReport {
   readonly metadata: {
     readonly checkedAt: 'static';
     readonly repoRootName: string;
-    readonly phaseScope: 'phase-5-local-preview-route-stub';
+    readonly phaseScope: 'phase-5-public-link-preview-ux-polish';
     readonly route: typeof LOCAL_PUBLIC_LINK_PREVIEW_ROUTE;
     readonly publicResultDtoContractSchemaVersion: string;
   };
@@ -41,6 +41,9 @@ export interface PublicLinkPreviewContractReport {
     readonly rawAnswerPreviewLeakageAbsent: boolean;
     readonly noBackendDatabaseApiLookupSignals: boolean;
     readonly statusDocExists: boolean;
+    readonly publicPreviewSectionModelPassed: boolean;
+    readonly stateCopyPolishPassed: boolean;
+    readonly routeSmokeUpgradePassed: boolean;
     readonly overallPassed: boolean;
   };
   readonly files: {
@@ -61,6 +64,8 @@ export interface PublicLinkPreviewContractReport {
     readonly dtoKeyCount: number;
     readonly axisSummaryCount: number;
     readonly contradictionSummaryCount: number;
+    readonly sectionCount: number;
+    readonly metricCount: number;
     readonly boundaryNote: string;
     readonly resultId: string;
   };
@@ -79,7 +84,7 @@ const PREVIEW_ROUTE = 'src/app/r/preview/page.tsx';
 const PREVIEW_CLIENT = 'src/features/public-link/PublicLinkPreviewClient.tsx';
 const PREVIEW_HELPER = 'src/features/public-link/publicLinkPreview.ts';
 const RESULTS_CLIENT = 'src/features/results/ResultsClient.tsx';
-const STATUS_DOC = 'docs/ui/phase-5-2-local-public-link-preview-route-stub-status.md';
+const STATUS_DOC = 'docs/ui/phase-5-3-public-link-preview-ux-polish-route-smoke-upgrade-status.md';
 
 const ROUTE_REQUIRED_SIGNALS = ['PublicLinkPreviewClient', 'PublicLinkPreviewPage'] as const;
 const CLIENT_REQUIRED_SIGNALS = [
@@ -88,6 +93,9 @@ const CLIENT_REQUIRED_SIGNALS = [
   'Minimized DTO only',
   'Public share surface',
   'Privacy boundary',
+  'public-preview-route-smoke',
+  'public-preview-nav',
+  'public-preview-actions',
   '/results',
   '/quiz'
 ] as const;
@@ -97,6 +105,8 @@ const HELPER_REQUIRED_SIGNALS = [
   'LOCAL_PUBLIC_LINK_PREVIEW_MODE',
   'LOCAL_PUBLIC_LINK_PREVIEW_BOUNDARY_NOTE',
   'isPublicLinkPreviewPayloadSafe',
+  'buildPublicLinkPreviewSections',
+  'buildPublicLinkPreviewMetrics',
   'individual choices'
 ] as const;
 
@@ -161,6 +171,14 @@ export function runPublicLinkPreviewContract(options: PublicLinkPreviewContractO
     && samplePreview.dto.axisSummaries.length === 6
     && samplePreview.dto.shareCard.boundaryText.includes('Raw choices')
     && !('answers' in samplePreview.dto);
+  const publicPreviewSectionModelPassed = samplePreview.sections.length === 4
+    && samplePreview.sections.map((section) => section.id).join('|') === 'share-card|traits|axis-summary|privacy-boundary';
+  const stateCopyPolishPassed = samplePreview.metrics.length === 4
+    && samplePreview.renderingMode.includes('DTO-only')
+    && samplePreview.privacyBullets.some((bullet) => bullet.includes('No backend request'));
+  const routeSmokeUpgradePassed = clientSource.includes('public-preview-route-smoke')
+    && clientSource.includes('public-preview-nav')
+    && clientSource.includes('public-preview-actions');
 
   const gates = {
     publicDtoContractPassed: publicDtoContract.gates.overallPassed,
@@ -177,6 +195,9 @@ export function runPublicLinkPreviewContract(options: PublicLinkPreviewContractO
     rawAnswerPreviewLeakageAbsent: forbiddenPreviewSignals.length === 0,
     noBackendDatabaseApiLookupSignals: forbiddenPreviewSignals.length === 0,
     statusDocExists: existsSync(path.join(repoRoot, STATUS_DOC)),
+    publicPreviewSectionModelPassed,
+    stateCopyPolishPassed,
+    routeSmokeUpgradePassed,
     overallPassed: false
   };
   const completeGates = {
@@ -192,7 +213,7 @@ export function runPublicLinkPreviewContract(options: PublicLinkPreviewContractO
     metadata: {
       checkedAt: 'static',
       repoRootName: 'repository',
-      phaseScope: 'phase-5-local-preview-route-stub',
+      phaseScope: 'phase-5-public-link-preview-ux-polish',
       route: LOCAL_PUBLIC_LINK_PREVIEW_ROUTE,
       publicResultDtoContractSchemaVersion: publicDtoContract.schemaVersion
     },
@@ -215,6 +236,8 @@ export function runPublicLinkPreviewContract(options: PublicLinkPreviewContractO
       dtoKeyCount: dtoKeys.length,
       axisSummaryCount: samplePreview.dto.axisSummaries.length,
       contradictionSummaryCount: samplePreview.dto.contradictionSummaries.length,
+      sectionCount: samplePreview.sections.length,
+      metricCount: samplePreview.metrics.length,
       boundaryNote: samplePreview.boundaryNote,
       resultId: samplePreview.dto.resultId
     },

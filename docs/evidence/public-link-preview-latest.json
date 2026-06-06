@@ -1,10 +1,10 @@
 {
-  "schemaVersion": "phase-5.2-public-link-preview-v1",
-  "contractId": "phase-5-local-public-link-preview-route-stub",
+  "schemaVersion": "phase-5.3-public-link-preview-v1",
+  "contractId": "phase-5-public-link-preview-ux-polish-route-smoke",
   "metadata": {
     "checkedAt": "static",
     "repoRootName": "repository",
-    "phaseScope": "phase-5-local-preview-route-stub",
+    "phaseScope": "phase-5-public-link-preview-ux-polish",
     "route": "/r/preview",
     "publicResultDtoContractSchemaVersion": "phase-5.1-public-result-dto-contract-v1"
   },
@@ -23,6 +23,9 @@
     "rawAnswerPreviewLeakageAbsent": true,
     "noBackendDatabaseApiLookupSignals": true,
     "statusDocExists": true,
+    "publicPreviewSectionModelPassed": true,
+    "stateCopyPolishPassed": true,
+    "routeSmokeUpgradePassed": true,
     "overallPassed": true
   },
   "files": {
@@ -30,7 +33,7 @@
     "previewClient": "src/features/public-link/PublicLinkPreviewClient.tsx",
     "previewHelper": "src/features/public-link/publicLinkPreview.ts",
     "resultsClient": "src/features/results/ResultsClient.tsx",
-    "statusDoc": "docs/ui/phase-5-2-local-public-link-preview-route-stub-status.md"
+    "statusDoc": "docs/ui/phase-5-3-public-link-preview-ux-polish-route-smoke-upgrade-status.md"
   },
   "signalScan": {
     "missingRouteSignals": [],
@@ -43,6 +46,8 @@
     "dtoKeyCount": 13,
     "axisSummaryCount": 6,
     "contradictionSummaryCount": 1,
+    "sectionCount": 4,
+    "metricCount": 4,
     "boundaryNote": "Local preview only. Minimized DTO surface; individual choices and private scoring internals are excluded.",
     "resultId": "local_preview_result_0001"
   },

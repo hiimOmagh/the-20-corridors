@@ -592,3 +592,34 @@ Changed/new files:
 ## Phase 5.2 — Local Public-Link Preview Route Stub
 
 Changed files only. Adds `/r/preview`, a local-only preview client, public-link preview helper, preview contract gate, status docs, evidence snapshot, and tests. No backend/database/auth/payment/AI/public lookup is implemented.
+
+## Phase 5.3 — Public-Link Preview UX Polish + Route Smoke Upgrade
+
+Changed/new files:
+
+```text
+README.md
+docs/dev/update-manifest.md
+docs/evidence/public-link-preview-latest.json
+docs/evidence/ui-smoke-contract-latest.json
+docs/ui/phase-5-3-public-link-preview-ux-polish-route-smoke-upgrade-status.md
+src/app/globals.css
+src/core/release/publicLinkPreviewContract.ts
+src/core/release/uiSmokeContract.ts
+src/features/public-link/PublicLinkPreviewClient.tsx
+src/features/public-link/publicLinkPreview.ts
+tests/core/publicLinkPreviewContract.test.ts
+tests/core/uiSmokeContract.test.ts
+tests/ui/publicLinkPreview.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: polish `/r/preview`, improve empty/invalid local-preview states, add DTO-only section/metric presentation models, upgrade route smoke to include `/r/preview`, and strengthen DTO-only rendering checks. No backend, API route, database, auth, payment, analytics, telemetry, AI, persistence, or public result ID lookup.

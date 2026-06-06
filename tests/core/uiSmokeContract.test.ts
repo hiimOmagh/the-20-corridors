@@ -12,6 +12,7 @@ describe('Phase 2 UI smoke contract', () => {
       landingRouteSmokePassed: true,
       quizRouteSmokePassed: true,
       resultsRouteSmokePassed: true,
+      publicPreviewRouteSmokePassed: true,
       localOnlyBoundaryPassed: true,
       publicEngineSmokePassed: true,
       overallPassed: true
@@ -21,8 +22,8 @@ describe('Phase 2 UI smoke contract', () => {
 
   it('proves all required routes expose their expected smoke signals', () => {
     expect(report.schemaVersion).toBe('phase-2.8-ui-smoke-contract-v1');
-    expect(report.routes).toHaveLength(3);
-    expect(report.routes.map((route) => route.route)).toEqual(['/', '/quiz', '/results']);
+    expect(report.routes).toHaveLength(4);
+    expect(report.routes.map((route) => route.route)).toEqual(['/', '/quiz', '/results', '/r/preview']);
     expect(report.routes.every((route) => route.exists && route.passed)).toBe(true);
   });
 
@@ -68,6 +69,7 @@ function makeTempRepoRoot(): string {
   mkdirSync(path.join(tempRoot, 'src/features/landing'), { recursive: true });
   mkdirSync(path.join(tempRoot, 'src/features/quiz'), { recursive: true });
   mkdirSync(path.join(tempRoot, 'src/features/results'), { recursive: true });
+  mkdirSync(path.join(tempRoot, 'src/features/public-link'), { recursive: true });
 
   for (const [file, source] of Object.entries({
     'src/app/page.tsx': 'landing-title Non-clinical disclaimer Reflective game, not a diagnosis landingTrustCards landingMethodSteps landingScopeGuards href={cta.href}',
@@ -76,7 +78,9 @@ function makeTempRepoRoot(): string {
     'src/features/quiz/quizFlow.ts': 'sessionStorage',
     'src/features/results/ResultsClient.tsx': 'readCorridorsResultFromSessionStorage buildResultReportViewModel buildLocalShareCardPreview FeedbackPanel dominant-traits axis-map contradiction-map evidence-digest trust-guard local-feedback share-summary',
     'src/features/results/resultFeedback.ts': 'local feedback',
-    'src/features/results/resultShareCard.ts': 'share card'
+    'src/features/results/resultShareCard.ts': 'share card',
+    'src/features/public-link/PublicLinkPreviewClient.tsx': 'PublicLinkPreviewReport public-preview-route-smoke DTO-only public preview rendering public-preview-nav Privacy boundary Forbidden private keys: 0 Back to full local result',
+    'src/features/public-link/publicLinkPreview.ts': 'local public preview helper'
   })) {
     writeFileSync(path.join(tempRoot, file), `${source}\n`);
   }
