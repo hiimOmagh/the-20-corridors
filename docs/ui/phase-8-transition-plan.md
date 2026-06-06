@@ -280,3 +280,25 @@ Full validate remains green.
 ```
 
 Next intended phase: Phase 8.10 — Database Adapter Factory Activation Contract. This should permit controlled factory-level database adapter construction only in non-route contexts, while route handlers remain protected until an explicit public API activation gate.
+
+## Phase 8.10 — Database Adapter Factory Activation Contract
+
+Phase 8.10 permits controlled factory-level database adapter construction only for explicit non-route activation contexts.
+
+Acceptance gate:
+
+```text
+Factory can create database adapter only in explicit non-route activation context.
+Factory still refuses database adapter for route handlers.
+PUBLIC_RESULT_STORAGE_MODE=database alone is not enough to bind routes.
+Missing/invalid env fails closed.
+Database adapter activation dry-run remains green.
+Adapter implementation gate remains green.
+Query readiness guard remains green.
+Client smoke boundary remains green.
+No production mutation smoke yet.
+No persistent /r/[publicId] lookup yet.
+Full validate remains green.
+```
+
+Next intended phase: Phase 8.11 — Public Route Database Binding Preflight Contract. It should define the route activation criteria without yet switching public routes to database persistence.

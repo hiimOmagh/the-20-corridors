@@ -1153,3 +1153,33 @@ npm run build
 ```
 
 Scope: activation dry-run only. The database adapter can be selected in a controlled simulation through a fake executor, but factory route binding remains disabled, public route handlers remain memory/dry-run, no production mutation smoke runs, and no persistent `/r/[publicId]` lookup is introduced.
+
+## Phase 8.10 — Database Adapter Factory Activation Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/database-adapter-factory-activation-contract-latest.json
+docs/release/phase-8-database-adapter-factory-activation-contract.md
+docs/ui/phase-8-10-database-adapter-factory-activation-contract-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/database-adapter-factory-activation-contract.ts
+src/core/public-link/publicResultStorageAdapterFactoryActivation.ts
+src/core/release/databaseAdapterFactoryActivationContract.ts
+tests/core/databaseAdapterFactoryActivationContract.test.ts
+tests/core/publicResultStorageAdapterFactoryActivation.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: controlled non-route factory activation only. The database adapter can be constructed only with explicit non-route context, complete DB env, no-route-binding acknowledgement, and injected executor. Public route handlers remain memory/dry-run, route-handler context remains blocked, no production mutation smoke runs, no network SQL executes, and no persistent `/r/[publicId]` lookup is introduced.

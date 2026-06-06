@@ -756,3 +756,23 @@ npm run dryrun:database-adapter-activation
 ```
 
 The dry-run keeps factory route binding disabled, keeps public routes in memory/dry-run behavior, executes no network query, performs no production mutation smoke, and introduces no persistent `/r/[publicId]` lookup.
+
+## Phase 8.10 — Database Adapter Factory Activation Contract
+
+Phase 8.10 adds controlled factory-level database adapter construction for explicit non-route activation contexts only. It does not activate database persistence for public API routes.
+
+Validation now includes:
+
+```text
+npm run contract:database-factory-activation
+```
+
+Current persistence status:
+
+- Explicit non-route activation can construct the database adapter through an injected executor.
+- `PUBLIC_RESULT_STORAGE_MODE=database` alone is not enough to bind routes or create a route adapter.
+- Route-handler context still fails closed for database adapter construction.
+- Public result API routes still use memory/dry-run behavior.
+- No production mutation smoke is allowed.
+- No network SQL execution is performed.
+- No persistent `/r/[publicId]` lookup exists.
