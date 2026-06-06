@@ -215,3 +215,39 @@ Full validate remains green.
 ```
 
 Next intended phase: Phase 8.7 — Database Client Query Readiness Guard, still without route persistence unless explicitly approved.
+
+## Phase 8.7 — Database Client Query Readiness Guard
+
+Goal: prepare executable-query structure without enabling database persistence.
+
+Scope:
+
+- define parameterized query descriptor helpers
+- map query helpers to Phase 8.5 query intents
+- keep user-controlled values in values arrays only
+- verify placeholder/value alignment
+- prove query helpers are server-only
+- prove no SQL execution or network query is performed
+- prove no mutation smoke against production DB is performed
+- prove SDK import remains confined to the Phase 8.6 smoke boundary
+- prove no database-backed adapter exists yet
+- prove factory still refuses route-bound database adapter
+- prove routes still use memory/dry-run behavior
+
+Acceptance gate:
+
+```text
+Parameterized query helpers are defined.
+No raw string interpolation for user-controlled values.
+Insert/read/delete/expiry query helpers map to Phase 8.5 intents.
+Query helpers are server-only.
+No route binding yet.
+No adapter persistence yet.
+No mutation smoke against production DB.
+Missing/invalid env still fails closed.
+Client smoke boundary remains green.
+Phase 8.0–8.6 gates remain green.
+Full validate remains green.
+```
+
+Next intended phase: Phase 8.8 — Database Adapter Implementation Behind Disabled Factory Gate. It should add the adapter implementation without route binding until a separate activation gate is explicit.

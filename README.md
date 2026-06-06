@@ -727,3 +727,15 @@ Run the Phase 8.6 gate:
 ```text
 npm run smoke:database-client
 ```
+
+## Phase 8.7 — Database Client Query Readiness Guard
+
+Phase 8.7 adds server-only parameterized query descriptor builders for the future database adapter. The helpers map to the Phase 8.5 query intents while keeping SQL execution, network smoke, adapter persistence, and route binding disabled.
+
+Validation now includes:
+
+```text
+npm run guard:database-query-readiness
+```
+
+The guard confirms placeholder/value alignment, no raw string interpolation for user-controlled values, no mutation smoke against production DB, SDK import still confined to the Phase 8.6 smoke boundary, and routes still using memory/dry-run behavior.

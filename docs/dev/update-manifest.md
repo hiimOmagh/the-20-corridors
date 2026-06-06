@@ -1088,3 +1088,33 @@ npm run build
 ```
 
 Scope: install and lock `@neondatabase/serverless`, add a server-only non-network client smoke boundary, and keep database adapter/route persistence blocked.
+
+## Phase 8.7 — Database Client Query Readiness Guard
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/database-client-query-readiness-guard-latest.json
+docs/release/phase-8-database-client-query-readiness-guard.md
+docs/ui/phase-8-7-database-client-query-readiness-guard-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/database-client-query-readiness-guard.ts
+src/core/public-link/publicResultDatabaseClientQueryReadiness.ts
+src/core/release/databaseClientQueryReadinessGuard.ts
+tests/core/databaseClientQueryReadinessGuard.test.ts
+tests/core/publicResultDatabaseClientQueryReadiness.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: parameterized query readiness only. Defines server-only query descriptor helpers for the Phase 8.5 query intents, verifies placeholder/value alignment, and keeps SQL execution, network query smoke, database-backed adapter persistence, and route binding disabled.
