@@ -1,3 +1,14 @@
+# Update Manifest
+
+Latest package: Phase 7.0 — Backend API Boundary Contract
+
+Changed scope:
+
+- Added contract-only public-result API DTO boundary.
+- Added create/read/delete/error DTO helpers.
+- Added delete-token transport, expiry, and abuse-control expectations.
+- Added backend API boundary contract script and tests.
+- No actual API route, database, auth, payment, analytics, or AI implementation.
 # Update Manifest — Phase 2.2 Full Result Report UI
 
 ## Package

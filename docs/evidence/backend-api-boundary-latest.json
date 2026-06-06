@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "phase-7.0-backend-api-boundary-contract-v1",
+  "contractId": "phase-7-backend-api-boundary-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-7-api-boundary-contract-only",
+    "phase6ClosureSchemaVersion": "phase-6.4-public-link-lifecycle-closure-gate-v1",
+    "publicStorageSchemaVersion": "phase-6.0-public-result-storage-contract-v1",
+    "publicResultApiSchemaVersion": "phase-7.0-backend-api-boundary-v1",
+    "implementationMode": "contract-only-no-route-no-database"
+  },
+  "gates": {
+    "phase6ClosurePassed": true,
+    "publicStorageContractPassed": true,
+    "apiBoundaryScriptExists": true,
+    "validateScriptRunsApiBoundaryContract": true,
+    "apiBoundaryModuleExists": true,
+    "apiBoundaryDocExists": true,
+    "phase70StatusDocExists": true,
+    "createDtoContractDefined": true,
+    "readDtoContractDefined": true,
+    "deleteDtoContractDefined": true,
+    "errorDtoContractDefined": true,
+    "publicLookupResponseMinimized": true,
+    "deleteTokenTransportRulesDefined": true,
+    "expirySemanticsDefined": true,
+    "abuseControlExpectationsDefined": true,
+    "noActualApiRouteYet": true,
+    "noDatabaseBackendAuthPaymentAiAnalyticsImplementation": true,
+    "noPersistentPublicLookupRouteYet": true,
+    "noRawAnswerOrPrivateScoreLeakage": true,
+    "noFullResultSerializationTransport": true,
+    "samplePayloadWithinSizeLimit": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "apiBoundaryContract": "docs/release/phase-7-backend-api-boundary-contract.md",
+    "phase70Status": "docs/ui/phase-7-0-backend-api-boundary-contract-status.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api",
+    "apiBoundaryContract": "tsx scripts/backend-api-boundary-contract.ts",
+    "phase6Closure": "tsx scripts/phase6-closure-gate.ts",
+    "publicStorageContract": "tsx scripts/public-result-storage-contract.ts"
+  },
+  "apiContract": {
+    "allowedEndpoints": [
+      "POST /api/public-results",
+      "GET /api/public-results/{publicId}",
+      "DELETE /api/public-results/{publicId}"
+    ],
+    "allowedMethods": [
+      "POST",
+      "GET",
+      "DELETE"
+    ],
+    "deleteTokenTransport": "response-on-create-request-on-delete-only",
+    "defaultExpiryDays": 30,
+    "maxDtoBytes": 12000,
+    "createRequestKeys": [
+      "clientNonce",
+      "dto",
+      "schemaVersion"
+    ],
+    "createResponseKeys": [
+      "deleteToken",
+      "dto",
+      "expiresAt",
+      "publicId",
+      "publicPath",
+      "schemaVersion"
+    ],
+    "readResponseKeys": [
+      "dto",
+      "expiresAt",
+      "publicId",
+      "schemaVersion",
+      "status"
+    ],
+    "deleteRequestKeys": [
+      "deleteToken",
+      "publicId",
+      "schemaVersion"
+    ],
+    "deleteResponseKeys": [
+      "publicId",
+      "schemaVersion",
+      "status"
+    ],
+    "errorResponseKeys": [
+      "code",
+      "message",
+      "schemaVersion"
+    ],
+    "forbiddenPayloadKeyCount": 19
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/publicResultApi.ts",
+      "docs/release/phase-7-backend-api-boundary-contract.md",
+      "docs/ui/phase-7-0-backend-api-boundary-contract-status.md",
+      "src/core/public-link/publicResultStorage.ts",
+      "src/core/public-link/publicResultDto.ts"
+    ],
+    "blockedPaths": [],
+    "blockedImplementationSignals": [],
+    "persistentLookupRouteFiles": [],
+    "rawOrPrivateSignals": [],
+    "fullResultTransportSignals": [],
+    "missingContractPhrases": []
+  },
+  "coverage": {
+    "phase6IssueCount": 0,
+    "storageIssueCount": 0,
+    "endpointCount": 3,
+    "methodCount": 3,
+    "deleteTokenRuleCount": 5,
+    "expiryRuleCount": 5,
+    "abuseExpectationCount": 7,
+    "implementationBoundaryCount": 5,
+    "samplePayloadBytes": 9807
+  },
+  "issues": []
+}

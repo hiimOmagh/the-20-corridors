@@ -578,3 +578,8 @@ npm run closure:phase6
 ```
 
 The gate confirms that no backend API route, database, persistent public lookup route, browser persistence, network persistence, authentication, payment, analytics, telemetry, or AI implementation exists.
+
+
+## Phase 7.0 — Backend API Boundary Contract
+
+Phase 7.0 defines the future public-result create/read/delete API DTO boundary without implementing backend routes or persistence. The contract locks minimized `PublicResultDto` transport, delete-token rules, expiry semantics, and abuse-control expectations while keeping database, auth, payment, analytics, and AI out of scope.
