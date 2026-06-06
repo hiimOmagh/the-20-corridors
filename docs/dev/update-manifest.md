@@ -587,3 +587,8 @@ Changed/new files:
 - `src/core/release/publicResultDtoContract.ts`
 - `tests/core/publicResultDto.test.ts`
 - `tests/core/publicResultDtoContract.test.ts`
+
+
+## Phase 5.2 — Local Public-Link Preview Route Stub
+
+Changed files only. Adds `/r/preview`, a local-only preview client, public-link preview helper, preview contract gate, status docs, evidence snapshot, and tests. No backend/database/auth/payment/AI/public lookup is implemented.

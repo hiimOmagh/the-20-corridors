@@ -407,6 +407,7 @@ export function ResultsClient() {
           <button className="button" disabled={!exportUx.canAttemptExport} onClick={() => void exportShareCardImage(shareCard)} type="button">{exportUx.buttonLabel}</button>
           <button className="button secondary" onClick={() => void copyShareText(shareCard.copyText, 'card-copied')} type="button">Copy card text</button>
           <button className="button secondary" onClick={() => void copyShareText(viewModel.shareSummary, 'summary-copied')} type="button">Copy compact summary</button>
+          <Link className="button secondary" href="/r/preview">Preview public link</Link>
           <Link className="button secondary" href="/quiz">Retake</Link>
           <button className="button secondary" onClick={clearStoredResult} type="button">Clear local result</button>
           <Link className="button secondary" href="/">Home</Link>

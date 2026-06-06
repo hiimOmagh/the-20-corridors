@@ -84,7 +84,7 @@ const DTO_CONTRACT_DOC = 'docs/release/phase-5-public-result-dto-builder-contrac
 const PHASE_5_1_STATUS_DOC = 'docs/ui/phase-5-1-public-result-dto-builder-contract-status.md';
 
 const PUBLIC_ROUTE_PATHS = [
-  'src/app/r',
+  'src/app/r/[resultId]',
   'src/app/results/[resultId]',
   'src/app/public',
   'src/features/publicResultRoute',

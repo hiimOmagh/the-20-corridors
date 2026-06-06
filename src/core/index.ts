@@ -57,3 +57,24 @@ export type {
   CorridorsGoldenSnapshotDocument,
   CorridorsGoldenSnapshotVersion
 } from './serialization/goldenSnapshots';
+
+export {
+  PUBLIC_RESULT_DTO_ALLOWED_KEYS,
+  PUBLIC_RESULT_DTO_FORBIDDEN_KEYS,
+  PUBLIC_RESULT_DTO_SCHEMA_VERSION,
+  assertPublicResultDtoMetadata,
+  buildPublicResultDto,
+  containsForbiddenPublicResultDtoKeys,
+  findForbiddenPublicResultDtoKeys,
+  listPublicResultDtoKeys
+} from './public-link/publicResultDto';
+
+export type {
+  PublicResultAxisSummaryDto,
+  PublicResultContradictionSummaryDto,
+  PublicResultDto,
+  PublicResultDtoMetadata,
+  PublicResultDtoSchemaVersion,
+  PublicResultShareCardDto,
+  PublicResultTraitDto
+} from './public-link/publicResultDto';

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "phase-5.2-public-link-preview-v1",
+  "contractId": "phase-5-local-public-link-preview-route-stub",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-5-local-preview-route-stub",
+    "route": "/r/preview",
+    "publicResultDtoContractSchemaVersion": "phase-5.1-public-result-dto-contract-v1"
+  },
+  "gates": {
+    "publicDtoContractPassed": true,
+    "previewScriptExists": true,
+    "validateScriptRunsPreviewContract": true,
+    "previewRouteExists": true,
+    "previewClientExists": true,
+    "previewHelperExists": true,
+    "resultPageLinksToPreview": true,
+    "routeRequiredSignalsPresent": true,
+    "clientRequiredSignalsPresent": true,
+    "helperRequiredSignalsPresent": true,
+    "localDtoPreviewPassed": true,
+    "rawAnswerPreviewLeakageAbsent": true,
+    "noBackendDatabaseApiLookupSignals": true,
+    "statusDocExists": true,
+    "overallPassed": true
+  },
+  "files": {
+    "previewRoute": "src/app/r/preview/page.tsx",
+    "previewClient": "src/features/public-link/PublicLinkPreviewClient.tsx",
+    "previewHelper": "src/features/public-link/publicLinkPreview.ts",
+    "resultsClient": "src/features/results/ResultsClient.tsx",
+    "statusDoc": "docs/ui/phase-5-2-local-public-link-preview-route-stub-status.md"
+  },
+  "signalScan": {
+    "missingRouteSignals": [],
+    "missingClientSignals": [],
+    "missingHelperSignals": [],
+    "forbiddenPreviewSignals": [],
+    "forbiddenPrivateKeyCount": 0
+  },
+  "samplePreview": {
+    "dtoKeyCount": 13,
+    "axisSummaryCount": 6,
+    "contradictionSummaryCount": 1,
+    "boundaryNote": "Local preview only. Minimized DTO surface; individual choices and private scoring internals are excluded.",
+    "resultId": "local_preview_result_0001"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link",
+    "previewPublicLink": "tsx scripts/public-link-preview-contract.ts"
+  },
+  "issues": []
+}

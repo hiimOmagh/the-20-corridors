@@ -481,3 +481,8 @@ npm run privacy:public-link
 Phase 5.1 adds a minimized public result DTO builder. The builder derives from the public engine result and externally supplied anonymous metadata, excludes raw choices/private scoring internals, and does not add backend storage, public routes, authentication, payment, or AI.
 
 Validation includes `npm run contract:public-dto` through `npm run validate`.
+
+
+### Phase 5.2 — Local public-link preview route stub
+
+Adds `/r/preview` as a local-only simulation of a future public result link. It renders the minimized `PublicResultDto` from the browser session result only. No persistence, backend API, database, auth, payment, analytics, AI, or public result lookup is introduced.

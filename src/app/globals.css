@@ -3210,3 +3210,110 @@ body::after {
     grid-template-columns: 1fr;
   }
 }
+
+/* Phase 5.2 — Local public-link preview route */
+.public-preview-shell {
+  gap: 1.25rem;
+  max-width: 1180px;
+}
+
+.public-preview-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+  gap: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.public-preview-hero::before {
+  background: radial-gradient(circle at 12% 12%, rgba(125, 211, 252, 0.2), transparent 34%),
+    linear-gradient(135deg, rgba(250, 204, 21, 0.12), transparent 42%);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.public-preview-hero > * {
+  position: relative;
+}
+
+.public-preview-strip,
+.public-preview-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.public-preview-strip span,
+.public-preview-metrics span {
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  padding: 0.45rem 0.7rem;
+}
+
+.public-preview-aside,
+.public-preview-card {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.86), rgba(2, 6, 23, 0.72));
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  border-radius: 1.5rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  display: grid;
+  gap: 0.6rem;
+  padding: 1rem;
+}
+
+.public-preview-aside strong,
+.public-preview-card h3 {
+  color: var(--text);
+}
+
+.public-preview-aside span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.public-preview-card {
+  border-color: rgba(250, 204, 21, 0.18);
+}
+
+.public-preview-signature {
+  border-left: 3px solid var(--gold);
+  color: var(--text);
+  font-weight: 800;
+  padding-left: 0.85rem;
+}
+
+.public-preview-state {
+  max-width: 760px;
+}
+
+.boundary-list {
+  display: grid;
+  gap: 0.65rem;
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.boundary-list li {
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 1rem;
+  color: var(--muted);
+  padding: 0.8rem 0.9rem;
+}
+
+@media (max-width: 760px) {
+  .public-preview-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .public-preview-strip span,
+  .public-preview-metrics span {
+    width: 100%;
+  }
+}
