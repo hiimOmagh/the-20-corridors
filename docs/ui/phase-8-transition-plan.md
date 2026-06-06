@@ -251,3 +251,9 @@ Full validate remains green.
 ```
 
 Next intended phase: Phase 8.8 — Database Adapter Implementation Behind Disabled Factory Gate. It should add the adapter implementation without route binding until a separate activation gate is explicit.
+
+## Phase 8.8 — Database Adapter Implementation Behind Disabled Factory Gate
+
+Phase 8.8 implements the database adapter behind a disabled factory gate. Database adapter implementation exists, adapter methods map create/read/delete/prune to the Phase 8.5 query intents, and all SQL execution remains behind explicit adapter methods. Factory database adapter binding remains blocked by default. Routes still use memory/dry-run behavior. No production mutation smoke yet.
+
+Next: Phase 8.9 should add a controlled database adapter activation dry-run gate without public route persistence.

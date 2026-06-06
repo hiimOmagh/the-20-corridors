@@ -1118,3 +1118,8 @@ npm run build
 ```
 
 Scope: parameterized query readiness only. Defines server-only query descriptor helpers for the Phase 8.5 query intents, verifies placeholder/value alignment, and keeps SQL execution, network query smoke, database-backed adapter persistence, and route binding disabled.
+
+## Phase 8.8 — Database Adapter Implementation Behind Disabled Factory Gate
+
+Changed files are limited to the adapter implementation, release guard, tests, status docs, and validation wiring. No route binding, persistent public lookup, production mutation smoke, auth, payment, AI, analytics, or telemetry implementation is included.
+

@@ -739,3 +739,8 @@ npm run guard:database-query-readiness
 ```
 
 The guard confirms placeholder/value alignment, no raw string interpolation for user-controlled values, no mutation smoke against production DB, SDK import still confined to the Phase 8.6 smoke boundary, and routes still using memory/dry-run behavior.
+
+## Phase 8.8 — Database Adapter Implementation Behind Disabled Factory Gate
+
+Phase 8.8 adds the first server-only database adapter implementation while keeping activation disabled. The adapter maps create/read/delete/prune methods to the Phase 8.5 query intents through the Phase 8.7 parameterized descriptors. All SQL execution remains behind explicit adapter methods. Factory route binding remains blocked and routes still use memory/dry-run behavior.
+
