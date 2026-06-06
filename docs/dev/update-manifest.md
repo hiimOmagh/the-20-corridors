@@ -785,3 +785,31 @@ npm run build
 ```
 
 Scope: local-only public-link lifecycle UI controls. Simulates create/delete/reset behavior through component state and minimized DTO boundaries. No backend, API route, database, persistent public lookup route, browser persistence, network write, auth, payment, analytics, telemetry, or AI is implemented.
+
+## Phase 6.4 — Phase 6 Closure Gate + Public Link Lifecycle Smoke Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/phase6-closure-latest.json
+docs/release/phase-6-closure-review.md
+docs/ui/phase-6-4-phase-6-closure-gate-public-link-lifecycle-smoke-contract-status.md
+docs/ui/phase-7-transition-plan.md
+scripts/phase6-closure-gate.ts
+src/core/release/phase6ClosureGate.ts
+tests/core/phase6ClosureGate.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: formal Phase 6 closure only. Verifies public-storage contract, in-memory storage adapter, local persistent-link flow, and lifecycle UI contract. No backend/API/database/persistent public lookup route/browser persistence/network persistence/auth/payment/analytics/telemetry/AI implementation is introduced.

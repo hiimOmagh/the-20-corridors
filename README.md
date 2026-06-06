@@ -566,3 +566,15 @@ Validation now includes:
 ```text
 npm run lifecycle:public-link-ui
 ```
+
+## Phase 6.4 — Phase 6 Closure Gate + Public Link Lifecycle Smoke Contract
+
+Phase 6.4 formally closes the local public-link lifecycle phase. It verifies that the public storage contract, in-memory adapter, local persistent-link flow, and result-page lifecycle UI all pass together while keeping the implementation local-only.
+
+Validation now includes:
+
+```text
+npm run closure:phase6
+```
+
+The gate confirms that no backend API route, database, persistent public lookup route, browser persistence, network persistence, authentication, payment, analytics, telemetry, or AI implementation exists.
