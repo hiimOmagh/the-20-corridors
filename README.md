@@ -25,14 +25,15 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 3.6 — Phase 3 Closure Gate + Visual Smoke Contract**
+**Phase 6.0 — Persistent Public Result Link Storage Contract**
 
-This phase formally closes Phase 3 by adding a visual smoke contract and closure gate for the local visual identity layer:
+This phase defines the storage boundary for future persistent public result links without implementing storage infrastructure.
 
-- verifies landing, quiz, result, share-card, feedback, visual identity, and reduced-motion smoke signals
-- records Phase 3 closure evidence snapshots
-- keeps the visual layer local-only and non-exporting
-- prepares Phase 4 transition planning without enabling backend, database, AI/LLM, auth, payments, analytics, public links, image/PDF export, or scoring changes
+- defines `PublicResultStorageAdapter` as the future persistence seam
+- locks minimized `PublicResultDto` as the only allowed stored payload
+- defines anonymous non-sequential public ID, delete-token hash, and default expiry policies
+- adds `npm run contract:public-storage` and evidence at `docs/evidence/public-result-storage-latest.json`
+- keeps backend, API routes, database, auth, payment, analytics, telemetry, AI, and persistent public route lookup blocked
 
 ## Development rule
 
@@ -41,7 +42,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract
 ```
 
 ## Commands
@@ -275,7 +276,7 @@ npm run build
 Scope: subtle interaction polish, hover/focus/active state consistency, mobile tap-state safety, reduced-motion rules, and motion helper tests only. No new routes, export behavior, backend, database, AI/LLM, auth, payments, analytics, telemetry, public result links, or scoring methodology changes.
 
 
-## Phase 3.6 — Phase 3 Closure Gate + Visual Smoke Contract
+## Phase 3.6 — Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract + Visual Smoke Contract
 
 Changed/new files:
 
@@ -524,3 +525,9 @@ The full validation chain now includes:
 ```bash
 npm run closure:phase5
 ```
+
+## Phase 6.0 — Persistent Public Result Link Storage Contract
+
+Phase 6.0 defines the contract for future persistent public links. It introduces a storage adapter interface and record helpers, but deliberately avoids backend/database implementation. Stored records are limited to minimized `PublicResultDto` payloads plus anonymous metadata, expiry, delete-token hash, and status.
+
+Validation is covered by `npm run contract:public-storage`.

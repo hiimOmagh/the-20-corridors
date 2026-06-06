@@ -664,3 +664,32 @@ npm run build
 ```
 
 Scope: formal closure gate for the local public-link preview phase. Verifies Phase 4 closure, public-link privacy, public DTO, preview route contract, DTO-only rendering, local-only `/r/preview` scope, and absence of backend/API/database/auth/payment/AI/public result lookup. No persistence or public-link backend is implemented.
+
+## Phase 6.0 — Persistent Public Result Link Storage Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-result-storage-latest.json
+docs/release/phase-6-persistent-public-result-link-storage-contract.md
+docs/ui/phase-6-0-persistent-public-result-link-storage-contract-status.md
+scripts/public-result-storage-contract.ts
+src/core/public-link/publicResultStorage.ts
+src/core/release/publicResultStorageContract.ts
+tests/core/publicResultStorage.test.ts
+tests/core/publicResultStorageContract.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: contract-only package for future persistent public result links. Defines storage adapter interface, minimized DTO-only storage records, anonymous non-sequential public ID policy, delete-token hash policy, default 30-day expiry, and storage contract evidence. No backend, API route, database, auth, payment, analytics, telemetry, AI, persistent public result lookup, or full-result persistence is implemented.
