@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "phase-8.5-database-query-contract-v1",
+  "contractId": "phase-8-database-query-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-8-5-database-query-contract-only",
+    "queryContractSchemaVersion": "phase-8.5-database-query-contract-v1",
+    "routeHandlerMode": "next-route-files-dry-run-in-memory-only"
+  },
+  "gates": {
+    "databaseSdkDecisionPassed": true,
+    "queryScriptExists": true,
+    "validateScriptRunsQueryContract": true,
+    "queryModuleExists": true,
+    "queryGuardModuleExists": true,
+    "queryDocExists": true,
+    "phase85StatusDocExists": true,
+    "tableContractDefined": true,
+    "columnsAndTypesDefined": true,
+    "queryIntentsDefined": true,
+    "softDeleteBehaviorDefined": true,
+    "expiredRecordBehaviorDefined": true,
+    "deleteTokenHashLookupDefined": true,
+    "noSqlExecutionYet": true,
+    "noSdkInstallationOrImportYet": true,
+    "factoryStillCannotCreateDatabaseAdapter": true,
+    "routesRemainMemoryDryRun": true,
+    "noDatabaseClientMigrationAuthPaymentAiAnalyticsImplementation": true,
+    "noPersistentPublicLookupRoute": true,
+    "overallPassed": true
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers && npm run routes:backend-handlers && npm run smoke:backend-routes && npm run closure:phase7 && npm run contract:database-adapter && npm run guard:database-runtime-selection && npm run contract:database-adapter-factory && npm run contract:database-client-config && npm run contract:database-sdk-decision && npm run contract:database-query",
+    "databaseSdkDecision": "tsx scripts/database-sdk-selection-decision-record.ts",
+    "databaseQueryContract": "tsx scripts/database-query-contract.ts"
+  },
+  "docs": {
+    "queryContract": "docs/release/phase-8-database-query-contract.md",
+    "phase85Status": "docs/ui/phase-8-5-database-query-contract-status.md",
+    "phase8Transition": "docs/ui/phase-8-transition-plan.md"
+  },
+  "queryContract": {
+    "status": "query-contract-only-no-sql-execution",
+    "selectedSdkName": "@neondatabase/serverless",
+    "tableName": "public_result_links",
+    "columns": [
+      {
+        "name": "schema_version",
+        "type": "text",
+        "nullable": false,
+        "source": "DatabasePublicResultStorageRecord.schemaVersion",
+        "constraints": [
+          "equals-current-database-record-schema-version"
+        ]
+      },
+      {
+        "name": "public_id",
+        "type": "text",
+        "nullable": false,
+        "source": "DatabasePublicResultStorageRecord.publicId",
+        "constraints": [
+          "primary-key",
+          "anonymous-non-sequential-id"
+        ]
+      },
+      {
+        "name": "dto",
+        "type": "jsonb",
+        "nullable": false,
+        "source": "DatabasePublicResultStorageRecord.dto",
+        "constraints": [
+          "minimized-public-result-dto-only",
+          "no-raw-answers",
+          "no-private-score-internals"
+        ]
+      },
+      {
+        "name": "delete_token_hash",
+        "type": "text",
+        "nullable": false,
+        "source": "DatabasePublicResultStorageRecord.deleteTokenHash",
+        "constraints": [
+          "hash-only",
+          "raw-delete-token-never-stored"
+        ]
+      },
+      {
+        "name": "created_at",
+        "type": "timestamptz",
+        "nullable": false,
+        "source": "DatabasePublicResultStorageRecord.createdAt",
+        "constraints": [
+          "iso-timestamp"
+        ]
+      },
+      {
+        "name": "expires_at",
+        "type": "timestamptz",
+        "nullable": false,
+        "source": "DatabasePublicResultStorageRecord.expiresAt",
+        "constraints": [
+          "iso-timestamp",
+          "read-time-expiry-check"
+        ]
+      },
+      {
+        "name": "deleted_at",
+        "type": "timestamptz",
+        "nullable": true,
+        "source": "DatabasePublicResultStorageRecord.deletedAt",
+        "constraints": [
+          "null-until-soft-delete",
+          "deleted-at-wins-over-active-status"
+        ]
+      },
+      {
+        "name": "status",
+        "type": "text",
+        "nullable": false,
+        "source": "DatabasePublicResultStorageRecord.status",
+        "constraints": [
+          "active-expired-deleted-only"
+        ]
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamptz",
+        "nullable": false,
+        "source": "database-maintained-metadata",
+        "constraints": [
+          "mutation-timestamp",
+          "not-exposed-in-public-dto"
+        ]
+      }
+    ],
+    "queryIntents": [
+      {
+        "name": "insert-public-result-record",
+        "operation": "insert",
+        "parameters": [
+          "schema_version",
+          "public_id",
+          "dto",
+          "delete_token_hash",
+          "created_at",
+          "expires_at",
+          "deleted_at",
+          "status",
+          "updated_at"
+        ],
+        "returns": "inserted-record-row",
+        "behavior": "create-one-minimized-public-result-record-or-fail-without-issuing-success",
+        "executionAllowed": false
+      },
+      {
+        "name": "read-active-public-result-by-public-id",
+        "operation": "select",
+        "parameters": [
+          "public_id",
+          "now_iso"
+        ],
+        "returns": "record-or-null-with-read-disposition",
+        "behavior": "missing-returns-null-expired-returns-expired-deleted-returns-deleted-active-returns-dto",
+        "executionAllowed": false
+      },
+      {
+        "name": "verify-delete-token-hash-for-public-id",
+        "operation": "select",
+        "parameters": [
+          "public_id",
+          "delete_token_hash"
+        ],
+        "returns": "match-or-null",
+        "behavior": "hash-match-required-before-soft-delete",
+        "executionAllowed": false
+      },
+      {
+        "name": "soft-delete-public-result-by-public-id",
+        "operation": "update",
+        "parameters": [
+          "public_id",
+          "delete_token_hash",
+          "deleted_at",
+          "updated_at"
+        ],
+        "returns": "updated-record-or-null",
+        "behavior": "set-status-deleted-and-deleted-at-only-when-delete-token-hash-matches",
+        "executionAllowed": false
+      },
+      {
+        "name": "mark-expired-public-results",
+        "operation": "update",
+        "parameters": [
+          "now_iso",
+          "updated_at"
+        ],
+        "returns": "expired-row-count",
+        "behavior": "mark-non-deleted-expired-records-with-status-expired-without-removing-dto",
+        "executionAllowed": false
+      },
+      {
+        "name": "prune-deleted-or-expired-public-results",
+        "operation": "delete",
+        "parameters": [
+          "retention_cutoff_iso"
+        ],
+        "returns": "deleted-row-count",
+        "behavior": "future-retention-cleanup-only-not-route-read-path",
+        "executionAllowed": false
+      }
+    ],
+    "behaviorRules": [
+      "query-contract-is-static-and-non-executable-in-phase-8-5",
+      "table-contract-is-defined-before-sdk-installation",
+      "column-names-and-types-are-explicit",
+      "insert-read-delete-update-expiry-query-intents-are-defined",
+      "soft-delete-sets-deleted-at-and-status-deleted",
+      "deleted-at-wins-over-active-status",
+      "expired-records-return-expired-disposition-at-read-time",
+      "delete-token-hash-is-used-for-delete-verification",
+      "raw-delete-token-is-never-persisted-or-selected",
+      "dto-column-stores-minimized-public-result-dto-only",
+      "no-sql-execution-or-client-binding-is-allowed",
+      "database-sdk-remains-not-installed-and-not-imported"
+    ],
+    "summarizedRules": [
+      "phase:phase-8.5-database-query-contract",
+      "schema:phase-8.5-database-query-contract-v1",
+      "status:query-contract-only-no-sql-execution",
+      "table:public_result_links",
+      "query-contract-is-static-and-non-executable-in-phase-8-5",
+      "table-contract-is-defined-before-sdk-installation",
+      "column-names-and-types-are-explicit",
+      "insert-read-delete-update-expiry-query-intents-are-defined",
+      "soft-delete-sets-deleted-at-and-status-deleted",
+      "deleted-at-wins-over-active-status",
+      "expired-records-return-expired-disposition-at-read-time",
+      "delete-token-hash-is-used-for-delete-verification",
+      "raw-delete-token-is-never-persisted-or-selected",
+      "dto-column-stores-minimized-public-result-dto-only",
+      "no-sql-execution-or-client-binding-is-allowed",
+      "database-sdk-remains-not-installed-and-not-imported"
+    ],
+    "queryExecutionAllowed": false,
+    "sqlClientAllowed": false,
+    "sdkInstallAllowed": false,
+    "sdkImportAllowed": false,
+    "routeBindingAllowed": false,
+    "factoryDatabaseAdapterAllowed": false
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/publicResultDatabaseQueryContract.ts",
+      "src/core/public-link/publicResultDatabaseSdkDecision.ts",
+      "src/core/public-link/publicResultStorageAdapterFactory.ts",
+      "src/core/public-link/publicResultRouteHandlers.ts",
+      "docs/release/phase-8-database-query-contract.md",
+      "docs/ui/phase-8-5-database-query-contract-status.md",
+      "docs/ui/phase-8-transition-plan.md"
+    ],
+    "implementationFiles": [
+      "src/core/public-link/publicResultDatabaseQueryContract.ts",
+      "src/core/public-link/publicResultStorageAdapterFactory.ts",
+      "src/core/public-link/publicResultRouteHandlers.ts"
+    ],
+    "blockedPaths": [],
+    "installedDatabasePackages": [],
+    "importedDatabaseSdkSignals": [],
+    "executableSqlSignals": [],
+    "blockedIntegrationSignals": [],
+    "persistentPublicLookupRouteFiles": [],
+    "missingContractPhrases": []
+  },
+  "coverage": {
+    "databaseSdkDecisionIssueCount": 0,
+    "checkedFileCount": 7,
+    "implementationFileCount": 3,
+    "columnCount": 9,
+    "queryIntentCount": 6,
+    "behaviorRuleCount": 12,
+    "blockedPathCount": 0,
+    "installedDatabasePackageCount": 0,
+    "importedDatabaseSdkSignalCount": 0,
+    "executableSqlSignalCount": 0,
+    "blockedIntegrationSignalCount": 0,
+    "persistentRouteCount": 0
+  },
+  "issues": []
+}

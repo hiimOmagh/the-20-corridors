@@ -143,3 +143,40 @@ Full validate remains green.
 ```
 
 Next intended phase: Phase 8.5 — Database Query Contract, still without route binding unless the SDK/client gate explicitly allows it.
+
+## Phase 8.5 — Database Query Contract
+
+Goal: lock the database table and query contract before installing or importing any database SDK.
+
+Scope:
+
+- define `public_result_links` table contract
+- define column names and types
+- define insert/read/delete/update-expiry query intents
+- define soft-delete behavior
+- define expired-record behavior
+- define delete-token-hash lookup behavior
+- prove no SQL execution exists
+- prove no SDK installation/import exists
+- prove factory database adapter creation remains blocked
+- prove routes still use memory/dry-run behavior
+
+Acceptance gate:
+
+```text
+Table contract is defined.
+Column names and types are defined.
+Insert/read/delete/update-expiry query intents are defined.
+Soft-delete behavior is defined.
+Expired-record behavior is defined.
+Delete-token-hash lookup behavior is defined.
+No SQL execution yet.
+No SDK installation/import yet.
+Factory still cannot create database adapter.
+Routes still use memory/dry-run behavior.
+Phase 8.0–8.4 gates remain green.
+Full validate remains green.
+```
+
+Next intended phase: Phase 8.6 — Database SDK Install + Client Smoke Boundary. The SDK may be introduced only behind a smoke boundary and must still not bind routes to production persistence until the adapter implementation gate is explicit.
+

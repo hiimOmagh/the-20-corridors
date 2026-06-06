@@ -1028,3 +1028,26 @@ tests/core/publicResultDatabaseSdkDecision.test.ts
 Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
 
 Scope: decision record only. Selects PostgreSQL with future `@neondatabase/serverless` SDK, documents rejected alternatives, serverless runtime assumptions, secret handling, and database failure modes. The SDK is not installed, not imported, and not bound to the factory or routes. No production database client, migrations, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced.
+## Phase 8.5 — Database Query Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/database-query-contract-latest.json
+docs/release/phase-8-database-query-contract.md
+docs/ui/phase-8-5-database-query-contract-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/database-query-contract.ts
+src/core/public-link/publicResultDatabaseQueryContract.ts
+src/core/release/databaseQueryContract.ts
+tests/core/databaseQueryContract.test.ts
+tests/core/publicResultDatabaseQueryContract.test.ts
+```
+
+Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
+
+Scope: query contract only. Defines the `public_result_links` table contract, explicit columns, non-executable insert/read/delete/update-expiry intents, soft-delete behavior, expired-record behavior, and delete-token-hash lookup semantics. No SQL execution, database SDK installation/import, database client creation, migration, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced. Factory database adapter creation and route binding remain blocked.
+
