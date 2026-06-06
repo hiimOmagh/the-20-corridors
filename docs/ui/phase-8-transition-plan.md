@@ -257,3 +257,26 @@ Next intended phase: Phase 8.8 — Database Adapter Implementation Behind Disabl
 Phase 8.8 implements the database adapter behind a disabled factory gate. Database adapter implementation exists, adapter methods map create/read/delete/prune to the Phase 8.5 query intents, and all SQL execution remains behind explicit adapter methods. Factory database adapter binding remains blocked by default. Routes still use memory/dry-run behavior. No production mutation smoke yet.
 
 Next: Phase 8.9 should add a controlled database adapter activation dry-run gate without public route persistence.
+
+## Phase 8.9 — Database Adapter Activation Dry-Run Gate
+
+Phase 8.9 adds a controlled database adapter activation dry-run. The dry-run selects and exercises the database adapter implementation through a fake executor, while preserving the disabled factory gate.
+
+Acceptance gate:
+
+```text
+Activation dry-run gate exists.
+Database adapter can be selected in a controlled simulation.
+Factory route binding remains disabled.
+Route handlers still use memory/dry-run behavior.
+No real production mutation smoke.
+No network SQL execution.
+No persistent /r/[publicId] lookup.
+Missing/invalid env still fails closed.
+Adapter implementation gate remains green.
+Query readiness guard remains green.
+Client smoke boundary remains green.
+Full validate remains green.
+```
+
+Next intended phase: Phase 8.10 — Database Adapter Factory Activation Contract. This should permit controlled factory-level database adapter construction only in non-route contexts, while route handlers remain protected until an explicit public API activation gate.

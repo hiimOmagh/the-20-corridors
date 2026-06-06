@@ -744,3 +744,15 @@ The guard confirms placeholder/value alignment, no raw string interpolation for 
 
 Phase 8.8 adds the first server-only database adapter implementation while keeping activation disabled. The adapter maps create/read/delete/prune methods to the Phase 8.5 query intents through the Phase 8.7 parameterized descriptors. All SQL execution remains behind explicit adapter methods. Factory route binding remains blocked and routes still use memory/dry-run behavior.
 
+
+## Phase 8.9 — Database Adapter Activation Dry-Run Gate
+
+Phase 8.9 adds a controlled activation dry-run for the database adapter. The adapter can be selected and exercised through a fake executor, proving the implementation path without enabling production persistence.
+
+Run the Phase 8.9 gate:
+
+```bash
+npm run dryrun:database-adapter-activation
+```
+
+The dry-run keeps factory route binding disabled, keeps public routes in memory/dry-run behavior, executes no network query, performs no production mutation smoke, and introduces no persistent `/r/[publicId]` lookup.

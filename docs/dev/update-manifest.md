@@ -1123,3 +1123,33 @@ Scope: parameterized query readiness only. Defines server-only query descriptor 
 
 Changed files are limited to the adapter implementation, release guard, tests, status docs, and validation wiring. No route binding, persistent public lookup, production mutation smoke, auth, payment, AI, analytics, or telemetry implementation is included.
 
+
+## Phase 8.9 — Database Adapter Activation Dry-Run Gate
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/database-adapter-activation-dry-run-gate-latest.json
+docs/release/phase-8-database-adapter-activation-dry-run-gate.md
+docs/ui/phase-8-9-database-adapter-activation-dry-run-gate-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/database-adapter-activation-dry-run-gate.ts
+src/core/public-link/publicResultDatabaseAdapterActivationDryRun.ts
+src/core/release/databaseAdapterActivationDryRunGate.ts
+tests/core/databaseAdapterActivationDryRunGate.test.ts
+tests/core/publicResultDatabaseAdapterActivationDryRun.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: activation dry-run only. The database adapter can be selected in a controlled simulation through a fake executor, but factory route binding remains disabled, public route handlers remain memory/dry-run, no production mutation smoke runs, and no persistent `/r/[publicId]` lookup is introduced.
