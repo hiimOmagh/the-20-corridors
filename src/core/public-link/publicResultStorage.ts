@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import type { PublicResultDto } from './publicResultDto';
 
 export const PUBLIC_RESULT_STORAGE_SCHEMA_VERSION = 'phase-6.0-public-result-storage-v1' as const;
@@ -126,6 +127,28 @@ export function isSafeDeleteToken(value: string): boolean {
 
 export function isSafeDeleteTokenHash(value: string): boolean {
   return /^[a-zA-Z0-9_-]{32,160}$/.test(value);
+}
+
+
+export function buildPublicResultDeleteTokenHash(deleteToken: string): string {
+  if (!isSafeDeleteToken(deleteToken)) {
+    throw new Error('Public result delete token must be safe before hashing.');
+  }
+
+  return `sha256_${createHash('sha256').update(deleteToken).digest('base64url')}`;
+}
+
+export function doesDeleteTokenMatchHash(deleteToken: string, deleteTokenHash: string): boolean {
+  if (!isSafeDeleteToken(deleteToken) || !isSafeDeleteTokenHash(deleteTokenHash)) return false;
+  return buildPublicResultDeleteTokenHash(deleteToken) === deleteTokenHash;
+}
+
+export function resolvePublicResultStorageStatus(
+  record: PublicResultStorageRecord,
+  nowIso: string
+): PublicResultStorageStatus {
+  if (record.status === 'deleted') return 'deleted';
+  return isExpiredAt(record.expiresAt, nowIso) ? 'expired' : record.status;
 }
 
 export function buildDefaultPublicResultExpiry(createdAtIso: string): string {

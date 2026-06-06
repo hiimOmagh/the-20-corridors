@@ -52,7 +52,7 @@
     "resultId": "local_preview_result_0001"
   },
   "scripts": {
-    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory",
     "previewPublicLink": "tsx scripts/public-link-preview-contract.ts"
   },
   "issues": []

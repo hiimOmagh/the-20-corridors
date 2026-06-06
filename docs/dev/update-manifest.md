@@ -693,3 +693,34 @@ npm run build
 ```
 
 Scope: contract-only package for future persistent public result links. Defines storage adapter interface, minimized DTO-only storage records, anonymous non-sequential public ID policy, delete-token hash policy, default 30-day expiry, and storage contract evidence. No backend, API route, database, auth, payment, analytics, telemetry, AI, persistent public result lookup, or full-result persistence is implemented.
+
+
+## Phase 6.1 — In-Memory Public Result Storage Adapter
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/in-memory-public-result-storage-latest.json
+docs/release/phase-6-in-memory-public-result-storage-adapter.md
+docs/ui/phase-6-1-in-memory-public-result-storage-adapter-status.md
+scripts/in-memory-public-result-storage-contract.ts
+src/core/public-link/inMemoryPublicResultStorage.ts
+src/core/public-link/publicResultStorage.ts
+src/core/release/inMemoryPublicResultStorageContract.ts
+tests/core/inMemoryPublicResultStorage.test.ts
+tests/core/inMemoryPublicResultStorageContract.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: in-memory adapter only. Exercises create/read/delete/prune behavior against minimized PublicResultDto-only records. No database, backend API route, persistent public route lookup, browser persistence, network persistence, auth, payment, analytics, or AI.

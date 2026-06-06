@@ -531,3 +531,16 @@ npm run closure:phase5
 Phase 6.0 defines the contract for future persistent public links. It introduces a storage adapter interface and record helpers, but deliberately avoids backend/database implementation. Stored records are limited to minimized `PublicResultDto` payloads plus anonymous metadata, expiry, delete-token hash, and status.
 
 Validation is covered by `npm run contract:public-storage`.
+
+
+## Phase 6.1 — In-Memory Public Result Storage Adapter
+
+Phase 6.1 implements the first `PublicResultStorageAdapter` using memory only. It exercises create/read/delete/prune behavior, duplicate public-id rejection, delete-token hash verification, expired/deleted/not-found states, and DTO-only record preservation.
+
+Scope remains local and non-persistent: no database, no backend API route, no persistent public route lookup, no browser persistence, no network persistence, no auth/payment/AI/analytics.
+
+Validation now includes:
+
+```text
+npm run adapter:public-storage-memory
+```
