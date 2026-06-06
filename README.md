@@ -544,3 +544,13 @@ Validation now includes:
 ```text
 npm run adapter:public-storage-memory
 ```
+
+## Phase 6.2 — Local Persistent-Link Flow Stub
+
+Phase 6.2 wires the in-memory storage adapter into a local-only persistent-link flow helper. It simulates create/read/delete/prune lifecycle behavior from a minimized `PublicResultDto` without adding backend routes, database persistence, public ID lookup routes, browser persistence, network transport, authentication, payment, analytics, or AI.
+
+Validation now includes:
+
+```text
+npm run flow:public-link-memory
+```

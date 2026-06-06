@@ -724,3 +724,32 @@ npm run build
 ```
 
 Scope: in-memory adapter only. Exercises create/read/delete/prune behavior against minimized PublicResultDto-only records. No database, backend API route, persistent public route lookup, browser persistence, network persistence, auth, payment, analytics, or AI.
+
+## Phase 6.2 — Local Persistent-Link Flow Stub
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/local-persistent-link-flow-latest.json
+docs/release/phase-6-local-persistent-link-flow-stub.md
+docs/ui/phase-6-2-local-persistent-link-flow-stub-status.md
+scripts/local-persistent-link-flow-contract.ts
+src/core/public-link/localPersistentLinkFlow.ts
+src/core/release/localPersistentLinkFlowContract.ts
+tests/core/localPersistentLinkFlow.test.ts
+tests/core/localPersistentLinkFlowContract.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: local flow helper only. Simulates create/read/delete/prune lifecycle through the in-memory adapter, verifies delete-token behavior and minimized DTO-only records, and preserves the local `/r/preview` stub boundary. No database, backend API route, persistent public ID lookup route, browser persistence, network persistence, auth, payment, analytics, telemetry, or AI is implemented.

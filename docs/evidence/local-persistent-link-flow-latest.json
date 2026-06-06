@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "phase-6.2-local-persistent-link-flow-stub-v1",
+  "contractId": "phase-6-local-persistent-link-flow-stub",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-6-local-flow-helper-only",
+    "inMemoryAdapterSchemaVersion": "phase-6.1-in-memory-public-result-storage-adapter-v1"
+  },
+  "gates": {
+    "inMemoryAdapterContractPassed": true,
+    "flowHelperExists": true,
+    "flowScriptExists": true,
+    "validateScriptRunsFlowContract": true,
+    "contractDocExists": true,
+    "phase62StatusDocExists": true,
+    "createReadDeleteLifecyclePassed": true,
+    "wrongDeleteTokenRejected": true,
+    "pruneDeletedRecordPassed": true,
+    "dtoOnlyStoragePreserved": true,
+    "deleteTokenBehaviorPassed": true,
+    "previewRouteIsLocalOnlyStub": true,
+    "noRouteApiDatabaseOrPersistentLookup": true,
+    "noAuthPaymentAiAnalytics": true,
+    "noRawChoiceOrPrivateScoreLeakage": true,
+    "noBrowserPersistenceOrNetworkSignals": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "contract": "docs/release/phase-6-local-persistent-link-flow-stub.md",
+    "phase62Status": "docs/ui/phase-6-2-local-persistent-link-flow-stub-status.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory",
+    "localFlowContract": "tsx scripts/local-persistent-link-flow-contract.ts",
+    "inMemoryAdapterContract": "tsx scripts/in-memory-public-result-storage-contract.ts"
+  },
+  "lifecycle": {
+    "phase": "phase-6.2-local-persistent-link-flow-stub",
+    "previewRoute": "/r/preview",
+    "createdStatus": "active",
+    "readAfterCreateStatus": "active",
+    "wrongDeleteStatus": "active",
+    "deleteStatus": "deleted",
+    "readAfterDeleteStatus": "deleted",
+    "prunedDeletedCount": 1,
+    "rawAnswerLeakageCount": 0,
+    "fullResultLeakageCount": 0,
+    "summary": [
+      "phase:phase-6.2-local-persistent-link-flow-stub",
+      "previewRoute:/r/preview",
+      "created:active",
+      "readAfterCreate:active",
+      "wrongDelete:active",
+      "delete:deleted",
+      "readAfterDelete:deleted",
+      "pruned:1",
+      "rawLeaks:0",
+      "fullResultLeaks:0"
+    ]
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/localPersistentLinkFlow.ts",
+      "docs/release/phase-6-local-persistent-link-flow-stub.md",
+      "docs/ui/phase-6-2-local-persistent-link-flow-stub-status.md"
+    ],
+    "blockedPaths": [],
+    "persistentRouteFiles": [],
+    "blockedSignals": [],
+    "rawOrPrivateSignals": [],
+    "browserPersistenceOrNetworkSignals": [],
+    "missingContractPhrases": []
+  },
+  "coverage": {
+    "inMemoryAdapterIssueCount": 0,
+    "checkedFileCount": 3,
+    "lifecycleOperationCount": 5
+  },
+  "issues": []
+}
