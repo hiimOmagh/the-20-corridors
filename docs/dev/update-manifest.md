@@ -1051,3 +1051,40 @@ Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm
 
 Scope: query contract only. Defines the `public_result_links` table contract, explicit columns, non-executable insert/read/delete/update-expiry intents, soft-delete behavior, expired-record behavior, and delete-token-hash lookup semantics. No SQL execution, database SDK installation/import, database client creation, migration, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced. Factory database adapter creation and route binding remain blocked.
 
+
+## Phase 8.6 — Database SDK Install + Client Smoke Boundary
+
+Changed/new files:
+
+```text
+README.md
+package.json
+package-lock.json
+docs/dev/update-manifest.md
+docs/evidence/database-client-smoke-boundary-latest.json
+docs/evidence/database-query-contract-latest.json
+docs/evidence/database-sdk-selection-decision-record-latest.json
+docs/release/phase-8-database-sdk-client-smoke-boundary.md
+docs/ui/phase-8-6-database-sdk-client-smoke-boundary-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/database-client-smoke-boundary.ts
+src/core/public-link/publicResultDatabaseClientSmokeBoundary.ts
+src/core/release/databaseClientSmokeBoundary.ts
+src/core/release/databaseQueryContract.ts
+src/core/release/databaseSdkSelectionDecisionRecord.ts
+tests/core/databaseClientSmokeBoundary.test.ts
+tests/core/publicResultDatabaseClientSmokeBoundary.test.ts
+tests/core/databaseQueryContract.test.ts
+tests/core/databaseSdkSelectionDecisionRecord.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: install and lock `@neondatabase/serverless`, add a server-only non-network client smoke boundary, and keep database adapter/route persistence blocked.

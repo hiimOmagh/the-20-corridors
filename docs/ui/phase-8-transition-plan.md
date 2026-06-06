@@ -180,3 +180,38 @@ Full validate remains green.
 
 Next intended phase: Phase 8.6 — Database SDK Install + Client Smoke Boundary. The SDK may be introduced only behind a smoke boundary and must still not bind routes to production persistence until the adapter implementation gate is explicit.
 
+
+## Phase 8.6 — Database SDK Install + Client Smoke Boundary
+
+Goal: install and lock the selected database SDK while keeping database persistence disabled.
+
+Scope:
+
+- install `@neondatabase/serverless`
+- add a server-only client smoke boundary
+- prove SDK import is confined to that boundary
+- prove missing/invalid/public database env fails closed before client creation
+- prove complete database env can create a non-network smoke-only query function
+- prove no SQL mutation is executed
+- prove no database-backed adapter exists yet
+- prove factory still refuses route-bound database adapter
+- prove routes still use memory/dry-run behavior
+
+Acceptance gate:
+
+```text
+@neondatabase/serverless is installed and locked.
+SDK import exists only in server-only client smoke boundary.
+Client smoke supports non-network validation first.
+Missing env fails closed.
+Invalid env fails closed.
+Client-exposed env fails closed.
+No SQL mutation is executed.
+No database-backed adapter exists yet.
+Factory still refuses route-bound database adapter.
+Routes still use memory/dry-run behavior.
+Phase 8.0–8.5 gates remain green.
+Full validate remains green.
+```
+
+Next intended phase: Phase 8.7 — Database Client Query Readiness Guard, still without route persistence unless explicitly approved.

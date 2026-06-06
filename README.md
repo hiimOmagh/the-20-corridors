@@ -705,3 +705,25 @@ npm run contract:database-query
 ```
 
 The contract confirms that no SQL execution exists, no SDK is installed/imported, the factory still cannot create a database adapter, and routes still use memory/dry-run behavior.
+
+## Phase 8.6 — Database SDK Install + Client Smoke Boundary
+
+Phase 8.6 installs and locks `@neondatabase/serverless` after the SDK decision and query contracts are already green.
+
+Current persistence status:
+
+- `@neondatabase/serverless` is installed and locked.
+- The SDK import exists only in `src/core/public-link/publicResultDatabaseClientSmokeBoundary.ts`.
+- The client smoke boundary is server-only and non-network.
+- Missing/invalid/public database env fails closed before client creation.
+- Complete database env can create a smoke-only Neon query function without executing SQL.
+- No SQL mutation is executed.
+- No database-backed adapter exists yet.
+- Factory route binding for database mode remains blocked.
+- Public-result routes still use memory/dry-run behavior.
+
+Run the Phase 8.6 gate:
+
+```text
+npm run smoke:database-client
+```

@@ -160,7 +160,6 @@ const PERSISTENT_PUBLIC_LOOKUP_ROUTES = [
 ] as const;
 
 const DATABASE_PACKAGES_TO_BLOCK_UNTIL_CLIENT_PHASE = [
-  '@neondatabase/serverless',
   '@supabase/supabase-js',
   'prisma',
   '@prisma/client',
