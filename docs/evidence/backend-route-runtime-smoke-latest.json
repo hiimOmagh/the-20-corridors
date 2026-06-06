@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "phase-7.4-backend-route-runtime-smoke-v1",
+  "contractId": "phase-7-backend-route-runtime-smoke-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-7-backend-route-runtime-smoke-contract",
+    "routeHandlersSchemaVersion": "phase-7.3-backend-route-handlers-v1",
+    "routeHandlerMode": "next-route-files-dry-run-in-memory-only",
+    "backendRouteHandlersContractSchemaVersion": "phase-7.3-backend-route-handlers-contract-v1"
+  },
+  "gates": {
+    "backendRouteHandlersContractPassed": true,
+    "runtimeSmokeScriptExists": true,
+    "validateScriptRunsRuntimeSmoke": true,
+    "runtimeSmokeContractDocExists": true,
+    "phase74StatusDocExists": true,
+    "phase7ClosureCriteriaDocExists": true,
+    "actualRouteFilesExist": true,
+    "routeFilesUseRouteHelperLayer": true,
+    "createReadDeleteRuntimeFlowPassed": true,
+    "statusMappingPreserved": true,
+    "dtoOnlyRuntimeResponsesPreserved": true,
+    "deleteTokenTransportPreserved": true,
+    "responseHeadersPreserveDryRunMode": true,
+    "malformedCreateHandled": true,
+    "unknownReadHandled": true,
+    "noRawAnswerOrFullResultTransport": true,
+    "noDatabaseAuthPaymentAiAnalyticsImplementation": true,
+    "noPersistentPublicLookupRoute": true,
+    "routeRuntimeSmokePreparesPhase7Closure": true,
+    "overallPassed": true
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers && npm run routes:backend-handlers && npm run smoke:backend-routes",
+    "runtimeSmoke": "tsx scripts/backend-route-runtime-smoke-contract.ts",
+    "backendRouteHandlers": "tsx scripts/backend-route-handlers-contract.ts"
+  },
+  "docs": {
+    "runtimeSmokeContract": "docs/release/phase-7-backend-route-runtime-smoke-contract.md",
+    "phase74Status": "docs/ui/phase-7-4-backend-route-runtime-smoke-contract-status.md",
+    "phase7ClosureCriteria": "docs/release/phase-7-closure-criteria.md"
+  },
+  "routes": {
+    "collectionRouteFile": "src/app/api/public-results/route.ts",
+    "itemRouteFile": "src/app/api/public-results/[publicId]/route.ts",
+    "approvedRouteCount": 2,
+    "helperSignals": [
+      "handlePublicResultCreateRouteBody",
+      "handlePublicResultReadRoute",
+      "handlePublicResultDeleteRouteBody"
+    ]
+  },
+  "runtimeFlow": {
+    "createStatus": 201,
+    "readStatus": 200,
+    "wrongDeleteStatus": 403,
+    "deleteStatus": 200,
+    "readAfterDeleteStatus": 410,
+    "malformedCreateStatus": 400,
+    "unknownReadStatus": 404,
+    "createHeaderMode": "next-route-files-dry-run-in-memory-only",
+    "readHeaderMode": "next-route-files-dry-run-in-memory-only",
+    "deleteHeaderMode": "next-route-files-dry-run-in-memory-only"
+  },
+  "responseSafety": {
+    "createKeys": [
+      "deleteToken",
+      "dto",
+      "expiresAt",
+      "publicId",
+      "publicPath",
+      "schemaVersion"
+    ],
+    "readKeys": [
+      "dto",
+      "expiresAt",
+      "publicId",
+      "schemaVersion",
+      "status"
+    ],
+    "deleteKeys": [
+      "publicId",
+      "schemaVersion",
+      "status"
+    ],
+    "createIncludesDeleteToken": true,
+    "readIncludesDeleteToken": false,
+    "deleteIncludesDeleteToken": false,
+    "readAfterDeleteDtoIsNull": true
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/app/api/public-results/route.ts",
+      "src/app/api/public-results/[publicId]/route.ts",
+      "src/core/public-link/publicResultRouteHandlers.ts",
+      "src/core/public-link/publicResultHandlerDryRun.ts",
+      "src/core/public-link/publicResultApi.ts",
+      "docs/release/phase-7-backend-route-runtime-smoke-contract.md",
+      "docs/ui/phase-7-4-backend-route-runtime-smoke-contract-status.md",
+      "docs/release/phase-7-closure-criteria.md"
+    ],
+    "blockedImplementationSignals": [],
+    "rawOrFullResultSignals": [],
+    "persistentPublicLookupRouteFiles": [],
+    "missingContractPhrases": []
+  },
+  "coverage": {
+    "backendRouteHandlersIssueCount": 0,
+    "runtimeStatusCodeCount": 7,
+    "checkedFileCount": 8,
+    "routeFileCount": 2
+  },
+  "issues": []
+}

@@ -605,3 +605,8 @@ npm run routes:backend-handlers
 ```
 
 The full `npm run validate` chain now includes this route-handler contract.
+
+
+### Phase 7.4 — Backend Route Runtime Smoke Contract
+
+Adds `npm run smoke:backend-routes` to verify actual API route files remain aligned with dry-run route helpers, preserve DTO-only responses, enforce status mapping, and keep database/auth/payment/AI/analytics out of scope.

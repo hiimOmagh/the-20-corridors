@@ -865,3 +865,8 @@ Changed/new files:
 - tests/core/backendRouteHandlersContract.test.ts
 
 Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
+
+
+## Phase 7.4 — Backend Route Runtime Smoke Contract
+
+Changed files only. Adds backend runtime smoke gate, evidence, closure criteria, and route runtime status/DTO boundary tests. No database/auth/payment/AI/analytics implementation.
