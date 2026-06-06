@@ -870,3 +870,24 @@ Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm
 ## Phase 7.4 — Backend Route Runtime Smoke Contract
 
 Changed files only. Adds backend runtime smoke gate, evidence, closure criteria, and route runtime status/DTO boundary tests. No database/auth/payment/AI/analytics implementation.
+
+## Phase 7.5 — Phase 7 Closure Gate + Backend Transition Plan
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/phase7-closure-latest.json
+docs/release/phase-7-closure-review.md
+docs/ui/phase-7-5-phase-7-closure-gate-backend-transition-plan-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/phase7-closure-gate.ts
+src/core/release/phase7ClosureGate.ts
+tests/core/phase7ClosureGate.test.ts
+```
+
+Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
+
+Scope: formal Phase 7 closure only. Verifies backend API boundary, backend route skeleton guard, backend handler dry-run adapter, actual backend route handlers, and backend route runtime smoke contract. No database, auth, payment, AI, analytics, or persistent public lookup route is introduced.

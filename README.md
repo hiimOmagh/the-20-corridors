@@ -610,3 +610,15 @@ The full `npm run validate` chain now includes this route-handler contract.
 ### Phase 7.4 — Backend Route Runtime Smoke Contract
 
 Adds `npm run smoke:backend-routes` to verify actual API route files remain aligned with dry-run route helpers, preserve DTO-only responses, enforce status mapping, and keep database/auth/payment/AI/analytics out of scope.
+
+## Phase 7.5 — Phase 7 Closure Gate + Backend Transition Plan
+
+Phase 7.5 formally closes the dry-run backend route phase. It verifies that the backend API boundary, route skeleton guard, dry-run handler adapter, actual route handlers, and runtime smoke contract all pass together.
+
+Validation now includes:
+
+```text
+npm run closure:phase7
+```
+
+The closure gate confirms DTO-only transport, approved API route files, delete-token response boundaries, status mapping, no raw answers/full-result transport, and no database/auth/payment/AI/analytics implementation. Phase 8 is now constrained to begin with a database adapter contract.
