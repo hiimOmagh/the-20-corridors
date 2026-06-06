@@ -43,14 +43,14 @@ describe('engine release gate', () => {
 
   it('detects blocked backend/database/AI scope files', () => {
     const tempRoot = makeTempRepoRoot();
-    mkdirSync(path.join(tempRoot, 'src/app/api'), { recursive: true });
-    writeFileSync(path.join(tempRoot, 'src/app/api/route.ts'), 'export function GET() { return Response.json({}); }\n');
+    mkdirSync(path.join(tempRoot, 'src/server'), { recursive: true });
+    writeFileSync(path.join(tempRoot, 'src/server/route.ts'), 'export function GET() { return Response.json({}); }\n');
 
     const tempReport = runEngineReleaseGate({ repoRoot: tempRoot });
 
     expect(tempReport.gates.noBlockedBackendDatabaseAiScope).toBe(false);
-    expect(tempReport.hygiene.blockedScopeArtifacts).toContain('src/app/api');
-    expect(tempReport.issues).toContain('blocked_scope_artifact:src/app/api');
+    expect(tempReport.hygiene.blockedScopeArtifacts).toContain('src/server');
+    expect(tempReport.issues).toContain('blocked_scope_artifact:src/server');
 
     rmSync(tempRoot, { recursive: true, force: true });
   });

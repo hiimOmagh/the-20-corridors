@@ -132,7 +132,6 @@ export const PUBLIC_LINK_SMOKE_EXPECTATIONS = [
 ] as const;
 
 const BLOCKED_IMPLEMENTATION_PATHS = [
-  'src/app/api',
   'src/server',
   'src/backend',
   'src/db',

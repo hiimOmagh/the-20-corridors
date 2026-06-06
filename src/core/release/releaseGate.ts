@@ -80,7 +80,6 @@ const BLOCKED_SCOPE_ARTIFACTS = [
   'app/api',
   'pages',
   'pages/api',
-  'src/app/api',
   'src/pages',
   'src/pages/api',
   'src/server',

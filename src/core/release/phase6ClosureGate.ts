@@ -121,7 +121,6 @@ const IMPLEMENTATION_SCOPE_FILES = [
 const LIFECYCLE_DTO_SCOPE_FILES = [LIFECYCLE_UI_HELPER, LOCAL_FLOW, IN_MEMORY_STORAGE] as const;
 
 const BLOCKED_SCOPE_PATHS = [
-  'src/app/api',
   'src/server',
   'src/backend',
   'src/db',

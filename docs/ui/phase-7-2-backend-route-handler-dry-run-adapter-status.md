@@ -1,26 +1,13 @@
-# Phase 7.2 Status — Backend Route Handler Dry-Run Adapter
+# Phase 7.2 — Backend Route Handler Dry-Run Adapter Status
 
-## Added
+Status: complete and compatible with Phase 7.3.
 
-- Handler-only dry-run functions for public-result create/read/delete behavior.
-- In-memory adapter simulation for backend route logic.
-- Delete-token validation and lifecycle behavior checks.
-- Expired/deleted read behavior that returns no DTO.
-- Backend handler dry-run contract gate.
-- Evidence snapshot: `docs/evidence/backend-handler-dry-run-latest.json`.
+Phase 7.2 keeps handler logic independent from Next.js request/response APIs. In Phase 7.3, actual route files may exist, but the dry-run adapter remains route-independent and continues to be validated separately.
 
-## Still blocked
+Current boundary:
 
-- No `src/app/api/.../route.ts` files.
-- No request handler exports.
-- No database adapter.
-- No auth, payment, AI, or analytics integration.
-- No persistent public lookup route.
-
-## Validation command
-
-```bash
-npm run dryrun:backend-handlers
-```
-
-The full repository gate now also includes the dry-run contract through `npm run validate`.
+- handler logic functions remain under `src/core/public-link/publicResultHandlerDryRun.ts`;
+- no `NextRequest` or `NextResponse` dependency inside the dry-run module;
+- no database, auth, payment, AI, or analytics;
+- minimized PublicResultDto only;
+- route files are validated by the Phase 7.3 route-handler contract.

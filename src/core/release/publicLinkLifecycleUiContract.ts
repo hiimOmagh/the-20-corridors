@@ -83,7 +83,6 @@ const REQUIRED_UI_SIGNALS = [
 ] as const;
 
 const BLOCKED_PATHS = [
-  'src/app/api',
   'src/app/r/[resultId]',
   'src/app/r/[slug]',
   'src/server',

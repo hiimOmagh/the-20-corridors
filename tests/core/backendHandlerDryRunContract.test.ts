@@ -7,7 +7,7 @@ import { runBackendHandlerDryRunContract } from '../../src/core/release/backendH
 const report = await runBackendHandlerDryRunContract();
 
 describe('backend handler dry-run contract', () => {
-  it('passes the Phase 7.2 backend handler dry-run gates', () => {
+  it('passes the Phase 7.2 backend handler dry-run gates after Phase 7.3 route files exist', () => {
     expect(report.gates).toMatchObject({
       backendRouteSkeletonGuardPassed: true,
       dryRunScriptExists: true,
@@ -22,7 +22,7 @@ describe('backend handler dry-run contract', () => {
       deletedReadHidesDto: true,
       dtoOnlyResponsesPreserved: true,
       payloadSizeWithinLimit: true,
-      noNextRouteFilesYet: true,
+      approvedNextRouteFilesCanExist: true,
       noRequestObjectOrNextResponseDependency: true,
       noDatabaseAuthPaymentAiAnalyticsImplementation: true,
       noRawAnswerOrFullResultTransport: true,
@@ -31,7 +31,7 @@ describe('backend handler dry-run contract', () => {
     expect(report.issues).toEqual([]);
   });
 
-  it('records dry-run flow coverage without creating route files', () => {
+  it('records dry-run flow coverage while route files are handled by Phase 7.3', () => {
     expect(report.schemaVersion).toBe('phase-7.2-backend-handler-dry-run-contract-v1');
     expect(report.scripts.dryRunContract).toBe('tsx scripts/backend-handler-dry-run-contract.ts');
     expect(report.scripts.validate).toContain('npm run dryrun:backend-handlers');
@@ -46,30 +46,29 @@ describe('backend handler dry-run contract', () => {
     });
     expect(report.coverage).toMatchObject({
       routeSkeletonIssueCount: 0,
-      actualRouteFileCount: 0,
+      actualRouteFileCount: 2,
       handlerBoundaryCount: 8,
       dryRunMethodCount: 3
     });
   });
 
-  it('keeps implementation scope blocked in this phase', () => {
-    expect(report.implementationScan.actualRouteFiles).toEqual([]);
+  it('keeps dry-run implementation independent from Next request/response APIs', () => {
+    expect(report.implementationScan.actualRouteFiles).toEqual([
+      'src/app/api/public-results/route.ts',
+      'src/app/api/public-results/[publicId]/route.ts'
+    ]);
     expect(report.implementationScan.requestObjectOrNextResponseSignals).toEqual([]);
     expect(report.implementationScan.blockedImplementationSignals).toEqual([]);
     expect(report.implementationScan.rawOrFullResultSignals).toEqual([]);
     expect(report.implementationScan.missingContractPhrases).toEqual([]);
   });
 
-  it('detects premature route file creation', async () => {
+  it('detects missing approved route files once Phase 7.3 is active', async () => {
     const tempRoot = makeMinimalTempRepoRoot();
-    mkdirSync(path.join(tempRoot, 'src/app/api/public-results'), { recursive: true });
-    writeFileSync(path.join(tempRoot, 'src/app/api/public-results/route.ts'), 'export async function POST() {}');
-
     const tempReport = await runBackendHandlerDryRunContract({ repoRoot: tempRoot });
-    expect(tempReport.gates.noNextRouteFilesYet).toBe(false);
+    expect(tempReport.gates.approvedNextRouteFilesCanExist).toBe(false);
     expect(tempReport.gates.overallPassed).toBe(false);
-    expect(tempReport.issues).toContain('next_api_route_files_created_too_early');
-
+    expect(tempReport.issues).toContain('approved_next_api_route_files_missing');
     rmSync(tempRoot, { recursive: true, force: true });
   });
 });

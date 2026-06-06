@@ -1,13 +1,13 @@
 {
-  "schemaVersion": "phase-7.1-backend-route-skeleton-guard-v1",
+  "schemaVersion": "phase-7.3-backend-route-skeleton-guard-v2",
   "guardId": "phase-7-backend-route-skeleton-guard",
   "metadata": {
     "checkedAt": "static",
     "repoRootName": "the-20-corridors",
-    "phaseScope": "phase-7-route-skeleton-guard-only",
+    "phaseScope": "phase-7-approved-route-files-dry-run-handlers",
     "apiBoundarySchemaVersion": "phase-7.0-backend-api-boundary-contract-v1",
-    "routeSkeletonSchemaVersion": "phase-7.1-backend-route-skeleton-v1",
-    "implementationMode": "contract-only-no-route-files-no-request-handlers"
+    "routeSkeletonSchemaVersion": "phase-7.3-backend-route-skeleton-v2",
+    "implementationMode": "approved-route-files-dry-run-handlers-only"
   },
   "gates": {
     "backendApiBoundaryPassed": true,
@@ -20,8 +20,10 @@
     "plannedMethodsMatchApiContract": true,
     "requestHandlingBoundaryDefined": true,
     "futureGuardExpectationsDefined": true,
-    "noActualRouteFilesYet": true,
-    "noRequestHandlersYet": true,
+    "approvedRouteFilesPresent": true,
+    "onlyApprovedRouteFilesPresent": true,
+    "onlyApprovedRequestHandlersPresent": true,
+    "routeFilesUseDryRunHandlersOnly": true,
     "noBackendApiDatabaseAuthPaymentAiAnalyticsImplementation": true,
     "noPersistentPublicLookupRoute": true,
     "noRawAnswerOrFullResultTransport": true,
@@ -32,7 +34,7 @@
     "phase71Status": "docs/ui/phase-7-1-backend-route-skeleton-guard-status.md"
   },
   "scripts": {
-    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers && npm run routes:backend-handlers",
     "routeSkeletonGuard": "tsx scripts/backend-route-skeleton-guard.ts",
     "backendApiBoundary": "tsx scripts/backend-api-boundary-contract.ts"
   },
@@ -50,9 +52,9 @@
       "GET",
       "DELETE"
     ],
-    "requestHandlingBoundaryCount": 6,
-    "blockedBehaviorCount": 8,
-    "futureGuardCount": 7
+    "requestHandlingBoundaryCount": 7,
+    "blockedBehaviorCount": 9,
+    "futureGuardCount": 8
   },
   "implementationScan": {
     "checkedFiles": [
@@ -60,12 +62,21 @@
       "docs/release/phase-7-backend-route-skeleton-guard.md",
       "docs/ui/phase-7-1-backend-route-skeleton-guard-status.md",
       "src/core/public-link/publicResultApi.ts",
+      "src/core/public-link/publicResultRouteHandlers.ts",
       "src/core/release/publicResultApiBoundaryContract.ts"
     ],
-    "actualRouteFiles": [],
+    "actualRouteFiles": [
+      "src/app/api/public-results/route.ts",
+      "src/app/api/public-results/[publicId]/route.ts"
+    ],
+    "unapprovedRouteFiles": [],
     "blockedScopePaths": [],
     "persistentRouteFiles": [],
-    "requestHandlerSignals": [],
+    "requestHandlerSignals": [
+      "export async function POST",
+      "export async function GET",
+      "export async function DELETE"
+    ],
     "blockedImplementationSignals": [],
     "rawOrFullResultSignals": [],
     "missingContractPhrases": []
@@ -74,8 +85,8 @@
     "backendApiBoundaryIssueCount": 0,
     "plannedRouteFileCount": 2,
     "plannedMethodCount": 3,
-    "checkedFileCount": 5,
-    "actualRouteFileCount": 0
+    "checkedFileCount": 6,
+    "actualRouteFileCount": 2
   },
   "issues": []
 }

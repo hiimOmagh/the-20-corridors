@@ -5,7 +5,7 @@
     "checkedAt": "static",
     "repoRootName": "the-20-corridors",
     "phaseScope": "phase-7-handler-dry-run-only",
-    "routeSkeletonSchemaVersion": "phase-7.1-backend-route-skeleton-guard-v1",
+    "routeSkeletonSchemaVersion": "phase-7.3-backend-route-skeleton-guard-v2",
     "handlerDryRunSchemaVersion": "phase-7.2-backend-handler-dry-run-v1",
     "implementationMode": "handler-logic-only-no-next-route-files"
   },
@@ -23,7 +23,7 @@
     "deletedReadHidesDto": true,
     "dtoOnlyResponsesPreserved": true,
     "payloadSizeWithinLimit": true,
-    "noNextRouteFilesYet": true,
+    "approvedNextRouteFilesCanExist": true,
     "noRequestObjectOrNextResponseDependency": true,
     "noDatabaseAuthPaymentAiAnalyticsImplementation": true,
     "noRawAnswerOrFullResultTransport": true,
@@ -34,7 +34,7 @@
     "phase72Status": "docs/ui/phase-7-2-backend-route-handler-dry-run-adapter-status.md"
   },
   "scripts": {
-    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers && npm run routes:backend-handlers",
     "dryRunContract": "tsx scripts/backend-handler-dry-run-contract.ts",
     "backendRouteSkeletonGuard": "tsx scripts/backend-route-skeleton-guard.ts"
   },
@@ -58,7 +58,10 @@
       "src/core/public-link/publicResultStorage.ts",
       "src/core/public-link/inMemoryPublicResultStorage.ts"
     ],
-    "actualRouteFiles": [],
+    "actualRouteFiles": [
+      "src/app/api/public-results/route.ts",
+      "src/app/api/public-results/[publicId]/route.ts"
+    ],
     "requestObjectOrNextResponseSignals": [],
     "blockedImplementationSignals": [],
     "rawOrFullResultSignals": [],
@@ -67,7 +70,7 @@
   "coverage": {
     "routeSkeletonIssueCount": 0,
     "checkedFileCount": 6,
-    "actualRouteFileCount": 0,
+    "actualRouteFileCount": 2,
     "handlerBoundaryCount": 8,
     "dryRunMethodCount": 3
   },

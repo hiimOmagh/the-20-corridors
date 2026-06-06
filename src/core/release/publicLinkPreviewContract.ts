@@ -137,7 +137,6 @@ const FORBIDDEN_PREVIEW_SIGNALS = [
   'evidenceDigest',
   'serializeCorridorsResult',
   'deserializeCorridorsResult',
-  'src/app/api',
   'publicResultStorage'
 ] as const;
 

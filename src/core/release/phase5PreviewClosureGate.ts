@@ -119,7 +119,6 @@ const BLOCKED_SCOPE_SIGNALS = [
   'auth(',
   'signIn(',
   'signOut(',
-  'src/app/api',
   'publicResultStorage',
   'resultIdLookup',
   'lookupPublicResult',

@@ -99,7 +99,6 @@ const CHECKED_FILES = [
 ] as const;
 
 const BLOCKED_SCOPE_PATHS = [
-  'src/app/api',
   'src/server',
   'src/backend',
   'src/db',

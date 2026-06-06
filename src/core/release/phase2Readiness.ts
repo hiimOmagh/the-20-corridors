@@ -67,7 +67,6 @@ const REQUIRED_UI_FILES = [
 const STILL_BLOCKED_SCOPE = [
   'src/server/',
   'src/api/',
-  'src/app/api/',
   'pages/',
   'pages/api/',
   'server/',

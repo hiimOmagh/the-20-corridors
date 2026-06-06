@@ -57,7 +57,7 @@ export interface BackendHandlerDryRunContractReport {
     readonly deletedReadHidesDto: boolean;
     readonly dtoOnlyResponsesPreserved: boolean;
     readonly payloadSizeWithinLimit: boolean;
-    readonly noNextRouteFilesYet: boolean;
+    readonly approvedNextRouteFilesCanExist: boolean;
     readonly noRequestObjectOrNextResponseDependency: boolean;
     readonly noDatabaseAuthPaymentAiAnalyticsImplementation: boolean;
     readonly noRawAnswerOrFullResultTransport: boolean;
@@ -225,7 +225,7 @@ export async function runBackendHandlerDryRunContract(
       !containsForbiddenPublicResultApiPayloadKeys(dryRun.read.response) &&
       !containsForbiddenPublicResultApiPayloadKeys(dryRun.deleteResult.response),
     payloadSizeWithinLimit: dryRun.responsePayloadBytes <= PUBLIC_RESULT_API_MAX_DTO_BYTES,
-    noNextRouteFilesYet: actualRouteFiles.length === 0,
+    approvedNextRouteFilesCanExist: actualRouteFiles.length === 2,
     noRequestObjectOrNextResponseDependency: requestObjectOrNextResponseSignals.length === 0,
     noDatabaseAuthPaymentAiAnalyticsImplementation: blockedImplementationSignals.length === 0,
     noRawAnswerOrFullResultTransport: rawOrFullResultSignals.length === 0,
@@ -366,7 +366,7 @@ function buildIssues(
   if (!gates.deletedReadHidesDto) issues.push('deleted_read_does_not_hide_dto');
   if (!gates.dtoOnlyResponsesPreserved) issues.push('dto_only_response_boundary_failed');
   if (!gates.payloadSizeWithinLimit) issues.push('handler_dry_run_payload_exceeds_limit');
-  if (!gates.noNextRouteFilesYet) issues.push('next_api_route_files_created_too_early');
+  if (!gates.approvedNextRouteFilesCanExist) issues.push('approved_next_api_route_files_missing');
   if (!gates.noRequestObjectOrNextResponseDependency) issues.push('request_or_next_response_dependency_detected');
   if (!gates.noDatabaseAuthPaymentAiAnalyticsImplementation) issues.push('blocked_backend_dependency_detected');
   if (!gates.noRawAnswerOrFullResultTransport) issues.push('raw_answer_or_full_result_transport_detected');

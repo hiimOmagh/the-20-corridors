@@ -4,13 +4,13 @@ import {
   PUBLIC_RESULT_API_SCHEMA_VERSION
 } from './publicResultApi';
 
-export const PUBLIC_RESULT_ROUTE_SKELETON_SCHEMA_VERSION = 'phase-7.1-backend-route-skeleton-v1' as const;
-export const PUBLIC_RESULT_ROUTE_SKELETON_PHASE = 'phase-7.1-backend-route-skeleton-guard' as const;
-export const PUBLIC_RESULT_ROUTE_SKELETON_MODE = 'contract-only-no-route-files-no-request-handlers' as const;
+export const PUBLIC_RESULT_ROUTE_SKELETON_SCHEMA_VERSION = 'phase-7.3-backend-route-skeleton-v2' as const;
+export const PUBLIC_RESULT_ROUTE_SKELETON_PHASE = 'phase-7.3-backend-route-files-with-dry-run-handlers' as const;
+export const PUBLIC_RESULT_ROUTE_SKELETON_MODE = 'approved-route-files-dry-run-handlers-only' as const;
 
 export type PublicResultRouteSkeletonMethod = 'POST' | 'GET' | 'DELETE';
 export type PublicResultRouteSkeletonRuntime = 'nodejs';
-export type PublicResultRouteSkeletonStatus = 'planned-only' | 'blocked-until-phase-7-2';
+export type PublicResultRouteSkeletonStatus = 'implemented-dry-run-only';
 
 export interface PublicResultRouteSkeletonDefinition {
   readonly id: 'public-results-collection' | 'public-results-item';
@@ -20,8 +20,8 @@ export interface PublicResultRouteSkeletonDefinition {
   readonly runtime: PublicResultRouteSkeletonRuntime;
   readonly status: PublicResultRouteSkeletonStatus;
   readonly dtoBoundary: 'public-result-api-dto-only';
-  readonly storageBoundary: 'adapter-interface-only';
-  readonly blockedUntil: 'phase-7.2-route-implementation';
+  readonly storageBoundary: 'in-memory-adapter-only';
+  readonly implementationBoundary: 'dry-run-handler-adapter-only';
 }
 
 export interface PublicResultRouteSkeletonPolicy {
@@ -45,10 +45,10 @@ export const PUBLIC_RESULT_ROUTE_SKELETON_DEFINITIONS = [
     publicPath: '/api/public-results',
     methods: ['POST'],
     runtime: 'nodejs',
-    status: 'planned-only',
+    status: 'implemented-dry-run-only',
     dtoBoundary: 'public-result-api-dto-only',
-    storageBoundary: 'adapter-interface-only',
-    blockedUntil: 'phase-7.2-route-implementation'
+    storageBoundary: 'in-memory-adapter-only',
+    implementationBoundary: 'dry-run-handler-adapter-only'
   },
   {
     id: 'public-results-item',
@@ -56,10 +56,10 @@ export const PUBLIC_RESULT_ROUTE_SKELETON_DEFINITIONS = [
     publicPath: '/api/public-results/{publicId}',
     methods: ['GET', 'DELETE'],
     runtime: 'nodejs',
-    status: 'planned-only',
+    status: 'implemented-dry-run-only',
     dtoBoundary: 'public-result-api-dto-only',
-    storageBoundary: 'adapter-interface-only',
-    blockedUntil: 'phase-7.2-route-implementation'
+    storageBoundary: 'in-memory-adapter-only',
+    implementationBoundary: 'dry-run-handler-adapter-only'
   }
 ] as const satisfies readonly PublicResultRouteSkeletonDefinition[];
 
@@ -72,12 +72,13 @@ export const PUBLIC_RESULT_ROUTE_SKELETON_ALLOWED_PUBLIC_PATHS = PUBLIC_RESULT_R
 );
 
 export const PUBLIC_RESULT_ROUTE_SKELETON_REQUEST_HANDLING_BOUNDARY = [
-  'phase-7-1-defines-route-skeletons-only',
-  'no-route-ts-files-created-yet',
-  'no-exported-POST-GET-DELETE-handlers-yet',
-  'no-request-body-parsing-yet',
-  'no-response-construction-yet',
-  'no-storage-adapter-binding-yet'
+  'approved-route-ts-files-created-in-phase-7-3',
+  'only-approved-POST-GET-DELETE-handlers-exported',
+  'request-body-parsing-limited-to-public-api-dto',
+  'responses-built-from-dry-run-handler-results-only',
+  'storage-binding-limited-to-in-memory-adapter',
+  'no-database-client-binding',
+  'no-raw-answer-or-full-result-transport'
 ] as const;
 
 export const PUBLIC_RESULT_ROUTE_SKELETON_BLOCKED_BEHAVIOR = [
@@ -88,7 +89,8 @@ export const PUBLIC_RESULT_ROUTE_SKELETON_BLOCKED_BEHAVIOR = [
   'no-analytics-event',
   'no-raw-answer-transport',
   'no-full-result-serialization-transport',
-  'no-public-id-lookup-route-page'
+  'no-persistent-public-id-page-route',
+  'no-production-storage-adapter'
 ] as const;
 
 export const PUBLIC_RESULT_ROUTE_SKELETON_REQUIRED_FUTURE_GUARDS = [
@@ -98,7 +100,8 @@ export const PUBLIC_RESULT_ROUTE_SKELETON_REQUIRED_FUTURE_GUARDS = [
   'dto-size-limit-before-storage-write',
   'rate-limit-before-production-deploy',
   'expiry-null-dto-before-read-response',
-  'delete-token-never-returned-on-read-response'
+  'delete-token-never-returned-on-read-response',
+  'replace-in-memory-adapter-before-production'
 ] as const;
 
 export const PUBLIC_RESULT_ROUTE_SKELETON_POLICY: PublicResultRouteSkeletonPolicy = {
@@ -129,18 +132,21 @@ export function isAllowedPublicResultRouteFile(routeFile: string): boolean {
 
 export function containsBlockedPublicResultRouteSkeletonText(source: string): boolean {
   return [
-    'export async function POST',
-    'export async function GET',
-    'export async function DELETE',
-    'export const POST',
-    'export const GET',
-    'export const DELETE',
-    'NextResponse.json',
-    'request.json()',
     'fetch(',
+    'XMLHttpRequest',
+    'navigator.sendBeacon',
     'PrismaClient',
     'createClient(',
+    'drizzle(',
+    'mongoose.connect',
     'rawAnswers',
-    'serializeCorridorsResult'
+    'serializeCorridorsResult',
+    'runCorridorsEngine(input)',
+    'OpenAI(',
+    'generateText(',
+    'streamText(',
+    'stripe.checkout',
+    'posthog.capture',
+    'analytics.track'
   ].some((signal) => source.includes(signal));
 }

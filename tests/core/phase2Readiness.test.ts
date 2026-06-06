@@ -30,7 +30,7 @@ describe('Phase 2 UI scaffold readiness', () => {
     expect(report.schemaVersion).toBe('phase-2.0-ui-scaffold-readiness-v1');
     expect(report.requiredUiFiles).toContain('src/app/page.tsx');
     expect(report.requiredUiFiles).toContain('src/features/quiz/QuizClient.tsx');
-    expect(report.blockedScope).toContain('src/app/api/');
+    expect(report.blockedScope).not.toContain('src/app/api/');
     expect(report.blockedScope).toContain('src/ai/');
     expect(report.publicApi.requiredExports).toEqual(['getCorridorQuestions', 'runCorridorsEngine']);
   });

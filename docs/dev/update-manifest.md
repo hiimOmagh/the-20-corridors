@@ -837,3 +837,31 @@ Scope: formal Phase 6 closure only. Verifies public-storage contract, in-memory 
 ## Phase 7.2 — Backend Route Handler Dry-Run Adapter
 
 Changed files only. Adds handler-logic dry-run functions, contract gate, evidence snapshot, docs, and tests. No Next.js route files, no database, no auth/payment/AI/analytics, and no persistent lookup route.
+
+## Phase 7.3 — Backend Route Files with Dry-Run Handlers
+
+Changed/new files:
+
+- README.md
+- package.json
+- docs/dev/update-manifest.md
+- docs/evidence/backend-route-skeleton-latest.json
+- docs/evidence/backend-handler-dry-run-latest.json
+- docs/evidence/backend-route-handlers-latest.json
+- docs/release/phase-7-backend-route-handlers-dry-run.md
+- docs/ui/phase-7-2-backend-route-handler-dry-run-adapter-status.md
+- docs/ui/phase-7-3-backend-route-files-with-dry-run-handlers-status.md
+- scripts/backend-route-handlers-contract.ts
+- src/app/api/public-results/route.ts
+- src/app/api/public-results/[publicId]/route.ts
+- src/core/public-link/publicResultRouteHandlers.ts
+- src/core/public-link/publicResultRouteSkeleton.ts
+- src/core/release/backendRouteSkeletonGuard.ts
+- src/core/release/backendHandlerDryRunContract.ts
+- src/core/release/backendRouteHandlersContract.ts
+- tests/core/backendRouteSkeletonGuard.test.ts
+- tests/core/backendHandlerDryRunContract.test.ts
+- tests/core/publicResultRouteHandlers.test.ts
+- tests/core/backendRouteHandlersContract.test.ts
+
+Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.

@@ -593,3 +593,15 @@ Phase 7.1 defines the planned backend route skeleton for public result APIs whil
 ## Phase 7.2 — Backend Handler Dry-Run
 
 Phase 7.2 adds backend handler logic as a dry-run adapter only. It simulates public-result create/read/delete behavior against the in-memory adapter while keeping actual API route files, database persistence, auth, payment, AI, and analytics blocked.
+
+## Phase 7.3 — Backend Route Files with Dry-Run Handlers
+
+Phase 7.3 adds the first actual Next.js API route files for public-result links while keeping the implementation dry-run only. The routes use the in-memory adapter and return DTO-safe responses only. Database, production storage, auth, payment, AI, analytics, raw answers, and full-result transport remain blocked.
+
+New validation command:
+
+```bash
+npm run routes:backend-handlers
+```
+
+The full `npm run validate` chain now includes this route-handler contract.
