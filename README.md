@@ -646,3 +646,15 @@ Validation now includes:
 ```text
 npm run guard:database-runtime-selection
 ```
+
+## Phase 8.2 — Database Adapter Factory Contract
+
+Phase 8.2 adds the adapter factory boundary that will eventually instantiate the selected public-result storage adapter. The factory exists before any real database client and keeps database mode contract-only. Route handlers resolve through the factory, but only memory mode may bind to routes.
+
+Validation now includes:
+
+```text
+npm run contract:database-adapter-factory
+```
+
+The factory confirms memory remains the default, configured database mode does not create an adapter, database route binding remains blocked, and no Supabase/Prisma/Drizzle client, migration, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route exists.

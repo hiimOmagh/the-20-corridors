@@ -13,7 +13,10 @@ import {
 } from './publicResultApi';
 import { createInMemoryPublicResultStorageAdapter } from './inMemoryPublicResultStorage';
 import {
-  resolvePublicResultRouteStorageAdapter,
+  createPublicResultStorageAdapterFromFactory,
+  resolvePublicResultStorageAdapterFactoryDecision
+} from './publicResultStorageAdapterFactory';
+import {
   resolvePublicResultStorageRuntimeSelection
 } from './publicResultStorageRuntimeSelection';
 import {
@@ -58,6 +61,7 @@ export const PUBLIC_RESULT_ROUTE_HANDLER_BOUNDARIES = [
   'dry-run-handler-functions-only',
   'in-memory-adapter-only',
   'database-runtime-selection-fails-closed-before-client-binding',
+  'phase-8-2-factory-contract-preserves-memory-route-binding',
   'public-result-api-dto-only',
   'no-database-client',
   'no-auth-payment-ai-analytics',
@@ -66,11 +70,15 @@ export const PUBLIC_RESULT_ROUTE_HANDLER_BOUNDARIES = [
 ] as const;
 
 export function getPublicResultRouteAdapter(): PublicResultStorageAdapter {
-  return resolvePublicResultRouteStorageAdapter({ env: process.env, memoryAdapter: routeAdapter });
+  return createPublicResultStorageAdapterFromFactory({ env: process.env, memoryAdapter: routeAdapter, purpose: 'route-handler' });
 }
 
 export function getPublicResultRouteRuntimeSelection() {
   return resolvePublicResultStorageRuntimeSelection(process.env);
+}
+
+export function getPublicResultRouteAdapterFactoryDecision() {
+  return resolvePublicResultStorageAdapterFactoryDecision({ env: process.env, purpose: 'route-handler' });
 }
 
 export async function handlePublicResultCreateRouteBody(

@@ -955,3 +955,27 @@ tests/core/backendRouteHandlersContract.test.ts
 Validation target: `npm run typecheck`, `npm test`, `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
 
 Scope: validation/build hygiene only. No runtime behavior, database client, route persistence, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced.
+
+## Phase 8.2 — Database Adapter Factory Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/database-adapter-factory-contract-latest.json
+docs/release/phase-8-database-adapter-factory-contract.md
+docs/ui/phase-8-2-database-adapter-factory-contract-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/database-adapter-factory-contract.ts
+src/core/public-link/publicResultRouteHandlers.ts
+src/core/public-link/publicResultStorageAdapterFactory.ts
+src/core/release/databaseAdapterFactoryContract.ts
+tests/core/databaseAdapterFactoryContract.test.ts
+tests/core/publicResultStorageAdapterFactory.test.ts
+```
+
+Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
+
+Scope: factory contract only. Adds the storage adapter factory interface, keeps memory as the default route-bound adapter, keeps database mode contract-only, and proves configured database mode cannot create or bind a route adapter yet. No production database client, migrations, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced.

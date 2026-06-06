@@ -57,3 +57,28 @@ Acceptance criteria:
 - Missing database env vars fail closed.
 - Complete database env remains blocked from route binding until a later database-client phase.
 - No production database client, migrations, auth, payment, analytics, AI, or persistent `/r/[publicId]` route is introduced.
+
+## Third milestone
+
+**Phase 8.2 — Database Adapter Factory Contract**
+
+Required scope:
+
+- Add a factory boundary for public-result storage adapter creation.
+- Keep unset/default storage mode on memory.
+- Allow memory mode to create the in-memory adapter through the factory.
+- Recognize complete database mode as contract-only.
+- Prevent configured database mode from creating a real adapter.
+- Prevent configured database mode from binding to route handlers.
+- Keep route handlers dry-run in-memory while routing adapter creation through the factory.
+
+Acceptance criteria:
+
+- Phase 8.0 database adapter contract remains green.
+- Phase 8.1 runtime selection guard remains green.
+- Adapter factory interface exists.
+- Memory adapter remains default.
+- Database adapter remains contract-only.
+- Factory cannot bind database mode to routes.
+- Missing database env still fails closed.
+- No Supabase, Prisma, Drizzle, migration, auth, payment, AI, analytics, telemetry, or persistent `/r/[publicId]` route is introduced.

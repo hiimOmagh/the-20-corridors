@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "phase-8.2-database-adapter-factory-contract-v1",
+  "contractId": "phase-8-database-adapter-factory-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-8-2-factory-contract-only",
+    "factorySchemaVersion": "phase-8.2-database-adapter-factory-contract-v1",
+    "runtimeSelectionSchemaVersion": "phase-8.1-database-adapter-runtime-selection-guard-v1",
+    "routeHandlerMode": "next-route-files-dry-run-in-memory-only"
+  },
+  "gates": {
+    "databaseAdapterContractPassed": true,
+    "runtimeSelectionGuardPassed": true,
+    "factoryScriptExists": true,
+    "validateScriptRunsFactoryContract": true,
+    "factoryModuleExists": true,
+    "factoryGuardModuleExists": true,
+    "factoryDocExists": true,
+    "phase82StatusDocExists": true,
+    "factoryDefinesExpectedBoundary": true,
+    "unsetModeCreatesMemoryAdapter": true,
+    "explicitMemoryModeCreatesMemoryAdapter": true,
+    "databaseModeIsContractOnly": true,
+    "databaseModeDoesNotCreateAdapter": true,
+    "databaseModeRouteFactoryThrows": true,
+    "missingDatabaseEnvFailsClosed": true,
+    "routeHandlersUseFactoryBoundary": true,
+    "routeHandlersRemainDryRunInMemory": true,
+    "noDatabaseClientOrMigrationImplementation": true,
+    "noAuthPaymentAiAnalyticsImplementation": true,
+    "noPersistentPublicLookupRoute": true,
+    "noRawAnswerOrFullResultTransportExpansion": true,
+    "overallPassed": true
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes && npm run dryrun:backend-handlers && npm run routes:backend-handlers && npm run smoke:backend-routes && npm run closure:phase7 && npm run contract:database-adapter && npm run guard:database-runtime-selection && npm run contract:database-adapter-factory",
+    "databaseAdapterContract": "tsx scripts/database-adapter-contract.ts",
+    "runtimeSelectionGuard": "tsx scripts/database-adapter-runtime-selection-guard.ts",
+    "factoryContract": "tsx scripts/database-adapter-factory-contract.ts"
+  },
+  "docs": {
+    "factoryContract": "docs/release/phase-8-database-adapter-factory-contract.md",
+    "phase82Status": "docs/ui/phase-8-2-database-adapter-factory-contract-status.md",
+    "phase8Transition": "docs/ui/phase-8-transition-plan.md"
+  },
+  "factory": {
+    "modeEnv": "PUBLIC_RESULT_STORAGE_MODE",
+    "factoryMode": "memory-default-database-contract-only-no-route-binding",
+    "factoryRules": [
+      "phase:phase-8.2-database-adapter-factory-contract",
+      "schema:phase-8.2-database-adapter-factory-contract-v1",
+      "mode:memory-default-database-contract-only-no-route-binding",
+      "factory-exists-before-real-database-client",
+      "memory-mode-creates-in-memory-adapter",
+      "unset-mode-creates-in-memory-adapter",
+      "database-mode-is-contract-only",
+      "database-mode-does-not-create-real-adapter",
+      "database-mode-cannot-bind-to-route-handlers",
+      "missing-database-env-fails-closed-through-runtime-selection",
+      "invalid-storage-mode-fails-closed-through-runtime-selection",
+      "client-exposed-database-env-remains-blocked",
+      "no-supabase-prisma-drizzle-or-migration-client-in-factory-phase"
+    ],
+    "unsetModeStatus": "memory-adapter-created",
+    "explicitMemoryStatus": "memory-adapter-created",
+    "completeDatabaseStatus": "database-factory-contract-only",
+    "completeDatabaseAdapterKind": "server-only-public-result-database-adapter",
+    "completeDatabaseRouteBindingAllowed": false,
+    "completeDatabaseAdapterCreated": false,
+    "missingDatabaseStatus": "factory-blocked"
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/publicResultStorageAdapterFactory.ts",
+      "src/core/public-link/publicResultStorageRuntimeSelection.ts",
+      "src/core/public-link/publicResultRouteHandlers.ts",
+      "docs/release/phase-8-database-adapter-factory-contract.md",
+      "docs/ui/phase-8-2-database-adapter-factory-contract-status.md",
+      "docs/ui/phase-8-transition-plan.md"
+    ],
+    "blockedPaths": [],
+    "blockedIntegrationSignals": [],
+    "persistentPublicLookupRouteFiles": [],
+    "rawOrFullResultSignals": [],
+    "missingContractPhrases": []
+  },
+  "coverage": {
+    "databaseAdapterIssueCount": 0,
+    "runtimeSelectionIssueCount": 0,
+    "checkedFileCount": 6,
+    "factoryRuleCount": 10,
+    "blockedPathCount": 0,
+    "blockedIntegrationSignalCount": 0,
+    "persistentRouteCount": 0,
+    "rawOrFullResultSignalCount": 0
+  },
+  "issues": []
+}
