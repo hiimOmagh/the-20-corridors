@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "phase-7.1-backend-route-skeleton-guard-v1",
+  "guardId": "phase-7-backend-route-skeleton-guard",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-7-route-skeleton-guard-only",
+    "apiBoundarySchemaVersion": "phase-7.0-backend-api-boundary-contract-v1",
+    "routeSkeletonSchemaVersion": "phase-7.1-backend-route-skeleton-v1",
+    "implementationMode": "contract-only-no-route-files-no-request-handlers"
+  },
+  "gates": {
+    "backendApiBoundaryPassed": true,
+    "routeSkeletonGuardScriptExists": true,
+    "validateScriptRunsRouteSkeletonGuard": true,
+    "routeSkeletonModuleExists": true,
+    "routeSkeletonDocExists": true,
+    "phase71StatusDocExists": true,
+    "plannedRouteFilesDefined": true,
+    "plannedMethodsMatchApiContract": true,
+    "requestHandlingBoundaryDefined": true,
+    "futureGuardExpectationsDefined": true,
+    "noActualRouteFilesYet": true,
+    "noRequestHandlersYet": true,
+    "noBackendApiDatabaseAuthPaymentAiAnalyticsImplementation": true,
+    "noPersistentPublicLookupRoute": true,
+    "noRawAnswerOrFullResultTransport": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "routeSkeletonGuard": "docs/release/phase-7-backend-route-skeleton-guard.md",
+    "phase71Status": "docs/ui/phase-7-1-backend-route-skeleton-guard-status.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui && npm run closure:phase6 && npm run contract:backend-api && npm run guard:backend-routes",
+    "routeSkeletonGuard": "tsx scripts/backend-route-skeleton-guard.ts",
+    "backendApiBoundary": "tsx scripts/backend-api-boundary-contract.ts"
+  },
+  "routeSkeleton": {
+    "plannedRouteFiles": [
+      "src/app/api/public-results/route.ts",
+      "src/app/api/public-results/[publicId]/route.ts"
+    ],
+    "plannedPublicPaths": [
+      "/api/public-results",
+      "/api/public-results/{publicId}"
+    ],
+    "plannedMethods": [
+      "POST",
+      "GET",
+      "DELETE"
+    ],
+    "requestHandlingBoundaryCount": 6,
+    "blockedBehaviorCount": 8,
+    "futureGuardCount": 7
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/publicResultRouteSkeleton.ts",
+      "docs/release/phase-7-backend-route-skeleton-guard.md",
+      "docs/ui/phase-7-1-backend-route-skeleton-guard-status.md",
+      "src/core/public-link/publicResultApi.ts",
+      "src/core/release/publicResultApiBoundaryContract.ts"
+    ],
+    "actualRouteFiles": [],
+    "blockedScopePaths": [],
+    "persistentRouteFiles": [],
+    "requestHandlerSignals": [],
+    "blockedImplementationSignals": [],
+    "rawOrFullResultSignals": [],
+    "missingContractPhrases": []
+  },
+  "coverage": {
+    "backendApiBoundaryIssueCount": 0,
+    "plannedRouteFileCount": 2,
+    "plannedMethodCount": 3,
+    "checkedFileCount": 5,
+    "actualRouteFileCount": 0
+  },
+  "issues": []
+}

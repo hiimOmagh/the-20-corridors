@@ -583,3 +583,8 @@ The gate confirms that no backend API route, database, persistent public lookup 
 ## Phase 7.0 — Backend API Boundary Contract
 
 Phase 7.0 defines the future public-result create/read/delete API DTO boundary without implementing backend routes or persistence. The contract locks minimized `PublicResultDto` transport, delete-token rules, expiry semantics, and abuse-control expectations while keeping database, auth, payment, analytics, and AI out of scope.
+
+
+## Phase 7.1 — Backend Route Skeleton Guard
+
+Phase 7.1 defines the planned backend route skeleton for public result APIs while keeping actual route files and request handlers blocked. The validation chain now includes `npm run guard:backend-routes`.

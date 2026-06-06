@@ -824,3 +824,11 @@ npm run build
 ```
 
 Scope: formal Phase 6 closure only. Verifies public-storage contract, in-memory storage adapter, local persistent-link flow, and lifecycle UI contract. No backend/API/database/persistent public lookup route/browser persistence/network persistence/auth/payment/analytics/telemetry/AI implementation is introduced.
+
+
+## Phase 7.1 — Backend Route Skeleton Guard
+
+- Added backend route skeleton policy.
+- Added `npm run guard:backend-routes`.
+- Added backend route skeleton guard evidence.
+- Kept API route files, request handlers, database, auth, payment, analytics, and AI blocked.
