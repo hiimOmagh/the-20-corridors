@@ -11,7 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "audit:methodology": "tsx scripts/methodology-audit.ts",
-    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory",
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui",
     "snapshots:generate": "tsx scripts/generate-result-snapshots.ts",
     "snapshots:verify": "tsx scripts/verify-result-snapshots.ts",
     "release:engine": "tsx scripts/engine-release-gate.ts",
@@ -31,7 +31,8 @@
     "closure:phase5": "tsx scripts/phase5-preview-closure-gate.ts",
     "contract:public-storage": "tsx scripts/public-result-storage-contract.ts",
     "adapter:public-storage-memory": "tsx scripts/in-memory-public-result-storage-contract.ts",
-    "flow:public-link-memory": "tsx scripts/local-persistent-link-flow-contract.ts"
+    "flow:public-link-memory": "tsx scripts/local-persistent-link-flow-contract.ts",
+    "lifecycle:public-link-ui": "tsx scripts/public-link-lifecycle-ui-contract.ts"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",

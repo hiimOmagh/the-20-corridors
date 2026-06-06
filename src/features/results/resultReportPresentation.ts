@@ -58,6 +58,12 @@ export const REPORT_SECTION_ANCHORS: readonly ReportSectionAnchor[] = [
     description: 'Local-only feedback UX stub; no persistence or telemetry.'
   },
   {
+    id: 'public-link-lifecycle',
+    label: 'Link lifecycle',
+    shortLabel: 'Link',
+    description: 'Local-only create/delete lifecycle stub using minimized public DTO boundaries.'
+  },
+  {
     id: 'share-summary',
     label: 'Share summary',
     shortLabel: 'Share',

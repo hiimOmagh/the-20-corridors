@@ -14,7 +14,7 @@ describe('result visual consistency helpers', () => {
 
     expect(index).toHaveLength(REPORT_SECTION_ANCHORS.length);
     expect(index[0]).toMatchObject({ id: 'dominant-traits', stepLabel: '01', tone: 'signal' });
-    expect(index.at(-1)).toMatchObject({ id: 'share-summary', stepLabel: '08', tone: 'local' });
+    expect(index.at(-1)).toMatchObject({ id: 'share-summary', stepLabel: '09', tone: 'local' });
     expect(new Set(index.map((item) => item.stepLabel)).size).toBe(index.length);
   });
 

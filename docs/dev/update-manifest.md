@@ -753,3 +753,35 @@ npm run build
 ```
 
 Scope: local flow helper only. Simulates create/read/delete/prune lifecycle through the in-memory adapter, verifies delete-token behavior and minimized DTO-only records, and preserves the local `/r/preview` stub boundary. No database, backend API route, persistent public ID lookup route, browser persistence, network persistence, auth, payment, analytics, telemetry, or AI is implemented.
+
+## Phase 6.3 — Public Link Lifecycle UI Stub
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-link-lifecycle-ui-latest.json
+docs/release/phase-6-public-link-lifecycle-ui-stub.md
+docs/ui/phase-6-3-public-link-lifecycle-ui-stub-status.md
+scripts/public-link-lifecycle-ui-contract.ts
+src/app/globals.css
+src/core/release/publicLinkLifecycleUiContract.ts
+src/features/results/ResultsClient.tsx
+src/features/results/publicLinkLifecycleUi.ts
+src/features/results/resultReportPresentation.ts
+tests/core/publicLinkLifecycleUiContract.test.ts
+tests/ui/publicLinkLifecycleUi.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: local-only public-link lifecycle UI controls. Simulates create/delete/reset behavior through component state and minimized DTO boundaries. No backend, API route, database, persistent public lookup route, browser persistence, network write, auth, payment, analytics, telemetry, or AI is implemented.

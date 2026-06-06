@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "phase-6.3-public-link-lifecycle-ui-stub-v1",
+  "contractId": "phase-6-public-link-lifecycle-ui-stub",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "repository",
+    "phaseScope": "phase-6-local-public-link-lifecycle-ui-only",
+    "localFlowSchemaVersion": "phase-6.2-local-persistent-link-flow-stub-v1"
+  },
+  "gates": {
+    "localFlowContractPassed": true,
+    "uiHelperExists": true,
+    "resultsClientExists": true,
+    "lifecycleScriptExists": true,
+    "validateScriptRunsLifecycleUi": true,
+    "statusDocExists": true,
+    "lifecycleSectionRendered": true,
+    "lifecycleControlsRendered": true,
+    "usesLocalPreviewRouteOnly": true,
+    "noApiDatabasePersistentRoute": true,
+    "noAuthPaymentAiAnalytics": true,
+    "noNetworkOrBrowserPersistenceSignals": true,
+    "noRawChoiceOrPrivateScoreSignals": true,
+    "overallPassed": true
+  },
+  "docs": {
+    "status": "docs/ui/phase-6-3-public-link-lifecycle-ui-stub-status.md"
+  },
+  "scripts": {
+    "validate": "npm run typecheck && npm test && npm run guard:ui-imports && npm run release:engine && npm run readiness:phase2 && npm run smoke:ui && npm run closure:phase2 && npm run smoke:visual && npm run closure:phase3 && npm run readiness:export && npm run qa:export-visual && npm run smoke:export && npm run closure:phase4 && npm run privacy:public-link && npm run contract:public-dto && npm run preview:public-link && npm run closure:phase5 && npm run contract:public-storage && npm run adapter:public-storage-memory && npm run flow:public-link-memory && npm run lifecycle:public-link-ui",
+    "lifecyclePublicLinkUi": "tsx scripts/public-link-lifecycle-ui-contract.ts",
+    "localFlowContract": "tsx scripts/local-persistent-link-flow-contract.ts"
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/features/results/publicLinkLifecycleUi.ts",
+      "src/features/results/ResultsClient.tsx",
+      "docs/ui/phase-6-3-public-link-lifecycle-ui-stub-status.md"
+    ],
+    "blockedPaths": [],
+    "blockedSignals": [],
+    "networkOrPersistenceSignals": [],
+    "rawOrPrivateSignals": [],
+    "missingUiSignals": []
+  },
+  "coverage": {
+    "localFlowIssueCount": 0,
+    "checkedFileCount": 3,
+    "requiredUiSignalCount": 11
+  },
+  "issues": []
+}

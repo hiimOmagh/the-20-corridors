@@ -35,6 +35,13 @@ import {
 } from '@/features/results/resultFeedback';
 import { buildLocalShareCardPreview } from '@/features/results/resultShareCard';
 import {
+  createInitialPublicLinkLifecycleState,
+  createPublicLinkLifecycleStub as createPublicLinkLifecycleStubFromResult,
+  deletePublicLinkLifecycleStub as deletePublicLinkLifecycleStubFromState,
+  getPublicLinkLifecycleStatusLabel,
+  type PublicLinkLifecycleUiState
+} from '@/features/results/publicLinkLifecycleUi';
+import {
   buildLocalShareImageExportUxDetails,
   exportLocalShareCardPng,
   type LocalShareImageExportStatus
@@ -53,11 +60,13 @@ export function ResultsClient() {
   const [shareCopyState, setShareCopyState] = useState<'idle' | 'summary-copied' | 'card-copied' | 'failed'>('idle');
   const [shareImageExportState, setShareImageExportState] = useState<LocalShareImageExportStatus>('idle');
   const [feedbackState, setFeedbackState] = useState<LocalFeedbackState>(() => createInitialLocalFeedbackState());
+  const [publicLinkLifecycleState, setPublicLinkLifecycleState] = useState<PublicLinkLifecycleUiState>(() => createInitialPublicLinkLifecycleState());
 
   const loadStoredResult = useCallback(() => {
     const nextStorageState = readCorridorsResultFromSessionStorage(window.sessionStorage);
     setStorageState(nextStorageState);
     setResult(nextStorageState.status === 'ok' ? nextStorageState.result : null);
+    setPublicLinkLifecycleState(createInitialPublicLinkLifecycleState());
     setLoaded(true);
   }, []);
 
@@ -104,6 +113,19 @@ export function ResultsClient() {
 
   function resetFeedbackStub() {
     setFeedbackState(resetLocalFeedback());
+  }
+
+  function createPublicLinkLifecycleStub() {
+    if (!result) return;
+    setPublicLinkLifecycleState(createPublicLinkLifecycleStubFromResult(result));
+  }
+
+  function deletePublicLinkLifecycleStub() {
+    setPublicLinkLifecycleState((current) => deletePublicLinkLifecycleStubFromState(current));
+  }
+
+  function resetPublicLinkLifecycleStub() {
+    setPublicLinkLifecycleState(createInitialPublicLinkLifecycleState());
   }
 
   if (!loaded) {
@@ -320,6 +342,20 @@ export function ResultsClient() {
         />
       </section>
 
+      <section className="panel report-section public-link-lifecycle-section" id="public-link-lifecycle" aria-labelledby="public-link-lifecycle-heading">
+        <SectionHeader
+          eyebrow="Local public-link lifecycle"
+          title="Create/delete link stub"
+          description="Phase 6.3 simulates the future public-link lifecycle in local component state only. It uses the minimized DTO boundary and does not create an API route, database record, public lookup, account, payment, analytics event, or AI call."
+        />
+        <PublicLinkLifecyclePanel
+          state={publicLinkLifecycleState}
+          onCreate={createPublicLinkLifecycleStub}
+          onDelete={deletePublicLinkLifecycleStub}
+          onReset={resetPublicLinkLifecycleStub}
+        />
+      </section>
+
       <section className="panel report-section share-section" id="share-summary" aria-labelledby="share-heading">
         <SectionHeader
           eyebrow="Local share preview"
@@ -502,6 +538,75 @@ function BulletPanel({
         ))}
       </div>
     </section>
+  );
+}
+
+
+function PublicLinkLifecyclePanel({
+  state,
+  onCreate,
+  onDelete,
+  onReset
+}: Readonly<{
+  state: PublicLinkLifecycleUiState;
+  onCreate: () => void;
+  onDelete: () => void;
+  onReset: () => void;
+}>) {
+  const canPreview = state.status === 'created' || state.status === 'delete-rejected';
+  const canDelete = state.status === 'created' || state.status === 'delete-rejected';
+
+  return (
+    <div className={`public-link-lifecycle-panel lifecycle-tone-${state.tone}`}>
+      <div className="public-link-lifecycle-header">
+        <div>
+          <p className="kicker">{state.phase}</p>
+          <h3>{state.title}</h3>
+          <p className="muted">{state.description}</p>
+        </div>
+        <span className="band-pill">{getPublicLinkLifecycleStatusLabel(state.status)}</span>
+      </div>
+
+      <div className="public-link-lifecycle-grid" aria-label="Local public-link lifecycle details">
+        <div>
+          <strong>Public ID</strong>
+          <span>{state.publicId ?? 'Not created'}</span>
+        </div>
+        <div>
+          <strong>Preview route</strong>
+          <span>{state.previewHref}</span>
+        </div>
+        <div>
+          <strong>Delete-token hash</strong>
+          <span>{state.deleteTokenHash ?? 'Not created'}</span>
+        </div>
+      </div>
+
+      <div className="public-link-lifecycle-steps" aria-label="Local lifecycle steps">
+        {state.lifecycleSteps.map((step) => (
+          <article className={`lifecycle-step lifecycle-step-${step.status}`} key={step.label}>
+            <span>{step.status}</span>
+            <strong>{step.label}</strong>
+            <p>{step.detail}</p>
+          </article>
+        ))}
+      </div>
+
+      <ul className="public-link-lifecycle-boundary" aria-label="Public-link lifecycle privacy boundary">
+        {state.boundaryItems.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+
+      <pre className="share-preview public-link-lifecycle-copy">{state.copyText}</pre>
+
+      <div className="actions public-link-lifecycle-actions">
+        <button className="button" onClick={onCreate} type="button">{state.status === 'deleted' ? state.actionLabel : 'Create local link stub'}</button>
+        {canPreview ? <Link className="button secondary" href={state.previewHref}>Open local preview</Link> : null}
+        <button className="button secondary" disabled={!canDelete} onClick={onDelete} type="button">{state.secondaryActionLabel}</button>
+        <button className="button secondary" onClick={onReset} type="button">Reset lifecycle stub</button>
+      </div>
+    </div>
   );
 }
 

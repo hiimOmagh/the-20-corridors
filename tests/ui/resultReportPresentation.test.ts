@@ -9,7 +9,7 @@ describe('result report presentation helpers', () => {
   it('defines stable unique report section anchors for mobile jump navigation', () => {
     const ids = REPORT_SECTION_ANCHORS.map((anchor) => anchor.id);
 
-    expect(REPORT_SECTION_ANCHORS.length).toBe(8);
+    expect(REPORT_SECTION_ANCHORS.length).toBe(9);
     expect(new Set(ids).size).toBe(ids.length);
     expect(ids).toEqual([
       'dominant-traits',
@@ -19,6 +19,7 @@ describe('result report presentation helpers', () => {
       'evidence-digest',
       'trust-guard',
       'local-feedback',
+      'public-link-lifecycle',
       'share-summary'
     ]);
     expect(REPORT_SECTION_ANCHORS.every((anchor) => anchor.shortLabel.length > 0)).toBe(true);

@@ -554,3 +554,15 @@ Validation now includes:
 ```text
 npm run flow:public-link-memory
 ```
+
+## Phase 6.3 — Public Link Lifecycle UI Stub
+
+Phase 6.3 adds local-only result-page controls for a simulated public-link lifecycle. The UI creates a minimized DTO stub in component state, displays a local public ID/delete-token hash, links only to `/r/preview`, and allows local delete/reset simulation.
+
+No backend API route, database, persistent public lookup, browser persistence, network write, authentication, payment, analytics, telemetry, or AI is introduced.
+
+Validation now includes:
+
+```text
+npm run lifecycle:public-link-ui
+```
