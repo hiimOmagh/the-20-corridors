@@ -25,15 +25,18 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 6.0 — Persistent Public Result Link Storage Contract**
+**Phase 8.0 — Database Adapter Contract**
 
-This phase defines the storage boundary for future persistent public result links without implementing storage infrastructure.
+This phase defines the production persistence adapter boundary without implementing production persistence.
 
-- defines `PublicResultStorageAdapter` as the future persistence seam
-- locks minimized `PublicResultDto` as the only allowed stored payload
-- defines anonymous non-sequential public ID, delete-token hash, and default expiry policies
-- adds `npm run contract:public-storage` and evidence at `docs/evidence/public-result-storage-latest.json`
-- keeps backend, API routes, database, auth, payment, analytics, telemetry, AI, and persistent public route lookup blocked
+- defines `DatabasePublicResultStorageAdapterContract` against `PublicResultStorageAdapter`
+- defines database records for minimized `PublicResultDto` payloads only
+- locks `publicId`, `deleteTokenHash`, `createdAt`, `expiresAt`, `deletedAt`, and schema-version fields
+- defines migration/version expectations without adding migration files
+- defines a server-only access boundary
+- keeps route handlers on dry-run in-memory behavior
+- adds `npm run contract:database-adapter` and evidence at `docs/evidence/database-adapter-contract-latest.json`
+- keeps production database client, migrations, auth, payment, analytics, AI, and persistent `/r/[publicId]` lookup blocked
 
 ## Development rule
 
@@ -42,7 +45,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract
 ```
 
 ## Commands
@@ -215,7 +218,7 @@ The latest Phase 3 closure snapshot is written to:
 docs/evidence/phase3-closure-latest.json
 ```
 
-These snapshots record methodology integrity, archetype reachability, contradiction coverage, serialization stability, approved UI scope, import-boundary status, local UI smoke coverage, closure readiness, and blocked backend/database/AI scope.
+These snapshots record methodology integrity, archetype reachability, contradiction coverage, serialization stability, approved UI scope, import-boundary status, local UI smoke coverage, closure readiness, backend route safety, database adapter contract safety, and blocked auth/payment/AI/analytics scope.
 
 ## Package workflow
 

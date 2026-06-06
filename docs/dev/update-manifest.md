@@ -891,3 +891,27 @@ tests/core/phase7ClosureGate.test.ts
 Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
 
 Scope: formal Phase 7 closure only. Verifies backend API boundary, backend route skeleton guard, backend handler dry-run adapter, actual backend route handlers, and backend route runtime smoke contract. No database, auth, payment, AI, analytics, or persistent public lookup route is introduced.
+
+## Phase 8.0 — Database Adapter Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/phase7-closure-latest.json
+docs/evidence/database-adapter-contract-latest.json
+docs/release/phase-8-database-adapter-contract.md
+docs/ui/phase-8-0-database-adapter-contract-status.md
+scripts/database-adapter-contract.ts
+src/core/public-link/databasePublicResultStorage.ts
+src/core/release/databaseAdapterContract.ts
+tests/core/databasePublicResultStorage.test.ts
+tests/core/databaseAdapterContract.test.ts
+```
+
+Validation target: `npm run validate`, `npm audit --omit=dev`, `npm audit`, `npm run build`.
+
+Scope: contract-only database adapter boundary. Defines database record shape, adapter contract against `PublicResultStorageAdapter`, delete-token hash-only persistence, `deletedAt` semantics, migration/version expectations, and server-only access rules. Route handlers remain dry-run in-memory. No production database client, migration files, auth, payment, AI, analytics, or persistent `/r/[publicId]` lookup route is introduced.
+
