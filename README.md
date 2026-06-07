@@ -1061,3 +1061,13 @@ Current visual layout status:
 - No persistence behavior changes are introduced.
 - No database binding behavior changes are introduced.
 - Operational smoke remains unchanged.
+
+### Phase 9.4 — Public Result Page Browser Evidence Gate
+
+Phase 9.4 adds static browser/markup evidence for `/r/[publicId]` without changing persistence or operational behavior.
+
+```bash
+npm run gate:phase9-public-result-browser-evidence
+```
+
+The gate verifies renderable, not-found, deleted, expired, and disabled/rollback visible states; checks that the share/copy block appears only for renderable public results; preserves Phase 9.2 accessibility semantics and Phase 9.3 visual-layout evidence; and confirms raw answers, raw delete tokens, persistence changes, database-binding changes, and network-smoke changes remain blocked.

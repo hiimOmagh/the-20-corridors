@@ -48,6 +48,8 @@ export default async function PublicResultLookupPage(props: PublicResultLookupPa
         aria-label={accessibility.mainLandmarkLabel}
         aria-labelledby={accessibility.pageTitleId}
         data-public-result-page="true"
+        data-browser-evidence="phase-9.4"
+        data-public-result-browser-state={copy.tone}
         data-lookup-status={view.status}
         data-copy-tone={copy.tone}
         data-share-copy-ux={shareCopy.availability}
@@ -98,6 +100,8 @@ export default async function PublicResultLookupPage(props: PublicResultLookupPa
       aria-label={accessibility.mainLandmarkLabel}
       aria-labelledby={accessibility.pageTitleId}
       data-public-result-page="true"
+      data-browser-evidence="phase-9.4"
+      data-public-result-browser-state={copy.tone}
       data-lookup-status={view.status}
       data-copy-tone={copy.tone}
       data-share-copy-ux={shareCopy.availability}

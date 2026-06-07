@@ -144,3 +144,35 @@ Phase 9.0, 9.1, and 9.2 gates remain green.
 Full validate remains green.
 Build remains green.
 ```
+
+## Phase 9.4 — Public Result Page Browser Evidence Gate
+
+Scope:
+
+- Verify `/r/[publicId]` visible state evidence through browser/static markup evidence.
+- Verify renderable, not-found, deleted, expired, and disabled/rollback visible text.
+- Verify share/copy block appears only in the renderable state.
+- Verify accessibility landmarks and status semantics remain visible in markup evidence.
+- Preserve Phase 9.0–9.3 gates and Phase 8 closure evidence.
+
+Acceptance gate:
+
+```text
+Browser/static evidence gate exists.
+Renderable state visible text is verified.
+Not-found state visible text is verified.
+Deleted state visible text is verified.
+Expired state visible text is verified.
+Disabled/rollback state visible text is verified.
+Share/copy block appears only in renderable state.
+Accessibility landmarks remain visible in markup evidence.
+Raw answers remain blocked.
+Raw delete tokens remain blocked.
+No persistence behavior changes.
+No database binding changes.
+No network smoke changes.
+Phase 8 closure remains green.
+Phase 9.0, 9.1, 9.2, and 9.3 gates remain green.
+Full validate remains green.
+Build remains green.
+```

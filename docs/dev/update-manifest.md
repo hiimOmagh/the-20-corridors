@@ -1662,3 +1662,34 @@ npm run build
 ```
 
 Scope: visual layout polish only. No persistence behavior, database binding, rollback, production network smoke, production mutation smoke, account system, payment path, analytics, telemetry, or generated-AI feature is changed.
+
+## Phase 9.4 — Public Result Page Browser Evidence Gate
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/phase9-public-result-page-browser-evidence-gate-latest.json
+docs/release/phase-9-public-result-page-browser-evidence-gate.md
+docs/ui/phase-9-4-public-result-page-browser-evidence-gate-status.md
+docs/ui/phase-9-transition-plan.md
+scripts/phase9-public-result-page-browser-evidence-gate.ts
+src/app/r/(public)/[publicId]/page.tsx
+src/core/public-link/publicResultLookupPageBrowserEvidence.ts
+src/core/release/phase9PublicResultPageBrowserEvidenceGate.ts
+tests/core/phase9PublicResultPageBrowserEvidenceGate.test.ts
+tests/core/publicResultLookupPageBrowserEvidence.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: browser/static evidence gate only. No persistence behavior, database binding, rollback, production network smoke, production mutation smoke, account system, payment path, analytics, telemetry, or generated-AI feature is changed.
