@@ -790,3 +790,23 @@ npm run contract:route-database-binding-preflight
 ```
 
 The gate confirms that the factory activation contract remains green, route handlers still use memory/dry-run behavior, no production mutation smoke runs, no network SQL executes, and no persistent `/r/[publicId]` lookup is introduced.
+
+## Phase 8.12 — Public Route Database Binding Dry-Run Contract
+
+Phase 8.12 simulates route-level database binding through a fake executor only. The dry-run can inject a database adapter into the route handler functions for create/read/delete/prune simulation, while the actual public route adapter resolver remains memory/dry-run.
+
+Validation now includes:
+
+```text
+npm run dryrun:route-database-binding
+```
+
+Current persistence status:
+
+- Route database binding dry-run contract exists.
+- Preflight contract remains green.
+- Fake route-bound database adapter can execute create/read/delete/prune simulation.
+- Actual public route handlers still use memory/dry-run behavior.
+- No production mutation smoke runs.
+- No network SQL executes.
+- No persistent `/r/[publicId]` lookup exists.

@@ -322,3 +322,22 @@ Full validate remains green.
 ```
 
 Next intended phase: Phase 8.12 — Public Route Database Binding Dry-Run Contract. It should simulate public route database binding with fake executor evidence before any production persistence activation.
+
+## Phase 8.12 — Public Route Database Binding Dry-Run Contract
+
+Phase 8.12 simulates public route database binding with a fake executor before any production route persistence activation.
+
+Acceptance gate:
+
+```text
+Route database binding dry-run contract exists.
+Preflight contract remains green.
+Fake route-bound database adapter can execute create/read/delete/prune simulation.
+Actual public route handlers still use memory/dry-run behavior.
+No production mutation smoke.
+No network SQL execution.
+No persistent /r/[publicId] lookup yet.
+Full validate remains green.
+```
+
+Next intended phase: Phase 8.13 — Public Route Database Binding Activation Contract. It should decide whether route binding can be enabled under explicit production-safe controls, and must still separate route persistence activation from public `/r/[publicId]` page activation.

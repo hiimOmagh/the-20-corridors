@@ -1213,3 +1213,33 @@ npm run build
 ```
 
 Scope: route database-binding preflight only. `PUBLIC_RESULT_STORAGE_MODE=database` alone is still insufficient, an explicit route-binding preflight flag is required, complete DB env is required, and route handlers remain memory/dry-run. No public route database binding, production mutation smoke, network SQL execution, or persistent `/r/[publicId]` lookup is introduced.
+
+## Phase 8.12 — Public Route Database Binding Dry-Run Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-route-database-binding-dry-run-contract-latest.json
+docs/release/phase-8-public-route-database-binding-dry-run-contract.md
+docs/ui/phase-8-12-public-route-database-binding-dry-run-contract-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/public-route-database-binding-dry-run-contract.ts
+src/core/public-link/publicResultRouteDatabaseBindingDryRun.ts
+src/core/release/publicRouteDatabaseBindingDryRunContract.ts
+tests/core/publicRouteDatabaseBindingDryRunContract.test.ts
+tests/core/publicResultRouteDatabaseBindingDryRun.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: route database-binding dry-run only. Fake route-bound database adapter simulation covers create/read/delete/prune through injected route handler options. Actual public route handlers remain memory/dry-run. No production mutation smoke, network SQL execution, public route database binding, or persistent `/r/[publicId]` lookup is introduced.
