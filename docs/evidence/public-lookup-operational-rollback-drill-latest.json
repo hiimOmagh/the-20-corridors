@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "phase-8.21-public-lookup-operational-rollback-drill-gate-v1",
+  "gateId": "phase-8-public-lookup-operational-rollback-drill",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-8-public-lookup-operational-rollback-drill",
+    "drillSchemaVersion": "phase-8.21-public-lookup-operational-rollback-drill-v1"
+  },
+  "gates": {
+    "operationalSmokeEvidencePassed": true,
+    "drillScriptExists": true,
+    "validateScriptRunsRollbackDrill": true,
+    "drillOptInPassed": true,
+    "apiRouteBindingActiveBeforeRollback": true,
+    "publicLookupRenderableBeforeRollback": true,
+    "operationalSmokeGreenBeforeRollback": true,
+    "rollbackForcesApiRouteStorageToMemory": true,
+    "rollbackDisablesPublicLookupRendering": true,
+    "rollbackDoesNotExposeStaleDatabaseDto": true,
+    "unavailableStatesRemainDtoFreeAfterRollback": true,
+    "noRawAnswersExposed": true,
+    "noRawDeleteTokenExposed": true,
+    "noProductionNetworkLookupSmoke": true,
+    "noProductionMutationSmoke": true,
+    "overallPassed": true
+  },
+  "drill": {
+    "phase": "phase-8.21-public-lookup-operational-rollback-drill",
+    "status": "public-lookup-operational-rollback-drill-passed",
+    "apiRouteBeforeRollbackStatus": "database-adapter-selected-for-public-api-route",
+    "publicLookupBeforeRollbackStatus": "public-result-page-renderable",
+    "publicLookupBeforeRollbackHttpStatus": 200,
+    "apiRouteAfterRollbackStatus": "memory-adapter-selected-rollback",
+    "publicLookupAfterRollbackStatus": "public-result-page-disabled",
+    "publicLookupAfterRollbackHttpStatus": 503,
+    "missingAfterRollbackStatus": "public-result-page-disabled",
+    "deletedAfterRollbackStatus": "public-result-page-disabled",
+    "expiredAfterRollbackStatus": "public-result-page-disabled",
+    "networkLookupSmokeExecuted": false,
+    "productionNetworkLookupSmokeExecuted": false,
+    "productionMutationSmokeExecuted": false,
+    "rules": [
+      "phase:phase-8.21-public-lookup-operational-rollback-drill",
+      "schema:phase-8.21-public-lookup-operational-rollback-drill-v1",
+      "flag:PUBLIC_RESULT_LOOKUP_OPERATIONAL_ROLLBACK_DRILL=enabled",
+      "safeMode:PUBLIC_RESULT_LOOKUP_OPERATIONAL_ROLLBACK_DRILL_SAFE_MODE=fake-executor-only",
+      "rollback:PUBLIC_RESULT_API_ROUTE_DATABASE_BINDING_ROLLBACK=memory",
+      "rollback-drill-is-explicit-opt-in-only",
+      "rollback-drill-is-fake-executor-only",
+      "api-route-database-binding-can-be-selected-before-rollback",
+      "public-lookup-can-render-before-rollback-in-safe-mode",
+      "single-rollback-flag-forces-api-route-storage-to-memory",
+      "single-rollback-flag-disables-public-lookup-rendering",
+      "rollback-does-not-expose-stale-database-dto",
+      "deleted-expired-missing-states-remain-dto-free-after-rollback",
+      "raw-answers-remain-blocked-through-rollback",
+      "raw-delete-token-remains-blocked-through-rollback",
+      "production-network-lookup-smoke-remains-disabled-by-default"
+    ]
+  },
+  "coverage": {
+    "checkedScenarioCount": 8,
+    "ruleCount": 16
+  },
+  "issues": []
+}

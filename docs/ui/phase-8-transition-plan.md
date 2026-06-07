@@ -509,3 +509,27 @@ Build remains green.
 ```
 
 Next intended phase: Phase 8.21 — Public Lookup Operational Rollback Drill. It should prove rollback behavior across API route persistence and public lookup rendering as one operational drill without running production network lookup smoke by default.
+
+## Phase 8.21 — Public Lookup Operational Rollback Drill
+
+Phase 8.21 proves rollback behavior across API route persistence and public lookup rendering as one operational drill without running production network lookup smoke by default.
+
+Acceptance gate:
+
+```text
+Operational rollback drill exists.
+API route database binding can be active in simulated safe mode.
+Public lookup can be active in simulated safe mode.
+Rollback flag forces API route storage back to memory.
+Rollback flag disables public lookup rendering.
+Rollback does not expose stale database DTOs.
+Deleted/expired/missing states remain DTO-free after rollback.
+No raw answers exposed.
+No raw delete token exposed.
+No production network lookup smoke by default.
+Operational smoke boundary remains green.
+Full validate remains green.
+Build remains green.
+```
+
+Next intended phase: Phase 8.22 — Public Lookup Release Closure Gate. It should close Phase 8 with consolidated evidence for database adapter, API persistence, public lookup, rollback, and operational smoke controls before moving to the next feature track.

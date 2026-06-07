@@ -973,3 +973,26 @@ Current public lookup smoke status:
 - DTO-only rendering remains enforced.
 - Raw answers and raw delete tokens remain blocked.
 - Production network lookup smoke is not executed by default.
+
+## Phase 8.21 — Public Lookup Operational Rollback Drill
+
+Phase 8.21 adds an operational rollback drill across API route persistence and public `/r/[publicId]` lookup rendering.
+
+Run the Phase 8.21 drill:
+
+```bash
+npm run drill:public-lookup-rollback
+```
+
+Current rollback status:
+
+- The drill is explicit and fake-executor-only.
+- API route database binding can be selected before rollback.
+- Public lookup can render an active DTO-only result before rollback.
+- Operational public lookup smoke must remain green before rollback.
+- `PUBLIC_RESULT_API_ROUTE_DATABASE_BINDING_ROLLBACK=memory` forces API route storage back to memory.
+- The same rollback flag disables public lookup rendering.
+- Rollback does not expose stale database DTOs.
+- Missing, deleted, and expired states remain DTO-free after rollback.
+- Raw answers and raw delete tokens remain blocked.
+- Production network lookup smoke is not executed by default.

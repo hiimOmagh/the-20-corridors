@@ -1491,3 +1491,33 @@ npm run build
 ```
 
 Scope: opt-in non-production operational smoke boundary only. The boundary verifies active, missing, deleted, and expired public lookup behavior through fake-executor smoke, refuses default/production/rollback execution, and keeps production network lookup smoke disabled by default.
+
+## Phase 8.21 — Public Lookup Operational Rollback Drill
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-lookup-operational-rollback-drill-latest.json
+docs/release/phase-8-public-lookup-operational-rollback-drill.md
+docs/ui/phase-8-21-public-lookup-operational-rollback-drill-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/public-lookup-operational-rollback-drill.ts
+src/core/public-link/publicResultLookupOperationalRollbackDrill.ts
+src/core/release/publicLookupOperationalRollbackDrill.ts
+tests/core/publicLookupOperationalRollbackDrill.test.ts
+tests/core/publicLookupOperationalRollbackDrillGate.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: operational rollback drill. The drill proves API route database binding and public lookup rendering can be active in safe fake-executor mode, then proves rollback forces API route storage to memory and disables public lookup rendering without stale DTO exposure or production network lookup smoke.
