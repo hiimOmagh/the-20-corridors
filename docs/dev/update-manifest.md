@@ -1461,3 +1461,33 @@ npm run build
 ```
 
 Scope: implementation gate. The public `/r/[publicId]` page route is implemented behind the Phase 8.18 activation decision. Default behavior stays disabled, rollback blocks database lookup, active/missing/deleted/expired states are covered, raw answers and raw delete tokens remain blocked, and production network lookup smoke remains disabled by default.
+
+## Phase 8.20 — Public Result Lookup Operational Smoke Boundary
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-result-lookup-operational-smoke-boundary-latest.json
+docs/release/phase-8-public-result-lookup-operational-smoke-boundary.md
+docs/ui/phase-8-20-public-result-lookup-operational-smoke-boundary-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/public-result-lookup-operational-smoke-boundary.ts
+src/core/public-link/publicResultLookupOperationalSmokeBoundary.ts
+src/core/release/publicResultLookupOperationalSmokeBoundary.ts
+tests/core/publicResultLookupOperationalSmokeBoundary.test.ts
+tests/core/publicResultLookupOperationalSmokeBoundaryGate.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: opt-in non-production operational smoke boundary only. The boundary verifies active, missing, deleted, and expired public lookup behavior through fake-executor smoke, refuses default/production/rollback execution, and keeps production network lookup smoke disabled by default.

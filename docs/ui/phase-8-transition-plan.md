@@ -485,3 +485,27 @@ Build remains green.
 ```
 
 Next intended phase: Phase 8.20 — Public Result Lookup Operational Smoke Boundary. It should define an explicit, opt-in non-production smoke boundary for public lookup behavior without running production network lookup by default.
+
+## Phase 8.20 — Public Result Lookup Operational Smoke Boundary
+
+Phase 8.20 defines an explicit opt-in non-production smoke boundary for `/r/[publicId]` lookup behavior without enabling production network lookup smoke by default.
+
+Acceptance gate:
+
+```text
+Operational smoke boundary exists.
+Smoke is opt-in only.
+Smoke refuses production unless explicit non-production/safe flag is set.
+Page implementation gate remains green.
+Rollback blocks lookup smoke.
+Missing/invalid env fails closed.
+Network lookup smoke remains disabled by default.
+DTO-only rendering is verified.
+Deleted/expired/missing states are verified.
+No raw answers exposed.
+No raw delete token exposed.
+Full validate remains green.
+Build remains green.
+```
+
+Next intended phase: Phase 8.21 — Public Lookup Operational Rollback Drill. It should prove rollback behavior across API route persistence and public lookup rendering as one operational drill without running production network lookup smoke by default.

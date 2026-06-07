@@ -949,3 +949,27 @@ Current persistence status:
 - Missing, deleted, and expired results render non-DTO unavailable states.
 - Raw answers and raw delete tokens remain blocked.
 - Production network lookup smoke is not executed by default.
+
+## Phase 8.20 — Public Result Lookup Operational Smoke Boundary
+
+Phase 8.20 adds an opt-in non-production smoke boundary for public `/r/[publicId]` lookup behavior.
+
+Run the Phase 8.20 boundary:
+
+```bash
+npm run smoke:public-lookup-operational
+```
+
+Current public lookup smoke status:
+
+- Smoke is blocked by default.
+- Smoke requires `PUBLIC_RESULT_LOOKUP_OPERATIONAL_SMOKE=enabled`.
+- Smoke requires a non-production `PUBLIC_RESULT_LOOKUP_OPERATIONAL_SMOKE_ENVIRONMENT` value.
+- Smoke requires `PUBLIC_RESULT_LOOKUP_OPERATIONAL_SMOKE_SAFE_MODE=fake-executor-only`.
+- Production smoke is rejected.
+- Rollback-to-memory blocks lookup smoke.
+- Missing/invalid environment fails closed.
+- Active, missing, deleted, and expired lookup states are verified through fake-executor smoke.
+- DTO-only rendering remains enforced.
+- Raw answers and raw delete tokens remain blocked.
+- Production network lookup smoke is not executed by default.

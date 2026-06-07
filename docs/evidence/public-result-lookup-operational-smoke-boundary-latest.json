@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "phase-8.20-public-result-lookup-operational-smoke-boundary-gate-v1",
+  "gateId": "phase-8-public-result-lookup-operational-smoke-boundary",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-8-public-result-lookup-operational-smoke-boundary",
+    "boundarySchemaVersion": "phase-8.20-public-result-lookup-operational-smoke-boundary-v1"
+  },
+  "gates": {
+    "implementationGateEvidencePassed": true,
+    "smokeScriptExists": true,
+    "validateScriptRunsSmokeBoundary": true,
+    "defaultSmokeBlocked": true,
+    "productionSmokeRejected": true,
+    "rollbackBlocksSmoke": true,
+    "missingInvalidEnvFailsClosed": true,
+    "optInSmokePassed": true,
+    "dtoOnlyRenderingVerified": true,
+    "unavailableStatesVerified": true,
+    "noRawAnswersExposed": true,
+    "noRawDeleteTokenExposed": true,
+    "networkSmokeDisabledByDefault": true,
+    "noProductionMutationSmoke": true,
+    "overallPassed": true
+  },
+  "smoke": {
+    "phase": "phase-8.20-public-result-lookup-operational-smoke-boundary",
+    "defaultStatus": "public-result-lookup-operational-smoke-blocked",
+    "productionStatus": "public-result-lookup-operational-smoke-blocked",
+    "rollbackStatus": "public-result-lookup-operational-smoke-blocked",
+    "invalidEnvStatus": "public-result-lookup-operational-smoke-configuration-error",
+    "optInStatus": "public-result-lookup-operational-smoke-passed",
+    "activeLookupStatus": "public-result-page-renderable",
+    "activeLookupHttpStatus": 200,
+    "readMissStatus": "public-result-page-not-found",
+    "readMissHttpStatus": 404,
+    "deletedStatus": "public-result-page-deleted-unavailable",
+    "deletedHttpStatus": 410,
+    "expiredStatus": "public-result-page-expired-unavailable",
+    "expiredHttpStatus": 410,
+    "networkLookupSmokeExecuted": false,
+    "productionNetworkLookupSmokeExecuted": false,
+    "rules": [
+      "phase:phase-8.20-public-result-lookup-operational-smoke-boundary",
+      "schema:phase-8.20-public-result-lookup-operational-smoke-boundary-v1",
+      "flag:PUBLIC_RESULT_LOOKUP_OPERATIONAL_SMOKE=enabled",
+      "safeMode:PUBLIC_RESULT_LOOKUP_OPERATIONAL_SMOKE_SAFE_MODE=fake-executor-only",
+      "public-result-lookup-operational-smoke-is-explicit-opt-in-only",
+      "public-result-lookup-operational-smoke-refuses-production-environment",
+      "public-result-lookup-operational-smoke-requires-safe-fake-executor-mode",
+      "public-result-lookup-operational-smoke-rolls-back-to-disabled-lookup-when-rollback-memory-is-set",
+      "public-result-lookup-operational-smoke-fails-closed-on-missing-or-invalid-env",
+      "public-result-lookup-operational-smoke-verifies-active-renderable-dto-only-state",
+      "public-result-lookup-operational-smoke-verifies-missing-deleted-expired-non-dto-states",
+      "public-result-lookup-operational-smoke-never-exposes-raw-answers",
+      "public-result-lookup-operational-smoke-never-exposes-raw-delete-token",
+      "public-result-lookup-operational-smoke-runs-no-production-network-lookup-by-default"
+    ]
+  },
+  "coverage": {
+    "checkedScenarioCount": 5,
+    "ruleCount": 14
+  },
+  "issues": []
+}
