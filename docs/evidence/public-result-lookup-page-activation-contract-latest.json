@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "phase-8.18-public-result-lookup-page-activation-contract-release-v1",
+  "contractId": "phase-8.18-public-result-lookup-page-activation-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-8.18-public-result-lookup-page-activation-contract",
+    "activationSchemaVersion": "phase-8.18-public-result-lookup-page-activation-contract-v1"
+  },
+  "gates": {
+    "preflightContractPassed": true,
+    "dryRunContractPassed": true,
+    "apiRouteDatabaseBindingGatePassed": true,
+    "rollbackFailureEvidencePackPassed": true,
+    "activationScriptExists": true,
+    "validateScriptRunsActivation": true,
+    "activationModuleExists": true,
+    "activationGuardModuleExists": true,
+    "activationDocExists": true,
+    "phase818StatusDocExists": true,
+    "activationFlagDefined": true,
+    "activationDecisionReady": true,
+    "activationRequiresCompleteDatabaseEnv": true,
+    "activationRequiresApiRouteDatabaseBinding": true,
+    "activationDoesNotBypassRollback": true,
+    "actualPublicLookupPageBindingNotApplied": true,
+    "noRealPublicPageDatabaseRead": true,
+    "noPersistentPublicLookupRoute": true,
+    "noNetworkLookupSmoke": true,
+    "noProductionMutationSmoke": true,
+    "publicPageRouteImplementationSeparate": true,
+    "noBlockedIntegrationSignals": true,
+    "overallPassed": true
+  },
+  "activation": {
+    "phase": "phase-8.18-public-result-lookup-page-activation-contract",
+    "status": "public-result-lookup-page-activation-ready-not-applied",
+    "preflightStatus": "public-result-lookup-page-preflight-ready-but-disabled",
+    "dryRunStatus": "public-result-lookup-page-dry-run-passed",
+    "completeDatabaseEnvPresent": true,
+    "apiRouteDatabaseBindingGateValid": true,
+    "activationDecisionReady": true,
+    "actualPublicLookupPageBindingApplied": false,
+    "publicPageDatabaseReadAllowed": false,
+    "realPublicResultPageDatabaseReadExecuted": false,
+    "networkLookupExecuted": false,
+    "publicPageRouteImplementationAllowed": false,
+    "apiRoutePersistenceRollbackStillAvailable": true,
+    "activationFlagEnv": "PUBLIC_RESULT_PUBLIC_LOOKUP_DATABASE_ACTIVATION",
+    "activationFlagRequiredValue": "enabled",
+    "rules": [
+      "phase:phase-8.18-public-result-lookup-page-activation-contract",
+      "schema:phase-8.18-public-result-lookup-page-activation-contract-v1",
+      "flag:PUBLIC_RESULT_PUBLIC_LOOKUP_DATABASE_ACTIVATION=enabled",
+      "public-result-lookup-page-activation-requires-explicit-public-lookup-activation-flag",
+      "public-result-lookup-page-activation-requires-complete-database-env",
+      "public-result-lookup-page-activation-requires-api-route-database-binding-valid",
+      "public-result-lookup-page-activation-requires-phase-8-17-dry-run-green",
+      "public-result-lookup-page-activation-does-not-bypass-api-route-rollback-mode",
+      "public-result-lookup-page-activation-contract-is-decision-only",
+      "actual-public-r-public-id-page-binding-remains-not-applied",
+      "no-real-public-page-database-read-in-activation-contract",
+      "no-production-network-lookup-smoke",
+      "public-page-route-implementation-remains-separate"
+    ]
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/publicResultLookupPageDatabaseActivation.ts",
+      "scripts/public-result-lookup-page-activation-contract.ts",
+      "docs/release/phase-8-public-result-lookup-page-activation-contract.md",
+      "docs/ui/phase-8-18-public-result-lookup-page-activation-contract-status.md",
+      "docs/ui/phase-8-transition-plan.md",
+      "src/app/r/preview/page.tsx"
+    ],
+    "persistentPublicLookupRouteFiles": [],
+    "publicPageDatabaseReadSignals": [],
+    "blockedIntegrationSignals": []
+  },
+  "coverage": {
+    "checkedFileCount": 6,
+    "persistentRouteCount": 0,
+    "publicPageDatabaseReadSignalCount": 0,
+    "blockedIntegrationSignalCount": 0,
+    "activationRuleCount": 10
+  },
+  "issues": []
+}

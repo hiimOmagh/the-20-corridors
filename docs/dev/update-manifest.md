@@ -1400,3 +1400,33 @@ npm run build
 ```
 
 Scope: fake-executor public lookup page dry-run only. Active, missing, deleted, and expired lookup states are simulated without enabling the real `/r/[publicId]` page database lookup, production network lookup smoke, or public lookup route activation.
+
+## Phase 8.18 — Public Result Lookup Page Activation Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-result-lookup-page-activation-contract-latest.json
+docs/release/phase-8-public-result-lookup-page-activation-contract.md
+docs/ui/phase-8-18-public-result-lookup-page-activation-contract-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/public-result-lookup-page-activation-contract.ts
+src/core/public-link/publicResultLookupPageDatabaseActivation.ts
+src/core/release/publicResultLookupPageActivationContract.ts
+tests/core/publicResultLookupPageActivationContract.test.ts
+tests/core/publicResultLookupPageDatabaseActivation.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: activation decision only. The contract defines the guarded `/r/[publicId]` page lookup activation state, proves rollback blocks lookup activation, and keeps actual public page database read, route implementation, production mutation smoke, and network lookup smoke disabled.

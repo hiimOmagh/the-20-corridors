@@ -906,3 +906,25 @@ Current persistence status:
 - Actual `/r/[publicId]` page database lookup remains disabled.
 - No production network lookup smoke runs.
 - No persistent public lookup route is introduced.
+
+## Phase 8.18 — Public Result Lookup Page Activation Contract
+
+Phase 8.18 defines the production-safe activation decision for future `/r/[publicId]` database lookup. It keeps the decision separate from actual page route implementation and preserves API route rollback behavior.
+
+Run the Phase 8.18 activation contract:
+
+```bash
+npm run contract:public-lookup-page-activation
+```
+
+Current persistence status:
+
+- Public lookup page activation requires `PUBLIC_RESULT_PUBLIC_LOOKUP_DATABASE_ACTIVATION=enabled`.
+- Phase 8.17 dry-run must remain green.
+- API route database binding gate must remain green.
+- Rollback/failure evidence must remain green.
+- Rollback mode blocks public lookup activation.
+- Actual `/r/[publicId]` page database lookup remains not applied.
+- No real public page database read is executed.
+- No production network lookup smoke runs.
+- No public page route implementation is introduced.

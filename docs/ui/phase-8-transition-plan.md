@@ -435,3 +435,27 @@ Build remains green.
 ```
 
 Next intended phase: Phase 8.18 — Public Result Lookup Page Activation Contract. It should define the production-safe activation decision for `/r/[publicId]` page lookup without coupling it to API route persistence rollback.
+
+## Phase 8.18 — Public Result Lookup Page Activation Contract
+
+Phase 8.18 defines the production-safe activation decision for `/r/[publicId]` page lookup without implementing the real database-backed page route.
+
+Acceptance gate:
+
+```text
+Public lookup page activation contract exists.
+Phase 8.17 dry-run remains green.
+API route database binding gate remains green.
+Rollback/failure evidence remains green.
+Activation requires explicit PUBLIC_RESULT_PUBLIC_LOOKUP_DATABASE_ACTIVATION=enabled.
+Activation requires complete DB env.
+Activation requires API route database binding already valid.
+Activation does not bypass rollback mode.
+No real /r/[publicId] database read yet.
+No production network lookup smoke yet.
+No public page route implementation yet.
+Full validate remains green.
+Build remains green.
+```
+
+Next intended phase: Phase 8.19 — Public Result Lookup Page Implementation Gate. It should implement the page lookup behind the Phase 8.18 activation decision while preserving rollback and failure-mode controls.
