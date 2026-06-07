@@ -1549,3 +1549,35 @@ npm run build
 ```
 
 Scope: release closure evidence only. No new runtime persistence behavior, production network smoke, production mutation smoke, auth, payment, AI, analytics, or telemetry.
+
+
+## Phase 9.0 — Public Result Page UX + Operational Copy Polish
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/phase9-public-result-page-ux-copy-polish-latest.json
+docs/release/phase-9-public-result-page-ux-copy-polish.md
+docs/ui/phase-9-0-public-result-page-ux-copy-polish-status.md
+docs/ui/phase-9-transition-plan.md
+scripts/phase9-public-result-page-ux-copy-polish.ts
+src/app/r/(public)/[publicId]/page.tsx
+src/core/public-link/publicResultLookupPageCopy.ts
+src/core/release/phase9PublicResultPageUxCopyPolish.ts
+tests/core/phase9PublicResultPageUxCopyPolish.test.ts
+tests/core/publicResultLookupPageCopy.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: UX and operational copy polish only. No persistence behavior, database binding, rollback, production network smoke, production mutation smoke, account system, payment path, analytics, telemetry, or generated-AI feature is changed.

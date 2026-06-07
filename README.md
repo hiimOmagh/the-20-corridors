@@ -25,23 +25,17 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 8.5 — Database Query Contract**
+**Phase 9.0 — Public Result Page UX + Operational Copy Polish**
 
-This phase locks the database table and query contract without installing, importing, or binding a real database SDK/client.
+This phase polishes public `/r/[publicId]` page copy while preserving the locked Phase 8 persistence, rollback, and operational-smoke boundaries.
 
-- defines the `public_result_links` table contract
-- defines column names and types
-- defines insert/read/delete/update-expiry query intents
-- defines soft-delete behavior through `deleted_at` and deleted status
-- defines expired-record behavior before adapter implementation
-- defines delete-token-hash lookup behavior without raw delete-token storage
-- proves SQL execution remains disabled
-- proves the selected SDK remains not installed and not imported
-- keeps database client creation disabled
-- keeps adapter factory database creation disabled
-- keeps route handlers on dry-run in-memory behavior
-- adds `npm run contract:database-query` and evidence at `docs/evidence/database-query-contract-latest.json`
-- keeps production database client, SDK imports, migrations, auth, payment, analytics, AI, telemetry, and persistent `/r/[publicId]` lookup blocked
+- adds a public lookup page copy model for renderable, not-found, deleted, expired, disabled, configuration-error, and storage-unavailable states
+- updates the public result page to use state-specific user-facing copy
+- keeps DTO-only rendering intact
+- keeps raw answers and raw delete tokens blocked
+- keeps persistence, database binding, rollback, and operational smoke behavior unchanged
+- adds `npm run gate:phase9-public-result-page-copy` and evidence at `docs/evidence/phase9-public-result-page-ux-copy-polish-latest.json`
+- keeps production network lookup smoke, production mutation smoke, account systems, payment paths, analytics, telemetry, and generated-AI features out of scope
 
 ## Development rule
 
@@ -50,7 +44,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Public Page Copy Polish
 ```
 
 ## Commands
@@ -145,10 +139,10 @@ Run the Phase 3 closure gate:
 npm run closure:phase3
 ```
 
-Run the Phase 8.5 database query contract gate:
+Run the Phase 9.0 public result page copy-polish gate:
 
 ```bash
-npm run contract:database-query
+npm run gate:phase9-public-result-page-copy
 ```
 
 Run the full local validation suite:
