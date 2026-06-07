@@ -1013,3 +1013,25 @@ Current closure status:
 - Production network lookup smoke remains disabled by default.
 - `/r/[publicId]` route implementation is present.
 - Phase 9 transition plan exists.
+
+## Phase 9.1 — Public Result Share/Copy UX Polish
+
+Phase 9.1 improves the public `/r/[publicId]` share/copy guidance without changing persistence, database binding, rollback, or operational smoke behavior.
+
+Run the Phase 9.1 gate:
+
+```bash
+npm run gate:phase9-public-result-share-copy
+```
+
+Current share/copy status:
+
+- Renderable public results expose clear share/copy guidance.
+- The copy affordance is explicit: `Copy public result link`.
+- Manual fallback guidance is present for environments without automatic copy support.
+- Unavailable public result states do not offer a copy action.
+- Raw answers remain blocked.
+- Raw delete tokens remain blocked.
+- No persistence behavior changes are introduced.
+- No database binding behavior changes are introduced.
+- Operational smoke remains unchanged.

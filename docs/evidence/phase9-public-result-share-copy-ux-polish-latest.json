@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "phase-9.1-public-result-share-copy-ux-polish-gate-v1",
+  "gateId": "phase-9.1-public-result-share-copy-ux-polish",
+  "shareCopySchemaVersion": "phase-9.1-public-result-share-copy-ux-polish-v1",
+  "shareCopyPhase": "phase-9.1-public-result-share-copy-ux-polish",
+  "gates": {
+    "gateScriptExists": true,
+    "gateModuleExists": true,
+    "shareCopyModuleExists": true,
+    "pageRouteExists": true,
+    "shareCopyTestsExist": true,
+    "gateTestsExist": true,
+    "packageScriptExists": true,
+    "validateRunsShareCopyGate": true,
+    "phase9CopyGateEvidenceCurrent": true,
+    "phase9StatusDocExists": true,
+    "phase9ReleaseDocExists": true,
+    "phase9TransitionPlanUpdated": true,
+    "pageUsesShareCopyBuilder": true,
+    "pageExposesShareCopyAvailability": true,
+    "pageRendersShareCopyPanelOnlyWhenAvailable": true,
+    "copyLinkAffordanceTextClear": true,
+    "manualCopyGuidanceExists": true,
+    "unavailableStatesBlockCopyAction": true,
+    "rawAnswersRemainBlocked": true,
+    "rawDeleteTokensRemainBlocked": true,
+    "noPersistenceChangeSignals": true,
+    "noDatabaseBindingChangeSignals": true,
+    "noNetworkSmokeChangeSignals": true,
+    "overallPassed": true
+  },
+  "coverage": {
+    "requiredShareCopyPhraseCount": 7,
+    "presentShareCopyPhraseCount": 7,
+    "shareCopyRuleCount": 11,
+    "forbiddenPageSignalCount": 0,
+    "persistenceChangeSignalCount": 0,
+    "databaseBindingChangeSignalCount": 0,
+    "networkSmokeChangeSignalCount": 0
+  },
+  "docs": {
+    "status": "docs/ui/phase-9-1-public-result-share-copy-ux-polish-status.md",
+    "release": "docs/release/phase-9-public-result-share-copy-ux-polish.md",
+    "phase9Transition": "docs/ui/phase-9-transition-plan.md",
+    "phase9CopyGateEvidence": "docs/evidence/phase9-public-result-page-ux-copy-polish-latest.json"
+  },
+  "issues": []
+}

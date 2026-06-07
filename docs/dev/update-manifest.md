@@ -1581,3 +1581,34 @@ npm run build
 ```
 
 Scope: UX and operational copy polish only. No persistence behavior, database binding, rollback, production network smoke, production mutation smoke, account system, payment path, analytics, telemetry, or generated-AI feature is changed.
+
+## Phase 9.1 — Public Result Share/Copy UX Polish
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/phase9-public-result-share-copy-ux-polish-latest.json
+docs/release/phase-9-public-result-share-copy-ux-polish.md
+docs/ui/phase-9-1-public-result-share-copy-ux-polish-status.md
+docs/ui/phase-9-transition-plan.md
+scripts/phase9-public-result-share-copy-ux-polish.ts
+src/app/r/(public)/[publicId]/page.tsx
+src/core/public-link/publicResultShareCopyUx.ts
+src/core/release/phase9PublicResultShareCopyUxPolish.ts
+tests/core/phase9PublicResultShareCopyUxPolish.test.ts
+tests/core/publicResultShareCopyUx.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: share/copy UX polish only. No persistence behavior, database binding, rollback, production network smoke, production mutation smoke, account system, payment path, analytics, telemetry, or generated-AI feature is changed.

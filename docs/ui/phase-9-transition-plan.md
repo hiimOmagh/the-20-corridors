@@ -54,3 +54,32 @@ After Phase 9.0, the next useful product-hardening moves are:
 Phase 9 must not silently change the Phase 8 persistence contract.
 
 Any production network smoke, destructive database operation, account system, payment path, analytics, telemetry, or generated-AI feature must enter through a separate explicit gate with its own rollback and failure-mode evidence.
+
+## Phase 9.1 — Public Result Share/Copy UX Polish
+
+Scope:
+
+- Improve public result share/copy guidance.
+- Make the copy-link affordance clearer.
+- Add manual copy fallback guidance.
+- Prevent unavailable states from offering invalid copy actions.
+- Preserve DTO-only rendering.
+- Preserve Phase 9.0 copy evidence and Phase 8 closure.
+
+Acceptance gate:
+
+```text
+Share/copy UX copy exists for the public result page.
+Copy-link affordance text is clearer.
+Fallback/manual copy guidance exists.
+Unavailable states do not offer invalid copy action.
+Raw answers remain blocked.
+Raw delete tokens remain blocked.
+No persistence behavior changes.
+No database binding changes.
+No network smoke changes.
+Phase 8 closure remains green.
+Phase 9.0 copy gate remains green.
+Full validate remains green.
+Build remains green.
+```
