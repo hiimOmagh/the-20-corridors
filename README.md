@@ -864,3 +864,24 @@ Current persistence status:
 - No production mutation smoke runs.
 - No network SQL execution runs.
 - Public `/r/[publicId]` page lookup remains blocked.
+
+## Phase 8.16 — Public Result Lookup Page Preflight Contract
+
+Phase 8.16 defines the public `/r/[publicId]` lookup-page database preflight criteria without enabling the page lookup. API route database binding does not automatically activate public result-page database reads.
+
+Run the Phase 8.16 preflight contract:
+
+```bash
+npm run contract:public-lookup-page-preflight
+```
+
+Current persistence status:
+
+- Public lookup page preflight requires `PUBLIC_RESULT_PUBLIC_LOOKUP_DATABASE_ACTIVATION=enabled`.
+- Public lookup page preflight also requires `PUBLIC_RESULT_LOOKUP_PAGE_DATABASE_PREFLIGHT=enabled`.
+- Complete database env remains required.
+- API route database binding can be active while public lookup remains blocked.
+- Public `/r/[publicId]` page database lookup remains disabled by default.
+- No public page database read is executed.
+- No production network lookup smoke runs.
+- No persistent `/r/[publicId]` route is introduced.

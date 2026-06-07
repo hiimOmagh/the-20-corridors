@@ -1340,3 +1340,33 @@ npm run build
 ```
 
 Scope: rollback and failure-mode evidence only. API route database binding remains behind explicit controls. Public `/r/[publicId]` page lookup remains separate and blocked. No production mutation smoke or network SQL execution is introduced.
+
+## Phase 8.16 — Public Result Lookup Page Preflight Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-result-lookup-page-preflight-contract-latest.json
+docs/release/phase-8-public-result-lookup-page-preflight-contract.md
+docs/ui/phase-8-16-public-result-lookup-page-preflight-contract-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/public-result-lookup-page-preflight-contract.ts
+src/core/public-link/publicResultLookupPageDatabasePreflight.ts
+src/core/release/publicResultLookupPagePreflightContract.ts
+tests/core/publicResultLookupPageDatabasePreflight.test.ts
+tests/core/publicResultLookupPagePreflightContract.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: preflight only. The public lookup page requires its own activation and preflight flags, complete DB env, and explicit acknowledgements. API route database binding does not activate `/r/[publicId]` page lookup. No public page database read, production mutation smoke, network lookup smoke, or persistent public lookup route is introduced.

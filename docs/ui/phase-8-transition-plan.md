@@ -388,3 +388,26 @@ Build remains green.
 ```
 
 Next intended phase: Phase 8.16 — Public Result Lookup Page Preflight Contract. It should define public `/r/[publicId]` page lookup activation criteria without enabling database lookup in the page yet.
+
+## Phase 8.16 — Public Result Lookup Page Preflight Contract
+
+Phase 8.16 defines the public `/r/[publicId]` database lookup preflight criteria without enabling public result-page lookup.
+
+Acceptance gate:
+
+```text
+Public lookup page preflight contract exists.
+API route database binding gate remains green.
+Rollback/failure evidence remains green.
+PUBLIC_RESULT_PUBLIC_LOOKUP_DATABASE_ACTIVATION flag is defined.
+PUBLIC_RESULT_LOOKUP_PAGE_DATABASE_PREFLIGHT flag is defined.
+Complete DB env is required.
+API route database binding does not automatically activate /r/[publicId].
+Public lookup remains disabled by default.
+No public page database read yet.
+No production network lookup smoke yet.
+Full validate remains green.
+Build remains green.
+```
+
+Next intended phase: Phase 8.17 — Public Result Lookup Page Dry-Run Contract. It should simulate `/r/[publicId]` database lookup through a fake executor while keeping the actual public page lookup disabled.
