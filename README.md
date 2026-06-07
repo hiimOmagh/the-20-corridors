@@ -25,16 +25,18 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 9.0 — Public Result Page UX + Operational Copy Polish**
+**Phase 9.2 — Public Result Page Accessibility Semantics Polish**
 
-This phase polishes public `/r/[publicId]` page copy while preserving the locked Phase 8 persistence, rollback, and operational-smoke boundaries.
+This phase improves public `/r/[publicId]` page accessibility semantics while preserving the locked Phase 8 persistence, rollback, and operational-smoke boundaries.
 
-- adds a public lookup page copy model for renderable, not-found, deleted, expired, disabled, configuration-error, and storage-unavailable states
-- updates the public result page to use state-specific user-facing copy
+- adds a public lookup page accessibility model for landmarks, headings, status regions, and share/copy help
+- updates the public result page with explicit main landmark labelling and addressable state text
+- labels renderable result regions for facts, overview, axis summaries, and sharing
+- keeps unavailable public page states non-actionable
 - keeps DTO-only rendering intact
 - keeps raw answers and raw delete tokens blocked
 - keeps persistence, database binding, rollback, and operational smoke behavior unchanged
-- adds `npm run gate:phase9-public-result-page-copy` and evidence at `docs/evidence/phase9-public-result-page-ux-copy-polish-latest.json`
+- adds `npm run gate:phase9-public-result-accessibility` and evidence at `docs/evidence/phase9-public-result-page-accessibility-semantics-polish-latest.json`
 - keeps production network lookup smoke, production mutation smoke, account systems, payment paths, analytics, telemetry, and generated-AI features out of scope
 
 ## Development rule
@@ -44,7 +46,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Public Page Copy Polish
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Public Page Accessibility Polish
 ```
 
 ## Commands

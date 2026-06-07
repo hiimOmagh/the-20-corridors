@@ -83,3 +83,34 @@ Phase 9.0 copy gate remains green.
 Full validate remains green.
 Build remains green.
 ```
+
+## Phase 9.2 — Public Result Page Accessibility Semantics Polish
+
+Scope:
+
+- Add explicit main landmark labelling for `/r/[publicId]`.
+- Add accessible heading and region semantics for renderable public result content.
+- Add status/error live-region semantics for unavailable states.
+- Add accessible share/copy label and help text.
+- Keep unavailable states non-actionable.
+- Preserve Phase 8 closure, Phase 9.0 copy polish, and Phase 9.1 share/copy UX evidence.
+
+Acceptance gate:
+
+```text
+Accessible heading hierarchy exists.
+Main landmark is explicit.
+Status/error states use appropriate semantic text.
+Renderable result has clear region labels.
+Copy/share action has accessible label/help text.
+Unavailable states remain non-actionable.
+Raw answers remain blocked.
+Raw delete tokens remain blocked.
+No persistence behavior changes.
+No database binding changes.
+No network smoke changes.
+Phase 8 closure remains green.
+Phase 9.0 and 9.1 gates remain green.
+Full validate remains green.
+Build remains green.
+```

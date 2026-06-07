@@ -1612,3 +1612,22 @@ npm run build
 ```
 
 Scope: share/copy UX polish only. No persistence behavior, database binding, rollback, production network smoke, production mutation smoke, account system, payment path, analytics, telemetry, or generated-AI feature is changed.
+
+## Phase 9.2 — Public Result Page Accessibility Semantics Polish
+
+Changed files:
+
+- README.md
+- package.json
+- docs/evidence/phase9-public-result-page-accessibility-semantics-polish-latest.json
+- docs/release/phase-9-public-result-page-accessibility-semantics-polish.md
+- docs/ui/phase-9-2-public-result-page-accessibility-semantics-polish-status.md
+- docs/ui/phase-9-transition-plan.md
+- scripts/phase9-public-result-page-accessibility-semantics-polish.ts
+- src/app/r/(public)/[publicId]/page.tsx
+- src/core/public-link/publicResultLookupPageAccessibility.ts
+- src/core/release/phase9PublicResultPageAccessibilitySemanticsPolish.ts
+- tests/core/phase9PublicResultPageAccessibilitySemanticsPolish.test.ts
+- tests/core/publicResultLookupPageAccessibility.test.ts
+
+Scope: accessibility semantics only. No persistence, database binding, rollback, or operational smoke behavior changes.
