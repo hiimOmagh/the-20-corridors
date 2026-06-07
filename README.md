@@ -810,3 +810,22 @@ Current persistence status:
 - No production mutation smoke runs.
 - No network SQL executes.
 - No persistent `/r/[publicId]` lookup exists.
+
+## Phase 8.13 — Public Route Database Binding Activation Contract
+
+Phase 8.13 defines the API route database-binding activation decision without applying production route persistence. The activation contract requires the Phase 8.11 preflight, Phase 8.12 fake-executor dry-run, and the explicit `PUBLIC_RESULT_ROUTE_DATABASE_BINDING_ACTIVATION=enabled` flag.
+
+Run the Phase 8.13 gate:
+
+```bash
+npm run contract:route-database-binding-activation
+```
+
+Current persistence status:
+
+- API route database binding activation decision can become ready.
+- Actual route handlers remain memory/dry-run.
+- Public `/r/[publicId]` page lookup remains separate and blocked.
+- Production mutation smoke remains blocked.
+- Network SQL execution remains blocked.
+- Persistent public result page lookup remains absent.

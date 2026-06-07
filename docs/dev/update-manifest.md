@@ -1243,3 +1243,33 @@ npm run build
 ```
 
 Scope: route database-binding dry-run only. Fake route-bound database adapter simulation covers create/read/delete/prune through injected route handler options. Actual public route handlers remain memory/dry-run. No production mutation smoke, network SQL execution, public route database binding, or persistent `/r/[publicId]` lookup is introduced.
+
+## Phase 8.13 — Public Route Database Binding Activation Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-route-database-binding-activation-contract-latest.json
+docs/release/phase-8-public-route-database-binding-activation-contract.md
+docs/ui/phase-8-13-public-route-database-binding-activation-contract-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/public-route-database-binding-activation-contract.ts
+src/core/public-link/publicResultRouteDatabaseBindingActivation.ts
+src/core/release/publicRouteDatabaseBindingActivationContract.ts
+tests/core/publicRouteDatabaseBindingActivationContract.test.ts
+tests/core/publicResultRouteDatabaseBindingActivation.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: API route database-binding activation decision only. The contract can mark API route database binding ready under explicit controls, but it does not apply production route persistence. Actual public route handlers remain memory/dry-run. Public `/r/[publicId]` lookup remains separate and blocked. No production mutation smoke, network SQL execution, or persistent public lookup route is introduced.

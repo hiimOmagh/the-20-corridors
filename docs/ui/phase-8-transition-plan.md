@@ -341,3 +341,25 @@ Full validate remains green.
 ```
 
 Next intended phase: Phase 8.13 — Public Route Database Binding Activation Contract. It should decide whether route binding can be enabled under explicit production-safe controls, and must still separate route persistence activation from public `/r/[publicId]` page activation.
+
+## Phase 8.13 — Public Route Database Binding Activation Contract
+
+Phase 8.13 defines the production-safe API route database-binding activation decision without applying route persistence.
+
+Acceptance gate:
+
+```text
+Activation contract exists.
+Phase 8.11 preflight remains green.
+Phase 8.12 fake-executor dry-run remains green.
+Explicit route database-binding activation flag is required.
+API route database-binding activation can be ready but not applied.
+Actual public route handlers remain memory/dry-run.
+Public /r/[publicId] page lookup remains a separate blocked activation.
+No production mutation smoke runs.
+No network SQL execution runs.
+No persistent public lookup route exists.
+Full validate remains green.
+```
+
+Next intended phase: Phase 8.14 — Public API Route Database Binding Implementation Gate. It should wire route handlers behind the activation decision while preserving a rollback path and still keeping `/r/[publicId]` page activation separate.
