@@ -302,3 +302,23 @@ Full validate remains green.
 ```
 
 Next intended phase: Phase 8.11 — Public Route Database Binding Preflight Contract. It should define the route activation criteria without yet switching public routes to database persistence.
+
+## Phase 8.11 — Public Route Database Binding Preflight Contract
+
+Phase 8.11 defines the exact route-level database activation criteria before any public API route can bind to database persistence.
+
+Acceptance gate:
+
+```text
+Route binding preflight contract exists.
+PUBLIC_RESULT_STORAGE_MODE=database alone is still insufficient.
+Explicit route-binding flag is required but still does not activate routes.
+Complete DB env is required.
+Factory activation contract remains green.
+Route handlers still use memory/dry-run behavior.
+No production mutation smoke yet.
+No persistent /r/[publicId] lookup yet.
+Full validate remains green.
+```
+
+Next intended phase: Phase 8.12 — Public Route Database Binding Dry-Run Contract. It should simulate public route database binding with fake executor evidence before any production persistence activation.

@@ -776,3 +776,17 @@ Current persistence status:
 - No production mutation smoke is allowed.
 - No network SQL execution is performed.
 - No persistent `/r/[publicId]` lookup exists.
+
+## Phase 8.11 — Public Route Database Binding Preflight Contract
+
+Phase 8.11 defines the public route database-binding preflight criteria before any public API route can bind to database persistence.
+
+`PUBLIC_RESULT_STORAGE_MODE=database` alone remains insufficient. The preflight requires complete database env, the explicit `PUBLIC_RESULT_ROUTE_DATABASE_BINDING_PREFLIGHT=enabled` flag, and an acknowledgement that production route binding remains disabled.
+
+Run the Phase 8.11 gate:
+
+```bash
+npm run contract:route-database-binding-preflight
+```
+
+The gate confirms that the factory activation contract remains green, route handlers still use memory/dry-run behavior, no production mutation smoke runs, no network SQL executes, and no persistent `/r/[publicId]` lookup is introduced.

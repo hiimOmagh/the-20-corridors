@@ -1183,3 +1183,33 @@ npm run build
 ```
 
 Scope: controlled non-route factory activation only. The database adapter can be constructed only with explicit non-route context, complete DB env, no-route-binding acknowledgement, and injected executor. Public route handlers remain memory/dry-run, route-handler context remains blocked, no production mutation smoke runs, no network SQL executes, and no persistent `/r/[publicId]` lookup is introduced.
+
+## Phase 8.11 — Public Route Database Binding Preflight Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-route-database-binding-preflight-contract-latest.json
+docs/release/phase-8-public-route-database-binding-preflight-contract.md
+docs/ui/phase-8-11-public-route-database-binding-preflight-contract-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/public-route-database-binding-preflight-contract.ts
+src/core/public-link/publicResultRouteDatabaseBindingPreflight.ts
+src/core/release/publicRouteDatabaseBindingPreflightContract.ts
+tests/core/publicRouteDatabaseBindingPreflightContract.test.ts
+tests/core/publicResultRouteDatabaseBindingPreflight.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: route database-binding preflight only. `PUBLIC_RESULT_STORAGE_MODE=database` alone is still insufficient, an explicit route-binding preflight flag is required, complete DB env is required, and route handlers remain memory/dry-run. No public route database binding, production mutation smoke, network SQL execution, or persistent `/r/[publicId]` lookup is introduced.
