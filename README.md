@@ -885,3 +885,24 @@ Current persistence status:
 - No public page database read is executed.
 - No production network lookup smoke runs.
 - No persistent `/r/[publicId]` route is introduced.
+
+## Phase 8.17 — Public Result Lookup Page Dry-Run Contract
+
+Phase 8.17 simulates future public `/r/[publicId]` database lookup behavior through a fake executor only. It keeps the real public result page lookup disabled while proving active, missing, deleted, and expired lookup states.
+
+Run the Phase 8.17 dry-run contract:
+
+```bash
+npm run dryrun:public-lookup-page
+```
+
+Current persistence status:
+
+- Public lookup page dry-run requires `PUBLIC_RESULT_LOOKUP_PAGE_DATABASE_DRY_RUN=enabled`.
+- Phase 8.16 preflight must remain green.
+- Fake lookup adapter resolves an active public DTO by public ID.
+- Read miss returns not-found behavior.
+- Deleted and expired results render unavailable states without DTO exposure.
+- Actual `/r/[publicId]` page database lookup remains disabled.
+- No production network lookup smoke runs.
+- No persistent public lookup route is introduced.

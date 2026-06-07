@@ -1370,3 +1370,33 @@ npm run build
 ```
 
 Scope: preflight only. The public lookup page requires its own activation and preflight flags, complete DB env, and explicit acknowledgements. API route database binding does not activate `/r/[publicId]` page lookup. No public page database read, production mutation smoke, network lookup smoke, or persistent public lookup route is introduced.
+
+## Phase 8.17 — Public Result Lookup Page Dry-Run Contract
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-result-lookup-page-dry-run-contract-latest.json
+docs/release/phase-8-public-result-lookup-page-dry-run-contract.md
+docs/ui/phase-8-17-public-result-lookup-page-dry-run-contract-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/public-result-lookup-page-dry-run-contract.ts
+src/core/public-link/publicResultLookupPageDatabaseDryRun.ts
+src/core/release/publicResultLookupPageDryRunContract.ts
+tests/core/publicResultLookupPageDatabaseDryRun.test.ts
+tests/core/publicResultLookupPageDryRunContract.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: fake-executor public lookup page dry-run only. Active, missing, deleted, and expired lookup states are simulated without enabling the real `/r/[publicId]` page database lookup, production network lookup smoke, or public lookup route activation.

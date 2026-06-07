@@ -411,3 +411,27 @@ Build remains green.
 ```
 
 Next intended phase: Phase 8.17 — Public Result Lookup Page Dry-Run Contract. It should simulate `/r/[publicId]` database lookup through a fake executor while keeping the actual public page lookup disabled.
+
+## Phase 8.17 — Public Result Lookup Page Dry-Run Contract
+
+Phase 8.17 simulates `/r/[publicId]` database lookup through a fake executor while keeping actual public result-page lookup disabled.
+
+Acceptance gate:
+
+```text
+Public lookup page dry-run contract exists.
+Phase 8.16 preflight remains green.
+Fake lookup adapter can resolve active public DTO by publicId.
+Read miss returns not-found behavior.
+Deleted result returns unavailable behavior without DTO exposure.
+Expired result returns expired/unavailable behavior without DTO exposure.
+No real /r/[publicId] database read yet.
+No production network lookup smoke yet.
+No route-page activation yet.
+API route binding gate remains green.
+Rollback/failure evidence remains green.
+Full validate remains green.
+Build remains green.
+```
+
+Next intended phase: Phase 8.18 — Public Result Lookup Page Activation Contract. It should define the production-safe activation decision for `/r/[publicId]` page lookup without coupling it to API route persistence rollback.

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "phase-8.17-public-result-lookup-page-dry-run-contract-report-v1",
+  "contractId": "phase-8-public-result-lookup-page-dry-run-contract",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-8-17-public-result-lookup-page-dry-run-contract",
+    "dryRunSchemaVersion": "phase-8.17-public-result-lookup-page-dry-run-contract-v1"
+  },
+  "gates": {
+    "preflightContractPassed": true,
+    "apiRouteDatabaseBindingGatePassed": true,
+    "rollbackFailureEvidencePackPassed": true,
+    "dryRunScriptExists": true,
+    "validateScriptRunsDryRun": true,
+    "dryRunModuleExists": true,
+    "dryRunGuardModuleExists": true,
+    "dryRunDocExists": true,
+    "phase817StatusDocExists": true,
+    "dryRunFlagDefined": true,
+    "preflightReady": true,
+    "fakeExecutorOnly": true,
+    "fakeLookupAdapterCreated": true,
+    "activeLookupRenderable": true,
+    "readMissReturnsNotFound": true,
+    "deletedResultUnavailable": true,
+    "expiredResultUnavailable": true,
+    "actualPublicLookupPageBindingNotApplied": true,
+    "noRealPublicPageDatabaseRead": true,
+    "noPersistentPublicLookupRoute": true,
+    "noNetworkLookupSmoke": true,
+    "noProductionMutationSmoke": true,
+    "noPrivateDataExposure": true,
+    "noBlockedIntegrationSignals": true,
+    "overallPassed": true
+  },
+  "dryRun": {
+    "phase": "phase-8.17-public-result-lookup-page-dry-run-contract",
+    "status": "public-result-lookup-page-dry-run-passed",
+    "preflightStatus": "public-result-lookup-page-preflight-ready-but-disabled",
+    "activeLookupStatus": "renderable",
+    "activeLookupHttpStatus": 200,
+    "readMissStatus": "not-found",
+    "readMissHttpStatus": 404,
+    "deletedLookupStatus": "deleted-unavailable",
+    "deletedLookupHttpStatus": 410,
+    "expiredLookupStatus": "expired-unavailable",
+    "expiredLookupHttpStatus": 410,
+    "lookupSimulationPassed": true,
+    "executedQueryIntents": [
+      "read-active-public-result-by-public-id",
+      "read-active-public-result-by-public-id",
+      "read-active-public-result-by-public-id",
+      "read-active-public-result-by-public-id"
+    ],
+    "queryIntentExecutionCount": 4,
+    "actualPublicLookupPageBindingApplied": false,
+    "realPublicResultPageDatabaseReadExecuted": false,
+    "networkQueryExecuted": false,
+    "dryRunFlagEnv": "PUBLIC_RESULT_LOOKUP_PAGE_DATABASE_DRY_RUN",
+    "dryRunFlagRequiredValue": "enabled",
+    "rules": [
+      "phase:phase-8.17-public-result-lookup-page-dry-run-contract",
+      "schema:phase-8.17-public-result-lookup-page-dry-run-contract-v1",
+      "flag:PUBLIC_RESULT_LOOKUP_PAGE_DATABASE_DRY_RUN=enabled",
+      "public-lookup-page-dry-run-requires-phase-8-16-preflight-ready-state",
+      "public-lookup-page-dry-run-requires-explicit-dry-run-flag",
+      "public-lookup-page-dry-run-uses-fake-executor-only",
+      "fake-lookup-adapter-may-read-active-public-dto-by-public-id",
+      "read-miss-renders-not-found-behavior",
+      "deleted-result-renders-unavailable-behavior-without-dto",
+      "expired-result-renders-expired-behavior-without-dto",
+      "actual-public-r-public-id-page-lookup-remains-disabled",
+      "no-production-network-lookup-smoke",
+      "no-persistent-public-lookup-route-activation"
+    ]
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/publicResultLookupPageDatabaseDryRun.ts",
+      "scripts/public-result-lookup-page-dry-run-contract.ts",
+      "docs/release/phase-8-public-result-lookup-page-dry-run-contract.md",
+      "docs/ui/phase-8-17-public-result-lookup-page-dry-run-contract-status.md",
+      "docs/ui/phase-8-transition-plan.md",
+      "src/app/r/preview/page.tsx"
+    ],
+    "persistentPublicLookupRouteFiles": [],
+    "publicPageDatabaseReadSignals": [],
+    "blockedIntegrationSignals": []
+  },
+  "coverage": {
+    "checkedFileCount": 6,
+    "persistentRouteCount": 0,
+    "publicPageDatabaseReadSignalCount": 0,
+    "blockedIntegrationSignalCount": 0
+  },
+  "issues": []
+}
