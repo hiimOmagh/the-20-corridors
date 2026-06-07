@@ -18,6 +18,7 @@ import {
   resolvePublicResultDatabaseQueryContractRecord
 } from './publicResultDatabaseQueryContract';
 import { resolvePublicResultStorageAdapterFactoryDecision } from './publicResultStorageAdapterFactory';
+import type { PublicResultDatabaseQueryExecutor, PublicResultDatabaseStorageAdapterRow } from './publicResultDatabaseStorageAdapter';
 import {
   PUBLIC_RESULT_STORAGE_DATABASE_MODE,
   PUBLIC_RESULT_STORAGE_MEMORY_MODE,
@@ -181,6 +182,27 @@ export function resolvePublicResultDatabaseClientSmokeBoundary(
     nonNetworkSmokePassed: queryFunctionCreated,
     queryFunctionCreated,
     issues: queryFunctionCreated ? [] : ['neon_query_function_not_created']
+  };
+}
+
+
+export function createPublicResultDatabaseQueryExecutorFromEnvironment(
+  env: PublicResultDatabaseClientSmokeEnvironment = process.env
+): PublicResultDatabaseQueryExecutor {
+  const smoke = resolvePublicResultDatabaseClientSmokeBoundary(env);
+  const databaseUrl = normalizeOptionalEnvValue(env[PUBLIC_RESULT_DATABASE_URL_ENV]);
+  if (smoke.status !== 'client-created-smoke-only' || databaseUrl === undefined) {
+    throw new Error(`Database query executor creation failed closed: ${smoke.issues.join(', ') || smoke.status}`);
+  }
+
+  const queryFunction = neon(databaseUrl, { disableWarningInBrowsers: true });
+  return async (descriptor) => {
+    const rows = await queryFunction.query(descriptor.text, [...descriptor.values]);
+    const normalizedRows = Array.isArray(rows) ? rows : [];
+    return {
+      rows: normalizedRows as unknown as readonly PublicResultDatabaseStorageAdapterRow[],
+      rowCount: normalizedRows.length
+    };
   };
 }
 

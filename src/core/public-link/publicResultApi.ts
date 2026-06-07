@@ -16,7 +16,8 @@ export type PublicResultApiErrorCode =
   | 'expired-result'
   | 'deleted-result'
   | 'not-found'
-  | 'rate-limited';
+  | 'rate-limited'
+  | 'storage-unavailable';
 
 export interface PublicResultCreateRequestDto {
   readonly schemaVersion: PublicResultApiSchemaVersion;

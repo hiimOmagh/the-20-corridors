@@ -13,11 +13,17 @@ import {
 } from './publicResultApi';
 import { createInMemoryPublicResultStorageAdapter } from './inMemoryPublicResultStorage';
 import {
+  createPublicResultApiRouteDatabaseBindingStorageAdapter,
+  resolvePublicResultApiRouteDatabaseBindingImplementationDecision
+} from './publicResultApiRouteDatabaseBindingImplementation';
+import type { PublicResultDatabaseQueryExecutor } from './publicResultDatabaseStorageAdapter';
+import {
   createPublicResultStorageAdapterFromFactory,
   resolvePublicResultStorageAdapterFactoryDecision
 } from './publicResultStorageAdapterFactory';
 import {
-  resolvePublicResultStorageRuntimeSelection
+  resolvePublicResultStorageRuntimeSelection,
+  type PublicResultStorageRuntimeEnvironment
 } from './publicResultStorageRuntimeSelection';
 import {
   handlePublicResultCreateDryRun,
@@ -46,6 +52,8 @@ export interface PublicResultRouteResponse<TBody extends PublicResultRouteRespon
 export interface PublicResultRouteOptions {
   readonly adapter?: PublicResultStorageAdapter;
   readonly nowIso?: string;
+  readonly env?: PublicResultStorageRuntimeEnvironment;
+  readonly databaseExecuteQuery?: PublicResultDatabaseQueryExecutor;
 }
 
 export interface PublicResultCreateRouteBody extends PublicResultCreateRequestDto {
@@ -62,6 +70,8 @@ export const PUBLIC_RESULT_ROUTE_HANDLER_BOUNDARIES = [
   'in-memory-adapter-only',
   'database-runtime-selection-fails-closed-before-client-binding',
   'phase-8-2-factory-contract-preserves-memory-route-binding',
+  'phase-8-14-database-route-binding-behind-explicit-activation-gate',
+  'memory-default-and-rollback-remain-available',
   'public-result-api-dto-only',
   'no-database-client',
   'no-auth-payment-ai-analytics',
@@ -69,8 +79,23 @@ export const PUBLIC_RESULT_ROUTE_HANDLER_BOUNDARIES = [
   'delete-token-returned-only-on-create'
 ] as const;
 
-export function getPublicResultRouteAdapter(): PublicResultStorageAdapter {
-  return createPublicResultStorageAdapterFromFactory({ env: process.env, memoryAdapter: routeAdapter, purpose: 'route-handler' });
+export function getPublicResultRouteAdapter(options: PublicResultRouteOptions = {}): PublicResultStorageAdapter {
+  return createPublicResultApiRouteDatabaseBindingStorageAdapter({
+    env: options.env ?? process.env,
+    context: 'public-api-route-handler',
+    memoryAdapter: routeAdapter,
+    ...(options.databaseExecuteQuery === undefined ? {} : { executeQuery: options.databaseExecuteQuery }),
+    ...(options.nowIso === undefined ? {} : { nowIso: () => options.nowIso as string })
+  });
+}
+
+export function getPublicResultRouteDatabaseBindingImplementationDecision(options: PublicResultRouteOptions = {}) {
+  return resolvePublicResultApiRouteDatabaseBindingImplementationDecision({
+    env: options.env ?? process.env,
+    context: 'public-api-route-handler',
+    memoryAdapter: routeAdapter,
+    ...(options.databaseExecuteQuery === undefined ? {} : { executeQuery: options.databaseExecuteQuery })
+  });
 }
 
 export function getPublicResultRouteRuntimeSelection() {
@@ -88,9 +113,12 @@ export async function handlePublicResultCreateRouteBody(
   const parsed = parsePublicResultCreateRouteBody(body);
   if (!parsed.ok) return errorRouteResponse(parsed.code, parsed.message);
 
+  const adapter = resolvePublicResultRouteAdapterOrError(options);
+  if (!adapter.ok) return adapter.response;
+
   const request = buildPublicResultCreateRequestDto(parsed.body.dto, parsed.body.clientNonce);
   const result = await handlePublicResultCreateDryRun({
-    adapter: options.adapter ?? getPublicResultRouteAdapter(),
+    adapter: adapter.value,
     nowIso: options.nowIso ?? new Date().toISOString(),
     request,
     deleteToken: parsed.body.deleteToken
@@ -104,8 +132,11 @@ export async function handlePublicResultReadRoute(
   publicId: string,
   options: PublicResultRouteOptions = {}
 ): Promise<PublicResultRouteResponse> {
+  const adapter = resolvePublicResultRouteAdapterOrError(options);
+  if (!adapter.ok) return adapter.response;
+
   const result = await handlePublicResultReadDryRun({
-    adapter: options.adapter ?? getPublicResultRouteAdapter(),
+    adapter: adapter.value,
     nowIso: options.nowIso ?? new Date().toISOString(),
     publicId
   });
@@ -122,8 +153,11 @@ export async function handlePublicResultDeleteRouteBody(
   const parsed = parsePublicResultDeleteRouteBody(publicId, body);
   if (!parsed.ok) return errorRouteResponse(parsed.code, parsed.message);
 
+  const adapter = resolvePublicResultRouteAdapterOrError(options);
+  if (!adapter.ok) return adapter.response;
+
   const result = await handlePublicResultDeleteDryRun({
-    adapter: options.adapter ?? getPublicResultRouteAdapter(),
+    adapter: adapter.value,
     nowIso: options.nowIso ?? new Date().toISOString(),
     request: parsed.body
   });
@@ -139,6 +173,23 @@ export function summarizePublicResultRouteHandlerBoundaries(): readonly string[]
     `mode:${PUBLIC_RESULT_ROUTE_HANDLERS_MODE}`,
     ...PUBLIC_RESULT_ROUTE_HANDLER_BOUNDARIES
   ];
+}
+
+
+function resolvePublicResultRouteAdapterOrError(
+  options: PublicResultRouteOptions
+):
+  | { readonly ok: true; readonly value: PublicResultStorageAdapter }
+  | { readonly ok: false; readonly response: PublicResultRouteResponse<PublicResultApiErrorResponseDto> } {
+  if (options.adapter !== undefined) return { ok: true, value: options.adapter };
+  try {
+    return { ok: true, value: getPublicResultRouteAdapter(options) };
+  } catch {
+    return {
+      ok: false,
+      response: routeResponse(500, buildPublicResultApiErrorResponseDto('storage-unavailable', 'Public result storage is unavailable.'))
+    };
+  }
 }
 
 function parsePublicResultCreateRouteBody(

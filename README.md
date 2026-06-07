@@ -829,3 +829,14 @@ Current persistence status:
 - Production mutation smoke remains blocked.
 - Network SQL execution remains blocked.
 - Persistent public result page lookup remains absent.
+
+
+## Phase 8.14 — Public API Route Database Binding Implementation Gate
+
+Phase 8.14 wires the public API route storage resolver behind explicit database-binding activation controls. Memory remains the default, `PUBLIC_RESULT_API_ROUTE_DATABASE_BINDING_ROLLBACK=memory` provides immediate rollback, and public `/r/[publicId]` page lookup remains separate and blocked.
+
+Run the Phase 8.14 gate:
+
+```bash
+npm run gate:api-route-database-binding
+```

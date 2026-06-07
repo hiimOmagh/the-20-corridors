@@ -1273,3 +1273,37 @@ npm run build
 ```
 
 Scope: API route database-binding activation decision only. The contract can mark API route database binding ready under explicit controls, but it does not apply production route persistence. Actual public route handlers remain memory/dry-run. Public `/r/[publicId]` lookup remains separate and blocked. No production mutation smoke, network SQL execution, or persistent public lookup route is introduced.
+
+
+## Phase 8.14 — Public API Route Database Binding Implementation Gate
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/public-api-route-database-binding-implementation-gate-latest.json
+docs/release/phase-8-public-api-route-database-binding-implementation-gate.md
+docs/ui/phase-8-14-public-api-route-database-binding-implementation-gate-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/public-api-route-database-binding-implementation-gate.ts
+src/core/public-link/publicResultApi.ts
+src/core/public-link/publicResultApiRouteDatabaseBindingImplementation.ts
+src/core/public-link/publicResultDatabaseClientSmokeBoundary.ts
+src/core/public-link/publicResultRouteHandlers.ts
+src/core/release/publicApiRouteDatabaseBindingImplementationGate.ts
+tests/core/publicApiRouteDatabaseBindingImplementationGate.test.ts
+tests/core/publicResultApiRouteDatabaseBindingImplementation.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: API route database-binding implementation gate only. The route helper resolver can select the database adapter under explicit activation and implementation flags, memory remains default, rollback to memory is immediate, public `/r/[publicId]` lookup remains separate, and validation uses fake-executor coverage without production mutation smoke.

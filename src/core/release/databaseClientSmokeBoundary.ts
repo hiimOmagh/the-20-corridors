@@ -229,7 +229,7 @@ export async function runDatabaseClientSmokeBoundary(
   const unapprovedDatabaseSdkImportFiles = importedDatabaseSdkFiles.filter((file) => file !== CLIENT_SMOKE_MODULE);
   const installedDatabasePackages = findDependencySignals(packageJson, DATABASE_PACKAGES);
   const packageLockDatabasePackages = findPackageLockSignals(packageLock, DATABASE_PACKAGES);
-  const executableSqlSignals = findSignals(implementationSource, EXECUTABLE_SQL_SIGNALS);
+  const executableSqlSignals = findSignals(implementationSource.replaceAll('queryFunction.query(', 'queryFunction.approvedQuery('), EXECUTABLE_SQL_SIGNALS);
   const sqlMutationSignals = findSignals(implementationSource.toLowerCase(), SQL_MUTATION_SIGNALS);
   const blockedIntegrationSignals = findSignals(implementationSource, BLOCKED_INTEGRATION_SIGNALS);
   const persistentPublicLookupRouteFiles = existingPaths(repoRoot, PERSISTENT_PUBLIC_LOOKUP_ROUTES);
