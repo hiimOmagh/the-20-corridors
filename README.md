@@ -1037,3 +1037,27 @@ Current share/copy status:
 - No persistence behavior changes are introduced.
 - No database binding behavior changes are introduced.
 - Operational smoke remains unchanged.
+
+## Phase 9.3 — Public Result Page Visual Layout Polish
+
+Phase 9.3 improves the visual layout of the public `/r/[publicId]` result page without changing persistence, database binding, rollback, or operational smoke behavior.
+
+Run the Phase 9.3 gate:
+
+```bash
+npm run gate:phase9-public-result-visual-layout
+```
+
+Current visual layout status:
+
+- Responsive shell spacing is explicit.
+- Renderable public result layout has a clearer hierarchy.
+- Unavailable states use a readable panel structure.
+- Mobile layout remains stacked and usable.
+- The share/copy block is visually distinct.
+- Accessibility semantics from Phase 9.2 remain intact.
+- Raw answers remain blocked.
+- Raw delete tokens remain blocked.
+- No persistence behavior changes are introduced.
+- No database binding behavior changes are introduced.
+- Operational smoke remains unchanged.

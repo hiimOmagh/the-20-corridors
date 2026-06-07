@@ -1631,3 +1631,34 @@ Changed files:
 - tests/core/publicResultLookupPageAccessibility.test.ts
 
 Scope: accessibility semantics only. No persistence, database binding, rollback, or operational smoke behavior changes.
+
+## Phase 9.3 — Public Result Page Visual Layout Polish
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/phase9-public-result-page-visual-layout-polish-latest.json
+docs/release/phase-9-public-result-page-visual-layout-polish.md
+docs/ui/phase-9-3-public-result-page-visual-layout-polish-status.md
+docs/ui/phase-9-transition-plan.md
+scripts/phase9-public-result-page-visual-layout-polish.ts
+src/app/r/(public)/[publicId]/page.tsx
+src/core/public-link/publicResultLookupPageVisualLayout.ts
+src/core/release/phase9PublicResultPageVisualLayoutPolish.ts
+tests/core/phase9PublicResultPageVisualLayoutPolish.test.ts
+tests/core/publicResultLookupPageVisualLayout.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: visual layout polish only. No persistence behavior, database binding, rollback, production network smoke, production mutation smoke, account system, payment path, analytics, telemetry, or generated-AI feature is changed.

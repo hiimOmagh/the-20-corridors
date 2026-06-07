@@ -114,3 +114,33 @@ Phase 9.0 and 9.1 gates remain green.
 Full validate remains green.
 Build remains green.
 ```
+
+## Phase 9.3 — Public Result Page Visual Layout Polish
+
+Scope:
+
+- Improve `/r/[publicId]` page spacing and visual hierarchy.
+- Improve renderable result layout readability.
+- Improve unavailable-state visual structure.
+- Keep mobile layout stacked and usable.
+- Make the share/copy block visually distinct.
+- Preserve Phase 9.2 accessibility semantics and Phase 9.0/9.1 copy/share gates.
+
+Acceptance gate:
+
+```text
+Renderable result layout has clearer visual hierarchy.
+Unavailable states have readable visual structure.
+Mobile layout remains usable.
+Share/copy block is visually distinct.
+Accessibility semantics from Phase 9.2 remain intact.
+Raw answers remain blocked.
+Raw delete tokens remain blocked.
+No persistence behavior changes.
+No database binding changes.
+No network smoke changes.
+Phase 8 closure remains green.
+Phase 9.0, 9.1, and 9.2 gates remain green.
+Full validate remains green.
+Build remains green.
+```
