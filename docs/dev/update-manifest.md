@@ -1521,3 +1521,31 @@ npm run build
 ```
 
 Scope: operational rollback drill. The drill proves API route database binding and public lookup rendering can be active in safe fake-executor mode, then proves rollback forces API route storage to memory and disables public lookup rendering without stale DTO exposure or production network lookup smoke.
+
+## Phase 8.22 — Public Lookup Release Closure Gate
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/phase8-public-lookup-release-closure-latest.json
+docs/release/phase-8-public-lookup-release-closure-gate.md
+docs/ui/phase-8-22-public-lookup-release-closure-gate-status.md
+docs/ui/phase-9-transition-plan.md
+scripts/phase8-public-lookup-release-closure-gate.ts
+src/core/release/phase8PublicLookupReleaseClosureGate.ts
+tests/core/phase8PublicLookupReleaseClosureGate.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: release closure evidence only. No new runtime persistence behavior, production network smoke, production mutation smoke, auth, payment, AI, analytics, or telemetry.

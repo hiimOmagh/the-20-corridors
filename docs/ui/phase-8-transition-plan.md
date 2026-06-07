@@ -533,3 +533,40 @@ Build remains green.
 ```
 
 Next intended phase: Phase 8.22 — Public Lookup Release Closure Gate. It should close Phase 8 with consolidated evidence for database adapter, API persistence, public lookup, rollback, and operational smoke controls before moving to the next feature track.
+
+## Phase 8.22 — Public Lookup Release Closure Gate
+
+Goal: close the Phase 8 database persistence and public lookup release track before moving to Phase 9.
+
+Scope:
+
+- consolidate database adapter evidence
+- consolidate API route database binding evidence
+- consolidate public lookup preflight, dry-run, activation, and implementation evidence
+- consolidate operational smoke evidence
+- consolidate rollback drill evidence
+- prove raw answers remain blocked
+- prove raw delete tokens remain blocked
+- prove production network lookup smoke remains disabled by default
+- prove `/r/[publicId]` route implementation exists
+- add Phase 9 transition plan
+
+Acceptance gate:
+
+```text
+Phase 8 closure gate exists.
+Database adapter contract evidence is current.
+API route database binding evidence is current.
+Public lookup preflight/dry-run/activation/implementation evidence is current.
+Operational smoke boundary evidence is current.
+Rollback drill evidence is current.
+Raw answers remain blocked.
+Raw delete tokens remain blocked.
+Production network lookup smoke remains disabled by default.
+Build route list includes /r/[publicId].
+Full validate remains green.
+Build remains green.
+Phase 9 transition plan exists.
+```
+
+Next intended phase: Phase 9.0 — Public Result Page UX + Operational Copy Polish.

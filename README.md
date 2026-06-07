@@ -996,3 +996,26 @@ Current rollback status:
 - Missing, deleted, and expired states remain DTO-free after rollback.
 - Raw answers and raw delete tokens remain blocked.
 - Production network lookup smoke is not executed by default.
+
+## Phase 8.22 — Public Lookup Release Closure Gate
+
+Phase 8.22 closes the Phase 8 persistence and public lookup track. It consolidates database adapter, API route persistence, public lookup, operational smoke, rollback, and public route evidence before moving to Phase 9.
+
+Run the Phase 8.22 closure gate:
+
+```bash
+npm run closure:phase8
+```
+
+Current closure status:
+
+- Database adapter evidence must be current and passed.
+- API route database binding evidence must be current and passed.
+- Public lookup preflight, dry-run, activation, and implementation evidence must be current and passed.
+- Operational smoke boundary evidence must be current and passed.
+- Rollback drill evidence must be current and passed.
+- Raw answers remain blocked.
+- Raw delete tokens remain blocked.
+- Production network lookup smoke remains disabled by default.
+- `/r/[publicId]` route implementation is present.
+- Phase 9 transition plan exists.
