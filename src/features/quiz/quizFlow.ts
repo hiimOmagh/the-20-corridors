@@ -12,6 +12,38 @@ export const CORRIDORS_SESSION_STORAGE_KEY = 'the-20-corridors:last-result';
 
 export type DraftCorridorsAnswers = Partial<Record<CorridorsQuestionId, CorridorsOptionKey>>;
 
+export const QUIZ_SECONDS_PER_QUESTION = 10;
+
+export interface QuizCountdownState {
+  readonly secondsRemaining: number;
+  readonly isExpired: boolean;
+  readonly label: string;
+  readonly urgency: 'steady' | 'urgent' | 'expired';
+}
+
+export function createQuizQuestionDeadline(nowMs: number, secondsPerQuestion: number = QUIZ_SECONDS_PER_QUESTION): number {
+  return nowMs + Math.max(1, secondsPerQuestion) * 1000;
+}
+
+export function calculateQuizSecondsRemaining(deadlineMs: number, nowMs: number): number {
+  return Math.max(0, Math.ceil((deadlineMs - nowMs) / 1000));
+}
+
+export function buildQuizCountdownState(secondsRemaining: number): QuizCountdownState {
+  const safeSeconds = Math.max(0, Math.floor(secondsRemaining));
+
+  return {
+    secondsRemaining: safeSeconds,
+    isExpired: safeSeconds === 0,
+    label: safeSeconds === 0 ? 'Time expired' : `${safeSeconds}s left`,
+    urgency: safeSeconds === 0 ? 'expired' : safeSeconds <= 3 ? 'urgent' : 'steady'
+  };
+}
+
+export function shouldBlockQuizInteractionForTimeout(secondsRemaining: number): boolean {
+  return buildQuizCountdownState(secondsRemaining).isExpired;
+}
+
 export interface QuizProgressState {
   readonly currentCorridor: number;
   readonly totalCorridors: number;

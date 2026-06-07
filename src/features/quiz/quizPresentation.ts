@@ -33,8 +33,8 @@ export function buildQuizStatusSummary(progress: QuizProgressState): QuizStatusS
   return {
     answeredLabel: `${progress.answeredCount}/${progress.totalCorridors} answered`,
     remainingLabel: remaining === 0 ? 'Ready to generate' : `${remaining} remaining`,
-    modeLabel: progress.isComplete ? 'Review before result' : 'Instinct mode',
-    keyboardHint: progress.isComplete ? 'Enter builds the report' : 'A/B/C/D select · ← review · Backspace undo'
+    modeLabel: progress.isComplete ? 'Ready for report' : 'Timed input',
+    keyboardHint: progress.isComplete ? 'Enter builds the report' : 'A/B/C/D select · 10s per question'
   };
 }
 
@@ -43,7 +43,7 @@ export function buildCompletionPanel(progress: QuizProgressState): QuizCompletio
     return {
       isVisible: false,
       headline: 'Corridor map still incomplete',
-      body: 'Answer all 20 corridors before generating the deterministic report.',
+      body: 'Answer all 20 corridors before the report is available.',
       primaryActionLabel: 'Complete all corridors',
       secondaryActionLabel: 'Review answers',
       keyboardHint: 'A/B/C/D select answers.'
@@ -63,13 +63,14 @@ export function buildCompletionPanel(progress: QuizProgressState): QuizCompletio
 export function buildReviewDots(
   questions: readonly CorridorsQuestionDto[],
   answers: DraftCorridorsAnswers,
-  currentIndex: number
+  currentIndex: number,
+  revealAnswerKeys = false
 ): readonly QuizReviewDotViewModel[] {
   return questions.map((question, index) => {
     const answer = answers[question.id];
     const isAnswered = answer !== undefined;
     const isCurrent = index === currentIndex;
-    const label = isAnswered ? `${question.id}${answer}` : `${question.id}`;
+    const label = isAnswered && revealAnswerKeys ? `${question.id}${answer}` : `${question.id}`;
     const className = [
       'review-dot',
       isAnswered ? 'answered' : 'unanswered',
@@ -79,10 +80,16 @@ export function buildReviewDots(
     return {
       questionId: question.id,
       label,
-      title: isAnswered ? `Corridor ${question.id}: ${answer}` : `Corridor ${question.id}: unanswered`,
+      title: isAnswered
+        ? revealAnswerKeys
+          ? `Corridor ${question.id}: answered ${answer}`
+          : `Corridor ${question.id}: answered`
+        : `Corridor ${question.id}: unanswered`,
       className,
       ariaLabel: isAnswered
-        ? `Review corridor ${question.id}, answered ${answer}`
+        ? revealAnswerKeys
+          ? `Review corridor ${question.id}, answered ${answer}`
+          : `Review corridor ${question.id}, answered`
         : `Review corridor ${question.id}, unanswered`,
       isAnswered,
       isCurrent

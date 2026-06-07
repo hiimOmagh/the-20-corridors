@@ -2,17 +2,21 @@ import { describe, expect, it } from 'vitest';
 import { getCorridorQuestions, runCorridorsEngine, stableStringify, type CorridorsOptionKey } from '@/core';
 import {
   buildCorridorAnswerSequence,
+  buildQuizCountdownState,
   calculateQuizProgress,
+  calculateQuizSecondsRemaining,
   clearCorridorsResultFromSessionStorage,
   CORRIDORS_SESSION_STORAGE_KEY,
   getLastAnsweredQuestionIndex,
   getNextQuestionIndex,
   getNextUnansweredQuestionIndex,
   getPreviousQuestionIndex,
+  QUIZ_SECONDS_PER_QUESTION,
   parseKeyboardOptionKey,
   readCorridorsResultFromSessionStorage,
   removeAnswerForQuestion,
   saveCorridorsResultToSessionStorage,
+  shouldBlockQuizInteractionForTimeout,
   type DraftCorridorsAnswers,
   type StorageLike
 } from '@/features/quiz/quizFlow';
@@ -68,6 +72,20 @@ describe('quiz flow helpers', () => {
       isLast: true,
       isComplete: true
     });
+  });
+
+
+
+  it('enforces a 10-second timed question window', () => {
+    expect(QUIZ_SECONDS_PER_QUESTION).toBe(10);
+    expect(calculateQuizSecondsRemaining(12_000, 2_001)).toBe(10);
+    expect(calculateQuizSecondsRemaining(12_000, 9_100)).toBe(3);
+    expect(calculateQuizSecondsRemaining(12_000, 12_001)).toBe(0);
+
+    expect(buildQuizCountdownState(10)).toMatchObject({ label: '10s left', urgency: 'steady', isExpired: false });
+    expect(buildQuizCountdownState(3)).toMatchObject({ label: '3s left', urgency: 'urgent', isExpired: false });
+    expect(buildQuizCountdownState(0)).toMatchObject({ label: 'Time expired', urgency: 'expired', isExpired: true });
+    expect(shouldBlockQuizInteractionForTimeout(0)).toBe(true);
   });
 
   it('parses only A/B/C/D keyboard shortcuts', () => {

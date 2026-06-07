@@ -25,19 +25,18 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 9.2 — Public Result Page Accessibility Semantics Polish**
+**Phase 9.4.1 — Quiz Interaction Timer No-Hints Hotfix**
 
-This phase improves public `/r/[publicId]` page accessibility semantics while preserving the locked Phase 8 persistence, rollback, and operational-smoke boundaries.
+This hotfix hardens the quiz interaction layer before Phase 9.5 closure.
 
-- adds a public lookup page accessibility model for landmarks, headings, status regions, and share/copy help
-- updates the public result page with explicit main landmark labelling and addressable state text
-- labels renderable result regions for facts, overview, axis summaries, and sharing
-- keeps unavailable public page states non-actionable
-- keeps DTO-only rendering intact
-- keeps raw answers and raw delete tokens blocked
-- keeps persistence, database binding, rollback, and operational smoke behavior unchanged
-- adds `npm run gate:phase9-public-result-accessibility` and evidence at `docs/evidence/phase9-public-result-page-accessibility-semantics-polish-latest.json`
-- keeps production network lookup smoke, production mutation smoke, account systems, payment paths, analytics, telemetry, and generated-AI features out of scope
+- mouse/touch selection on A/B/C/D answer buttons is explicitly guarded
+- keyboard A/B/C/D selection remains supported
+- focused answer buttons support Enter and Space
+- each question has a 10-second countdown timer
+- timeout blocks further answering and requires quiz restart
+- result hints and interpretive option signals are suppressed until all questions are complete
+- the question map hides answer letters until completion
+- persistence, database binding, public lookup, rollback, and operational smoke behavior remain unchanged
 
 ## Development rule
 
@@ -46,7 +45,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Public Page Accessibility Polish
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Quiz Interaction Timer No-Hints Hotfix
 ```
 
 ## Commands
@@ -145,6 +144,13 @@ Run the Phase 9.0 public result page copy-polish gate:
 
 ```bash
 npm run gate:phase9-public-result-page-copy
+```
+
+
+Run the Phase 9.4.1 quiz interaction/timer/no-hints hotfix gate:
+
+```bash
+npm run gate:quiz-interaction-timer-no-hints
 ```
 
 Run the full local validation suite:

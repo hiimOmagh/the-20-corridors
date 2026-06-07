@@ -1693,3 +1693,41 @@ npm run build
 ```
 
 Scope: browser/static evidence gate only. No persistence behavior, database binding, rollback, production network smoke, production mutation smoke, account system, payment path, analytics, telemetry, or generated-AI feature is changed.
+
+## Phase 9.4.1 — Quiz Interaction Timer No-Hints Hotfix
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/phase9-quiz-interaction-timer-no-hints-hotfix-latest.json
+docs/release/phase-9-quiz-interaction-timer-no-hints-hotfix.md
+docs/ui/phase-9-4-1-quiz-interaction-timer-no-hints-hotfix-status.md
+scripts/quiz-interaction-timer-no-hints-hotfix.ts
+src/app/globals.css
+src/features/quiz/QuizClient.tsx
+src/features/quiz/quizFlow.ts
+src/features/quiz/quizPresentation.ts
+src/features/quiz/quizVisualIdentity.ts
+src/core/release/phase9QuizInteractionTimerNoHintsHotfix.ts
+tests/core/phase9QuizInteractionTimerNoHintsHotfix.test.ts
+tests/ui/quizFlow.test.ts
+tests/ui/quizPresentation.test.ts
+tests/ui/quizVisualIdentity.test.ts
+```
+
+Validation:
+
+```text
+npm run typecheck
+npm test
+npm run gate:quiz-interaction-timer-no-hints
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: quiz interaction hotfix, 10-second per-question countdown, forced restart on timeout, and no in-progress result hints. No persistence, database binding, public lookup, rollback, operational smoke, auth, payment, analytics, or AI changes.

@@ -17,32 +17,22 @@ export interface QuizOptionIdentityViewModel {
 }
 
 const OPTION_TONES: Record<CorridorsOptionKey, { readonly signal: string; readonly tone: string }> = {
-  A: { signal: 'Direct signal', tone: 'threshold' },
-  B: { signal: 'Control signal', tone: 'signal' },
-  C: { signal: 'Depth signal', tone: 'echo' },
-  D: { signal: 'Distance signal', tone: 'void' }
+  A: { signal: 'Answer A', tone: 'threshold' },
+  B: { signal: 'Answer B', tone: 'signal' },
+  C: { signal: 'Answer C', tone: 'echo' },
+  D: { signal: 'Answer D', tone: 'void' }
 };
 
 export function buildQuizVisualFrame(progress: QuizProgressState, currentQuestionId: number): QuizVisualFrameViewModel {
-  const phaseLabel = progress.isComplete
-    ? 'Final threshold'
-    : progress.progressPercent >= 70
-      ? 'Late corridor'
-      : progress.progressPercent >= 35
-        ? 'Middle corridor'
-        : 'Opening corridor';
+  const phaseLabel = progress.isComplete ? 'Report step ready' : 'Timed question';
 
   const paceLabel = progress.isComplete
-    ? 'All answers locked'
+    ? 'All answers submitted'
     : progress.answeredCount === 0
-      ? 'No answers locked yet'
-      : `${progress.answeredCount} choices locked`;
+      ? 'No answers submitted yet'
+      : `${progress.answeredCount} answers submitted`;
 
-  const atmosphereLabel = progress.isComplete
-    ? 'Report gate ready'
-    : progress.progressPercent >= 50
-      ? 'Pattern density rising'
-      : 'Instinct capture active';
+  const atmosphereLabel = progress.isComplete ? 'Report available after submission' : 'No result hints during quiz';
 
   const frameClassName = [
     'quiz-visual-frame',

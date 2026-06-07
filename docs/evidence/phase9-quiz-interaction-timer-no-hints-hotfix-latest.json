@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "phase-9.4.1-quiz-interaction-timer-no-hints-hotfix-v1",
+  "gateId": "phase-9.4.1-quiz-interaction-timer-no-hints-hotfix",
+  "gates": {
+    "gateScriptExists": true,
+    "gateModuleExists": true,
+    "quizClientExists": true,
+    "packageScriptExists": true,
+    "validateRunsGate": true,
+    "mouseClickSelectionHardened": true,
+    "keyboardSelectionHardened": true,
+    "perQuestionTimerIsTenSeconds": true,
+    "timeoutForcesRestart": true,
+    "answerButtonsDisableAfterTimeout": true,
+    "reviewDotsHideAnswerKeysBeforeCompletion": true,
+    "inProgressResultHintsRemoved": true,
+    "optionSignalsAreGeneric": true,
+    "pointerTargetCssHardened": true,
+    "phase9BrowserEvidenceCurrent": true,
+    "testsExist": true,
+    "docsExist": true,
+    "noPersistenceChangeSignals": true,
+    "noDatabaseBindingChangeSignals": true,
+    "noNetworkSmokeChangeSignals": true,
+    "overallPassed": true
+  },
+  "coverage": {
+    "requiredQuizClientTokenCount": 9,
+    "presentQuizClientTokenCount": 9,
+    "forbiddenHintTokenCount": 0
+  },
+  "issues": []
+}
