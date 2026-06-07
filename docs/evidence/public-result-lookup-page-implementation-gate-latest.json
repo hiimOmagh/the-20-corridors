@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "phase-8.19-public-result-lookup-page-implementation-gate-v1",
+  "gateId": "phase-8-public-result-lookup-page-implementation-gate",
+  "metadata": {
+    "checkedAt": "static",
+    "repoRootName": "the-20-corridors",
+    "phaseScope": "phase-8-public-result-lookup-page-implementation-gate",
+    "implementationSchemaVersion": "phase-8.19-public-result-lookup-page-implementation-gate-v1"
+  },
+  "gates": {
+    "activationContractPassed": true,
+    "dryRunContractPassed": true,
+    "rollbackFailureEvidencePassed": true,
+    "implementationScriptExists": true,
+    "validateScriptRunsImplementationGate": true,
+    "implementationModuleExists": true,
+    "pageRouteExists": true,
+    "routeUsesImplementationResolver": true,
+    "defaultBehaviorSafeFallback": true,
+    "activationDecisionReady": true,
+    "rollbackBlocksLookup": true,
+    "activeRenderable": true,
+    "readMissNotFound": true,
+    "deletedUnavailable": true,
+    "expiredUnavailable": true,
+    "dtoOnlyRenderableResult": true,
+    "noRawAnswersExposed": true,
+    "noRawDeleteTokenExposed": true,
+    "noProductionNetworkLookupSmoke": true,
+    "noProductionMutationSmoke": true,
+    "noBlockedIntegrationSignals": true,
+    "overallPassed": true
+  },
+  "implementation": {
+    "phase": "phase-8.19-public-result-lookup-page-implementation-gate",
+    "routePath": "src/app/r/(public)/[publicId]/page.tsx",
+    "activationPhase": "phase-8.18-public-result-lookup-page-activation-contract",
+    "activeStatus": "public-result-page-renderable",
+    "activeHttpStatus": 200,
+    "readMissStatus": "public-result-page-not-found",
+    "readMissHttpStatus": 404,
+    "deletedStatus": "public-result-page-deleted-unavailable",
+    "deletedHttpStatus": 410,
+    "expiredStatus": "public-result-page-expired-unavailable",
+    "expiredHttpStatus": 410,
+    "defaultStatus": "public-result-page-disabled",
+    "rollbackStatus": "public-result-page-disabled",
+    "actualPublicLookupPageBindingApplied": true,
+    "databaseReadExecuted": true,
+    "networkLookupSmokeExecuted": false,
+    "productionMutationSmokeExecuted": false,
+    "rules": [
+      "phase:phase-8.19-public-result-lookup-page-implementation-gate",
+      "schema:phase-8.19-public-result-lookup-page-implementation-gate-v1",
+      "route:src/app/r/(public)/[publicId]/page.tsx",
+      "public-result-lookup-page-implementation-is-behind-phase-8-18-activation-decision",
+      "default-public-lookup-page-behavior-is-disabled-safe-fallback",
+      "rollback-to-memory-blocks-public-page-database-lookup",
+      "missing-or-invalid-env-fails-closed-before-database-read",
+      "read-miss-renders-not-found-behavior",
+      "deleted-result-renders-unavailable-behavior-without-dto",
+      "expired-result-renders-expired-behavior-without-dto",
+      "renderable-result-exposes-dto-only-public-fields",
+      "raw-delete-token-is-never-exposed",
+      "raw-answers-are-never-exposed",
+      "no-production-network-lookup-smoke-by-default",
+      "api-route-persistence-rollback-remains-separate"
+    ]
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/core/public-link/publicResultLookupPageImplementation.ts",
+      "src/core/release/publicResultLookupPageImplementationGate.ts",
+      "scripts/public-result-lookup-page-implementation-gate.ts",
+      "docs/release/phase-8-public-result-lookup-page-implementation-gate.md",
+      "docs/ui/phase-8-19-public-result-lookup-page-implementation-gate-status.md",
+      "docs/ui/phase-8-transition-plan.md",
+      "src/app/r/(public)/[publicId]/page.tsx"
+    ],
+    "blockedIntegrationSignals": [],
+    "rawAnswerSignals": [],
+    "rawDeleteTokenSignals": []
+  },
+  "coverage": {
+    "checkedFileCount": 7,
+    "blockedIntegrationSignalCount": 0,
+    "rawAnswerSignalCount": 0,
+    "rawDeleteTokenSignalCount": 0,
+    "implementationRuleCount": 12
+  },
+  "issues": []
+}

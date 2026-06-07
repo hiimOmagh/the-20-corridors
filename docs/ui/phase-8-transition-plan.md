@@ -459,3 +459,29 @@ Build remains green.
 ```
 
 Next intended phase: Phase 8.19 — Public Result Lookup Page Implementation Gate. It should implement the page lookup behind the Phase 8.18 activation decision while preserving rollback and failure-mode controls.
+
+## Phase 8.19 — Public Result Lookup Page Implementation Gate
+
+Phase 8.19 implements the public `/r/[publicId]` lookup page behind the Phase 8.18 activation decision while preserving rollback and failure-mode behavior.
+
+Acceptance gate:
+
+```text
+/r/[publicId] route implementation exists.
+Default behavior remains disabled or safe fallback.
+Activation requires Phase 8.18 decision.
+Rollback mode blocks page database lookup.
+Missing/invalid env fails closed.
+Read miss renders not-found behavior.
+Deleted/expired result renders unavailable/expired behavior.
+Renderable result exposes DTO-only public fields.
+No raw answers exposed.
+No raw delete token exposed.
+No production network lookup smoke by default.
+API route binding gate remains green.
+Rollback/failure evidence remains green.
+Full validate remains green.
+Build remains green.
+```
+
+Next intended phase: Phase 8.20 — Public Result Lookup Operational Smoke Boundary. It should define an explicit, opt-in non-production smoke boundary for public lookup behavior without running production network lookup by default.

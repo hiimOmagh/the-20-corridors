@@ -928,3 +928,24 @@ Current persistence status:
 - No real public page database read is executed.
 - No production network lookup smoke runs.
 - No public page route implementation is introduced.
+
+## Phase 8.19 — Public Result Lookup Page Implementation Gate
+
+Phase 8.19 implements the public `/r/[publicId]` lookup page behind the Phase 8.18 activation decision. The route implementation uses the grouped Next.js path `src/app/r/(public)/[publicId]/page.tsx`, which resolves to `/r/[publicId]` while keeping earlier unapproved-route guards precise.
+
+Run the Phase 8.19 implementation gate:
+
+```bash
+npm run gate:public-lookup-page-implementation
+```
+
+Current persistence status:
+
+- The public lookup page is implemented but remains activation-gated.
+- Default behavior is a safe disabled fallback.
+- `PUBLIC_RESULT_API_ROUTE_DATABASE_BINDING_ROLLBACK=memory` blocks page database lookup.
+- Missing or invalid database configuration fails closed before database read.
+- Active public results can render DTO-only public fields.
+- Missing, deleted, and expired results render non-DTO unavailable states.
+- Raw answers and raw delete tokens remain blocked.
+- Production network lookup smoke is not executed by default.
