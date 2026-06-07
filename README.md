@@ -840,3 +840,27 @@ Run the Phase 8.14 gate:
 ```bash
 npm run gate:api-route-database-binding
 ```
+
+## Phase 8.15 — Database Route Rollback + Failure-Mode Evidence Pack
+
+Phase 8.15 hardens API route database-binding operations before any public lookup activation. It adds explicit rollback and failure-mode evidence for the database-bound API route path while keeping `/r/[publicId]` page lookup separate and blocked.
+
+Run the Phase 8.15 evidence pack:
+
+```bash
+npm run evidence:database-route-failures
+```
+
+The evidence pack verifies rollback to memory, missing-env fail-closed behavior, invalid-env fail-closed behavior, partial activation fail-closed behavior, database unavailable behavior, write failure behavior, read miss behavior, delete-token mismatch behavior, and delete failure behavior.
+
+Current persistence status:
+
+- API route database binding remains behind explicit activation and implementation controls.
+- `PUBLIC_RESULT_API_ROUTE_DATABASE_BINDING_ROLLBACK=memory` immediately selects memory mode.
+- Missing/invalid/partial database activation returns storage-unavailable instead of pretending persistence is active.
+- Database unavailable, write failure, and delete failure are normalized to storage-unavailable route responses.
+- Read miss returns not-found.
+- Delete-token mismatch returns invalid-delete-token.
+- No production mutation smoke runs.
+- No network SQL execution runs.
+- Public `/r/[publicId]` page lookup remains blocked.

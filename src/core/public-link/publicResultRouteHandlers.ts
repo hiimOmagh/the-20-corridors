@@ -117,15 +117,19 @@ export async function handlePublicResultCreateRouteBody(
   if (!adapter.ok) return adapter.response;
 
   const request = buildPublicResultCreateRequestDto(parsed.body.dto, parsed.body.clientNonce);
-  const result = await handlePublicResultCreateDryRun({
-    adapter: adapter.value,
-    nowIso: options.nowIso ?? new Date().toISOString(),
-    request,
-    deleteToken: parsed.body.deleteToken
-  });
+  try {
+    const result = await handlePublicResultCreateDryRun({
+      adapter: adapter.value,
+      nowIso: options.nowIso ?? new Date().toISOString(),
+      request,
+      deleteToken: parsed.body.deleteToken
+    });
 
-  if (!result.ok) return routeResponse(statusForError(result.response.code), result.response);
-  return routeResponse(201, result.response);
+    if (!result.ok) return routeResponse(statusForError(result.response.code), result.response);
+    return routeResponse(201, result.response);
+  } catch {
+    return storageUnavailableRouteResponse();
+  }
 }
 
 export async function handlePublicResultReadRoute(
@@ -135,14 +139,18 @@ export async function handlePublicResultReadRoute(
   const adapter = resolvePublicResultRouteAdapterOrError(options);
   if (!adapter.ok) return adapter.response;
 
-  const result = await handlePublicResultReadDryRun({
-    adapter: adapter.value,
-    nowIso: options.nowIso ?? new Date().toISOString(),
-    publicId
-  });
+  try {
+    const result = await handlePublicResultReadDryRun({
+      adapter: adapter.value,
+      nowIso: options.nowIso ?? new Date().toISOString(),
+      publicId
+    });
 
-  if (!result.ok) return routeResponse(statusForError(result.response.code), result.response);
-  return routeResponse(statusForRead(result.response.status), result.response);
+    if (!result.ok) return routeResponse(statusForError(result.response.code), result.response);
+    return routeResponse(statusForRead(result.response.status), result.response);
+  } catch {
+    return storageUnavailableRouteResponse();
+  }
 }
 
 export async function handlePublicResultDeleteRouteBody(
@@ -156,14 +164,18 @@ export async function handlePublicResultDeleteRouteBody(
   const adapter = resolvePublicResultRouteAdapterOrError(options);
   if (!adapter.ok) return adapter.response;
 
-  const result = await handlePublicResultDeleteDryRun({
-    adapter: adapter.value,
-    nowIso: options.nowIso ?? new Date().toISOString(),
-    request: parsed.body
-  });
+  try {
+    const result = await handlePublicResultDeleteDryRun({
+      adapter: adapter.value,
+      nowIso: options.nowIso ?? new Date().toISOString(),
+      request: parsed.body
+    });
 
-  if (!result.ok) return routeResponse(statusForError(result.response.code), result.response);
-  return routeResponse(statusForDelete(result.response.status), result.response);
+    if (!result.ok) return routeResponse(statusForError(result.response.code), result.response);
+    return routeResponse(statusForDelete(result.response.status), result.response);
+  } catch {
+    return storageUnavailableRouteResponse();
+  }
 }
 
 export function summarizePublicResultRouteHandlerBoundaries(): readonly string[] {
@@ -190,6 +202,11 @@ function resolvePublicResultRouteAdapterOrError(
       response: routeResponse(500, buildPublicResultApiErrorResponseDto('storage-unavailable', 'Public result storage is unavailable.'))
     };
   }
+}
+
+
+function storageUnavailableRouteResponse(): PublicResultRouteResponse<PublicResultApiErrorResponseDto> {
+  return routeResponse(500, buildPublicResultApiErrorResponseDto('storage-unavailable', 'Public result storage is unavailable.'));
 }
 
 function parsePublicResultCreateRouteBody(

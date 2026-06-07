@@ -363,3 +363,28 @@ Full validate remains green.
 ```
 
 Next intended phase: Phase 8.14 — Public API Route Database Binding Implementation Gate. It should wire route handlers behind the activation decision while preserving a rollback path and still keeping `/r/[publicId]` page activation separate.
+
+## Phase 8.15 — Database Route Rollback + Failure-Mode Evidence Pack
+
+Phase 8.15 hardens the operational safety surface after API route database-binding implementation. It verifies rollback-to-memory behavior and normalizes database route failure modes before any public lookup activation.
+
+Acceptance gate:
+
+```text
+Explicit rollback-to-memory evidence exists.
+Missing env fails closed.
+Invalid env fails closed.
+Partial activation fails closed.
+Database unavailable is modeled.
+Write failure is modeled.
+Read miss is modeled.
+Delete-token mismatch is modeled.
+Delete failure is modeled.
+API route binding gate remains green.
+No /r/[publicId] page database lookup yet.
+No public lookup activation yet.
+Full validate remains green.
+Build remains green.
+```
+
+Next intended phase: Phase 8.16 — Public Result Lookup Page Preflight Contract. It should define public `/r/[publicId]` page lookup activation criteria without enabling database lookup in the page yet.

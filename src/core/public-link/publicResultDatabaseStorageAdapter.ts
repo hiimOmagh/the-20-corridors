@@ -145,6 +145,9 @@ export function createPublicResultDatabaseStorageAdapterImplementation(
       );
       const deleteResult = await executeQuery(deleteDescriptor);
       const deletedRecord = firstDatabaseRecord(deleteResult);
+      if (deletedRecord === null) {
+        throw new Error('Database public result adapter delete returned no deleted row after token verification.');
+      }
       return databaseRecordToPublicResultStorageReadResult(deletedRecord, deletedAtIso);
     },
 

@@ -116,7 +116,7 @@ export async function handlePublicResultCreateDryRun(
       dto: record.dto
     }));
   } catch (error) {
-    return fail('POST', 'create', 'invalid-request', error instanceof Error ? error.message : 'Create dry-run failed.');
+    return fail('POST', 'create', 'storage-unavailable', error instanceof Error ? error.message : 'Create dry-run storage operation failed.');
   }
 }
 

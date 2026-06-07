@@ -1307,3 +1307,36 @@ npm run build
 ```
 
 Scope: API route database-binding implementation gate only. The route helper resolver can select the database adapter under explicit activation and implementation flags, memory remains default, rollback to memory is immediate, public `/r/[publicId]` lookup remains separate, and validation uses fake-executor coverage without production mutation smoke.
+
+## Phase 8.15 — Database Route Rollback + Failure-Mode Evidence Pack
+
+Changed/new files:
+
+```text
+README.md
+package.json
+docs/dev/update-manifest.md
+docs/evidence/database-route-rollback-failure-evidence-pack-latest.json
+docs/release/phase-8-database-route-rollback-failure-evidence-pack.md
+docs/ui/phase-8-15-database-route-rollback-failure-evidence-pack-status.md
+docs/ui/phase-8-transition-plan.md
+scripts/database-route-rollback-failure-evidence-pack.ts
+src/core/public-link/publicResultDatabaseRouteRollbackFailureEvidence.ts
+src/core/public-link/publicResultDatabaseStorageAdapter.ts
+src/core/public-link/publicResultHandlerDryRun.ts
+src/core/public-link/publicResultRouteHandlers.ts
+src/core/release/databaseRouteRollbackFailureEvidencePack.ts
+tests/core/databaseRouteRollbackFailureEvidencePack.test.ts
+tests/core/publicResultDatabaseRouteRollbackFailureEvidence.test.ts
+```
+
+Validation:
+
+```text
+npm run validate
+npm audit --omit=dev
+npm audit
+npm run build
+```
+
+Scope: rollback and failure-mode evidence only. API route database binding remains behind explicit controls. Public `/r/[publicId]` page lookup remains separate and blocked. No production mutation smoke or network SQL execution is introduced.
