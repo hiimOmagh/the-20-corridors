@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCorridorQuestions, runCorridorsEngine, type CorridorsOptionKey } from '@/core';
 import {
@@ -26,6 +26,12 @@ import {
 } from './quizPresentation';
 import { buildQuizOptionIdentity, buildQuizVisualFrame } from './quizVisualIdentity';
 
+interface LastAnswerActivation {
+  readonly questionId: number;
+  readonly option: CorridorsOptionKey;
+  readonly activatedAt: number;
+}
+
 export function QuizClient() {
   const router = useRouter();
   const questions = useMemo(() => getCorridorQuestions(), []);
@@ -37,6 +43,13 @@ export function QuizClient() {
   const [statusMessage, setStatusMessage] = useState(
     'Pick one answer. No result hints appear until all questions are complete.'
   );
+
+  const answersRef = useRef<DraftCorridorsAnswers>(answers);
+  const currentIndexRef = useRef(currentIndex);
+  const isTimedOutRef = useRef(isTimedOut);
+  const suppressNextClickRef = useRef(false);
+  const lastAnswerActivationRef = useRef<LastAnswerActivation | null>(null);
+
   const maybeCurrentQuestion = questions[currentIndex];
 
   const answeredCount = Object.keys(answers).length;
@@ -46,27 +59,45 @@ export function QuizClient() {
   const reviewDots = buildReviewDots(questions, answers, currentIndex, progress.isComplete);
   const countdownState = buildQuizCountdownState(progress.isComplete ? 0 : secondsRemaining);
 
+  useEffect(() => {
+    answersRef.current = answers;
+  }, [answers]);
+
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
+  useEffect(() => {
+    isTimedOutRef.current = isTimedOut;
+  }, [isTimedOut]);
+
   const resetQuestionTimer = useCallback(() => {
     setDeadlineMs(createQuizQuestionDeadline(Date.now()));
     setSecondsRemaining(QUIZ_SECONDS_PER_QUESTION);
     setIsTimedOut(false);
+    isTimedOutRef.current = false;
   }, []);
 
   const restartQuiz = useCallback(() => {
-    setAnswers({});
+    const emptyAnswers: DraftCorridorsAnswers = {};
+    answersRef.current = emptyAnswers;
+    currentIndexRef.current = 0;
+    lastAnswerActivationRef.current = null;
+    suppressNextClickRef.current = false;
+    setAnswers(emptyAnswers);
     setCurrentIndex(0);
     resetQuestionTimer();
     setStatusMessage('Quiz restarted. Pick one answer before the 10-second timer expires.');
   }, [resetQuestionTimer]);
 
   const generateResult = useCallback(() => {
-    if (isTimedOut) {
+    if (isTimedOutRef.current) {
       setStatusMessage('Time expired. Restart the quiz before generating a report.');
       return;
     }
 
     try {
-      const answerSequence = buildCorridorAnswerSequence(questions, answers);
+      const answerSequence = buildCorridorAnswerSequence(questions, answersRef.current);
       const result = runCorridorsEngine(answerSequence);
       saveCorridorsResultToSessionStorage(window.sessionStorage, result);
       setStatusMessage('Result generated. Opening the report.');
@@ -74,72 +105,111 @@ export function QuizClient() {
     } catch (error) {
       setStatusMessage(error instanceof Error ? error.message : 'Could not complete the corridor map.');
     }
-  }, [answers, isTimedOut, questions, router]);
+  }, [questions, router]);
 
   const selectAnswer = useCallback(
-    (option: CorridorsOptionKey) => {
-      if (isTimedOut) {
+    (option: CorridorsOptionKey, source: 'keyboard' | 'pointer' | 'click' | 'button-key' = 'click') => {
+      if (isTimedOutRef.current) {
         setStatusMessage('Time expired. Restart the quiz to continue.');
         return;
       }
 
-      const currentQuestion = questions[currentIndex];
+      const sourceIndex = currentIndexRef.current;
+      const currentQuestion = questions[sourceIndex];
 
       if (!currentQuestion) {
         return;
       }
 
+      const activatedAt = Date.now();
+      const lastActivation = lastAnswerActivationRef.current;
+
+      if (
+        lastActivation !== null &&
+        lastActivation.questionId === currentQuestion.id &&
+        lastActivation.option === option &&
+        activatedAt - lastActivation.activatedAt < 240
+      ) {
+        return;
+      }
+
+      lastAnswerActivationRef.current = {
+        questionId: currentQuestion.id,
+        option,
+        activatedAt
+      };
+
       const nextAnswers: DraftCorridorsAnswers = {
-        ...answers,
+        ...answersRef.current,
         [currentQuestion.id]: option
       };
 
+      answersRef.current = nextAnswers;
       setAnswers(nextAnswers);
 
-      const nextUnansweredIndex = getNextUnansweredQuestionIndex(questions, nextAnswers, currentIndex);
+      const nextUnansweredIndex = getNextUnansweredQuestionIndex(questions, nextAnswers, sourceIndex);
 
       if (nextUnansweredIndex !== null) {
+        currentIndexRef.current = nextUnansweredIndex;
         setCurrentIndex(nextUnansweredIndex);
         resetQuestionTimer();
-        setStatusMessage('Answer submitted. Next timed question.');
+        setStatusMessage(`Answer ${option} submitted by ${source}. Next timed question.`);
         return;
       }
 
       setSecondsRemaining(0);
       setStatusMessage('All questions complete. Generate your report when ready.');
     },
-    [answers, currentIndex, isTimedOut, questions, resetQuestionTimer]
+    [questions, resetQuestionTimer]
   );
 
   const goBack = useCallback(() => {
-    if (isTimedOut) {
+    if (isTimedOutRef.current) {
       setStatusMessage('Time expired. Restart the quiz to continue.');
       return;
     }
 
-    setCurrentIndex((value) => getPreviousQuestionIndex(value));
+    const nextIndex = getPreviousQuestionIndex(currentIndexRef.current);
+    currentIndexRef.current = nextIndex;
+    setCurrentIndex(nextIndex);
     resetQuestionTimer();
     setStatusMessage('Question reopened. Timer restarted.');
-  }, [isTimedOut, resetQuestionTimer]);
+  }, [resetQuestionTimer]);
 
   const reviewFromStart = useCallback(() => {
-    if (isTimedOut) {
+    if (isTimedOutRef.current) {
       setStatusMessage('Time expired. Restart the quiz to continue.');
       return;
     }
 
+    currentIndexRef.current = 0;
     setCurrentIndex(0);
     resetQuestionTimer();
     setStatusMessage('Review from question 1. Timer restarted.');
-  }, [isTimedOut, resetQuestionTimer]);
+  }, [resetQuestionTimer]);
+
+  const openReviewQuestion = useCallback(
+    (index: number) => {
+      if (isTimedOutRef.current) {
+        setStatusMessage('Time expired. Restart the quiz to continue.');
+        return;
+      }
+
+      currentIndexRef.current = index;
+      setCurrentIndex(index);
+      resetQuestionTimer();
+      setStatusMessage('Question opened. Timer restarted.');
+    },
+    [resetQuestionTimer]
+  );
 
   const undoLastAnswer = useCallback(() => {
-    if (isTimedOut) {
+    if (isTimedOutRef.current) {
       setStatusMessage('Time expired. Restart the quiz to continue.');
       return;
     }
 
-    const lastAnsweredIndex = getLastAnsweredQuestionIndex(questions, answers);
+    const lastAnsweredIndex = getLastAnsweredQuestionIndex(questions, answersRef.current);
 
     if (lastAnsweredIndex === null) {
       setStatusMessage('No answer to undo yet.');
@@ -152,11 +222,14 @@ export function QuizClient() {
       return;
     }
 
-    setAnswers((value) => removeAnswerForQuestion(value, question.id));
+    const nextAnswers = removeAnswerForQuestion(answersRef.current, question.id);
+    answersRef.current = nextAnswers;
+    currentIndexRef.current = lastAnsweredIndex;
+    setAnswers(nextAnswers);
     setCurrentIndex(lastAnsweredIndex);
     resetQuestionTimer();
     setStatusMessage('Last answer cleared. Timer restarted.');
-  }, [answers, isTimedOut, questions, resetQuestionTimer]);
+  }, [questions, resetQuestionTimer]);
 
   useEffect(() => {
     if (progress.isComplete || isTimedOut) {
@@ -169,6 +242,7 @@ export function QuizClient() {
 
       if (nextSecondsRemaining === 0) {
         setIsTimedOut(true);
+        isTimedOutRef.current = true;
         setStatusMessage('Time expired. Restart the quiz to continue.');
       }
     }
@@ -180,15 +254,15 @@ export function QuizClient() {
 
   useEffect(() => {
     function handleKeyboard(event: KeyboardEvent) {
-      if (event.altKey || event.ctrlKey || event.metaKey || event.repeat) {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.repeat || isEditableKeyboardTarget(event.target)) {
         return;
       }
 
-      const option = parseKeyboardOptionKey(event.key);
+      const option = parseKeyboardOptionKey(event.key, event.code);
 
       if (option !== null) {
         event.preventDefault();
-        selectAnswer(option);
+        selectAnswer(option, 'keyboard');
         return;
       }
 
@@ -231,7 +305,7 @@ export function QuizClient() {
   const isInteractionBlocked = isTimedOut;
 
   return (
-    <main className="page-shell quiz-shell quiz-shell-identity">
+    <main className="page-shell quiz-shell quiz-shell-identity" data-quiz-workflow="timed-interactive">
       <section className="panel quiz-card quiz-card-polished quiz-card-identity" aria-labelledby="quiz-title">
         <div className={visualFrame.frameClassName} aria-label="Quiz visual identity status">
           <span className="quiz-corridor-mark">{visualFrame.corridorMark}</span>
@@ -257,7 +331,13 @@ export function QuizClient() {
           <span>{statusSummary.keyboardHint}</span>
         </div>
 
-        <div className="quiz-countdown-panel" data-urgency={countdownState.urgency} role="timer" aria-live="polite">
+        <div
+          className="quiz-countdown-panel"
+          data-quiz-countdown="visible"
+          data-urgency={countdownState.urgency}
+          role="timer"
+          aria-live="polite"
+        >
           <span className="quiz-countdown-value">{progress.isComplete ? 'Complete' : countdownState.label}</span>
           <span className="quiz-countdown-label">10 seconds per question. No result hints during the quiz.</span>
         </div>
@@ -301,12 +381,32 @@ export function QuizClient() {
                 data-option-key={option.key}
                 disabled={isInteractionBlocked}
                 key={option.key}
-                onClick={() => selectAnswer(option.key)}
+                onClick={(event) => {
+                  event.preventDefault();
+
+                  if (suppressNextClickRef.current) {
+                    suppressNextClickRef.current = false;
+                    return;
+                  }
+
+                  selectAnswer(option.key, 'click');
+                }}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault();
-                    selectAnswer(option.key);
+                    suppressNextClickRef.current = true;
+                    selectAnswer(option.key, 'button-key');
                   }
+                }}
+                onPointerUp={(event) => {
+                  if (event.button !== 0 && event.pointerType === 'mouse') {
+                    return;
+                  }
+
+                  event.preventDefault();
+                  event.currentTarget.focus();
+                  suppressNextClickRef.current = true;
+                  selectAnswer(option.key, 'pointer');
                 }}
                 type="button"
               >
@@ -351,11 +451,7 @@ export function QuizClient() {
               className={dot.className}
               disabled={isInteractionBlocked}
               key={dot.questionId}
-              onClick={() => {
-                setCurrentIndex(index);
-                resetQuestionTimer();
-                setStatusMessage('Question opened. Timer restarted.');
-              }}
+              onClick={() => openReviewQuestion(index)}
               title={dot.title}
               type="button"
             >
@@ -385,5 +481,18 @@ export function QuizClient() {
         <p className="small live-status" aria-live="polite">{statusMessage}</p>
       </section>
     </main>
+  );
+}
+
+function isEditableKeyboardTarget(target: EventTarget | null): boolean {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  return (
+    target.isContentEditable ||
+    target.tagName === 'INPUT' ||
+    target.tagName === 'TEXTAREA' ||
+    target.tagName === 'SELECT'
   );
 }

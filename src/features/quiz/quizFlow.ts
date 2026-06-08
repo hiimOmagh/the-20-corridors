@@ -99,11 +99,28 @@ export function calculateQuizProgress(
   };
 }
 
-export function parseKeyboardOptionKey(key: string): CorridorsOptionKey | null {
-  const normalized = key.trim().toUpperCase();
+export function parseKeyboardOptionKey(key: string, code = ''): CorridorsOptionKey | null {
+  const normalizedKey = key.trim().toUpperCase();
+  const normalizedCode = code.trim().toUpperCase();
 
-  if (normalized === 'A' || normalized === 'B' || normalized === 'C' || normalized === 'D') {
-    return normalized;
+  if (normalizedKey === 'A' || normalizedKey === 'B' || normalizedKey === 'C' || normalizedKey === 'D') {
+    return normalizedKey;
+  }
+
+  if (normalizedCode === 'KEYA') {
+    return 'A';
+  }
+
+  if (normalizedCode === 'KEYB') {
+    return 'B';
+  }
+
+  if (normalizedCode === 'KEYC') {
+    return 'C';
+  }
+
+  if (normalizedCode === 'KEYD') {
+    return 'D';
   }
 
   return null;

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "phase-9.4.2-quiz-browser-interaction-ux-hotfix-v1",
+  "gateId": "phase-9.4.2-quiz-browser-interaction-ux-hotfix",
+  "gates": {
+    "gateScriptExists": true,
+    "gateModuleExists": true,
+    "packageScriptExists": true,
+    "validateRunsGate": true,
+    "previousQuizHotfixEvidenceCurrent": true,
+    "nextDevOriginAllowsUserNetworkHost": true,
+    "clientHydrationMarkerExists": true,
+    "countdownVisibleMarkerExists": true,
+    "pointerActivationPathExists": true,
+    "clickFallbackDoesNotDoubleSubmit": true,
+    "keyboardShortcutUsesKeyAndCode": true,
+    "staleClosureProtectionExists": true,
+    "timeoutStillForcesRestart": true,
+    "inProgressHintsRemainBlocked": true,
+    "testsExist": true,
+    "docsExist": true,
+    "noPersistenceChangeSignals": true,
+    "noDatabaseBindingChangeSignals": true,
+    "noNetworkSmokeChangeSignals": true,
+    "overallPassed": true
+  },
+  "issues": []
+}

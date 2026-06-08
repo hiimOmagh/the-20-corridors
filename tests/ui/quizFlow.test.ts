@@ -91,6 +91,8 @@ describe('quiz flow helpers', () => {
   it('parses only A/B/C/D keyboard shortcuts', () => {
     expect(parseKeyboardOptionKey('a')).toBe('A');
     expect(parseKeyboardOptionKey('D')).toBe('D');
+    expect(parseKeyboardOptionKey('', 'KeyA')).toBe('A');
+    expect(parseKeyboardOptionKey('Dead', 'KeyD')).toBe('D');
     expect(parseKeyboardOptionKey(' ArrowLeft ')).toBeNull();
     expect(parseKeyboardOptionKey('E')).toBeNull();
   });
