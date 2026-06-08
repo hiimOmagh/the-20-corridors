@@ -4,7 +4,7 @@ Phase 10 starts after Phase 9 public result page UX release closure.
 
 ## Intent
 
-Turn the manual quiz checks from Phase 9.4.2 and Phase 9.5 into executable browser E2E interaction evidence. The Phase 9 manual check was sufficient to continue, but deeper quiz UX investigation remains valuable and is not a Phase 9 blocker. Deeper UX investigation is therefore deferred to the next track instead of blocking Phase 9 closure. Then extend the same evidence discipline to public result page browser states before any hosted non-production database smoke planning.
+Turn the manual quiz checks from Phase 9.4.2 and Phase 9.5 into executable browser E2E interaction evidence. The Phase 9 manual check was sufficient to continue, but deeper quiz UX investigation remains valuable and is not a Phase 9 blocker. Deeper UX investigation is therefore deferred to the next track instead of blocking Phase 9 closure. Then extend the same evidence discipline to public result page browser states and hosted public-result page evidence before any hosted non-production database smoke planning.
 
 ## Phase 10.0 — Quiz Browser E2E Interaction Evidence
 
@@ -68,7 +68,42 @@ Full validate remains green.
 Build remains green.
 ```
 
-## Candidate Phase 10.2 — Hosted Non-Production Database Smoke Planning
+## Phase 10.2 — Hosted Public Result Page Evidence
+
+Scope:
+
+- verify deployed `/r/[publicId]` renderable public-result page through hosted GET evidence
+- verify hosted not-found public-result behavior through hosted GET evidence
+- optionally verify hosted deleted, expired, and disabled states when seeded URLs exist
+- verify share/copy affordances remain renderable-only on hosted responses
+- verify public URLs, hosted HTML, and visible text do not expose raw answers
+- verify hosted HTML and visible text do not expose raw delete tokens
+- verify hosted responses preserve accessibility frame markers
+- keep hosted evidence opt-in and outside local `npm run validate`
+- keep hosted checks GET-only with no mutation smoke
+
+Acceptance:
+
+```text
+Hosted public result page evidence script exists.
+Hosted evidence is not wired into local validate.
+Renderable hosted public-result URL returns recognizable report content.
+Hosted not-found URL returns safe unavailable copy.
+Configured unavailable-state URLs remain non-actionable.
+Hosted public URLs do not expose raw answers.
+Hosted HTML and visible text do not expose raw answers.
+Hosted HTML and visible text do not expose raw delete tokens.
+Hosted accessibility frame is detectable.
+Hosted checks are GET-only.
+No persistence changes.
+No database binding changes.
+No production mutation smoke.
+Phase 10.1 evidence remains green.
+Full local validate remains green.
+Build remains green.
+```
+
+## Candidate Phase 10.3 — Hosted Non-Production Database Smoke Planning
 
 Scope:
 

@@ -72,7 +72,8 @@
     "gate:quiz-browser-interaction-ux": "tsx scripts/quiz-browser-interaction-ux-hotfix.ts",
     "closure:phase9": "tsx scripts/phase9-public-result-page-ux-release-closure-gate.ts",
     "evidence:quiz-browser-e2e": "tsx scripts/phase10-quiz-browser-e2e-interaction-evidence.ts",
-    "evidence:public-result-page-browser-e2e": "tsx scripts/phase10-public-result-page-browser-e2e-evidence.ts"
+    "evidence:public-result-page-browser-e2e": "tsx scripts/phase10-public-result-page-browser-e2e-evidence.ts",
+    "evidence:hosted-public-result-page": "tsx scripts/phase10-hosted-public-result-page-evidence.ts"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",

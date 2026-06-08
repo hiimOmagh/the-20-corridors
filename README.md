@@ -25,16 +25,17 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 10.1 — Public Result Page Browser E2E Evidence**
+**Phase 10.2 — Hosted Public Result Page Evidence**
 
-Phase 10.1 converts the public result page browser expectations into executable evidence while preserving runtime behavior.
+Phase 10.2 adds opt-in hosted public-result page evidence after deployment while preserving local validation determinism.
 
-- Phase 10.0 quiz browser E2E interaction evidence remains locked
-- public result renderable state is checked through deterministic browser-state fixtures and source evidence
-- not-found, deleted, expired, and disabled public-result states are checked for safe non-renderable behavior
-- share/copy affordances are verified as renderable-only
-- accessibility landmarks are checked in rendered-state fixtures and source evidence
-- raw answer exposure is blocked in public URL and visible text checks
+- Phase 10.1 public result page browser-state evidence remains locked
+- hosted renderable public-result URL is checked through GET-only page evidence
+- hosted not-found/unavailable result behavior is checked for safe non-actionable copy
+- optional hosted deleted, expired, and disabled URLs can be checked when seeded URLs exist
+- public URLs, HTML, and visible text are checked for raw-answer and delete-token exposure
+- accessibility frame markers are checked on hosted page responses
+- the hosted gate is intentionally not wired into local `npm run validate`
 - persistence, database binding, public lookup mutation behavior, rollback, and operational smoke behavior remain unchanged
 
 ## Development rule
@@ -44,7 +45,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Public Result Page UX Closure Gate → Phase 10.0 Quiz Browser E2E Interaction Evidence → Phase 10.1 Public Result Page Browser E2E Evidence
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Public Result Page UX Closure Gate → Phase 10.0 Quiz Browser E2E Interaction Evidence → Phase 10.1 Public Result Page Browser E2E Evidence → Phase 10.2 Hosted Public Result Page Evidence
 ```
 
 ## Commands
@@ -164,6 +165,12 @@ Run the Phase 10.1 public result page browser E2E evidence gate:
 npm run evidence:public-result-page-browser-e2e
 ```
 
+Run the Phase 10.2 hosted public result page evidence gate after deployment:
+
+```bash
+npm run evidence:hosted-public-result-page
+```
+
 Run the full local validation suite:
 
 ```bash
@@ -246,6 +253,12 @@ The latest Phase 10.1 public result page browser E2E evidence snapshot is writte
 
 ```text
 docs/evidence/phase10-public-result-page-browser-e2e-evidence-latest.json
+```
+
+The latest Phase 10.2 hosted public result page evidence snapshot is written to:
+
+```text
+docs/evidence/phase10-hosted-public-result-page-evidence-latest.json
 ```
 
 These snapshots record methodology integrity, archetype reachability, contradiction coverage, serialization stability, approved UI scope, import-boundary status, local UI smoke coverage, closure readiness, backend route safety, database adapter contract safety, Phase 10 browser evidence, and blocked auth/payment/AI/analytics scope.
@@ -1165,3 +1178,31 @@ Current Phase 10.0 evidence status:
 - Completing all 20 answers still generates the report path.
 - Phase 9 closure remains green.
 - No persistence, database binding, or network-smoke behavior changes are introduced.
+
+
+## Phase 10.2 — Hosted Public Result Page Evidence
+
+Phase 10.2 verifies deployed `/r/[publicId]` behavior through opt-in hosted GET evidence. It is intentionally excluded from local `npm run validate` because it depends on a live deployment and seeded public-result URLs.
+
+Required environment variables before running the hosted gate:
+
+```bash
+PHASE10_2_HOSTED_RENDERABLE_PUBLIC_RESULT_URL=https://your-host/r/<public-id>
+PHASE10_2_HOSTED_NOT_FOUND_PUBLIC_RESULT_URL=https://your-host/r/phase10-2-missing-public-result-id
+```
+
+Optional unavailable-state URLs:
+
+```bash
+PHASE10_2_HOSTED_DELETED_PUBLIC_RESULT_URL=https://your-host/r/<deleted-public-id>
+PHASE10_2_HOSTED_EXPIRED_PUBLIC_RESULT_URL=https://your-host/r/<expired-public-id>
+PHASE10_2_HOSTED_DISABLED_PUBLIC_RESULT_URL=https://your-host/r/<disabled-public-id>
+```
+
+Run:
+
+```bash
+npm run evidence:hosted-public-result-page
+```
+
+The hosted gate performs GET-only checks. It must not introduce persistence changes, database binding changes, mutation smoke, telemetry, auth, payment, or generated-AI behavior.
