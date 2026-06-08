@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "phase-10.1-public-result-page-browser-e2e-evidence-v1",
+  "gateId": "phase-10-1-public-result-page-browser-e2e-evidence",
+  "metadata": {
+    "evidenceMode": "deterministic-public-result-browser-state-runner",
+    "runtimeChange": "none",
+    "checkedAt": "static-and-simulated-e2e"
+  },
+  "gates": {
+    "gateScriptExists": true,
+    "gateModuleExists": true,
+    "e2eHelperExists": true,
+    "gateTestsExist": true,
+    "packageScriptExists": true,
+    "validateRunsGate": true,
+    "phase10QuizBrowserEvidenceCurrent": true,
+    "renderableResultStatePasses": true,
+    "notFoundStatePasses": true,
+    "deletedStatePasses": true,
+    "expiredStatePasses": true,
+    "disabledStatePasses": true,
+    "shareCopyRenderableOnly": true,
+    "publicUrlDoesNotExposeRawAnswers": true,
+    "visibleTextDoesNotExposeRawAnswers": true,
+    "accessibilityFrameCovered": true,
+    "publicResultPageSourceExists": true,
+    "sourceHasRenderableStateSignals": true,
+    "sourceHasNonRenderableStateSignals": true,
+    "sourceHasAccessibilitySignals": true,
+    "sourceDoesNotExposeRawAnswerSignals": true,
+    "noPersistenceChangeSignals": true,
+    "noDatabaseBindingChangeSignals": true,
+    "noNetworkSmokeChangeSignals": true,
+    "docsExist": true,
+    "overallPassed": true
+  },
+  "scenario": {
+    "evidenceId": "phase-10.1-public-result-page-browser-e2e-evidence",
+    "renderable": {
+      "state": "renderable",
+      "resultContentVisible": true,
+      "archetypeVisible": true,
+      "reportStructureVisible": true,
+      "shareCopyVisible": true,
+      "accessibilityLandmarksVisible": true,
+      "noRawAnswersInUrl": true,
+      "noRawAnswersInVisibleText": true,
+      "passed": true
+    },
+    "notFound": {
+      "state": "not-found",
+      "statusCopyVisible": true,
+      "shareCopySuppressed": true,
+      "accessibilityLandmarksVisible": true,
+      "noRawAnswersInUrl": true,
+      "noRawAnswersInVisibleText": true,
+      "passed": true
+    },
+    "deleted": {
+      "state": "deleted",
+      "statusCopyVisible": true,
+      "shareCopySuppressed": true,
+      "accessibilityLandmarksVisible": true,
+      "noRawAnswersInUrl": true,
+      "noRawAnswersInVisibleText": true,
+      "passed": true
+    },
+    "expired": {
+      "state": "expired",
+      "statusCopyVisible": true,
+      "shareCopySuppressed": true,
+      "accessibilityLandmarksVisible": true,
+      "noRawAnswersInUrl": true,
+      "noRawAnswersInVisibleText": true,
+      "passed": true
+    },
+    "disabled": {
+      "state": "disabled",
+      "statusCopyVisible": true,
+      "shareCopySuppressed": true,
+      "accessibilityLandmarksVisible": true,
+      "noRawAnswersInUrl": true,
+      "noRawAnswersInVisibleText": true,
+      "passed": true
+    },
+    "allStatesPassed": true
+  },
+  "sourceScan": {
+    "checkedFiles": [
+      "src/features/results/publicResultPageBrowserE2eEvidence.ts"
+    ],
+    "publicResultPageSourceFiles": [
+      "src/app/r/(public)/[publicId]/page.tsx",
+      "src/app/r/preview/page.tsx",
+      "src/features/results/ResultsClient.tsx",
+      "src/features/results/publicLinkLifecycleUi.ts",
+      "src/features/results/resultReportViewModel.ts",
+      "src/features/results/resultShareCard.ts"
+    ],
+    "publicResultStateSignals": [
+      "renderable:archetype",
+      "renderable:axis",
+      "renderable:contradiction",
+      "renderable:motive",
+      "renderable:share",
+      "renderable:copy",
+      "non-renderable:deleted",
+      "non-renderable:disabled",
+      "non-renderable:unavailable"
+    ],
+    "accessibilitySignals": [
+      "accessibility:<main",
+      "accessibility:aria-",
+      "accessibility:<h1"
+    ],
+    "rawAnswerLeakSignals": [],
+    "persistenceChangeSignals": [],
+    "databaseBindingChangeSignals": [],
+    "networkSmokeChangeSignals": []
+  },
+  "issues": []
+}

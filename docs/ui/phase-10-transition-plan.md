@@ -4,7 +4,7 @@ Phase 10 starts after Phase 9 public result page UX release closure.
 
 ## Intent
 
-Turn the manual quiz checks from Phase 9.4.2 and Phase 9.5 into executable browser E2E interaction evidence. The Phase 9 manual check was sufficient to continue, but deeper quiz UX investigation remains valuable and is not a Phase 9 blocker.
+Turn the manual quiz checks from Phase 9.4.2 and Phase 9.5 into executable browser E2E interaction evidence. The Phase 9 manual check was sufficient to continue, but deeper quiz UX investigation remains valuable and is not a Phase 9 blocker. Deeper UX investigation is therefore deferred to the next track instead of blocking Phase 9 closure. Then extend the same evidence discipline to public result page browser states before any hosted non-production database smoke planning.
 
 ## Phase 10.0 — Quiz Browser E2E Interaction Evidence
 
@@ -37,14 +37,36 @@ Full validate remains green.
 Build remains green.
 ```
 
-## Candidate Phase 10.1 — Public Result Page Browser E2E Evidence
+## Phase 10.1 — Public Result Page Browser E2E Evidence
 
 Scope:
 
-- verify `/r/[publicId]` renderable state in browser evidence
+- verify `/r/[publicId]` renderable state in browser-state evidence
 - verify not-found, deleted, expired, and disabled states
 - verify share/copy block appears only when renderable
-- verify accessibility landmarks in browser-rendered markup
+- verify public URL and visible text do not expose raw answer payloads
+- verify accessibility landmarks in browser-rendered state fixtures and source evidence
+- preserve Phase 10.0 quiz browser evidence
+
+Acceptance:
+
+```text
+Public result page browser-state evidence exists.
+Renderable public result state exposes recognizable report content.
+Not-found/deleted/expired/disabled states expose safe status copy.
+Share/copy affordances appear only in renderable state.
+Public URL does not expose raw answers.
+Visible public result text does not expose raw answers.
+Accessibility frame coverage is verified.
+Public result source carries renderable/non-renderable/accessibility signals.
+No runtime UX changes.
+No persistence changes.
+No database binding changes.
+No network smoke changes.
+Phase 10.0 evidence remains green.
+Full validate remains green.
+Build remains green.
+```
 
 ## Candidate Phase 10.2 — Hosted Non-Production Database Smoke Planning
 
@@ -54,6 +76,7 @@ Scope:
 - keep production mutation smoke disabled by default
 - preserve rollback behavior
 - preserve DTO-only public result storage
+- define environment variable contract and operator refusal states
 
 ## Boundaries
 

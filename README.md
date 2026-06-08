@@ -25,17 +25,17 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 9.5 — Public Result Page UX Release Closure Gate**
+**Phase 10.1 — Public Result Page Browser E2E Evidence**
 
-This closure consolidates the public-result-page UX track and the quiz-interaction stabilization hotfixes.
+Phase 10.1 converts the public result page browser expectations into executable evidence while preserving runtime behavior.
 
-- public result page copy, share/copy, accessibility, visual layout, and browser/static evidence are consolidated
-- quiz mouse/touch and keyboard answer selection gates are consolidated
-- the 10-second per-question timer and timeout restart behavior remain enforced
-- result hints remain suppressed until all questions are complete
-- manual browser checks passed sufficiently to continue
-- deeper quiz UX investigation and browser E2E evidence are deferred to Phase 10
-- persistence, database binding, public lookup, rollback, and operational smoke behavior remain unchanged
+- Phase 10.0 quiz browser E2E interaction evidence remains locked
+- public result renderable state is checked through deterministic browser-state fixtures and source evidence
+- not-found, deleted, expired, and disabled public-result states are checked for safe non-renderable behavior
+- share/copy affordances are verified as renderable-only
+- accessibility landmarks are checked in rendered-state fixtures and source evidence
+- raw answer exposure is blocked in public URL and visible text checks
+- persistence, database binding, public lookup mutation behavior, rollback, and operational smoke behavior remain unchanged
 
 ## Development rule
 
@@ -44,7 +44,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Public Result Page UX Closure Gate
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Public Result Page UX Closure Gate → Phase 10.0 Quiz Browser E2E Interaction Evidence → Phase 10.1 Public Result Page Browser E2E Evidence
 ```
 
 ## Commands
@@ -152,6 +152,18 @@ Run the Phase 9.4.1 quiz interaction/timer/no-hints hotfix gate:
 npm run gate:quiz-interaction-timer-no-hints
 ```
 
+Run the Phase 10.0 quiz browser E2E interaction evidence gate:
+
+```bash
+npm run evidence:quiz-browser-e2e
+```
+
+Run the Phase 10.1 public result page browser E2E evidence gate:
+
+```bash
+npm run evidence:public-result-page-browser-e2e
+```
+
 Run the full local validation suite:
 
 ```bash
@@ -230,7 +242,13 @@ The latest Phase 3 closure snapshot is written to:
 docs/evidence/phase3-closure-latest.json
 ```
 
-These snapshots record methodology integrity, archetype reachability, contradiction coverage, serialization stability, approved UI scope, import-boundary status, local UI smoke coverage, closure readiness, backend route safety, database adapter contract safety, and blocked auth/payment/AI/analytics scope.
+The latest Phase 10.1 public result page browser E2E evidence snapshot is written to:
+
+```text
+docs/evidence/phase10-public-result-page-browser-e2e-evidence-latest.json
+```
+
+These snapshots record methodology integrity, archetype reachability, contradiction coverage, serialization stability, approved UI scope, import-boundary status, local UI smoke coverage, closure readiness, backend route safety, database adapter contract safety, Phase 10 browser evidence, and blocked auth/payment/AI/analytics scope.
 
 ## Package workflow
 
