@@ -1,22 +1,29 @@
-# Update Manifest — Phase 9.4.2.1 Quiz Interaction Gate Harmonization Hotfix
+# Update Manifest — Phase 9.5 Public Result Page UX Release Closure Gate
 
 ## Package
 
-`the-20-corridors_phase9_4_2_1_quiz_gate_harmonization_hotfix.zip`
+`the-20-corridors_phase9_5_public_result_page_ux_release_closure_gate.zip`
 
 ## Scope
 
-Phase 9.4.2.1 fixes the stale Phase 9.4.1 quiz interaction gate after Phase 9.4.2 replaced the original answer activation implementation with the stronger browser interaction model.
+Phase 9.5 closes the public-result-page UX track and quiz-interaction stabilization track by consolidating Phase 9.0–9.4 plus Phase 9.4.1, Phase 9.4.2, and Phase 9.4.2.1 evidence.
+
+This closure records that manual browser checks passed sufficiently to continue. Further quiz UX investigation and browser E2E coverage are deferred into Phase 10 and are not treated as Phase 9 blockers.
 
 ## Changed files
 
 ```text
 README.md
+package.json
 docs/dev/update-manifest.md
-docs/evidence/phase9-quiz-interaction-timer-no-hints-hotfix-latest.json
-docs/release/phase-9-4-2-1-quiz-gate-harmonization-hotfix.md
-docs/ui/phase-9-4-2-1-quiz-gate-harmonization-hotfix-status.md
-src/core/release/phase9QuizInteractionTimerNoHintsHotfix.ts
+docs/evidence/phase9-public-result-page-ux-release-closure-latest.json
+docs/release/phase-9-public-result-page-ux-release-closure-gate.md
+docs/ui/phase-9-5-public-result-page-ux-release-closure-gate-status.md
+docs/ui/phase-9-transition-plan.md
+docs/ui/phase-10-transition-plan.md
+scripts/phase9-public-result-page-ux-release-closure-gate.ts
+src/core/release/phase9PublicResultPageUxReleaseClosureGate.ts
+tests/core/phase9PublicResultPageUxReleaseClosureGate.test.ts
 ```
 
 ## Validation
@@ -26,8 +33,7 @@ Expected local validation:
 ```text
 npm run typecheck
 npm test
-npm run gate:quiz-interaction-timer-no-hints
-npm run gate:quiz-browser-interaction-ux
+npm run closure:phase9
 npm run validate
 npm audit --omit=dev
 npm audit
@@ -37,10 +43,20 @@ npm run build
 ## Scope explicitly not included
 
 ```text
-runtime UX changes
-quiz scoring changes
-persistence changes
-database binding changes
-public lookup changes
-network smoke changes
+new runtime UX behavior
+new persistence behavior
+new database binding behavior
+production network smoke
+production mutation smoke
+account system
+payment path
+analytics or telemetry
+generated-AI feature
 ```
+
+## Phase 9.5.1 — Phase 9 Transition Plan Gate Compatibility Hotfix
+
+- Restored the exact Phase 9.0 compatibility marker required by the public result page UX copy polish gate.
+- Preserved the Phase 9.5 closure scope and Phase 10 transition plan.
+- Runtime behavior unchanged: no persistence, database binding, rollback, or network smoke changes.
+

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "phase-9.5.1-transition-plan-gate-compatibility-hotfix-v1",
+  "gateId": "phase-9.5.1-transition-plan-gate-compatibility-hotfix",
+  "overallPassed": true,
+  "gates": {
+    "phase9TransitionPlanRestoresPhase90Marker": true,
+    "phase8ClosureRemainsGreenMarkerPresent": true,
+    "runtimeBehaviorChanged": false,
+    "persistenceChanged": false,
+    "databaseBindingChanged": false,
+    "networkSmokeChanged": false,
+    "overallPassed": true
+  },
+  "issues": []
+}

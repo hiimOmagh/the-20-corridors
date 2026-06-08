@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "phase-9.5-public-result-page-ux-release-closure-gate-v1",
+  "closureId": "phase-9-public-result-page-ux-release-closure-gate",
+  "metadata": {
+    "checkedAt": "static",
+    "phaseScope": "phase-9-public-result-page-ux-and-quiz-interaction-closure",
+    "closureMode": "evidence-consolidation-no-runtime-change"
+  },
+  "gates": {
+    "closureScriptExists": true,
+    "closureModuleExists": true,
+    "closureTestExists": true,
+    "closureReleaseDocExists": true,
+    "closureStatusDocExists": true,
+    "phase9TransitionPlanExists": true,
+    "phase10TransitionPlanExists": true,
+    "packageScriptExists": true,
+    "validateRunsPhase9ClosureGate": true,
+    "phase8ClosureEvidenceCurrent": true,
+    "phase90CopyEvidenceCurrent": true,
+    "phase91ShareCopyEvidenceCurrent": true,
+    "phase92AccessibilityEvidenceCurrent": true,
+    "phase93VisualLayoutEvidenceCurrent": true,
+    "phase94BrowserEvidenceCurrent": true,
+    "phase941QuizTimerNoHintsEvidenceCurrent": true,
+    "phase942QuizBrowserInteractionEvidenceCurrent": true,
+    "allPhase9EvidenceCurrentAndPassed": true,
+    "manualBrowserCheckRecorded": true,
+    "deeperUxInvestigationDeferredToNextTrack": true,
+    "publicLookupRouteStillExists": true,
+    "quizRouteStillExists": true,
+    "quizTimerVisibleContractPresent": true,
+    "mouseTouchAnswerSelectionHardened": true,
+    "keyboardAnswerSelectionHardened": true,
+    "noQuizResultHintsBeforeCompletion": true,
+    "unavailableStatesRemainNonActionable": true,
+    "shareCopyRenderableOnly": true,
+    "accessibilitySemanticsRemainIntact": true,
+    "rawAnswersRemainBlocked": true,
+    "rawDeleteTokensRemainBlocked": true,
+    "noPersistenceChangeSignals": true,
+    "noDatabaseBindingChangeSignals": true,
+    "noNetworkSmokeChangeSignals": true,
+    "phase8ClosureRemainsGreen": true,
+    "buildRouteListExpectedToIncludeQuizAndPublicLookup": true,
+    "overallPassed": true
+  },
+  "coverage": {
+    "evidenceFileCount": 10,
+    "passedEvidenceFileCount": 10,
+    "publicPageUxEvidenceCount": 4,
+    "quizEvidenceCount": 2,
+    "checkedSourceFileCount": 8,
+    "forbiddenRawAnswerSignalCount": 0,
+    "forbiddenRawDeleteTokenSignalCount": 0,
+    "persistenceChangeSignalCount": 0,
+    "databaseBindingChangeSignalCount": 0,
+    "networkSmokeChangeSignalCount": 0
+  },
+  "evidence": [
+    {
+      "key": "phase8-public-lookup-release-closure",
+      "path": "docs/evidence/phase8-public-lookup-release-closure-latest.json",
+      "category": "phase8-baseline",
+      "exists": true,
+      "passed": true,
+      "schemaVersion": "phase-8.22-public-lookup-release-closure-gate-v1",
+      "id": "phase-8-public-lookup-release-closure-gate"
+    },
+    {
+      "key": "phase9.0-public-result-page-copy",
+      "path": "docs/evidence/phase9-public-result-page-ux-copy-polish-latest.json",
+      "category": "public-page-ux",
+      "exists": true,
+      "passed": true,
+      "schemaVersion": "phase-9.0-public-result-page-ux-copy-polish-gate-v1",
+      "id": "phase-9.0-public-result-page-ux-copy-polish"
+    },
+    {
+      "key": "phase9.1-public-result-share-copy",
+      "path": "docs/evidence/phase9-public-result-share-copy-ux-polish-latest.json",
+      "category": "public-page-ux",
+      "exists": true,
+      "passed": true,
+      "schemaVersion": "phase-9.1-public-result-share-copy-ux-polish-gate-v1",
+      "id": "phase-9.1-public-result-share-copy-ux-polish"
+    },
+    {
+      "key": "phase9.2-public-result-accessibility",
+      "path": "docs/evidence/phase9-public-result-page-accessibility-semantics-polish-latest.json",
+      "category": "public-page-ux",
+      "exists": true,
+      "passed": true,
+      "schemaVersion": "phase-9.2-public-result-page-accessibility-semantics-polish-gate-v1",
+      "id": "phase-9.2-public-result-page-accessibility-semantics-polish"
+    },
+    {
+      "key": "phase9.3-public-result-visual-layout",
+      "path": "docs/evidence/phase9-public-result-page-visual-layout-polish-latest.json",
+      "category": "public-page-ux",
+      "exists": true,
+      "passed": true,
+      "schemaVersion": "phase-9.3-public-result-page-visual-layout-polish-gate-v1",
+      "id": "phase-9.3-public-result-page-visual-layout-polish"
+    },
+    {
+      "key": "phase9.4-public-result-browser-evidence",
+      "path": "docs/evidence/phase9-public-result-page-browser-evidence-gate-latest.json",
+      "category": "public-page-evidence",
+      "exists": true,
+      "passed": true,
+      "schemaVersion": "phase-9.4-public-result-page-browser-evidence-gate-v1",
+      "id": "phase-9.4-public-result-page-browser-evidence-gate"
+    },
+    {
+      "key": "phase9.4.1-quiz-interaction-timer-no-hints",
+      "path": "docs/evidence/phase9-quiz-interaction-timer-no-hints-hotfix-latest.json",
+      "category": "quiz-interaction",
+      "exists": true,
+      "passed": true,
+      "schemaVersion": "phase-9.4.1-quiz-interaction-timer-no-hints-hotfix-v1",
+      "id": "phase-9.4.1-quiz-interaction-timer-no-hints-hotfix"
+    },
+    {
+      "key": "phase9.4.2-quiz-browser-interaction-ux",
+      "path": "docs/evidence/phase9-quiz-browser-interaction-ux-hotfix-latest.json",
+      "category": "quiz-interaction",
+      "exists": true,
+      "passed": true,
+      "schemaVersion": "phase-9.4.2-quiz-browser-interaction-ux-hotfix-v1",
+      "id": "phase-9.4.2-quiz-browser-interaction-ux-hotfix"
+    },
+    {
+      "key": "public-lookup-operational-smoke",
+      "path": "docs/evidence/public-result-lookup-operational-smoke-boundary-latest.json",
+      "category": "operational-safety",
+      "exists": true,
+      "passed": true,
+      "schemaVersion": "phase-8.20-public-result-lookup-operational-smoke-boundary-gate-v1",
+      "id": "phase-8-public-result-lookup-operational-smoke-boundary"
+    },
+    {
+      "key": "public-lookup-operational-rollback-drill",
+      "path": "docs/evidence/public-lookup-operational-rollback-drill-latest.json",
+      "category": "operational-safety",
+      "exists": true,
+      "passed": true,
+      "schemaVersion": "phase-8.21-public-lookup-operational-rollback-drill-gate-v1",
+      "id": "phase-8-public-lookup-operational-rollback-drill"
+    }
+  ],
+  "docs": {
+    "phase9Transition": "docs/ui/phase-9-transition-plan.md",
+    "phase10Transition": "docs/ui/phase-10-transition-plan.md",
+    "release": "docs/release/phase-9-public-result-page-ux-release-closure-gate.md",
+    "status": "docs/ui/phase-9-5-public-result-page-ux-release-closure-gate-status.md"
+  },
+  "implementationScan": {
+    "checkedFiles": [
+      "src/app/r/(public)/[publicId]/page.tsx",
+      "src/features/quiz/QuizClient.tsx",
+      "src/features/quiz/quizFlow.ts",
+      "src/core/public-link/publicResultLookupPageCopy.ts",
+      "src/core/public-link/publicResultShareCopyUx.ts",
+      "src/core/public-link/publicResultLookupPageAccessibility.ts",
+      "src/core/public-link/publicResultLookupPageVisualLayout.ts",
+      "src/core/public-link/publicResultLookupPageBrowserEvidence.ts"
+    ],
+    "rawAnswerSignals": [],
+    "rawDeleteTokenSignals": [],
+    "persistenceChangeSignals": [],
+    "databaseBindingChangeSignals": [],
+    "networkSmokeChangeSignals": []
+  },
+  "issues": []
+}

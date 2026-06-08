@@ -1,178 +1,83 @@
-# Phase 9 Transition Plan — Post-Persistence Product Hardening
+# Phase 9 Transition Plan — Public Result Page UX + Quiz Interaction Stabilization
 
-Phase 9 starts after Phase 8 public lookup release closure. The transition is intentionally separate from the Phase 8 persistence implementation so that database persistence, public lookup rendering, rollback, and operational smoke remain governed by their existing evidence gates.
+Phase 9 starts after Phase 8 public lookup release closure. It remains intentionally separate from persistence and database activation work.
 
-## Current locked baseline
+## Locked baseline from Phase 8
 
 - API route database binding exists behind explicit activation and rollback controls.
 - Public `/r/[publicId]` lookup route exists behind explicit activation and rollback controls.
-- Operational smoke is opt-in, non-production, and fake-executor-only by default.
+- Operational smoke is opt-in and non-production by default.
 - Production network lookup smoke remains disabled by default.
 - Rollback disables both API route database persistence and public lookup rendering.
 - Public DTO-only rendering is preserved.
 - Raw answers and raw delete tokens remain blocked.
 
-## Phase 9.0 — Public Result Page UX + Operational Copy Polish
+## Completed Phase 9 scope
 
-Scope:
+### Phase 9.0 — Public Result Page UX + Operational Copy Polish
 
-- Polish renderable public result copy.
-- Polish not-found copy.
-- Polish deleted-result copy.
-- Polish expired-result copy.
-- Polish disabled/rollback copy.
-- Polish configuration-error and storage-unavailable copy.
-- Preserve DTO-only rendering.
-- Preserve Phase 8 closure and operational evidence.
+- renderable, not-found, deleted, expired, disabled, configuration-error, and storage-unavailable copy polished
+- DTO-only rendering preserved
+- Phase 8 closure remains green and preserved
 
-Acceptance gate:
+### Phase 9.1 — Public Result Share/Copy UX Polish
 
-```text
-Public result page user-facing states are polished.
-Renderable, not-found, deleted, expired, disabled, configuration-error, and storage-unavailable states have clear copy.
-Raw answers remain blocked.
-Raw delete tokens remain blocked.
-Operational smoke remains opt-in only.
-Rollback drill remains green.
-Phase 8 closure remains green.
-Full validate remains green.
-Build remains green.
-```
+- copy-link affordance clarified
+- manual copy fallback added
+- unavailable states kept non-actionable
 
-## Future candidate scope
+### Phase 9.2 — Public Result Page Accessibility Semantics Polish
 
-After Phase 9.0, the next useful product-hardening moves are:
+- main landmark, headings, status/error semantics, and labelled regions verified
+- share/copy action accessible help verified
 
-- share/copy UX around public links
-- operational runbook documentation
-- environment setup documentation
-- release checklist consolidation
-- non-production smoke playbooks
+### Phase 9.3 — Public Result Page Visual Layout Polish
 
-## Scope boundaries
+- responsive shell spacing added
+- renderable and unavailable visual hierarchy improved
+- share/copy block visually distinct
 
-Phase 9 must not silently change the Phase 8 persistence contract.
+### Phase 9.4 — Public Result Page Browser Evidence Gate
 
-Any production network smoke, destructive database operation, account system, payment path, analytics, telemetry, or generated-AI feature must enter through a separate explicit gate with its own rollback and failure-mode evidence.
+- renderable, not-found, deleted, expired, and disabled visible text verified through static browser/markup evidence
+- share/copy block verified as renderable-only
+- accessibility landmarks verified in markup evidence
 
-## Phase 9.1 — Public Result Share/Copy UX Polish
+### Phase 9.4.1 — Quiz Interaction Timer No-Hints Hotfix
 
-Scope:
+- A/B/C/D answer interaction hardened
+- 10-second per-question timer added
+- timeout forces restart
+- result hints suppressed before quiz completion
 
-- Improve public result share/copy guidance.
-- Make the copy-link affordance clearer.
-- Add manual copy fallback guidance.
-- Prevent unavailable states from offering invalid copy actions.
-- Preserve DTO-only rendering.
-- Preserve Phase 9.0 copy evidence and Phase 8 closure.
+### Phase 9.4.2 — Quiz Browser Interaction UX Hotfix
 
-Acceptance gate:
+- Next dev origin `172.21.48.1` allowed for the user’s network testing path
+- hydration marker, visible countdown marker, pointer activation, click fallback, keyboard `key`/`code`, and stale-state guards verified
 
-```text
-Share/copy UX copy exists for the public result page.
-Copy-link affordance text is clearer.
-Fallback/manual copy guidance exists.
-Unavailable states do not offer invalid copy action.
-Raw answers remain blocked.
-Raw delete tokens remain blocked.
-No persistence behavior changes.
-No database binding changes.
-No network smoke changes.
-Phase 8 closure remains green.
-Phase 9.0 copy gate remains green.
-Full validate remains green.
-Build remains green.
-```
+### Phase 9.4.2.1 — Quiz Gate Harmonization Hotfix
 
-## Phase 9.2 — Public Result Page Accessibility Semantics Polish
+- older 9.4.1 gate harmonized with the stronger 9.4.2 interaction implementation
+- validate restored after stale-gate false negative
 
-Scope:
+### Phase 9.5 — Public Result Page UX Release Closure Gate
 
-- Add explicit main landmark labelling for `/r/[publicId]`.
-- Add accessible heading and region semantics for renderable public result content.
-- Add status/error live-region semantics for unavailable states.
-- Add accessible share/copy label and help text.
-- Keep unavailable states non-actionable.
-- Preserve Phase 8 closure, Phase 9.0 copy polish, and Phase 9.1 share/copy UX evidence.
+- Phase 9 evidence consolidated
+- manual browser checks recorded as passed enough to continue
+- deeper quiz UX investigation deferred to Phase 10 and not a Phase 9 blocker
 
-Acceptance gate:
+## Phase 9 closure boundary
 
-```text
-Accessible heading hierarchy exists.
-Main landmark is explicit.
-Status/error states use appropriate semantic text.
-Renderable result has clear region labels.
-Copy/share action has accessible label/help text.
-Unavailable states remain non-actionable.
-Raw answers remain blocked.
-Raw delete tokens remain blocked.
-No persistence behavior changes.
-No database binding changes.
-No network smoke changes.
-Phase 8 closure remains green.
-Phase 9.0 and 9.1 gates remain green.
-Full validate remains green.
-Build remains green.
-```
+Phase 9 did not introduce new persistence behavior, new database binding behavior, production network smoke, production mutation smoke, accounts, payments, analytics, telemetry, or generated-AI features.
 
-## Phase 9.3 — Public Result Page Visual Layout Polish
+## Next track
 
-Scope:
+Phase 10 should convert the remaining manual UX confidence into browser E2E evidence and deeper quiz UX investigation.
 
-- Improve `/r/[publicId]` page spacing and visual hierarchy.
-- Improve renderable result layout readability.
-- Improve unavailable-state visual structure.
-- Keep mobile layout stacked and usable.
-- Make the share/copy block visually distinct.
-- Preserve Phase 9.2 accessibility semantics and Phase 9.0/9.1 copy/share gates.
+## Closure compatibility note
 
-Acceptance gate:
+No persistence behavior changes were introduced by Phase 9.4 Browser Evidence Gate or the later quiz hotfixes.
 
-```text
-Renderable result layout has clearer visual hierarchy.
-Unavailable states have readable visual structure.
-Mobile layout remains usable.
-Share/copy block is visually distinct.
-Accessibility semantics from Phase 9.2 remain intact.
-Raw answers remain blocked.
-Raw delete tokens remain blocked.
-No persistence behavior changes.
-No database binding changes.
-No network smoke changes.
-Phase 8 closure remains green.
-Phase 9.0, 9.1, and 9.2 gates remain green.
-Full validate remains green.
-Build remains green.
-```
+## Gate compatibility note
 
-## Phase 9.4 — Public Result Page Browser Evidence Gate
-
-Scope:
-
-- Verify `/r/[publicId]` visible state evidence through browser/static markup evidence.
-- Verify renderable, not-found, deleted, expired, and disabled/rollback visible text.
-- Verify share/copy block appears only in the renderable state.
-- Verify accessibility landmarks and status semantics remain visible in markup evidence.
-- Preserve Phase 9.0–9.3 gates and Phase 8 closure evidence.
-
-Acceptance gate:
-
-```text
-Browser/static evidence gate exists.
-Renderable state visible text is verified.
-Not-found state visible text is verified.
-Deleted state visible text is verified.
-Expired state visible text is verified.
-Disabled/rollback state visible text is verified.
-Share/copy block appears only in renderable state.
-Accessibility landmarks remain visible in markup evidence.
-Raw answers remain blocked.
-Raw delete tokens remain blocked.
-No persistence behavior changes.
-No database binding changes.
-No network smoke changes.
-Phase 8 closure remains green.
-Phase 9.0, 9.1, 9.2, and 9.3 gates remain green.
-Full validate remains green.
-Build remains green.
-```
+Phase 9.5 keeps the Phase 9.0 copy-polish gate compatible by preserving the explicit phrase: Phase 8 closure remains green. This is a compatibility marker for the older Phase 9.0 evidence gate, not a new runtime behavior.

@@ -25,17 +25,16 @@ This project is **not** a clinical, diagnostic, or scientifically validated psyc
 
 ## Current phase
 
-**Phase 9.4.1 — Quiz Interaction Timer No-Hints Hotfix**
+**Phase 9.5 — Public Result Page UX Release Closure Gate**
 
-This hotfix hardens the quiz interaction layer before Phase 9.5 closure.
+This closure consolidates the public-result-page UX track and the quiz-interaction stabilization hotfixes.
 
-- mouse/touch selection on A/B/C/D answer buttons is explicitly guarded
-- keyboard A/B/C/D selection remains supported
-- focused answer buttons support Enter and Space
-- each question has a 10-second countdown timer
-- timeout blocks further answering and requires quiz restart
-- result hints and interpretive option signals are suppressed until all questions are complete
-- the question map hides answer letters until completion
+- public result page copy, share/copy, accessibility, visual layout, and browser/static evidence are consolidated
+- quiz mouse/touch and keyboard answer selection gates are consolidated
+- the 10-second per-question timer and timeout restart behavior remain enforced
+- result hints remain suppressed until all questions are complete
+- manual browser checks passed sufficiently to continue
+- deeper quiz UX investigation and browser E2E evidence are deferred to Phase 10
 - persistence, database binding, public lookup, rollback, and operational smoke behavior remain unchanged
 
 ## Development rule
@@ -45,7 +44,7 @@ The scoring engine must stay separate from UI code.
 Canonical pipeline:
 
 ```text
-Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Quiz Interaction Timer No-Hints Hotfix
+Answer → Tags → Weighted Scores → Axis Scores → Contradictions → Archetype → Report Seed → Composed Report → Public API DTO → Serialization Envelope → Quality Guard → Methodology Audit Snapshot → Golden Result Snapshots → Engine Release Gate → UI Import Boundary → Phase 2 Readiness Gate → UI Smoke Contract → Phase 2 Closure Gate → Visual Identity Layer → Quiz Identity Layer → Landing Consistency Layer → Motion Polish Layer → Visual Smoke Contract → Phase 3 Closure Gate → Local Export Readiness → Export QA → Export Smoke → Phase 4 Closure Gate → Public-Link Privacy Contract → Public DTO Contract → Local Public-Link Preview → Phase 5 Preview Closure Gate → Public Result Storage Contract → Backend API Boundary → Backend Route Skeleton Guard → Backend Handler Dry Run → Backend Route Runtime Smoke → Phase 7 Closure Gate → Database Adapter Contract → Database Runtime Selection Guard → Database Adapter Factory Contract → Database Client Configuration Contract → Database SDK Selection Decision Record → Database Query Contract → Public Lookup Implementation → Phase 8 Closure Gate → Phase 9 Public Result Page UX Closure Gate
 ```
 
 ## Commands
@@ -1119,3 +1118,8 @@ Current harmonization status:
 - The 10-second timer and forced restart checks remain enforced.
 - No result hints before completion remain enforced.
 - No persistence, database binding, or network-smoke behavior changes are introduced.
+
+### Phase 9.5.1 — Phase 9 transition-plan gate compatibility hotfix
+
+Phase 9.5.1 restores the exact Phase 9.0 transition-plan compatibility marker required by the older public result page UX copy-polish gate: `Phase 8 closure remains green`. Runtime behavior is unchanged.
+
