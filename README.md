@@ -1123,3 +1123,27 @@ Current harmonization status:
 
 Phase 9.5.1 restores the exact Phase 9.0 transition-plan compatibility marker required by the older public result page UX copy-polish gate: `Phase 8 closure remains green`. Runtime behavior is unchanged.
 
+
+## Phase 10.0 — Quiz Browser E2E Interaction Evidence
+
+Phase 10.0 converts the Phase 9 manual quiz checks into executable browser-interaction evidence without changing runtime behavior.
+
+Run the Phase 10.0 evidence gate:
+
+```bash
+npm run evidence:quiz-browser-e2e
+```
+
+Current Phase 10.0 evidence status:
+
+- Mouse click A/B/C/D advances exactly one question.
+- Keyboard A/B/C/D advances exactly one question.
+- Focused answer button Enter advances exactly one question.
+- Focused answer button Space advances exactly one question.
+- The timer starts at 10 seconds and counts down.
+- Timeout forces restart-required behavior.
+- Pointer/click fallback does not double-skip.
+- No result hints appear before completion.
+- Completing all 20 answers still generates the report path.
+- Phase 9 closure remains green.
+- No persistence, database binding, or network-smoke behavior changes are introduced.

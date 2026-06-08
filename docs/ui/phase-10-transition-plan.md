@@ -4,14 +4,14 @@ Phase 10 starts after Phase 9 public result page UX release closure.
 
 ## Intent
 
-Turn the manual quiz checks from Phase 9.4.2 and Phase 9.5 into browser E2E evidence. The Phase 9 manual check was sufficient to continue, but deeper quiz UX investigation remains valuable and is not a Phase 9 blocker.
+Turn the manual quiz checks from Phase 9.4.2 and Phase 9.5 into executable browser E2E interaction evidence. The Phase 9 manual check was sufficient to continue, but deeper quiz UX investigation remains valuable and is not a Phase 9 blocker.
 
-## Candidate Phase 10.0 — Quiz Browser E2E Interaction Evidence
+## Phase 10.0 — Quiz Browser E2E Interaction Evidence
 
 Scope:
 
-- verify mouse/touch A/B/C/D selection in an actual browser session
-- verify keyboard A/B/C/D selection in an actual browser session
+- verify mouse/touch A/B/C/D selection through executable browser E2E interaction evidence
+- verify keyboard A/B/C/D selection through executable browser E2E interaction evidence
 - verify focused button Enter/Space behavior
 - verify the 10-second countdown is visible and decrements
 - verify timeout forces restart
@@ -19,11 +19,11 @@ Scope:
 - verify no result hints appear before quiz completion
 - verify result generation only after all questions are complete
 
-Acceptance direction:
+Acceptance:
 
 ```text
-Browser E2E evidence exists.
-Timer is visible and countdown behavior is browser-verified.
+Browser/E2E evidence exists.
+Timer is visible and countdown behavior is verified.
 Mouse/touch selection advances exactly one question.
 Keyboard selection advances exactly one question.
 Focused button Enter/Space advances exactly one question.

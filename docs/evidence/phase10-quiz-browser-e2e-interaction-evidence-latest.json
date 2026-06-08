@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "phase-10.0-quiz-browser-e2e-interaction-evidence-v1",
+  "gateId": "phase-10-quiz-browser-e2e-interaction-evidence",
+  "metadata": {
+    "evidenceMode": "deterministic-browser-interaction-scenario-runner",
+    "runtimeChange": "none",
+    "checkedAt": "static-and-simulated-e2e"
+  },
+  "gates": {
+    "gateScriptExists": true,
+    "gateModuleExists": true,
+    "e2eHelperExists": true,
+    "gateTestsExist": true,
+    "packageScriptExists": true,
+    "validateRunsGate": true,
+    "phase9ClosureEvidenceCurrent": true,
+    "mouseClickAdvancesExactlyOneQuestion": true,
+    "keyboardShortcutAdvancesExactlyOneQuestion": true,
+    "focusedEnterAdvancesExactlyOneQuestion": true,
+    "focusedSpaceAdvancesExactlyOneQuestion": true,
+    "timerStartsAtTenSeconds": true,
+    "timerCountsDown": true,
+    "timeoutForcesRestart": true,
+    "noDoubleSkipFromPointerClickFallback": true,
+    "noPreCompletionResultHints": true,
+    "completionStillGeneratesReport": true,
+    "sourceHasVisibleCountdownContract": true,
+    "sourceHasPointerAndClickInteractionPaths": true,
+    "sourceHasKeyboardInteractionPath": true,
+    "sourceHasTimeoutRestartUi": true,
+    "sourceBlocksPreCompletionHints": true,
+    "noPersistenceChangeSignals": true,
+    "noDatabaseBindingChangeSignals": true,
+    "noNetworkSmokeChangeSignals": true,
+    "docsExist": true,
+    "overallPassed": true
+  },
+  "scenario": {
+    "evidenceId": "phase-10.0-quiz-browser-e2e-interaction-evidence",
+    "questionCount": 20,
+    "mouse": {
+      "source": "mouse",
+      "option": "A",
+      "beforeQuestion": 1,
+      "afterQuestion": 2,
+      "beforeAnsweredCount": 0,
+      "afterAnsweredCount": 1,
+      "accepted": true,
+      "advancedExactlyOneQuestion": true
+    },
+    "keyboard": {
+      "source": "keyboard",
+      "option": "B",
+      "beforeQuestion": 1,
+      "afterQuestion": 2,
+      "beforeAnsweredCount": 0,
+      "afterAnsweredCount": 1,
+      "accepted": true,
+      "advancedExactlyOneQuestion": true
+    },
+    "focusedEnter": {
+      "source": "focused-enter",
+      "option": "C",
+      "beforeQuestion": 1,
+      "afterQuestion": 2,
+      "beforeAnsweredCount": 0,
+      "afterAnsweredCount": 1,
+      "accepted": true,
+      "advancedExactlyOneQuestion": true
+    },
+    "focusedSpace": {
+      "source": "focused-space",
+      "option": "D",
+      "beforeQuestion": 1,
+      "afterQuestion": 2,
+      "beforeAnsweredCount": 0,
+      "afterAnsweredCount": 1,
+      "accepted": true,
+      "advancedExactlyOneQuestion": true
+    },
+    "doubleSubmit": {
+      "pointerAccepted": true,
+      "clickFallbackSuppressed": true,
+      "beforeQuestion": 1,
+      "afterQuestion": 2,
+      "answeredCountDelta": 1,
+      "noDoubleSkip": true
+    },
+    "timer": {
+      "startsAtSeconds": 10,
+      "afterFourSeconds": 6,
+      "afterTenSeconds": 0,
+      "visibleLabelAtStart": "10s left",
+      "visibleLabelNearExpiry": "3s left",
+      "timeoutForcesRestart": true,
+      "answerAfterTimeoutAccepted": false
+    },
+    "noPreCompletionHints": true,
+    "completion": {
+      "completed": true,
+      "answeredCount": 20,
+      "generatedReport": true,
+      "answerSequenceLength": 20
+    },
+    "allInteractionsPassed": true
+  },
+  "sourceScan": {
+    "checkedFiles": [
+      "src/features/quiz/QuizClient.tsx",
+      "src/features/quiz/quizFlow.ts",
+      "src/features/quiz/quizBrowserE2eEvidence.ts"
+    ],
+    "persistenceChangeSignals": [],
+    "databaseBindingChangeSignals": [],
+    "networkSmokeChangeSignals": []
+  },
+  "issues": []
+}

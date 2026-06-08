@@ -1,14 +1,12 @@
-# Update Manifest — Phase 9.5 Public Result Page UX Release Closure Gate
+# Update Manifest — Phase 10.0 Quiz Browser E2E Interaction Evidence
 
 ## Package
 
-`the-20-corridors_phase9_5_public_result_page_ux_release_closure_gate.zip`
+`the-20-corridors_phase10_0_quiz_browser_e2e_interaction_evidence.zip`
 
 ## Scope
 
-Phase 9.5 closes the public-result-page UX track and quiz-interaction stabilization track by consolidating Phase 9.0–9.4 plus Phase 9.4.1, Phase 9.4.2, and Phase 9.4.2.1 evidence.
-
-This closure records that manual browser checks passed sufficiently to continue. Further quiz UX investigation and browser E2E coverage are deferred into Phase 10 and are not treated as Phase 9 blockers.
+Phase 10.0 converts the manually checked quiz interaction requirements into executable evidence.
 
 ## Changed files
 
@@ -16,14 +14,15 @@ This closure records that manual browser checks passed sufficiently to continue.
 README.md
 package.json
 docs/dev/update-manifest.md
-docs/evidence/phase9-public-result-page-ux-release-closure-latest.json
-docs/release/phase-9-public-result-page-ux-release-closure-gate.md
-docs/ui/phase-9-5-public-result-page-ux-release-closure-gate-status.md
-docs/ui/phase-9-transition-plan.md
+docs/evidence/phase10-quiz-browser-e2e-interaction-evidence-latest.json
+docs/release/phase-10-quiz-browser-e2e-interaction-evidence.md
+docs/ui/phase-10-0-quiz-browser-e2e-interaction-evidence-status.md
 docs/ui/phase-10-transition-plan.md
-scripts/phase9-public-result-page-ux-release-closure-gate.ts
-src/core/release/phase9PublicResultPageUxReleaseClosureGate.ts
-tests/core/phase9PublicResultPageUxReleaseClosureGate.test.ts
+scripts/phase10-quiz-browser-e2e-interaction-evidence.ts
+src/core/release/phase10QuizBrowserE2eInteractionEvidence.ts
+src/features/quiz/quizBrowserE2eEvidence.ts
+tests/core/phase10QuizBrowserE2eInteractionEvidence.test.ts
+tests/ui/quizBrowserE2eEvidence.test.ts
 ```
 
 ## Validation
@@ -33,7 +32,7 @@ Expected local validation:
 ```text
 npm run typecheck
 npm test
-npm run closure:phase9
+npm run evidence:quiz-browser-e2e
 npm run validate
 npm audit --omit=dev
 npm audit
@@ -43,20 +42,13 @@ npm run build
 ## Scope explicitly not included
 
 ```text
-new runtime UX behavior
-new persistence behavior
-new database binding behavior
-production network smoke
+runtime UX behavior changes
+persistence changes
+database binding changes
+network smoke changes
 production mutation smoke
 account system
 payment path
 analytics or telemetry
-generated-AI feature
+generated-AI behavior
 ```
-
-## Phase 9.5.1 — Phase 9 Transition Plan Gate Compatibility Hotfix
-
-- Restored the exact Phase 9.0 compatibility marker required by the public result page UX copy polish gate.
-- Preserved the Phase 9.5 closure scope and Phase 10 transition plan.
-- Runtime behavior unchanged: no persistence, database binding, rollback, or network smoke changes.
-
