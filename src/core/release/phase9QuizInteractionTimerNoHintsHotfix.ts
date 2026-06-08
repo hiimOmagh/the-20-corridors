@@ -24,9 +24,9 @@ const RELEASE_DOC_PATH = 'docs/release/phase-9-quiz-interaction-timer-no-hints-h
 
 const REQUIRED_QUIZ_CLIENT_TOKENS = [
   'data-interaction-target="quiz-answer-option"',
-  'onClick={() => selectAnswer(option.key)}',
+  'selectAnswer(option.key',
   'aria-keyshortcuts={option.key}',
-  'parseKeyboardOptionKey(event.key)',
+  'parseKeyboardOptionKey(event.key',
   'role="timer"',
   'QUIZ_SECONDS_PER_QUESTION',
   'Restart quiz',
@@ -108,12 +108,15 @@ export function runPhase9QuizInteractionTimerNoHintsHotfixGate(
       'tsx scripts/quiz-interaction-timer-no-hints-hotfix.ts',
     validateRunsGate: (packageJson.scripts?.validate ?? '').includes('npm run gate:quiz-interaction-timer-no-hints'),
     mouseClickSelectionHardened:
-      quizClient.includes('onClick={() => selectAnswer(option.key)}') &&
       quizClient.includes('data-interaction-target="quiz-answer-option"') &&
+      (quizClient.includes('onClick={() => selectAnswer(option.key)}') ||
+        quizClient.includes("selectAnswer(option.key, 'click')")) &&
+      (quizClient.includes('onPointerUp=') || quizClient.includes('onPointerUp={(event) =>')) &&
       css.includes('touch-action: manipulation') &&
       css.includes('pointer-events: auto'),
     keyboardSelectionHardened:
-      quizClient.includes('parseKeyboardOptionKey(event.key)') &&
+      (quizClient.includes('parseKeyboardOptionKey(event.key)') ||
+        quizClient.includes('parseKeyboardOptionKey(event.key, event.code)')) &&
       quizClient.includes('aria-keyshortcuts={option.key}') &&
       quizClient.includes("event.key === 'Enter' || event.key === ' '") &&
       quizClient.includes('event.repeat'),

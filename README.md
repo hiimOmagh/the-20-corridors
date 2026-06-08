@@ -1077,3 +1077,45 @@ npm run gate:phase9-public-result-browser-evidence
 ```
 
 The gate verifies renderable, not-found, deleted, expired, and disabled/rollback visible states; checks that the share/copy block appears only for renderable public results; preserves Phase 9.2 accessibility semantics and Phase 9.3 visual-layout evidence; and confirms raw answers, raw delete tokens, persistence changes, database-binding changes, and network-smoke changes remain blocked.
+
+## Phase 9.4.2 — Quiz Browser Interaction UX Hotfix
+
+Phase 9.4.2 hardens the actual browser interaction path before Phase 9 closure. It responds to manual UX testing where answer clicks, keyboard accuracy, timer visibility, and testing through `172.21.48.1` were not reliable enough.
+
+Run the Phase 9.4.2 gate:
+
+```bash
+npm run gate:quiz-browser-interaction-ux
+```
+
+Current browser interaction status:
+
+- Next dev resources allow the observed `172.21.48.1` test host.
+- The quiz exposes a timed-interactive workflow marker.
+- The countdown exposes a visible marker and `role="timer"`.
+- Answer buttons use pointer activation plus click fallback.
+- Pointer/click double submission is suppressed.
+- Keyboard shortcuts use both `event.key` and `event.code`.
+- Stale closure protection is applied for answers, question index, and timeout state.
+- Timeout still forces restart.
+- No result hints appear before completion.
+- No persistence, database binding, or network-smoke behavior changes are introduced.
+
+## Phase 9.4.2.1 — Quiz Interaction Gate Harmonization Hotfix
+
+Phase 9.4.2.1 harmonizes the older Phase 9.4.1 source-level quiz interaction gate with the stronger Phase 9.4.2 browser interaction implementation.
+
+Run the existing gates:
+
+```bash
+npm run gate:quiz-interaction-timer-no-hints
+npm run gate:quiz-browser-interaction-ux
+```
+
+Current harmonization status:
+
+- The older timer/no-hints gate accepts the newer pointer/click activation model.
+- The older keyboard-selection gate accepts `parseKeyboardOptionKey(event.key, event.code)`.
+- The 10-second timer and forced restart checks remain enforced.
+- No result hints before completion remain enforced.
+- No persistence, database binding, or network-smoke behavior changes are introduced.
