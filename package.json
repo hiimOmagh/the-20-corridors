@@ -73,15 +73,22 @@
     "closure:phase9": "tsx scripts/phase9-public-result-page-ux-release-closure-gate.ts",
     "evidence:quiz-browser-e2e": "tsx scripts/phase10-quiz-browser-e2e-interaction-evidence.ts",
     "evidence:public-result-page-browser-e2e": "tsx scripts/phase10-public-result-page-browser-e2e-evidence.ts",
-    "evidence:hosted-public-result-page": "tsx scripts/phase10-hosted-public-result-page-evidence.ts"
+    "evidence:hosted-public-result-page": "tsx scripts/phase10-hosted-public-result-page-evidence.ts",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf:upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf:typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.19.11",
     "@types/node": "^22.15.0",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
     "tsx": "^4.22.4",
     "typescript": "^5.8.3",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.8",
+    "wrangler": "^4.99.0"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
